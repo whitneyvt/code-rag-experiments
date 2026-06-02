@@ -1,0 +1,32 @@
+# Example experiment configuration for code_rag
+# Copy this file and modify for your experiment
+
+name: rerank_hybrid_unixcoder
+repo_path: /Users/whitney/src/code_rag
+repo: code_rag
+branch: main
+
+vector_store:
+  backend: qdrant
+  collection: code_chunks_experiment
+  url: http://localhost:6333
+
+embedding:
+  backend: unixcoder
+  model: microsoft/unixcoder-base
+
+chunking:
+  strategy: ast  # "ast" or "line"
+  chunk_size: 100
+  overlap: 15
+
+retrieval:
+  mode: hybrid  # "dense", "bm25", or "hybrid"
+  top_k: 5
+  rerank: true
+  rerank_limit: 20
+
+eval:
+  retrieval_eval_set: evals/code_rag.json
+  planning_eval_set: evals/planning_code_rag.json
+  max_iterations: 2
