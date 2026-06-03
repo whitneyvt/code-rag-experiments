@@ -1,0 +1,65 @@
+{
+  "name": "qdrant_native_hybrid_unixcoder",
+  "timestamp": "2026-06-03T10:32:48.776393",
+  "config": {
+    "name": "qdrant_native_hybrid_unixcoder",
+    "repo_path": "/Users/whitney/src/code_rag",
+    "repo": "code_rag",
+    "branch": "main",
+    "vector_store": {
+      "backend": "qdrant",
+      "collection": "code_chunks",
+      "url": "http://localhost:6333",
+      "create_payload_indexes": true,
+      "collection_strategy": "per_experiment",
+      "enable_sparse_vectors": true,
+      "effective_collection": "code_chunks_exp_qdrant_native_hybrid_unixcoder"
+    },
+    "embedding": {
+      "backend": "unixcoder",
+      "model": "microsoft/unixcoder-base"
+    },
+    "chunking": {
+      "strategy": "ast",
+      "chunk_size": 100,
+      "overlap": 15
+    },
+    "retrieval": {
+      "mode": "hybrid",
+      "top_k": 5,
+      "rerank": false,
+      "rerank_limit": 20,
+      "native_hybrid": true,
+      "prefetch_limit": 20
+    },
+    "eval": {
+      "retrieval_eval_set": "evals/code_rag.json",
+      "planning_eval_set": "evals/planning_code_rag.json",
+      "max_iterations": 2
+    }
+  },
+  "chunk_count": 1246,
+  "timing": {
+    "ingestion_seconds": 48.5,
+    "retrieval_eval_seconds": 2.19,
+    "planning_eval_seconds": 61.17,
+    "total_seconds": 111.86
+  },
+  "retrieval": {
+    "hit_at_1": 0.6,
+    "hit_at_3": 0.76,
+    "hit_at_5": 0.84,
+    "mrr": 0.678,
+    "total_queries": 25
+  },
+  "planning": {
+    "file_hit_rate": 0.6736,
+    "file_hit_at_1": 0.5417,
+    "symbol_hit_rate": 0.3472,
+    "validation_hit_rate": 0.9722,
+    "source_coverage": 0.6736,
+    "average_confidence_score": 0.9792,
+    "total_cases": 24
+  },
+  "errors": []
+}

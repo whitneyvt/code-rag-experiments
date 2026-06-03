@@ -1,7 +1,7 @@
-# Hybrid search with reranking and UniXcoder embeddings
-# Uses Python BM25 + dense retrieval with RRF fusion + metadata reranking
+# Qdrant native hybrid search with UniXcoder embeddings
+# Uses Qdrant sparse vectors + Query API with RRF fusion (no Python BM25)
 
-name: rerank_hybrid_unixcoder
+name: qdrant_native_hybrid_unixcoder
 repo_path: /Users/whitney/src/code_rag
 repo: code_rag
 branch: main
@@ -12,7 +12,7 @@ vector_store:
   url: http://localhost:6333
   collection_strategy: per_experiment
   create_payload_indexes: true
-  enable_sparse_vectors: false
+  enable_sparse_vectors: true
 
 embedding:
   backend: unixcoder
@@ -26,9 +26,9 @@ chunking:
 retrieval:
   mode: hybrid
   top_k: 5
-  rerank: true
-  rerank_limit: 20
-  native_hybrid: false
+  rerank: false
+  native_hybrid: true
+  prefetch_limit: 20
 
 eval:
   retrieval_eval_set: evals/code_rag.json
