@@ -1,0 +1,49 @@
+# Multi-vector fusion: code + comments with weighted score fusion
+# Tests weighted score combination (code=1.0, comments=0.5)
+# Comments as supplementary signal to code
+
+name: qdrant_multivector_code_comments_weighted_unixcoder
+repo_path: /Users/whitney/src/code_rag
+repo: code_rag
+branch: main
+
+vector_store:
+  backend: qdrant
+  collection: code_chunks
+  url: http://localhost:6333
+  collection_strategy: per_experiment
+  create_payload_indexes: true
+  enable_sparse_vectors: false
+  enable_named_vectors: true
+  default_dense_vector_name: code
+  named_vectors:
+    - name: code
+      representation: code
+    - name: comments
+      representation: comments
+
+embedding:
+  backend: unixcoder
+  model: microsoft/unixcoder-base
+  representation_type: code
+
+chunking:
+  strategy: ast
+  chunk_size: 100
+  overlap: 15
+
+retrieval:
+  mode: dense
+  top_k: 5
+  rerank: false
+  fusion_vectors:
+    - name: code
+      weight: 1.0
+    - name: comments
+      weight: 0.5
+  fusion_method: weighted
+
+eval:
+  retrieval_eval_set: evals/code_rag.json
+  planning_eval_set: evals/planning_code_rag.json
+  max_iterations: 2
