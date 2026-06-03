@@ -1,0 +1,51 @@
+# Math-heavy eval: code + comments + math_terms triple fusion
+# Tests trimodal fusion on math/scientific queries
+
+name: math_heavy_code_comments_math_weighted_unixcoder
+repo_path: /Users/whitney/src/code_rag
+repo: code_rag
+branch: main
+
+vector_store:
+  backend: qdrant
+  collection: code_chunks
+  url: http://localhost:6333
+  collection_strategy: per_experiment
+  create_payload_indexes: true
+  enable_sparse_vectors: false
+  enable_named_vectors: true
+  default_dense_vector_name: code
+  named_vectors:
+    - name: code
+      representation: code
+    - name: comments
+      representation: comments
+    - name: math_terms
+      representation: math_terms
+
+embedding:
+  backend: unixcoder
+  model: microsoft/unixcoder-base
+  representation_type: code
+
+chunking:
+  strategy: ast
+  chunk_size: 100
+  overlap: 15
+
+retrieval:
+  mode: dense
+  top_k: 5
+  rerank: false
+  fusion_vectors:
+    - name: code
+      weight: 1.0
+    - name: comments
+      weight: 0.5
+    - name: math_terms
+      weight: 0.2
+  fusion_method: weighted
+
+eval:
+  retrieval_eval_set: evals/code_rag_math_heavy.json
+  max_iterations: 2

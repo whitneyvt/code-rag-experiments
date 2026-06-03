@@ -1,0 +1,38 @@
+# Math-heavy eval: native hybrid (dense + sparse)
+# Tests Qdrant native hybrid search on math/scientific queries
+
+name: math_heavy_native_hybrid_unixcoder
+repo_path: /Users/whitney/src/code_rag
+repo: code_rag
+branch: main
+
+vector_store:
+  backend: qdrant
+  collection: code_chunks
+  url: http://localhost:6333
+  collection_strategy: per_experiment
+  create_payload_indexes: true
+  enable_sparse_vectors: true
+  enable_named_vectors: true
+  default_dense_vector_name: dense
+
+embedding:
+  backend: unixcoder
+  model: microsoft/unixcoder-base
+  representation_type: code
+
+chunking:
+  strategy: ast
+  chunk_size: 100
+  overlap: 15
+
+retrieval:
+  mode: hybrid
+  top_k: 5
+  rerank: false
+  native_hybrid: true
+  prefetch_limit: 20
+
+eval:
+  retrieval_eval_set: evals/code_rag_math_heavy.json
+  max_iterations: 2
