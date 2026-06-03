@@ -1,0 +1,674 @@
+{
+  "eval_set": "evals/code_rag_math_heavy.json",
+  "baseline_mode": "native_hybrid",
+  "top_k": 5,
+  "summary": {
+    "total_queries": 15,
+    "adaptive_wins": 1,
+    "baseline_wins": 0,
+    "ties": 11,
+    "neither": 3,
+    "wrong_route_count": 0,
+    "expected_missing_count": 0,
+    "expected_lower_ranked_count": 0,
+    "unsupported_route_fallback_count": 0,
+    "same_results_count": 11,
+    "no_expected_match_count": 3,
+    "query_type_counts": {
+      "technical": 13,
+      "fallback": 1,
+      "conceptual": 1
+    },
+    "selected_mode_counts": {
+      "native_hybrid": 15
+    },
+    "query_type_mode_counts": {
+      "technical -> native_hybrid": 13,
+      "fallback -> native_hybrid": 1,
+      "conceptual -> native_hybrid": 1
+    }
+  },
+  "diagnostics": [
+    {
+      "question": "Where is reciprocal rank fusion (RRF) implemented?",
+      "expected_files": [
+        "src/code_rag/retrieval/fusion.py"
+      ],
+      "expected_symbols": [
+        "reciprocal_rank_fusion"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "tests/test_fusion.py",
+        "tests/test_hybrid.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_reranker.py"
+      ],
+      "baseline_top_symbols": [
+        "TestReciprocalRankFusion",
+        "test_empty_lists",
+        "native_hybrid_search",
+        "TestRerankResults",
+        "test_empty_input"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "tests/test_fusion.py",
+        "tests/test_hybrid.py",
+        "tests/test_reranker.py",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "adaptive_top_symbols": [
+        "TestReciprocalRankFusion",
+        "test_empty_lists",
+        "TestRerankResults",
+        "native_hybrid_search",
+        "test_empty_input"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "How does weighted score fusion combine results from multiple vector searches?",
+      "expected_files": [
+        "src/code_rag/retrieval/fusion.py"
+      ],
+      "expected_symbols": [
+        "weighted_score_fusion"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "tests/test_fusion.py",
+        "src/code_rag/retrieval/fusion.py",
+        "src/code_rag/retrieval/search_service.py"
+      ],
+      "baseline_top_symbols": [
+        "FusionRetriever",
+        "test_weighted_method",
+        "fuse_results",
+        "weighted_score_fusion",
+        "_multi_vector_fusion_search"
+      ],
+      "adaptive_rank": 3,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "tests/test_fusion.py",
+        "src/code_rag/retrieval/fusion.py",
+        "src/code_rag/retrieval/search_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "FusionRetriever",
+        "test_weighted_method",
+        "fuse_results",
+        "weighted_score_fusion",
+        "_multi_vector_fusion_search"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How are sparse vectors encoded using term frequency weighting?",
+      "expected_files": [
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "expected_symbols": [
+        "encode_sparse_text"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "README.md",
+        "src/code_rag/config.py"
+      ],
+      "baseline_top_symbols": [
+        "encode_sparse_text",
+        "encode_sparse_query",
+        "qdrant_sparse_vector_name"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "README.md",
+        "src/code_rag/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "encode_sparse_text",
+        "encode_sparse_query",
+        "qdrant_sparse_vector_name"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How are sparse vector term IDs computed using deterministic hashing?",
+      "expected_files": [
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "expected_symbols": [
+        "stable_term_id"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "stable_term_id",
+        "encode_sparse_text",
+        "encode_sparse_query"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "stable_term_id",
+        "encode_sparse_text",
+        "encode_sparse_query"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where are mathematical and scientific terms extracted from code?",
+      "expected_files": [
+        "src/code_rag/retrieval/representations.py"
+      ],
+      "expected_symbols": [
+        "extract_math_terms",
+        "MATH_TERMS"
+      ],
+      "router_query_type": "fallback",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Fallback: using native hybrid as default",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/representations.py",
+        "tests/test_plan_service.py",
+        "tests/test_sparse_vectors.py",
+        "tests/test_representations.py"
+      ],
+      "baseline_top_symbols": [
+        "extract_math_terms",
+        "extract_math_terms_representation",
+        "test_extracts_meaningful_terms",
+        "test_code_snippet_encoding",
+        "test_no_math_terms"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/representations.py",
+        "tests/test_plan_service.py",
+        "tests/test_sparse_vectors.py",
+        "tests/test_representations.py"
+      ],
+      "adaptive_top_symbols": [
+        "extract_math_terms",
+        "extract_math_terms_representation",
+        "test_extracts_meaningful_terms",
+        "test_code_snippet_encoding",
+        "test_no_math_terms"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does the code select between different representation types like code, comments, and math_terms?",
+      "expected_files": [
+        "src/code_rag/retrieval/representations.py"
+      ],
+      "expected_symbols": [
+        "get_representation"
+      ],
+      "router_query_type": "conceptual",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Conceptual query: using native hybrid (fusion not available)",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 2,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/representations.py",
+        "tests/test_representations.py"
+      ],
+      "baseline_top_symbols": [
+        "NamedVectorConfig",
+        "get_representation",
+        "EmbeddingConfig",
+        "TestGetRepresentation",
+        "test_math_terms_representation"
+      ],
+      "adaptive_rank": 2,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/representations.py",
+        "tests/test_representations.py"
+      ],
+      "adaptive_top_symbols": [
+        "NamedVectorConfig",
+        "get_representation",
+        "EmbeddingConfig",
+        "TestGetRepresentation",
+        "test_math_terms_representation"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does Qdrant native hybrid search combine dense and sparse vectors with fusion?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "native_hybrid_search"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "tests/test_vector_store_capabilities.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/vector_stores/factory.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "test_qdrant_capabilities_native_hybrid_enabled",
+        "search_codebase",
+        "NativeHybridRetriever",
+        "supports_native_hybrid"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "tests/test_vector_store_capabilities.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "README.md",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "adaptive_top_symbols": [
+        "test_qdrant_capabilities_native_hybrid_enabled",
+        "search_codebase",
+        "NativeHybridRetriever",
+        "supports_native_hybrid"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "How are payload indexes created in Qdrant for efficient filtered search?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "create_payload_indexes",
+        "PAYLOAD_INDEX_FIELDS"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "tests/test_vector_store_capabilities.py",
+        "README.md",
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/config.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "baseline_top_symbols": [
+        "TestQdrantPayloadIndexes",
+        "create_payload_indexes",
+        "qdrant_create_payload_indexes"
+      ],
+      "adaptive_rank": 3,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "tests/test_vector_store_capabilities.py",
+        "README.md",
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "TestQdrantPayloadIndexes",
+        "create_payload_indexes",
+        "qdrant_create_payload_indexes",
+        "test_qdrant_capabilities_supports_payload_indexes"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_rank_different_results"
+    },
+    {
+      "question": "How are embeddings normalized using L2 normalization before storage?",
+      "expected_files": [
+        "src/code_rag/embeddings.py"
+      ],
+      "expected_symbols": [
+        "_encode_batch"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 2,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/embeddings.py"
+      ],
+      "baseline_top_symbols": [
+        "QdrantVectorStore",
+        "SentenceTransformerEmbedder",
+        "embed_texts",
+        "embed_query",
+        "UniXcoderEmbedder"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/embeddings.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "adaptive_top_symbols": [
+        "SentenceTransformerEmbedder",
+        "QdrantVectorStore",
+        "embed_texts",
+        "embed_query",
+        "UniXcoderEmbedder"
+      ],
+      "winner": "adaptive",
+      "loss_reason": "adaptive_better"
+    },
+    {
+      "question": "How does hybrid retrieval compute path-based ranking penalties?",
+      "expected_files": [
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "expected_symbols": [
+        "compute_path_penalty"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_eval_metrics.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "HybridRetriever",
+        "test_rank_5_gives_fifth",
+        "search",
+        "test_rank_2_gives_half"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_eval_metrics.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "HybridRetriever",
+        "test_rank_5_gives_fifth",
+        "search",
+        "test_rank_2_gives_half"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does multi-vector fusion search query multiple named vectors and combine results?",
+      "expected_files": [
+        "src/code_rag/retrieval/search_service.py"
+      ],
+      "expected_symbols": [
+        "_multi_vector_fusion_search",
+        "FusionVectorSpec"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "baseline_top_symbols": [
+        "FusionRetriever",
+        "search",
+        "search_codebase",
+        "_multi_vector_fusion_search"
+      ],
+      "adaptive_rank": 3,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "adaptive_top_symbols": [
+        "FusionRetriever",
+        "search",
+        "_multi_vector_fusion_search",
+        "search_codebase"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does dense retrieval compute similarity scores for semantic search?",
+      "expected_files": [
+        "src/code_rag/retrieval/dense.py"
+      ],
+      "expected_symbols": [
+        "DenseRetriever"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/mcp_server.py",
+        "tests/test_reranker.py",
+        "src/code_rag/retrieval/hybrid.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "list_tools",
+        "test_no_match_returns_zero",
+        "search"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "tests/test_reranker.py",
+        "src/code_rag/mcp_server.py",
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_router.py"
+      ],
+      "adaptive_top_symbols": [
+        "test_no_match_returns_zero",
+        "list_tools",
+        "search",
+        "test_detects_technical_terms"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Where is cosine distance configured for vector similarity in Qdrant?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "recreate"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/config.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "QdrantVectorStore",
+        "__init__",
+        "DenseRetriever",
+        "qdrant_dense_vector_name"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/config.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "QdrantVectorStore",
+        "__init__",
+        "DenseRetriever",
+        "qdrant_dense_vector_name"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How are fusion vector weights configured for multi-vector retrieval experiments?",
+      "expected_files": [
+        "src/code_rag/experiments/config.py"
+      ],
+      "expected_symbols": [
+        "FusionVectorConfig"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "tests/test_experiments.py"
+      ],
+      "baseline_top_symbols": [
+        "FusionVectorConfig",
+        "search_codebase",
+        "create_retriever",
+        "FusionVectorSpec",
+        "test_load_config_with_fusion_vectors"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "tests/test_experiments.py"
+      ],
+      "adaptive_top_symbols": [
+        "FusionVectorConfig",
+        "search_codebase",
+        "create_retriever",
+        "FusionVectorSpec",
+        "test_load_config_with_fusion_vectors"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does grouped search ensure file diversity in retrieval results?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "grouped_search"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "native_hybrid",
+      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "baseline_mode": "native_hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/router.py"
+      ],
+      "baseline_top_symbols": [
+        "grouped_search",
+        "search_codebase",
+        "_route_architecture",
+        "native_hybrid_grouped_search"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/router.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "adaptive_top_symbols": [
+        "grouped_search",
+        "search_codebase",
+        "_route_architecture",
+        "native_hybrid_grouped_search"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_rank_different_results"
+    }
+  ]
+}

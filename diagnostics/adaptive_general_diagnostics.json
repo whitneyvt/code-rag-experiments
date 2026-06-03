@@ -1,0 +1,1108 @@
+{
+  "eval_set": "evals/code_rag.json",
+  "baseline_mode": "hybrid",
+  "top_k": 5,
+  "summary": {
+    "total_queries": 25,
+    "adaptive_wins": 0,
+    "baseline_wins": 1,
+    "ties": 20,
+    "neither": 4,
+    "wrong_route_count": 1,
+    "expected_missing_count": 0,
+    "expected_lower_ranked_count": 0,
+    "unsupported_route_fallback_count": 0,
+    "same_results_count": 20,
+    "no_expected_match_count": 4,
+    "query_type_counts": {
+      "technical": 15,
+      "symbol": 5,
+      "conceptual": 2,
+      "fallback": 3
+    },
+    "selected_mode_counts": {
+      "hybrid": 23,
+      "dense": 2
+    },
+    "query_type_mode_counts": {
+      "technical -> hybrid": 15,
+      "symbol -> hybrid": 5,
+      "conceptual -> dense": 2,
+      "fallback -> hybrid": 3
+    }
+  },
+  "diagnostics": [
+    {
+      "question": "How does the Qdrant vector store initialize and connect?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "QdrantVectorStore",
+        "__init__"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retriever.py",
+        "src/code_rag/config.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "__init__",
+        "QdrantVectorStore",
+        "qdrant_sparse_vector_name"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retriever.py",
+        "src/code_rag/config.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "__init__",
+        "QdrantVectorStore",
+        "qdrant_sparse_vector_name"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does Qdrant upsert chunks with embeddings?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "upsert_chunks"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/embeddings.py"
+      ],
+      "baseline_top_symbols": [
+        "upsert_chunks",
+        "QdrantVectorStore",
+        "embed_texts"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/embeddings.py"
+      ],
+      "adaptive_top_symbols": [
+        "upsert_chunks",
+        "QdrantVectorStore",
+        "embed_texts"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does Qdrant search for similar vectors?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "search"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 2,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py"
+      ],
+      "baseline_top_symbols": [
+        "NativeHybridRetriever",
+        "search",
+        "QdrantVectorStore",
+        "qdrant_sparse_vector_name",
+        "qdrant_dense_vector_name"
+      ],
+      "adaptive_rank": 2,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "NativeHybridRetriever",
+        "search",
+        "QdrantVectorStore",
+        "qdrant_sparse_vector_name",
+        "qdrant_dense_vector_name"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does OpenSearch vector store initialize with credentials?",
+      "expected_files": [
+        "src/code_rag/vector_stores/opensearch.py"
+      ],
+      "expected_symbols": [
+        "OpenSearchVectorStore",
+        "__init__"
+      ],
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/config.py"
+      ],
+      "baseline_top_symbols": [
+        "OpenSearchVectorStore",
+        "__init__",
+        "capabilities",
+        "vector_store",
+        "opensearch_username"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "OpenSearchVectorStore",
+        "__init__",
+        "capabilities",
+        "vector_store",
+        "opensearch_username"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "What is the OpenSearch index mapping for k-NN vectors?",
+      "expected_files": [
+        "src/code_rag/vector_stores/opensearch.py"
+      ],
+      "expected_symbols": [
+        "recreate"
+      ],
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "OpenSearchVectorStore",
+        "recreate",
+        "create_payload_indexes",
+        "search",
+        "__init__"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "OpenSearchVectorStore",
+        "recreate",
+        "create_payload_indexes",
+        "search",
+        "__init__"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does OpenSearch perform k-NN vector search?",
+      "expected_files": [
+        "src/code_rag/vector_stores/opensearch.py"
+      ],
+      "expected_symbols": [
+        "search"
+      ],
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "OpenSearchVectorStore",
+        "recreate",
+        "native_hybrid_search",
+        "search"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "OpenSearchVectorStore",
+        "recreate",
+        "native_hybrid_search",
+        "search"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does the vector store factory select between Qdrant and OpenSearch backends?",
+      "expected_files": [
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "expected_symbols": [
+        "get_vector_store"
+      ],
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 2,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retriever.py",
+        "src/code_rag/vector_stores/factory.py",
+        "README.md",
+        "src/code_rag/config.py"
+      ],
+      "baseline_top_symbols": [
+        "__init__",
+        "_build_backend",
+        "vector_store_backend"
+      ],
+      "adaptive_rank": 2,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retriever.py",
+        "src/code_rag/vector_stores/factory.py",
+        "README.md",
+        "src/code_rag/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "__init__",
+        "_build_backend",
+        "vector_store_backend"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "What configuration settings are available for the vector store and embeddings?",
+      "expected_files": [
+        "src/code_rag/config.py"
+      ],
+      "expected_symbols": [
+        "Config"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retriever.py",
+        "src/code_rag/vector_stores/opensearch.py"
+      ],
+      "baseline_top_symbols": [
+        "upsert_chunks",
+        "QdrantVectorStore",
+        "__init__",
+        "OpenSearchVectorStore",
+        "Retriever"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retriever.py",
+        "src/code_rag/vector_stores/opensearch.py"
+      ],
+      "adaptive_top_symbols": [
+        "upsert_chunks",
+        "QdrantVectorStore",
+        "__init__",
+        "OpenSearchVectorStore",
+        "Retriever"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "How does the repository ingestion pipeline work end to end?",
+      "expected_files": [
+        "scripts/ingest_repo.py"
+      ],
+      "expected_symbols": [
+        "ingest_repo"
+      ],
+      "router_query_type": "conceptual",
+      "router_selected_mode": "dense",
+      "router_reason": "Conceptual query: using dense search (fallback)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/planning/plan_service.py",
+        "src/code_rag/experiments/results.py",
+        "src/code_rag/chunk_id.py",
+        "src/code_rag/experiments/runner.py",
+        "src/code_rag/__init__.py"
+      ],
+      "baseline_top_symbols": [
+        "_generate_validation_plan",
+        "TimingMetrics",
+        "generate_chunk_id",
+        "run_experiment"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "tests/test_ingest_metadata.py",
+        "src/code_rag/__init__.py",
+        "tests/test_collection_strategy.py",
+        "tests/test_plan_service.py",
+        "src/code_rag/planning/plan_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "TestIngestionMetadata",
+        "test_ingest_uses_env_collection",
+        "test_implementation_plan_is_non_empty",
+        "_generate_validation_plan"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "How are code files loaded from a repository?",
+      "expected_files": [
+        "src/code_rag/file_loader.py"
+      ],
+      "expected_symbols": [
+        "load_code_files"
+      ],
+      "router_query_type": "fallback",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Fallback: using hybrid search",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/config.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "_load_chunks",
+        "Config"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/config.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "_load_chunks",
+        "Config"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "How is programming language inferred from file extension?",
+      "expected_files": [
+        "src/code_rag/file_loader.py"
+      ],
+      "expected_symbols": [
+        "infer_language"
+      ],
+      "router_query_type": "fallback",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Fallback: using hybrid search",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/file_loader.py",
+        "src/code_rag/retrieval/reranker.py",
+        "src/code_rag/codegen/patch_validator.py",
+        "scripts/ingest_repo.py",
+        "src/code_rag/retrieval/search_service.py"
+      ],
+      "baseline_top_symbols": [
+        "infer_language",
+        "_compute_language_bonus",
+        "is_python_file",
+        "ingest_repo",
+        "_matches_filters"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/file_loader.py",
+        "src/code_rag/retrieval/reranker.py",
+        "src/code_rag/codegen/patch_validator.py",
+        "scripts/ingest_repo.py",
+        "src/code_rag/retrieval/search_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "infer_language",
+        "_compute_language_bonus",
+        "is_python_file",
+        "ingest_repo",
+        "_matches_filters"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does the unified chunker decide between AST and line-based chunking?",
+      "expected_files": [
+        "src/code_rag/chunker.py"
+      ],
+      "expected_symbols": [
+        "chunk_text"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/ast_chunker.py",
+        "src/code_rag/chunker.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "ChunkingConfig",
+        "can_ast_chunk",
+        "chunk_text",
+        "chunk_text_lines"
+      ],
+      "adaptive_rank": 3,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/ast_chunker.py",
+        "src/code_rag/chunker.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "ChunkingConfig",
+        "can_ast_chunk",
+        "chunk_text",
+        "chunk_text_lines"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does AST-based chunking extract functions and classes from Python code?",
+      "expected_files": [
+        "src/code_rag/ast_chunker.py"
+      ],
+      "expected_symbols": [
+        "ast_chunk_python"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/ast_chunker.py",
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/chunker.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "_extract_chunks_from_node",
+        "ChunkingConfig",
+        "chunk_text",
+        "can_ast_chunk"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/ast_chunker.py",
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/chunker.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "_extract_chunks_from_node",
+        "ChunkingConfig",
+        "chunk_text",
+        "can_ast_chunk"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How are large classes split into header and method chunks?",
+      "expected_files": [
+        "src/code_rag/ast_chunker.py"
+      ],
+      "expected_symbols": [
+        "_split_large_class"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/ast_chunker.py",
+        "tests/test_ast_chunking.py"
+      ],
+      "baseline_top_symbols": [
+        "_extract_large_class_chunks",
+        "_extract_chunks_from_node",
+        "test_large_class_split_into_header_and_methods",
+        "TestLargeClassChunking",
+        "test_decorated_large_class"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/ast_chunker.py",
+        "tests/test_ast_chunking.py"
+      ],
+      "adaptive_top_symbols": [
+        "_extract_large_class_chunks",
+        "_extract_chunks_from_node",
+        "test_large_class_split_into_header_and_methods",
+        "TestLargeClassChunking",
+        "test_decorated_large_class"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How are stable deterministic chunk IDs generated?",
+      "expected_files": [
+        "src/code_rag/chunk_id.py"
+      ],
+      "expected_symbols": [
+        "generate_chunk_id"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/chunk_id.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "tests/test_chunk_metadata.py"
+      ],
+      "baseline_top_symbols": [
+        "chunk_id_to_uuid",
+        "_load_chunks",
+        "stable_term_id",
+        "generate_chunk_id",
+        "TestGenerateChunkId"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/chunk_id.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "tests/test_chunk_metadata.py"
+      ],
+      "adaptive_top_symbols": [
+        "chunk_id_to_uuid",
+        "_load_chunks",
+        "stable_term_id",
+        "generate_chunk_id",
+        "TestGenerateChunkId"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does the embedding model generate vectors for code?",
+      "expected_files": [
+        "src/code_rag/embeddings.py"
+      ],
+      "expected_symbols": [
+        "EmbeddingModel",
+        "embed_texts"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/embeddings.py",
+        "src/code_rag/retriever.py"
+      ],
+      "baseline_top_symbols": [
+        "upsert_chunks",
+        "embedding_model",
+        "UniXcoderEmbedder",
+        "__init__",
+        "SentenceTransformerEmbedder"
+      ],
+      "adaptive_rank": 3,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/embeddings.py",
+        "src/code_rag/retriever.py"
+      ],
+      "adaptive_top_symbols": [
+        "upsert_chunks",
+        "embedding_model",
+        "UniXcoderEmbedder",
+        "__init__",
+        "SentenceTransformerEmbedder"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does the UniXcoder embedding backend work?",
+      "expected_files": [
+        "src/code_rag/embeddings.py"
+      ],
+      "expected_symbols": [
+        "UniXcoderEmbedder"
+      ],
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/embeddings.py",
+        "src/code_rag/config.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/retriever.py"
+      ],
+      "baseline_top_symbols": [
+        "__init__",
+        "EmbeddingModel",
+        "embedding_backend",
+        "embedding_model"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/embeddings.py",
+        "src/code_rag/config.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/retriever.py"
+      ],
+      "adaptive_top_symbols": [
+        "__init__",
+        "EmbeddingModel",
+        "embedding_backend",
+        "embedding_model"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does the search CLI work with different retriever modes?",
+      "expected_files": [
+        "scripts/search_repo.py"
+      ],
+      "expected_symbols": [
+        "main"
+      ],
+      "router_query_type": "conceptual",
+      "router_selected_mode": "dense",
+      "router_reason": "Conceptual query: using dense search (fallback)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "README.md",
+        "src/code_rag/retrieval/hybrid.py",
+        "scripts/search_repo.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "dense_retriever",
+        "main",
+        "FusionRetriever",
+        "evaluate_case"
+      ],
+      "adaptive_rank": 5,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_bm25.py",
+        "tests/test_search_cli.py",
+        "scripts/search_repo.py"
+      ],
+      "adaptive_top_symbols": [
+        "dense_retriever",
+        "test_search_empty_index",
+        "test_search_empty_query",
+        "test_dense_does_not_require_repo_path",
+        "main"
+      ],
+      "winner": "baseline",
+      "loss_reason": "wrong_route"
+    },
+    {
+      "question": "How does dense vector retrieval search for semantically similar code?",
+      "expected_files": [
+        "src/code_rag/retrieval/dense.py"
+      ],
+      "expected_symbols": [
+        "DenseRetriever",
+        "search"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/retrieval/hybrid.py",
+        "README.md",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "baseline_top_symbols": [
+        "DenseRetriever",
+        "HybridRetriever",
+        "search",
+        "NamedVectorConfig"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/retrieval/hybrid.py",
+        "README.md",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "DenseRetriever",
+        "HybridRetriever",
+        "search",
+        "NamedVectorConfig"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does BM25 sparse retrieval work for keyword matching?",
+      "expected_files": [
+        "src/code_rag/retrieval/bm25.py"
+      ],
+      "expected_symbols": [
+        "BM25Retriever",
+        "search"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/retrieval/bm25.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "HybridRetriever",
+        "OpenSearchVectorStore",
+        "BM25Retriever",
+        "NativeHybridRetriever",
+        "__init__"
+      ],
+      "adaptive_rank": 3,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/retrieval/bm25.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "HybridRetriever",
+        "OpenSearchVectorStore",
+        "BM25Retriever",
+        "NativeHybridRetriever",
+        "__init__"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How is code tokenized for BM25 indexing?",
+      "expected_files": [
+        "src/code_rag/retrieval/bm25.py"
+      ],
+      "expected_symbols": [
+        "tokenize_code"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/bm25.py",
+        "src/code_rag/retrieval/filters.py"
+      ],
+      "baseline_top_symbols": [
+        "tokenize_code",
+        "__init__",
+        "BM25Retriever",
+        "index_chunks",
+        "filter_chunks"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/bm25.py",
+        "src/code_rag/retrieval/filters.py"
+      ],
+      "adaptive_top_symbols": [
+        "tokenize_code",
+        "__init__",
+        "BM25Retriever",
+        "index_chunks",
+        "filter_chunks"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does hybrid retrieval combine BM25 and dense search?",
+      "expected_files": [
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "expected_symbols": [
+        "HybridRetriever",
+        "search"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "baseline_top_symbols": [
+        "HybridRetriever",
+        "create_retriever",
+        "run_evaluation",
+        "search_codebase",
+        "native_hybrid_search"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "adaptive_top_symbols": [
+        "HybridRetriever",
+        "create_retriever",
+        "run_evaluation",
+        "search_codebase",
+        "native_hybrid_search"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does Reciprocal Rank Fusion combine ranked lists?",
+      "expected_files": [
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "expected_symbols": [
+        "reciprocal_rank_fusion"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/fusion.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "reciprocal_rank_fusion",
+        "HybridRetriever",
+        "compute_reciprocal_rank",
+        "fuse_results"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/fusion.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "reciprocal_rank_fusion",
+        "HybridRetriever",
+        "compute_reciprocal_rank",
+        "fuse_results"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How are path-based penalties applied to search results?",
+      "expected_files": [
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "expected_symbols": [
+        "compute_path_penalty"
+      ],
+      "router_query_type": "fallback",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Fallback: using hybrid search",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/reranker.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "compute_path_penalty",
+        "HybridRetriever",
+        "__init__",
+        "_compute_penalty"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/reranker.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "compute_path_penalty",
+        "HybridRetriever",
+        "__init__",
+        "_compute_penalty"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "What fields are included in a vector search result?",
+      "expected_files": [
+        "src/code_rag/vector_stores/base.py"
+      ],
+      "expected_symbols": [
+        "VectorSearchResult"
+      ],
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query: using hybrid search (native not available)",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/retriever.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "Retriever",
+        "search"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/retriever.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "Retriever",
+        "search"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    }
+  ]
+}
