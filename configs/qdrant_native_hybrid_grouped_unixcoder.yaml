@@ -1,0 +1,38 @@
+# Qdrant native hybrid grouped search with UniXcoder embeddings
+# Uses Qdrant sparse vectors + Query API with RRF fusion + grouped by file_path
+
+name: qdrant_native_hybrid_grouped_unixcoder
+repo_path: /Users/whitney/src/code_rag
+repo: code_rag
+branch: main
+
+vector_store:
+  backend: qdrant
+  collection: code_chunks
+  url: http://localhost:6333
+  collection_strategy: per_experiment
+  create_payload_indexes: true
+  enable_sparse_vectors: true
+
+embedding:
+  backend: unixcoder
+  model: microsoft/unixcoder-base
+
+chunking:
+  strategy: ast
+  chunk_size: 100
+  overlap: 15
+
+retrieval:
+  mode: hybrid
+  top_k: 5
+  rerank: false
+  native_hybrid: true
+  prefetch_limit: 20
+  group_by_file: true
+  group_size: 2
+
+eval:
+  retrieval_eval_set: evals/code_rag.json
+  planning_eval_set: evals/planning_code_rag.json
+  max_iterations: 2
