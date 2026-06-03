@@ -1,0 +1,1604 @@
+{
+  "eval_set": "evals/code_rag_real_world.json",
+  "baseline_mode": "hybrid",
+  "top_k": 5,
+  "summary": {
+    "total_queries": 35,
+    "adaptive_wins": 0,
+    "baseline_wins": 0,
+    "ties": 20,
+    "neither": 15,
+    "wrong_route_count": 0,
+    "expected_missing_count": 0,
+    "expected_lower_ranked_count": 0,
+    "unsupported_route_fallback_count": 0,
+    "same_results_count": 20,
+    "no_expected_match_count": 15,
+    "query_type_counts": {
+      "error": 2,
+      "technical": 13,
+      "cli": 6,
+      "config": 5,
+      "architecture": 5,
+      "symbol": 4
+    },
+    "selected_mode_counts": {
+      "hybrid": 35
+    },
+    "query_type_mode_counts": {
+      "error -> hybrid": 2,
+      "technical -> hybrid": 13,
+      "cli -> hybrid": 6,
+      "config -> hybrid": 5,
+      "architecture -> hybrid": 5,
+      "symbol -> hybrid": 4
+    },
+    "category_counts": {
+      "error": 4,
+      "cli": 6,
+      "config": 6,
+      "architecture": 5,
+      "technical": 7,
+      "symbol": 4,
+      "conceptual": 3
+    },
+    "category_to_query_type": {
+      "error -> error": 2,
+      "error -> technical": 2,
+      "cli -> cli": 6,
+      "config -> config": 5,
+      "config -> technical": 1,
+      "architecture -> architecture": 5,
+      "technical -> technical": 7,
+      "symbol -> symbol": 4,
+      "conceptual -> technical": 3
+    },
+    "category_wins": {},
+    "category_losses": {},
+    "category_ties": {
+      "error": 2,
+      "cli": 1,
+      "config": 5,
+      "architecture": 1,
+      "technical": 6,
+      "symbol": 4,
+      "conceptual": 1
+    },
+    "category_neither": {
+      "error": 2,
+      "cli": 5,
+      "config": 1,
+      "architecture": 4,
+      "technical": 1,
+      "conceptual": 2
+    }
+  },
+  "diagnostics": [
+    {
+      "question": "Where is the error handled for badly formed hexadecimal UUID string?",
+      "expected_files": [
+        "src/code_rag/retrieval/router.py"
+      ],
+      "expected_symbols": [
+        "ERROR_PATTERNS",
+        "_is_error_query"
+      ],
+      "eval_category": "error",
+      "router_query_type": "error",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Error query routed to hybrid because exact exception strings should be matched with BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/chunk_id.py",
+        "tests/test_router.py",
+        "tests/test_chunk_metadata.py"
+      ],
+      "baseline_top_symbols": [
+        "chunk_id_to_uuid",
+        "test_detects_error_keywords",
+        "TestErrorDetection",
+        "test_uuid_is_valid_format",
+        "test_uuid_derived_from_chunk_id_prefix"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/chunk_id.py",
+        "tests/test_router.py",
+        "tests/test_chunk_metadata.py"
+      ],
+      "adaptive_top_symbols": [
+        "chunk_id_to_uuid",
+        "test_detects_error_keywords",
+        "TestErrorDetection",
+        "test_uuid_is_valid_format",
+        "test_uuid_derived_from_chunk_id_prefix"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "What code could cause a Qdrant vector dimension mismatch?",
+      "expected_files": [
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "expected_symbols": [
+        "MAX_SPARSE_DIM"
+      ],
+      "eval_category": "error",
+      "router_query_type": "error",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Error query routed to hybrid because exact exception strings should be matched with BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py",
+        "docker-compose.yml"
+      ],
+      "baseline_top_symbols": [
+        "QdrantVectorStore",
+        "qdrant_dense_vector_name",
+        "capabilities",
+        "qdrant_sparse_vector_name"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py",
+        "docker-compose.yml"
+      ],
+      "adaptive_top_symbols": [
+        "QdrantVectorStore",
+        "qdrant_dense_vector_name",
+        "capabilities",
+        "qdrant_sparse_vector_name"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Where is the Qdrant upsert payload size handled?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "upsert_chunks"
+      ],
+      "eval_category": "error",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 2,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py"
+      ],
+      "baseline_top_symbols": [
+        "create_payload_indexes",
+        "recreate",
+        "upsert_chunks",
+        "qdrant_create_payload_indexes",
+        "capabilities"
+      ],
+      "adaptive_rank": 2,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "create_payload_indexes",
+        "recreate",
+        "upsert_chunks",
+        "qdrant_create_payload_indexes",
+        "capabilities"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is native hybrid search validated before use?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "native_hybrid_search",
+        "sparse_enabled"
+      ],
+      "eval_category": "error",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 5,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "supports_native_hybrid",
+        "search",
+        "NativeHybridRetriever",
+        "supports_native_hybrid_grouped",
+        "native_hybrid_search"
+      ],
+      "adaptive_rank": 5,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "supports_native_hybrid",
+        "search",
+        "NativeHybridRetriever",
+        "supports_native_hybrid_grouped",
+        "native_hybrid_search"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is --adaptive parsed in the search CLI?",
+      "expected_files": [
+        "scripts/search_repo.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "cli",
+      "router_query_type": "cli",
+      "router_selected_mode": "hybrid",
+      "router_reason": "CLI query routed to hybrid because command names and flags are exact tokens.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "_is_cli_query",
+        "_route_cli",
+        "test_cli_routes_to_hybrid_when_no_native",
+        "test_cli_query_classification",
+        "search"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "_is_cli_query",
+        "_route_cli",
+        "test_cli_routes_to_hybrid_when_no_native",
+        "test_cli_query_classification",
+        "search"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Where is --native_hybrid parsed?",
+      "expected_files": [
+        "scripts/search_repo.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "cli",
+      "router_query_type": "cli",
+      "router_selected_mode": "hybrid",
+      "router_reason": "CLI query routed to hybrid because command names and flags are exact tokens.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_router.py"
+      ],
+      "baseline_top_symbols": [
+        "supports_native_hybrid",
+        "test_detects_cli_flags",
+        "test_cli_routes_to_hybrid_when_no_native",
+        "supports_native_hybrid_grouped",
+        "test_cli_query_classification"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_router.py"
+      ],
+      "adaptive_top_symbols": [
+        "supports_native_hybrid",
+        "test_detects_cli_flags",
+        "test_cli_routes_to_hybrid_when_no_native",
+        "supports_native_hybrid_grouped",
+        "test_cli_query_classification"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "How does search_repo.py choose the retriever mode?",
+      "expected_files": [
+        "scripts/search_repo.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "cli",
+      "router_query_type": "cli",
+      "router_selected_mode": "hybrid",
+      "router_reason": "CLI query routed to hybrid because command names and flags are exact tokens.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "tests/test_router.py",
+        "src/code_rag/planning/plan_service.py",
+        "tests/test_search_cli.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "test_detects_python_scripts",
+        "_perform_retrieval",
+        "test_dense_does_not_require_repo_path",
+        "TestSearchCLIArguments"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "tests/test_router.py",
+        "src/code_rag/planning/plan_service.py",
+        "tests/test_search_cli.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "test_detects_python_scripts",
+        "_perform_retrieval",
+        "test_dense_does_not_require_repo_path",
+        "TestSearchCLIArguments"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Where does evaluate_retrieval.py run adaptive evaluation?",
+      "expected_files": [
+        "scripts/evaluate_retrieval.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "cli",
+      "router_query_type": "cli",
+      "router_selected_mode": "hybrid",
+      "router_reason": "CLI query routed to hybrid because command names and flags are exact tokens.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/experiments/runner.py",
+        "tests/test_router.py",
+        "src/code_rag/mcp_server.py",
+        "scripts/analyze_routing.py"
+      ],
+      "baseline_top_symbols": [
+        "_run_retrieval_eval",
+        "test_detects_python_scripts",
+        "handle_evaluate_retrieval",
+        "test_cli_routes_to_hybrid_when_no_native",
+        "run_adaptive_retrieval"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/experiments/runner.py",
+        "tests/test_router.py",
+        "src/code_rag/mcp_server.py",
+        "scripts/analyze_routing.py"
+      ],
+      "adaptive_top_symbols": [
+        "_run_retrieval_eval",
+        "test_detects_python_scripts",
+        "handle_evaluate_retrieval",
+        "test_cli_routes_to_hybrid_when_no_native",
+        "run_adaptive_retrieval"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Where does run_experiment.py load the YAML config?",
+      "expected_files": [
+        "scripts/run_experiment.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "expected_symbols": [
+        "load_experiment_config"
+      ],
+      "eval_category": "cli",
+      "router_query_type": "cli",
+      "router_selected_mode": "hybrid",
+      "router_reason": "CLI query routed to hybrid because command names and flags are exact tokens.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "scripts/run_experiment.py",
+        "tests/test_router.py",
+        "src/code_rag/experiments/__init__.py",
+        "tests/test_experiments.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "baseline_top_symbols": [
+        "main",
+        "test_cli_beats_config",
+        "test_load_minimal_config",
+        "test_load_config_parses_create_payload_indexes"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "scripts/run_experiment.py",
+        "tests/test_router.py",
+        "src/code_rag/experiments/__init__.py",
+        "tests/test_experiments.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "adaptive_top_symbols": [
+        "main",
+        "test_cli_beats_config",
+        "test_load_minimal_config",
+        "test_load_config_parses_create_payload_indexes"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "What script runs experiment configs?",
+      "expected_files": [
+        "scripts/run_experiment.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "cli",
+      "router_query_type": "cli",
+      "router_selected_mode": "hybrid",
+      "router_reason": "CLI query routed to hybrid because command names and flags are exact tokens.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/router.py",
+        "src/code_rag/__main__.py",
+        "src/code_rag/config.py",
+        "README.md",
+        "tests/test_collection_strategy.py"
+      ],
+      "baseline_top_symbols": [
+        "_is_cli_query",
+        "experiments_path",
+        "test_per_experiment_strategy"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/router.py",
+        "src/code_rag/__main__.py",
+        "src/code_rag/config.py",
+        "README.md",
+        "tests/test_collection_strategy.py"
+      ],
+      "adaptive_top_symbols": [
+        "_is_cli_query",
+        "experiments_path",
+        "test_per_experiment_strategy"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Where is QDRANT_COLLECTION read?",
+      "expected_files": [
+        "src/code_rag/config.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "config",
+      "router_query_type": "config",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Config query routed to hybrid because environment variables and YAML keys are exact identifiers.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/config.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "baseline_top_symbols": [
+        "qdrant_collection",
+        "qdrant_create_payload_indexes",
+        "capabilities",
+        "qdrant_enable_named_vectors",
+        "qdrant_enable_sparse_vectors"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/config.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "adaptive_top_symbols": [
+        "qdrant_collection",
+        "qdrant_create_payload_indexes",
+        "capabilities",
+        "qdrant_enable_named_vectors",
+        "qdrant_enable_sparse_vectors"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is EMBEDDING_MODEL configured?",
+      "expected_files": [
+        "src/code_rag/config.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "config",
+      "router_query_type": "config",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Config query routed to hybrid because environment variables and YAML keys are exact identifiers.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/config.py",
+        "src/code_rag/embeddings.py",
+        "tests/test_router.py",
+        "src/code_rag/retrieval/dense.py"
+      ],
+      "baseline_top_symbols": [
+        "embedding_model",
+        "EmbeddingModel",
+        "test_detects_env_vars",
+        "embedding_backend"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/config.py",
+        "src/code_rag/embeddings.py",
+        "tests/test_router.py",
+        "src/code_rag/retrieval/dense.py"
+      ],
+      "adaptive_top_symbols": [
+        "embedding_model",
+        "EmbeddingModel",
+        "test_detects_env_vars",
+        "embedding_backend"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is collection_strategy loaded from YAML?",
+      "expected_files": [
+        "src/code_rag/experiments/config.py"
+      ],
+      "expected_symbols": [
+        "VectorStoreConfig",
+        "collection_strategy"
+      ],
+      "eval_category": "config",
+      "router_query_type": "config",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Config query routed to hybrid because environment variables and YAML keys are exact identifiers.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "tests/test_router.py",
+        "tests/test_collection_strategy.py",
+        "tests/test_experiments.py"
+      ],
+      "baseline_top_symbols": [
+        "test_detects_yaml_patterns",
+        "test_load_config_parses_collection_strategy",
+        "TestCollectionStrategyInConfig",
+        "TestConfigDetection",
+        "TestConfigLoading"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "tests/test_router.py",
+        "tests/test_collection_strategy.py",
+        "tests/test_experiments.py"
+      ],
+      "adaptive_top_symbols": [
+        "test_detects_yaml_patterns",
+        "test_load_config_parses_collection_strategy",
+        "TestCollectionStrategyInConfig",
+        "TestConfigDetection",
+        "TestConfigLoading"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Where is retrieval.adaptive loaded from YAML?",
+      "expected_files": [
+        "src/code_rag/experiments/config.py"
+      ],
+      "expected_symbols": [
+        "RetrievalConfig"
+      ],
+      "eval_category": "config",
+      "router_query_type": "config",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Config query routed to hybrid because environment variables and YAML keys are exact identifiers.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 5,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "tests/test_router.py",
+        "tests/test_experiments.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "baseline_top_symbols": [
+        "test_detects_yaml_patterns",
+        "test_config_query_classification",
+        "test_detects_cli_flags",
+        "TestConfigLoading",
+        "load_config"
+      ],
+      "adaptive_rank": 5,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "tests/test_router.py",
+        "tests/test_experiments.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "test_detects_yaml_patterns",
+        "test_config_query_classification",
+        "test_detects_cli_flags",
+        "TestConfigLoading",
+        "load_config"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where are fusion_vectors parsed?",
+      "expected_files": [
+        "src/code_rag/experiments/config.py"
+      ],
+      "expected_symbols": [
+        "FusionVectorConfig"
+      ],
+      "eval_category": "config",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/router.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "_route_conceptual",
+        "FusionVectorSpec",
+        "FusionVectorConfig",
+        "__init__",
+        "search"
+      ],
+      "adaptive_rank": 3,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/router.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "_route_conceptual",
+        "FusionVectorSpec",
+        "FusionVectorConfig",
+        "__init__",
+        "search"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is QDRANT_ENABLE_SPARSE_VECTORS used?",
+      "expected_files": [
+        "src/code_rag/config.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "config",
+      "router_query_type": "config",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Config query routed to hybrid because environment variables and YAML keys are exact identifiers.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/config.py"
+      ],
+      "baseline_top_symbols": [
+        "qdrant_enable_sparse_vectors",
+        "qdrant_sparse_vector_name",
+        "qdrant_enable_named_vectors",
+        "qdrant_dense_vector_name",
+        "qdrant_default_dense_vector_name"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "qdrant_enable_sparse_vectors",
+        "qdrant_sparse_vector_name",
+        "qdrant_enable_named_vectors",
+        "qdrant_dense_vector_name",
+        "qdrant_default_dense_vector_name"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Which files are involved in adaptive routing?",
+      "expected_files": [
+        "src/code_rag/retrieval/router.py"
+      ],
+      "expected_symbols": [
+        "route_query",
+        "classify_query",
+        "RoutingDecision"
+      ],
+      "eval_category": "architecture",
+      "router_query_type": "architecture",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Architecture query routed to grouped search for file diversity with hybrid.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "scripts/analyze_routing.py",
+        "scripts/search_repo.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "baseline_top_symbols": [
+        "get_routing_decision",
+        "run_adaptive_retrieval",
+        "determine_loss_reason",
+        "main",
+        "RetrievalConfig"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "scripts/analyze_routing.py",
+        "scripts/search_repo.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "adaptive_top_symbols": [
+        "get_routing_decision",
+        "run_adaptive_retrieval",
+        "determine_loss_reason",
+        "main",
+        "RetrievalConfig"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Which files handle Qdrant native hybrid search?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "expected_symbols": [
+        "native_hybrid_search",
+        "encode_sparse_query"
+      ],
+      "eval_category": "architecture",
+      "router_query_type": "architecture",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Architecture query routed to grouped search for file diversity with hybrid.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "baseline_top_symbols": [
+        "search",
+        "supports_native_hybrid_grouped",
+        "supports_native_hybrid",
+        "NativeHybridRetriever",
+        "test_qdrant_capabilities_native_hybrid_enabled"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "adaptive_top_symbols": [
+        "search",
+        "supports_native_hybrid_grouped",
+        "supports_native_hybrid",
+        "NativeHybridRetriever",
+        "test_qdrant_capabilities_native_hybrid_enabled"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Which files handle experiment execution?",
+      "expected_files": [
+        "src/code_rag/experiments/runner.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "expected_symbols": [
+        "run_experiment"
+      ],
+      "eval_category": "architecture",
+      "router_query_type": "architecture",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Architecture query routed to grouped search for file diversity with hybrid.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/config.py",
+        "src/code_rag/planning/evaluation_service.py",
+        "scripts/compare_experiments.py",
+        "README.md",
+        "src/code_rag/codegen/diff_generator.py"
+      ],
+      "baseline_top_symbols": [
+        "experiments_path",
+        "PlanningEvaluationError",
+        "main",
+        "generate_unified_diff"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/config.py",
+        "src/code_rag/planning/evaluation_service.py",
+        "scripts/compare_experiments.py",
+        "README.md",
+        "src/code_rag/codegen/diff_generator.py"
+      ],
+      "adaptive_top_symbols": [
+        "experiments_path",
+        "PlanningEvaluationError",
+        "main",
+        "generate_unified_diff"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Which files handle MCP search tools?",
+      "expected_files": [
+        "src/code_rag/mcp/tools.py",
+        "src/code_rag/mcp/server.py"
+      ],
+      "expected_symbols": [
+        "search_codebase",
+        "answer_code_question"
+      ],
+      "eval_category": "architecture",
+      "router_query_type": "architecture",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Architecture query routed to grouped search for file diversity with hybrid.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "tests/test_router.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "baseline_top_symbols": [
+        "test_detects_architecture_patterns",
+        "supports_payload_lookup",
+        "test_routes_architecture_with_grouped_search",
+        "supports_native_hybrid_grouped"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "tests/test_router.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "adaptive_top_symbols": [
+        "test_detects_architecture_patterns",
+        "supports_payload_lookup",
+        "test_routes_architecture_with_grouped_search",
+        "supports_native_hybrid_grouped"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Which parts of the codebase handle multi-vector fusion?",
+      "expected_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/fusion.py"
+      ],
+      "expected_symbols": [
+        "FusionRetriever",
+        "reciprocal_rank_fusion"
+      ],
+      "eval_category": "architecture",
+      "router_query_type": "architecture",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Architecture query routed to grouped search for file diversity with hybrid.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 3,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/dense.py",
+        "experiments/configs/example.yaml"
+      ],
+      "baseline_top_symbols": [
+        "FusionVectorConfig",
+        "FusionVectorSpec",
+        "search",
+        "vector_store"
+      ],
+      "adaptive_rank": 3,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/dense.py",
+        "experiments/configs/example.yaml"
+      ],
+      "adaptive_top_symbols": [
+        "FusionVectorConfig",
+        "FusionVectorSpec",
+        "search",
+        "vector_store"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is reciprocal rank fusion implemented?",
+      "expected_files": [
+        "src/code_rag/retrieval/fusion.py"
+      ],
+      "expected_symbols": [
+        "reciprocal_rank_fusion"
+      ],
+      "eval_category": "technical",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 2,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "baseline_top_symbols": [
+        "compute_reciprocal_rank",
+        "reciprocal_rank_fusion",
+        "native_hybrid_search",
+        "HybridRetriever"
+      ],
+      "adaptive_rank": 2,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "adaptive_top_symbols": [
+        "compute_reciprocal_rank",
+        "reciprocal_rank_fusion",
+        "native_hybrid_search",
+        "HybridRetriever"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is weighted score fusion implemented?",
+      "expected_files": [
+        "src/code_rag/retrieval/fusion.py"
+      ],
+      "expected_symbols": [
+        "weighted_score_fusion"
+      ],
+      "eval_category": "technical",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/fusion.py",
+        "tests/test_fusion.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "fuse_results",
+        "weighted_score_fusion",
+        "test_weighted_method",
+        "FusionVectorSpec",
+        "FusionRetriever"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/fusion.py",
+        "tests/test_fusion.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "fuse_results",
+        "weighted_score_fusion",
+        "test_weighted_method",
+        "FusionVectorSpec",
+        "FusionRetriever"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where are sparse vectors encoded?",
+      "expected_files": [
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "expected_symbols": [
+        "encode_sparse_text",
+        "encode_sparse_query"
+      ],
+      "eval_category": "technical",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "baseline_top_symbols": [
+        "sparse_enabled",
+        "upsert_chunks",
+        "_detect_named_vectors"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "adaptive_top_symbols": [
+        "sparse_enabled",
+        "upsert_chunks",
+        "_detect_named_vectors"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "Where is native hybrid search implemented?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "native_hybrid_search"
+      ],
+      "eval_category": "technical",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 4,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "supports_native_hybrid",
+        "supports_native_hybrid_grouped",
+        "search",
+        "native_hybrid_search",
+        "native_hybrid_grouped_search"
+      ],
+      "adaptive_rank": 4,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "supports_native_hybrid",
+        "supports_native_hybrid_grouped",
+        "search",
+        "native_hybrid_search",
+        "native_hybrid_grouped_search"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where are payload indexes created?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "create_payload_indexes",
+        "PAYLOAD_INDEX_FIELDS"
+      ],
+      "eval_category": "technical",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/base.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py",
+        "README.md"
+      ],
+      "baseline_top_symbols": [
+        "create_payload_indexes",
+        "PayloadIndexResult",
+        "qdrant_create_payload_indexes"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/base.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py",
+        "README.md"
+      ],
+      "adaptive_top_symbols": [
+        "create_payload_indexes",
+        "PayloadIndexResult",
+        "qdrant_create_payload_indexes"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does hybrid retrieval combine dense and BM25 results?",
+      "expected_files": [
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "expected_symbols": [
+        "HybridRetriever",
+        "search"
+      ],
+      "eval_category": "technical",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "README.md",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/search_service.py"
+      ],
+      "baseline_top_symbols": [
+        "HybridRetriever",
+        "run_evaluation",
+        "create_retriever",
+        "search_codebase"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "README.md",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/search_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "HybridRetriever",
+        "run_evaluation",
+        "create_retriever",
+        "search_codebase"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "How does hybrid retrieval compute path-based ranking penalties?",
+      "expected_files": [
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "expected_symbols": [
+        "_compute_path_penalties"
+      ],
+      "eval_category": "technical",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_router.py"
+      ],
+      "baseline_top_symbols": [
+        "HybridRetriever",
+        "compute_path_penalty",
+        "test_technical_routes_to_hybrid_when_native_unavailable",
+        "__init__",
+        "TestTechnicalRouting"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_router.py"
+      ],
+      "adaptive_top_symbols": [
+        "HybridRetriever",
+        "compute_path_penalty",
+        "test_technical_routes_to_hybrid_when_native_unavailable",
+        "__init__",
+        "TestTechnicalRouting"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is RoutingDecision implemented?",
+      "expected_files": [
+        "src/code_rag/retrieval/router.py"
+      ],
+      "expected_symbols": [
+        "RoutingDecision"
+      ],
+      "eval_category": "symbol",
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/router.py",
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "src/code_rag.egg-info/top_level.txt",
+        "tests/test_router.py"
+      ],
+      "baseline_top_symbols": [
+        "_route_fallback",
+        "get_routing_decision",
+        "_route_architecture",
+        "TestRoutingDecision"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/router.py",
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "src/code_rag.egg-info/top_level.txt",
+        "tests/test_router.py"
+      ],
+      "adaptive_top_symbols": [
+        "_route_fallback",
+        "get_routing_decision",
+        "_route_architecture",
+        "TestRoutingDecision"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is FusionRetriever implemented?",
+      "expected_files": [
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "expected_symbols": [
+        "FusionRetriever"
+      ],
+      "eval_category": "symbol",
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 4,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "baseline_top_symbols": [
+        "dense_retriever",
+        "FusionVectorSpec",
+        "FusionVectorConfig",
+        "__init__",
+        "bm25_retriever"
+      ],
+      "adaptive_rank": 4,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "adaptive_top_symbols": [
+        "dense_retriever",
+        "FusionVectorSpec",
+        "FusionVectorConfig",
+        "__init__",
+        "bm25_retriever"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is QdrantVectorStore implemented?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "QdrantVectorStore"
+      ],
+      "eval_category": "symbol",
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "baseline_top_symbols": [
+        "QdrantVectorStore",
+        "capabilities",
+        "vector_store",
+        "VectorStore",
+        "test_qdrant_adapter_has_capabilities_property"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "adaptive_top_symbols": [
+        "QdrantVectorStore",
+        "capabilities",
+        "vector_store",
+        "VectorStore",
+        "test_qdrant_adapter_has_capabilities_property"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "Where is VectorStoreCapabilities implemented?",
+      "expected_files": [
+        "src/code_rag/vector_stores/base.py"
+      ],
+      "expected_symbols": [
+        "VectorStoreCapabilities"
+      ],
+      "eval_category": "symbol",
+      "router_query_type": "symbol",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 4,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/base.py"
+      ],
+      "baseline_top_symbols": [
+        "capabilities",
+        "VectorStoreCapabilities",
+        "VectorStore"
+      ],
+      "adaptive_rank": 4,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/base.py"
+      ],
+      "adaptive_top_symbols": [
+        "capabilities",
+        "VectorStoreCapabilities",
+        "VectorStore"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    },
+    {
+      "question": "What are the benefits of adaptive routing over fixed retrieval modes?",
+      "expected_files": [
+        "src/code_rag/retrieval/router.py"
+      ],
+      "expected_symbols": [
+        "route_query"
+      ],
+      "eval_category": "conceptual",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "scripts/analyze_routing.py",
+        "scripts/search_repo.py"
+      ],
+      "baseline_top_symbols": [
+        "RetrievalConfig",
+        "get_routing_decision",
+        "compare_single_query",
+        "run_adaptive_retrieval",
+        "main"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "scripts/analyze_routing.py",
+        "scripts/search_repo.py"
+      ],
+      "adaptive_top_symbols": [
+        "RetrievalConfig",
+        "get_routing_decision",
+        "compare_single_query",
+        "run_adaptive_retrieval",
+        "main"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "When should sparse vectors be used instead of dense vectors?",
+      "expected_files": [
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "expected_symbols": [],
+      "eval_category": "conceptual",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": null,
+      "baseline_hit_at_5": false,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "baseline_top_symbols": [
+        "upsert_chunks",
+        "sparse_enabled",
+        "recreate",
+        "_detect_named_vectors"
+      ],
+      "adaptive_rank": null,
+      "adaptive_hit_at_5": false,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "adaptive_top_symbols": [
+        "upsert_chunks",
+        "sparse_enabled",
+        "recreate",
+        "_detect_named_vectors"
+      ],
+      "winner": "neither",
+      "loss_reason": "no_expected_match"
+    },
+    {
+      "question": "When should grouped search be used for file diversity?",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "expected_symbols": [
+        "grouped_search"
+      ],
+      "eval_category": "conceptual",
+      "router_query_type": "technical",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "baseline_mode": "hybrid",
+      "baseline_rank": 1,
+      "baseline_hit_at_5": true,
+      "baseline_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "baseline_top_symbols": [
+        "grouped_search",
+        "supports_grouped_search",
+        "native_hybrid_grouped_search",
+        "supports_native_hybrid_grouped"
+      ],
+      "adaptive_rank": 1,
+      "adaptive_hit_at_5": true,
+      "adaptive_top_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "adaptive_top_symbols": [
+        "grouped_search",
+        "supports_grouped_search",
+        "native_hybrid_grouped_search",
+        "supports_native_hybrid_grouped"
+      ],
+      "winner": "tie",
+      "loss_reason": "same_results"
+    }
+  ]
+}
