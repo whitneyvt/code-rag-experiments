@@ -8,8 +8,10 @@ branch: main
 
 vector_store:
   backend: qdrant
-  collection: code_chunks_experiment
+  collection: code_chunks
+  collection_strategy: per_experiment_and_model
   url: http://localhost:6333
+  create_payload_indexes: true
 
 embedding:
   backend: unixcoder

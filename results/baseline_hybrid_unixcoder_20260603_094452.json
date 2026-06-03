@@ -1,0 +1,62 @@
+{
+  "name": "baseline_hybrid_unixcoder",
+  "timestamp": "2026-06-03T09:44:52.996179",
+  "config": {
+    "name": "baseline_hybrid_unixcoder",
+    "repo_path": "/Users/whitney/src/code_rag",
+    "repo": "code_rag",
+    "branch": "main",
+    "vector_store": {
+      "backend": "qdrant",
+      "collection": "code_chunks",
+      "url": "http://localhost:6333",
+      "create_payload_indexes": true,
+      "collection_strategy": "per_experiment_and_model",
+      "effective_collection": "code_chunks_exp_baseline_hybrid_unixcoder_model_unixcoder_microsoft_unixcoder_base"
+    },
+    "embedding": {
+      "backend": "unixcoder",
+      "model": "microsoft/unixcoder-base"
+    },
+    "chunking": {
+      "strategy": "ast",
+      "chunk_size": 100,
+      "overlap": 15
+    },
+    "retrieval": {
+      "mode": "hybrid",
+      "top_k": 5,
+      "rerank": false,
+      "rerank_limit": 20
+    },
+    "eval": {
+      "retrieval_eval_set": "evals/code_rag.json",
+      "planning_eval_set": "evals/planning_code_rag.json",
+      "max_iterations": 2
+    }
+  },
+  "chunk_count": 1180,
+  "timing": {
+    "ingestion_seconds": 12.57,
+    "retrieval_eval_seconds": 9.74,
+    "planning_eval_seconds": 53.02,
+    "total_seconds": 75.32
+  },
+  "retrieval": {
+    "hit_at_1": 0.64,
+    "hit_at_3": 0.88,
+    "hit_at_5": 0.92,
+    "mrr": 0.75,
+    "total_queries": 25
+  },
+  "planning": {
+    "file_hit_rate": 0.6875,
+    "file_hit_at_1": 0.5417,
+    "symbol_hit_rate": 0.3333,
+    "validation_hit_rate": 0.9861,
+    "source_coverage": 0.6875,
+    "average_confidence_score": 0.9792,
+    "total_cases": 24
+  },
+  "errors": []
+}
