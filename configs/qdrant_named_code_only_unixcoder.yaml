@@ -1,0 +1,38 @@
+# Code-only representation experiment
+# Embeds only code text (default behavior, baseline for comparison)
+
+name: qdrant_named_code_only_unixcoder
+repo_path: /Users/whitney/src/code_rag
+repo: code_rag
+branch: main
+
+vector_store:
+  backend: qdrant
+  collection: code_chunks
+  url: http://localhost:6333
+  collection_strategy: per_experiment
+  create_payload_indexes: true
+  enable_sparse_vectors: false
+  enable_named_vectors: true
+  default_dense_vector_name: code
+
+embedding:
+  backend: unixcoder
+  model: microsoft/unixcoder-base
+  representation_type: code
+
+chunking:
+  strategy: ast
+  chunk_size: 100
+  overlap: 15
+
+retrieval:
+  mode: dense
+  top_k: 5
+  rerank: false
+  vector_name: code
+
+eval:
+  retrieval_eval_set: evals/code_rag.json
+  planning_eval_set: evals/planning_code_rag.json
+  max_iterations: 2

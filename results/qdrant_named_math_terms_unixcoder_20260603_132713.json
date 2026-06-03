@@ -1,0 +1,72 @@
+{
+  "name": "qdrant_named_math_terms_unixcoder",
+  "timestamp": "2026-06-03T13:27:13.519389",
+  "config": {
+    "name": "qdrant_named_math_terms_unixcoder",
+    "repo_path": "/Users/whitney/src/code_rag",
+    "repo": "code_rag",
+    "branch": "main",
+    "vector_store": {
+      "backend": "qdrant",
+      "collection": "code_chunks",
+      "url": "http://localhost:6333",
+      "create_payload_indexes": true,
+      "collection_strategy": "per_experiment",
+      "enable_sparse_vectors": false,
+      "enable_named_vectors": true,
+      "default_dense_vector_name": "math_terms",
+      "effective_collection": "code_chunks_exp_qdrant_named_math_terms_unixcoder"
+    },
+    "embedding": {
+      "backend": "unixcoder",
+      "model": "microsoft/unixcoder-base",
+      "representation_type": "math_terms"
+    },
+    "chunking": {
+      "strategy": "ast",
+      "chunk_size": 100,
+      "overlap": 15
+    },
+    "retrieval": {
+      "mode": "dense",
+      "top_k": 5,
+      "rerank": false,
+      "rerank_limit": 20,
+      "native_hybrid": false,
+      "prefetch_limit": 20,
+      "group_by_file": false,
+      "group_limit": 0,
+      "group_size": 2,
+      "vector_name": "math_terms"
+    },
+    "eval": {
+      "retrieval_eval_set": "evals/code_rag.json",
+      "planning_eval_set": "evals/planning_code_rag.json",
+      "max_iterations": 2
+    }
+  },
+  "chunk_count": 1303,
+  "timing": {
+    "ingestion_seconds": 43.87,
+    "retrieval_eval_seconds": 1.47,
+    "planning_eval_seconds": 52.33,
+    "total_seconds": 97.67
+  },
+  "retrieval": {
+    "hit_at_1": 0.08,
+    "hit_at_3": 0.24,
+    "hit_at_5": 0.32,
+    "mrr": 0.1713,
+    "total_queries": 25
+  },
+  "planning": {
+    "file_hit_rate": 0.4583,
+    "file_hit_at_1": 0.375,
+    "symbol_hit_rate": 0.125,
+    "validation_hit_rate": 0.9583,
+    "source_coverage": 0.4583,
+    "average_confidence_score": 0.875,
+    "total_cases": 24
+  },
+  "errors": []
+}
