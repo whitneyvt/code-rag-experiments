@@ -15,19 +15,23 @@
     "same_results_count": 21,
     "no_expected_match_count": 4,
     "query_type_counts": {
-      "technical": 15,
+      "technical": 14,
       "symbol": 5,
-      "conceptual": 2,
-      "fallback": 3
+      "config": 1,
+      "conceptual": 1,
+      "fallback": 3,
+      "cli": 1
     },
     "selected_mode_counts": {
       "hybrid": 25
     },
     "query_type_mode_counts": {
-      "technical -> hybrid": 15,
+      "technical -> hybrid": 14,
       "symbol -> hybrid": 5,
-      "conceptual -> hybrid": 2,
-      "fallback -> hybrid": 3
+      "config -> hybrid": 1,
+      "conceptual -> hybrid": 1,
+      "fallback -> hybrid": 3,
+      "cli -> hybrid": 1
     }
   },
   "diagnostics": [
@@ -92,8 +96,8 @@
       "baseline_top_files": [
         "src/code_rag/vector_stores/factory.py",
         "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/vector_stores/opensearch.py",
-        "src/code_rag/embeddings.py"
+        "src/code_rag/embeddings.py",
+        "src/code_rag/vector_stores/opensearch.py"
       ],
       "baseline_top_symbols": [
         "upsert_chunks",
@@ -105,8 +109,8 @@
       "adaptive_top_files": [
         "src/code_rag/vector_stores/factory.py",
         "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/vector_stores/opensearch.py",
-        "src/code_rag/embeddings.py"
+        "src/code_rag/embeddings.py",
+        "src/code_rag/vector_stores/opensearch.py"
       ],
       "adaptive_top_symbols": [
         "upsert_chunks",
@@ -141,7 +145,7 @@
         "QdrantVectorStore",
         "qdrant_sparse_vector_name",
         "qdrant_dense_vector_name",
-        "search"
+        "native_hybrid_search"
       ],
       "adaptive_rank": 2,
       "adaptive_hit_at_5": true,
@@ -156,7 +160,7 @@
         "QdrantVectorStore",
         "qdrant_sparse_vector_name",
         "qdrant_dense_vector_name",
-        "search"
+        "native_hybrid_search"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -225,8 +229,8 @@
         "OpenSearchVectorStore",
         "recreate",
         "create_payload_indexes",
-        "search",
-        "__init__"
+        "__init__",
+        "search"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
@@ -238,8 +242,8 @@
         "OpenSearchVectorStore",
         "recreate",
         "create_payload_indexes",
-        "search",
-        "__init__"
+        "__init__",
+        "search"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -334,21 +338,21 @@
       "expected_symbols": [
         "Config"
       ],
-      "router_query_type": "technical",
+      "router_query_type": "config",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
+      "router_reason": "Config query routed to hybrid because environment variables and YAML keys are exact identifiers.",
       "baseline_mode": "hybrid",
       "baseline_rank": null,
       "baseline_hit_at_5": false,
       "baseline_top_files": [
-        "src/code_rag/vector_stores/factory.py",
         "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py",
         "src/code_rag/retriever.py",
         "src/code_rag/vector_stores/opensearch.py"
       ],
       "baseline_top_symbols": [
-        "upsert_chunks",
         "QdrantVectorStore",
+        "upsert_chunks",
         "__init__",
         "OpenSearchVectorStore",
         "Retriever"
@@ -356,14 +360,14 @@
       "adaptive_rank": null,
       "adaptive_hit_at_5": false,
       "adaptive_top_files": [
-        "src/code_rag/vector_stores/factory.py",
         "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py",
         "src/code_rag/retriever.py",
         "src/code_rag/vector_stores/opensearch.py"
       ],
       "adaptive_top_symbols": [
-        "upsert_chunks",
         "QdrantVectorStore",
+        "upsert_chunks",
         "__init__",
         "OpenSearchVectorStore",
         "Retriever"
@@ -561,13 +565,14 @@
         "src/code_rag/ast_chunker.py",
         "src/code_rag/experiments/config.py",
         "src/code_rag/chunker.py",
-        "README.md"
+        "README.md",
+        "tests/test_ast_chunking.py"
       ],
       "baseline_top_symbols": [
         "_extract_chunks_from_node",
         "ChunkingConfig",
         "chunk_text",
-        "can_ast_chunk"
+        "TestASTChunker"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
@@ -575,13 +580,14 @@
         "src/code_rag/ast_chunker.py",
         "src/code_rag/experiments/config.py",
         "src/code_rag/chunker.py",
-        "README.md"
+        "README.md",
+        "tests/test_ast_chunking.py"
       ],
       "adaptive_top_symbols": [
         "_extract_chunks_from_node",
         "ChunkingConfig",
         "chunk_text",
-        "can_ast_chunk"
+        "TestASTChunker"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -685,34 +691,34 @@
       "router_selected_mode": "hybrid",
       "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
-      "baseline_rank": 3,
+      "baseline_rank": 4,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/vector_stores/factory.py",
         "src/code_rag/retrieval/dense.py",
-        "src/code_rag/embeddings.py",
-        "src/code_rag/retriever.py"
+        "src/code_rag/retriever.py",
+        "src/code_rag/embeddings.py"
       ],
       "baseline_top_symbols": [
         "upsert_chunks",
         "embedding_model",
-        "UniXcoderEmbedder",
         "__init__",
+        "UniXcoderEmbedder",
         "SentenceTransformerEmbedder"
       ],
-      "adaptive_rank": 3,
+      "adaptive_rank": 4,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
         "src/code_rag/vector_stores/factory.py",
         "src/code_rag/retrieval/dense.py",
-        "src/code_rag/embeddings.py",
-        "src/code_rag/retriever.py"
+        "src/code_rag/retriever.py",
+        "src/code_rag/embeddings.py"
       ],
       "adaptive_top_symbols": [
         "upsert_chunks",
         "embedding_model",
-        "UniXcoderEmbedder",
         "__init__",
+        "UniXcoderEmbedder",
         "SentenceTransformerEmbedder"
       ],
       "winner": "tie",
@@ -735,13 +741,14 @@
       "baseline_top_files": [
         "src/code_rag/embeddings.py",
         "src/code_rag/config.py",
-        "src/code_rag/retrieval/dense.py",
-        "src/code_rag/retriever.py"
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/dense.py"
       ],
       "baseline_top_symbols": [
         "__init__",
         "EmbeddingModel",
         "embedding_backend",
+        "EmbeddingConfig",
         "embedding_model"
       ],
       "adaptive_rank": 1,
@@ -749,13 +756,14 @@
       "adaptive_top_files": [
         "src/code_rag/embeddings.py",
         "src/code_rag/config.py",
-        "src/code_rag/retrieval/dense.py",
-        "src/code_rag/retriever.py"
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/dense.py"
       ],
       "adaptive_top_symbols": [
         "__init__",
         "EmbeddingModel",
         "embedding_backend",
+        "EmbeddingConfig",
         "embedding_model"
       ],
       "winner": "tie",
@@ -769,16 +777,16 @@
       "expected_symbols": [
         "main"
       ],
-      "router_query_type": "conceptual",
+      "router_query_type": "cli",
       "router_selected_mode": "hybrid",
-      "router_reason": "Conceptual query routed to hybrid because neither fusion nor native_hybrid is available.",
+      "router_reason": "CLI query routed to hybrid because command names and flags are exact tokens.",
       "baseline_mode": "hybrid",
-      "baseline_rank": 3,
+      "baseline_rank": 2,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
-        "README.md",
         "src/code_rag/retrieval/hybrid.py",
         "scripts/search_repo.py",
+        "README.md",
         "src/code_rag/retrieval/evaluation_service.py"
       ],
       "baseline_top_symbols": [
@@ -787,12 +795,12 @@
         "FusionRetriever",
         "evaluate_case"
       ],
-      "adaptive_rank": 3,
+      "adaptive_rank": 2,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
-        "README.md",
         "src/code_rag/retrieval/hybrid.py",
         "scripts/search_repo.py",
+        "README.md",
         "src/code_rag/retrieval/evaluation_service.py"
       ],
       "adaptive_top_symbols": [
@@ -823,14 +831,14 @@
         "src/code_rag/retrieval/dense.py",
         "README.md",
         "src/code_rag/retrieval/hybrid.py",
-        "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/experiments/config.py"
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/vector_stores/qdrant.py"
       ],
       "baseline_top_symbols": [
         "DenseRetriever",
         "HybridRetriever",
-        "search",
-        "NamedVectorConfig"
+        "NamedVectorConfig",
+        "search"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
@@ -838,14 +846,14 @@
         "src/code_rag/retrieval/dense.py",
         "README.md",
         "src/code_rag/retrieval/hybrid.py",
-        "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/experiments/config.py"
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/vector_stores/qdrant.py"
       ],
       "adaptive_top_symbols": [
         "DenseRetriever",
         "HybridRetriever",
-        "search",
-        "NamedVectorConfig"
+        "NamedVectorConfig",
+        "search"
       ],
       "winner": "tie",
       "loss_reason": "same_results"

@@ -22,8 +22,9 @@
 ## Query Type Distribution
 
 - conceptual: 1 (6.7%)
+- config: 2 (13.3%)
 - fallback: 1 (6.7%)
-- technical: 13 (86.7%)
+- technical: 11 (73.3%)
 
 ## Selected Mode Distribution
 
@@ -32,8 +33,9 @@
 ## Query Type -> Mode Mapping
 
 - conceptual -> native_hybrid: 1 (6.7%)
+- config -> native_hybrid: 2 (13.3%)
 - fallback -> native_hybrid: 1 (6.7%)
-- technical -> native_hybrid: 13 (86.7%)
+- technical -> native_hybrid: 11 (73.3%)
 
 ## Per-Query Results
 
@@ -47,10 +49,10 @@
 | Q6 | conceptual | native_hybrid | 2 | 2 | tie | same_results |
 | Q7 | technical | native_hybrid | - | - | neither | no_expected_match |
 | Q8 | technical | native_hybrid | 3 | 3 | tie | same_results |
-| Q9 | technical | native_hybrid | 1 | 1 | tie | same_results |
-| Q10 | technical | native_hybrid | 1 | 1 | tie | same_rank_different_results |
+| Q9 | technical | native_hybrid | 2 | 2 | tie | same_results |
+| Q10 | technical | native_hybrid | 1 | 1 | tie | same_results |
 | Q11 | technical | native_hybrid | 3 | 3 | tie | same_results |
 | Q12 | technical | native_hybrid | - | - | neither | no_expected_match |
-| Q13 | technical | native_hybrid | 1 | 1 | tie | same_results |
-| Q14 | technical | native_hybrid | 1 | 1 | tie | same_results |
+| Q13 | config | native_hybrid | 1 | 1 | tie | same_rank_different_results |
+| Q14 | config | native_hybrid | 1 | 1 | tie | same_results |
 | Q15 | technical | native_hybrid | 1 | 1 | tie | same_results |

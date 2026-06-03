@@ -4,28 +4,30 @@
   "top_k": 5,
   "summary": {
     "total_queries": 15,
-    "adaptive_wins": 0,
+    "adaptive_wins": 1,
     "baseline_wins": 0,
-    "ties": 12,
+    "ties": 11,
     "neither": 3,
     "wrong_route_count": 0,
     "expected_missing_count": 0,
     "expected_lower_ranked_count": 0,
     "unsupported_route_fallback_count": 0,
-    "same_results_count": 12,
+    "same_results_count": 11,
     "no_expected_match_count": 3,
     "query_type_counts": {
-      "technical": 13,
+      "technical": 11,
       "fallback": 1,
-      "conceptual": 1
+      "conceptual": 1,
+      "config": 2
     },
     "selected_mode_counts": {
       "native_hybrid": 15
     },
     "query_type_mode_counts": {
-      "technical -> native_hybrid": 13,
+      "technical -> native_hybrid": 11,
       "fallback -> native_hybrid": 1,
-      "conceptual -> native_hybrid": 1
+      "conceptual -> native_hybrid": 1,
+      "config -> native_hybrid": 2
     }
   },
   "diagnostics": [
@@ -302,8 +304,8 @@
         "tests/test_vector_store_capabilities.py",
         "src/code_rag/retrieval/search_service.py",
         "src/code_rag/retrieval/evaluation_service.py",
-        "src/code_rag/vector_stores/factory.py",
-        "README.md"
+        "README.md",
+        "src/code_rag/vector_stores/factory.py"
       ],
       "baseline_top_symbols": [
         "test_qdrant_capabilities_native_hybrid_enabled",
@@ -398,21 +400,21 @@
         "embed_query",
         "UniXcoderEmbedder"
       ],
-      "adaptive_rank": 2,
+      "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
-        "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/embeddings.py"
+        "src/code_rag/embeddings.py",
+        "src/code_rag/vector_stores/qdrant.py"
       ],
       "adaptive_top_symbols": [
-        "QdrantVectorStore",
         "SentenceTransformerEmbedder",
+        "QdrantVectorStore",
         "embed_texts",
         "embed_query",
         "UniXcoderEmbedder"
       ],
-      "winner": "tie",
-      "loss_reason": "same_results"
+      "winner": "adaptive",
+      "loss_reason": "adaptive_better"
     },
     {
       "question": "How does hybrid retrieval compute path-based ranking penalties?",
@@ -431,29 +433,31 @@
       "baseline_top_files": [
         "src/code_rag/retrieval/hybrid.py",
         "README.md",
+        "tests/test_router.py",
         "tests/test_eval_metrics.py"
       ],
       "baseline_top_symbols": [
         "HybridRetriever",
+        "test_technical_routes_to_hybrid_when_native_unavailable",
         "test_rank_5_gives_fifth",
-        "search",
-        "test_rank_2_gives_half"
+        "search"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
         "src/code_rag/retrieval/hybrid.py",
+        "tests/test_router.py",
         "README.md",
         "tests/test_eval_metrics.py"
       ],
       "adaptive_top_symbols": [
         "HybridRetriever",
+        "test_technical_routes_to_hybrid_when_native_unavailable",
         "test_rank_5_gives_fifth",
-        "search",
-        "test_rank_2_gives_half"
+        "search"
       ],
       "winner": "tie",
-      "loss_reason": "same_results"
+      "loss_reason": "same_rank_different_results"
     },
     {
       "question": "How does multi-vector fusion search query multiple named vectors and combine results?",
@@ -515,13 +519,12 @@
         "src/code_rag/mcp_server.py",
         "tests/test_reranker.py",
         "src/code_rag/retrieval/hybrid.py",
-        "tests/test_router.py"
+        "README.md"
       ],
       "baseline_top_symbols": [
         "list_tools",
         "test_no_match_returns_zero",
-        "search",
-        "test_detects_technical_terms"
+        "search"
       ],
       "adaptive_rank": null,
       "adaptive_hit_at_5": false,
@@ -547,23 +550,23 @@
       "expected_symbols": [
         "recreate"
       ],
-      "router_query_type": "technical",
+      "router_query_type": "config",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
+      "router_reason": "Config query routed to native_hybrid because environment variables and YAML keys are exact identifiers.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/retrieval/dense.py",
-        "src/code_rag/config.py"
+        "src/code_rag/config.py",
+        "README.md"
       ],
       "baseline_top_symbols": [
         "QdrantVectorStore",
         "__init__",
         "DenseRetriever",
-        "qdrant_dense_vector_name",
-        "qdrant_sparse_vector_name"
+        "qdrant_dense_vector_name"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
@@ -580,7 +583,7 @@
         "qdrant_dense_vector_name"
       ],
       "winner": "tie",
-      "loss_reason": "same_rank_different_results"
+      "loss_reason": "same_results"
     },
     {
       "question": "How are fusion vector weights configured for multi-vector retrieval experiments?",
@@ -590,9 +593,9 @@
       "expected_symbols": [
         "FusionVectorConfig"
       ],
-      "router_query_type": "technical",
+      "router_query_type": "config",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
+      "router_reason": "Config query routed to native_hybrid because environment variables and YAML keys are exact identifiers.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -644,13 +647,13 @@
       "baseline_top_files": [
         "src/code_rag/vector_stores/factory.py",
         "src/code_rag/retrieval/search_service.py",
-        "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/retrieval/router.py"
+        "scripts/search_repo.py",
+        "src/code_rag/vector_stores/qdrant.py"
       ],
       "baseline_top_symbols": [
         "grouped_search",
         "search_codebase",
-        "_route_architecture",
+        "main",
         "native_hybrid_grouped_search"
       ],
       "adaptive_rank": 1,
@@ -659,16 +662,16 @@
         "src/code_rag/vector_stores/factory.py",
         "src/code_rag/retrieval/search_service.py",
         "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/retrieval/router.py"
+        "scripts/search_repo.py"
       ],
       "adaptive_top_symbols": [
         "grouped_search",
         "search_codebase",
-        "_route_architecture",
+        "main",
         "native_hybrid_grouped_search"
       ],
       "winner": "tie",
-      "loss_reason": "same_results"
+      "loss_reason": "same_rank_different_results"
     }
   ]
 }
