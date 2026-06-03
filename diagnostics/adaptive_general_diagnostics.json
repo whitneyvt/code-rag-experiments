@@ -5,14 +5,14 @@
   "summary": {
     "total_queries": 25,
     "adaptive_wins": 0,
-    "baseline_wins": 1,
-    "ties": 20,
+    "baseline_wins": 0,
+    "ties": 21,
     "neither": 4,
-    "wrong_route_count": 1,
+    "wrong_route_count": 0,
     "expected_missing_count": 0,
     "expected_lower_ranked_count": 0,
     "unsupported_route_fallback_count": 0,
-    "same_results_count": 20,
+    "same_results_count": 21,
     "no_expected_match_count": 4,
     "query_type_counts": {
       "technical": 15,
@@ -21,13 +21,12 @@
       "fallback": 3
     },
     "selected_mode_counts": {
-      "hybrid": 23,
-      "dense": 2
+      "hybrid": 25
     },
     "query_type_mode_counts": {
       "technical -> hybrid": 15,
       "symbol -> hybrid": 5,
-      "conceptual -> dense": 2,
+      "conceptual -> hybrid": 2,
       "fallback -> hybrid": 3
     }
   },
@@ -43,19 +42,20 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/retriever.py",
-        "src/code_rag/config.py",
-        "README.md"
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/config.py"
       ],
       "baseline_top_symbols": [
         "__init__",
         "QdrantVectorStore",
+        "vector_store",
         "qdrant_sparse_vector_name"
       ],
       "adaptive_rank": 1,
@@ -63,12 +63,13 @@
       "adaptive_top_files": [
         "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/retriever.py",
-        "src/code_rag/config.py",
-        "README.md"
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/config.py"
       ],
       "adaptive_top_symbols": [
         "__init__",
         "QdrantVectorStore",
+        "vector_store",
         "qdrant_sparse_vector_name"
       ],
       "winner": "tie",
@@ -84,7 +85,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -125,35 +126,37 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 2,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/retrieval/evaluation_service.py",
         "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/config.py"
+        "src/code_rag/config.py",
+        "src/code_rag/vector_stores/factory.py"
       ],
       "baseline_top_symbols": [
         "NativeHybridRetriever",
-        "search",
         "QdrantVectorStore",
         "qdrant_sparse_vector_name",
-        "qdrant_dense_vector_name"
+        "qdrant_dense_vector_name",
+        "search"
       ],
       "adaptive_rank": 2,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
         "src/code_rag/retrieval/evaluation_service.py",
         "src/code_rag/vector_stores/qdrant.py",
-        "src/code_rag/config.py"
+        "src/code_rag/config.py",
+        "src/code_rag/vector_stores/factory.py"
       ],
       "adaptive_top_symbols": [
         "NativeHybridRetriever",
-        "search",
         "QdrantVectorStore",
         "qdrant_sparse_vector_name",
-        "qdrant_dense_vector_name"
+        "qdrant_dense_vector_name",
+        "search"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -169,35 +172,33 @@
       ],
       "router_query_type": "symbol",
       "router_selected_mode": "hybrid",
-      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/vector_stores/opensearch.py",
-        "src/code_rag/retrieval/dense.py",
-        "src/code_rag/config.py"
+        "docker-compose.yml",
+        "src/code_rag/retrieval/dense.py"
       ],
       "baseline_top_symbols": [
         "OpenSearchVectorStore",
         "__init__",
         "capabilities",
-        "vector_store",
-        "opensearch_username"
+        "vector_store"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
         "src/code_rag/vector_stores/opensearch.py",
-        "src/code_rag/retrieval/dense.py",
-        "src/code_rag/config.py"
+        "docker-compose.yml",
+        "src/code_rag/retrieval/dense.py"
       ],
       "adaptive_top_symbols": [
         "OpenSearchVectorStore",
         "__init__",
         "capabilities",
-        "vector_store",
-        "opensearch_username"
+        "vector_store"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -212,7 +213,7 @@
       ],
       "router_query_type": "symbol",
       "router_selected_mode": "hybrid",
-      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -253,7 +254,7 @@
       ],
       "router_query_type": "symbol",
       "router_selected_mode": "hybrid",
-      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -294,7 +295,7 @@
       ],
       "router_query_type": "symbol",
       "router_selected_mode": "hybrid",
-      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 2,
       "baseline_hit_at_5": true,
@@ -335,7 +336,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": null,
       "baseline_hit_at_5": false,
@@ -379,8 +380,8 @@
         "ingest_repo"
       ],
       "router_query_type": "conceptual",
-      "router_selected_mode": "dense",
-      "router_reason": "Conceptual query: using dense search (fallback)",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Conceptual query routed to hybrid because neither fusion nor native_hybrid is available.",
       "baseline_mode": "hybrid",
       "baseline_rank": null,
       "baseline_hit_at_5": false,
@@ -400,17 +401,17 @@
       "adaptive_rank": null,
       "adaptive_hit_at_5": false,
       "adaptive_top_files": [
-        "tests/test_ingest_metadata.py",
-        "src/code_rag/__init__.py",
-        "tests/test_collection_strategy.py",
-        "tests/test_plan_service.py",
-        "src/code_rag/planning/plan_service.py"
+        "src/code_rag/planning/plan_service.py",
+        "src/code_rag/experiments/results.py",
+        "src/code_rag/chunk_id.py",
+        "src/code_rag/experiments/runner.py",
+        "src/code_rag/__init__.py"
       ],
       "adaptive_top_symbols": [
-        "TestIngestionMetadata",
-        "test_ingest_uses_env_collection",
-        "test_implementation_plan_is_non_empty",
-        "_generate_validation_plan"
+        "_generate_validation_plan",
+        "TimingMetrics",
+        "generate_chunk_id",
+        "run_experiment"
       ],
       "winner": "neither",
       "loss_reason": "no_expected_match"
@@ -425,7 +426,7 @@
       ],
       "router_query_type": "fallback",
       "router_selected_mode": "hybrid",
-      "router_reason": "Fallback: using hybrid search",
+      "router_reason": "Unclassified query routed to hybrid as safe default.",
       "baseline_mode": "hybrid",
       "baseline_rank": null,
       "baseline_hit_at_5": false,
@@ -462,7 +463,7 @@
       ],
       "router_query_type": "fallback",
       "router_selected_mode": "hybrid",
-      "router_reason": "Fallback: using hybrid search",
+      "router_reason": "Unclassified query routed to hybrid as safe default.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -509,7 +510,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 3,
       "baseline_hit_at_5": true,
@@ -552,7 +553,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -595,7 +596,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -636,7 +637,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -682,7 +683,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 3,
       "baseline_hit_at_5": true,
@@ -727,7 +728,7 @@
       ],
       "router_query_type": "symbol",
       "router_selected_mode": "hybrid",
-      "router_reason": "Symbol query: using hybrid search for keyword matching",
+      "router_reason": "Symbol query routed to hybrid for keyword matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -769,8 +770,8 @@
         "main"
       ],
       "router_query_type": "conceptual",
-      "router_selected_mode": "dense",
-      "router_reason": "Conceptual query: using dense search (fallback)",
+      "router_selected_mode": "hybrid",
+      "router_reason": "Conceptual query routed to hybrid because neither fusion nor native_hybrid is available.",
       "baseline_mode": "hybrid",
       "baseline_rank": 3,
       "baseline_hit_at_5": true,
@@ -786,23 +787,22 @@
         "FusionRetriever",
         "evaluate_case"
       ],
-      "adaptive_rank": 5,
+      "adaptive_rank": 3,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
+        "README.md",
         "src/code_rag/retrieval/hybrid.py",
-        "tests/test_bm25.py",
-        "tests/test_search_cli.py",
-        "scripts/search_repo.py"
+        "scripts/search_repo.py",
+        "src/code_rag/retrieval/evaluation_service.py"
       ],
       "adaptive_top_symbols": [
         "dense_retriever",
-        "test_search_empty_index",
-        "test_search_empty_query",
-        "test_dense_does_not_require_repo_path",
-        "main"
+        "main",
+        "FusionRetriever",
+        "evaluate_case"
       ],
-      "winner": "baseline",
-      "loss_reason": "wrong_route"
+      "winner": "tie",
+      "loss_reason": "same_results"
     },
     {
       "question": "How does dense vector retrieval search for semantically similar code?",
@@ -815,14 +815,14 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/retrieval/dense.py",
-        "src/code_rag/retrieval/hybrid.py",
         "README.md",
+        "src/code_rag/retrieval/hybrid.py",
         "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/experiments/config.py"
       ],
@@ -836,8 +836,8 @@
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
         "src/code_rag/retrieval/dense.py",
-        "src/code_rag/retrieval/hybrid.py",
         "README.md",
+        "src/code_rag/retrieval/hybrid.py",
         "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/experiments/config.py"
       ],
@@ -861,37 +861,39 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
-      "baseline_rank": 3,
+      "baseline_rank": 4,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/router.py",
         "src/code_rag/vector_stores/opensearch.py",
         "src/code_rag/retrieval/bm25.py",
         "src/code_rag/retrieval/evaluation_service.py"
       ],
       "baseline_top_symbols": [
         "HybridRetriever",
+        "_route_symbol",
         "OpenSearchVectorStore",
         "BM25Retriever",
-        "NativeHybridRetriever",
-        "__init__"
+        "NativeHybridRetriever"
       ],
-      "adaptive_rank": 3,
+      "adaptive_rank": 4,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
         "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/router.py",
         "src/code_rag/vector_stores/opensearch.py",
         "src/code_rag/retrieval/bm25.py",
         "src/code_rag/retrieval/evaluation_service.py"
       ],
       "adaptive_top_symbols": [
         "HybridRetriever",
+        "_route_symbol",
         "OpenSearchVectorStore",
         "BM25Retriever",
-        "NativeHybridRetriever",
-        "__init__"
+        "NativeHybridRetriever"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -906,7 +908,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -918,8 +920,8 @@
         "tokenize_code",
         "__init__",
         "BM25Retriever",
-        "index_chunks",
-        "filter_chunks"
+        "filter_chunks",
+        "index_chunks"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
@@ -931,8 +933,8 @@
         "tokenize_code",
         "__init__",
         "BM25Retriever",
-        "index_chunks",
-        "filter_chunks"
+        "filter_chunks",
+        "index_chunks"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -948,7 +950,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -956,12 +958,12 @@
         "src/code_rag/retrieval/hybrid.py",
         "src/code_rag/retrieval/evaluation_service.py",
         "src/code_rag/retrieval/search_service.py",
-        "src/code_rag/vector_stores/factory.py"
+        "src/code_rag/vector_stores/factory.py",
+        "README.md"
       ],
       "baseline_top_symbols": [
         "HybridRetriever",
         "create_retriever",
-        "run_evaluation",
         "search_codebase",
         "native_hybrid_search"
       ],
@@ -971,12 +973,12 @@
         "src/code_rag/retrieval/hybrid.py",
         "src/code_rag/retrieval/evaluation_service.py",
         "src/code_rag/retrieval/search_service.py",
-        "src/code_rag/vector_stores/factory.py"
+        "src/code_rag/vector_stores/factory.py",
+        "README.md"
       ],
       "adaptive_top_symbols": [
         "HybridRetriever",
         "create_retriever",
-        "run_evaluation",
         "search_codebase",
         "native_hybrid_search"
       ],
@@ -993,7 +995,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -1034,7 +1036,7 @@
       ],
       "router_query_type": "fallback",
       "router_selected_mode": "hybrid",
-      "router_reason": "Fallback: using hybrid search",
+      "router_reason": "Unclassified query routed to hybrid as safe default.",
       "baseline_mode": "hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -1075,7 +1077,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "hybrid",
-      "router_reason": "Technical query: using hybrid search (native not available)",
+      "router_reason": "Technical query routed to hybrid for domain term matching via BM25.",
       "baseline_mode": "hybrid",
       "baseline_rank": null,
       "baseline_hit_at_5": false,

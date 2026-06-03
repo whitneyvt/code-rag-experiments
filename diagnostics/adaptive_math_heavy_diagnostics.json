@@ -4,15 +4,15 @@
   "top_k": 5,
   "summary": {
     "total_queries": 15,
-    "adaptive_wins": 1,
+    "adaptive_wins": 0,
     "baseline_wins": 0,
-    "ties": 11,
+    "ties": 12,
     "neither": 3,
     "wrong_route_count": 0,
     "expected_missing_count": 0,
     "expected_lower_ranked_count": 0,
     "unsupported_route_fallback_count": 0,
-    "same_results_count": 11,
+    "same_results_count": 12,
     "no_expected_match_count": 3,
     "query_type_counts": {
       "technical": 13,
@@ -39,21 +39,21 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": null,
       "baseline_hit_at_5": false,
       "baseline_top_files": [
         "tests/test_fusion.py",
         "tests/test_hybrid.py",
-        "src/code_rag/vector_stores/factory.py",
-        "tests/test_reranker.py"
+        "tests/test_reranker.py",
+        "src/code_rag/vector_stores/factory.py"
       ],
       "baseline_top_symbols": [
         "TestReciprocalRankFusion",
         "test_empty_lists",
-        "native_hybrid_search",
         "TestRerankResults",
+        "native_hybrid_search",
         "test_empty_input"
       ],
       "adaptive_rank": null,
@@ -84,7 +84,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 3,
       "baseline_hit_at_5": true,
@@ -129,7 +129,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -168,7 +168,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -206,7 +206,7 @@
       ],
       "router_query_type": "fallback",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Fallback: using native hybrid as default",
+      "router_reason": "Unclassified query routed to native_hybrid as safe default.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -251,7 +251,7 @@
       ],
       "router_query_type": "conceptual",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Conceptual query: using native hybrid (fusion not available)",
+      "router_reason": "Conceptual query routed to native_hybrid because fusion vectors are unavailable.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 2,
       "baseline_hit_at_5": true,
@@ -294,7 +294,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": null,
       "baseline_hit_at_5": false,
@@ -340,7 +340,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 3,
       "baseline_hit_at_5": true,
@@ -348,13 +348,13 @@
         "tests/test_vector_store_capabilities.py",
         "README.md",
         "src/code_rag/vector_stores/opensearch.py",
-        "src/code_rag/config.py",
-        "src/code_rag/vector_stores/qdrant.py"
+        "src/code_rag/config.py"
       ],
       "baseline_top_symbols": [
         "TestQdrantPayloadIndexes",
         "create_payload_indexes",
-        "qdrant_create_payload_indexes"
+        "qdrant_create_payload_indexes",
+        "test_qdrant_capabilities_supports_payload_indexes"
       ],
       "adaptive_rank": 3,
       "adaptive_hit_at_5": true,
@@ -371,7 +371,7 @@
         "test_qdrant_capabilities_supports_payload_indexes"
       ],
       "winner": "tie",
-      "loss_reason": "same_rank_different_results"
+      "loss_reason": "same_results"
     },
     {
       "question": "How are embeddings normalized using L2 normalization before storage?",
@@ -383,7 +383,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 2,
       "baseline_hit_at_5": true,
@@ -398,21 +398,21 @@
         "embed_query",
         "UniXcoderEmbedder"
       ],
-      "adaptive_rank": 1,
+      "adaptive_rank": 2,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
-        "src/code_rag/embeddings.py",
-        "src/code_rag/vector_stores/qdrant.py"
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/embeddings.py"
       ],
       "adaptive_top_symbols": [
-        "SentenceTransformerEmbedder",
         "QdrantVectorStore",
+        "SentenceTransformerEmbedder",
         "embed_texts",
         "embed_query",
         "UniXcoderEmbedder"
       ],
-      "winner": "adaptive",
-      "loss_reason": "adaptive_better"
+      "winner": "tie",
+      "loss_reason": "same_results"
     },
     {
       "question": "How does hybrid retrieval compute path-based ranking penalties?",
@@ -424,14 +424,14 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/retrieval/hybrid.py",
-        "tests/test_eval_metrics.py",
-        "README.md"
+        "README.md",
+        "tests/test_eval_metrics.py"
       ],
       "baseline_top_symbols": [
         "HybridRetriever",
@@ -443,8 +443,8 @@
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
         "src/code_rag/retrieval/hybrid.py",
-        "tests/test_eval_metrics.py",
-        "README.md"
+        "README.md",
+        "tests/test_eval_metrics.py"
       ],
       "adaptive_top_symbols": [
         "HybridRetriever",
@@ -466,7 +466,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 3,
       "baseline_hit_at_5": true,
@@ -478,8 +478,8 @@
       "baseline_top_symbols": [
         "FusionRetriever",
         "search",
-        "search_codebase",
-        "_multi_vector_fusion_search"
+        "_multi_vector_fusion_search",
+        "search_codebase"
       ],
       "adaptive_rank": 3,
       "adaptive_hit_at_5": true,
@@ -507,7 +507,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": null,
       "baseline_hit_at_5": false,
@@ -515,26 +515,26 @@
         "src/code_rag/mcp_server.py",
         "tests/test_reranker.py",
         "src/code_rag/retrieval/hybrid.py",
-        "README.md"
+        "tests/test_router.py"
       ],
       "baseline_top_symbols": [
         "list_tools",
         "test_no_match_returns_zero",
-        "search"
+        "search",
+        "test_detects_technical_terms"
       ],
       "adaptive_rank": null,
       "adaptive_hit_at_5": false,
       "adaptive_top_files": [
-        "tests/test_reranker.py",
         "src/code_rag/mcp_server.py",
+        "tests/test_reranker.py",
         "src/code_rag/retrieval/hybrid.py",
-        "tests/test_router.py"
+        "README.md"
       ],
       "adaptive_top_symbols": [
-        "test_no_match_returns_zero",
         "list_tools",
-        "search",
-        "test_detects_technical_terms"
+        "test_no_match_returns_zero",
+        "search"
       ],
       "winner": "neither",
       "loss_reason": "no_expected_match"
@@ -549,21 +549,21 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
         "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/retrieval/dense.py",
-        "src/code_rag/config.py",
-        "README.md"
+        "src/code_rag/config.py"
       ],
       "baseline_top_symbols": [
         "QdrantVectorStore",
         "__init__",
         "DenseRetriever",
-        "qdrant_dense_vector_name"
+        "qdrant_dense_vector_name",
+        "qdrant_sparse_vector_name"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
@@ -580,7 +580,7 @@
         "qdrant_dense_vector_name"
       ],
       "winner": "tie",
-      "loss_reason": "same_results"
+      "loss_reason": "same_rank_different_results"
     },
     {
       "question": "How are fusion vector weights configured for multi-vector retrieval experiments?",
@@ -592,7 +592,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -637,7 +637,7 @@
       ],
       "router_query_type": "technical",
       "router_selected_mode": "native_hybrid",
-      "router_reason": "Technical query: using native hybrid for domain term matching",
+      "router_reason": "Technical query routed to native_hybrid because sparse+dense search handles exact technical terms.",
       "baseline_mode": "native_hybrid",
       "baseline_rank": 1,
       "baseline_hit_at_5": true,
@@ -658,8 +658,8 @@
       "adaptive_top_files": [
         "src/code_rag/vector_stores/factory.py",
         "src/code_rag/retrieval/search_service.py",
-        "src/code_rag/retrieval/router.py",
-        "src/code_rag/vector_stores/qdrant.py"
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/router.py"
       ],
       "adaptive_top_symbols": [
         "grouped_search",
@@ -668,7 +668,7 @@
         "native_hybrid_grouped_search"
       ],
       "winner": "tie",
-      "loss_reason": "same_rank_different_results"
+      "loss_reason": "same_results"
     }
   ]
 }
