@@ -1,0 +1,93 @@
+{
+  "name": "qdrant_multivector_code_math_weighted_equal_unixcoder",
+  "timestamp": "2026-06-03T13:58:31.478544",
+  "config": {
+    "name": "qdrant_multivector_code_math_weighted_equal_unixcoder",
+    "repo_path": "/Users/whitney/src/code_rag",
+    "repo": "code_rag",
+    "branch": "main",
+    "vector_store": {
+      "backend": "qdrant",
+      "collection": "code_chunks",
+      "url": "http://localhost:6333",
+      "create_payload_indexes": true,
+      "collection_strategy": "per_experiment",
+      "enable_sparse_vectors": false,
+      "enable_named_vectors": true,
+      "default_dense_vector_name": "code",
+      "named_vectors": [
+        {
+          "name": "code",
+          "representation": "code"
+        },
+        {
+          "name": "math_terms",
+          "representation": "math_terms"
+        }
+      ],
+      "effective_collection": "code_chunks_exp_qdrant_multivector_code_math_weighted_equal_unixcoder"
+    },
+    "embedding": {
+      "backend": "unixcoder",
+      "model": "microsoft/unixcoder-base",
+      "representation_type": "code"
+    },
+    "chunking": {
+      "strategy": "ast",
+      "chunk_size": 100,
+      "overlap": 15
+    },
+    "retrieval": {
+      "mode": "dense",
+      "top_k": 5,
+      "rerank": false,
+      "rerank_limit": 20,
+      "native_hybrid": false,
+      "prefetch_limit": 20,
+      "group_by_file": false,
+      "group_limit": 0,
+      "group_size": 2,
+      "vector_name": "",
+      "fusion_vectors": [
+        {
+          "name": "code",
+          "weight": 1.0
+        },
+        {
+          "name": "math_terms",
+          "weight": 1.0
+        }
+      ],
+      "fusion_method": "weighted"
+    },
+    "eval": {
+      "retrieval_eval_set": "evals/code_rag.json",
+      "planning_eval_set": "evals/planning_code_rag.json",
+      "max_iterations": 2
+    }
+  },
+  "chunk_count": 1342,
+  "timing": {
+    "ingestion_seconds": 96.64,
+    "retrieval_eval_seconds": 2.65,
+    "planning_eval_seconds": 85.45,
+    "total_seconds": 184.74
+  },
+  "retrieval": {
+    "hit_at_1": 0.28,
+    "hit_at_3": 0.48,
+    "hit_at_5": 0.56,
+    "mrr": 0.3847,
+    "total_queries": 25
+  },
+  "planning": {
+    "file_hit_rate": 0.4722,
+    "file_hit_at_1": 0.5833,
+    "symbol_hit_rate": 0.1875,
+    "validation_hit_rate": 0.9583,
+    "source_coverage": 0.4722,
+    "average_confidence_score": 0.8125,
+    "total_cases": 24
+  },
+  "errors": []
+}
