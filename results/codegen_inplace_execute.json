@@ -1,0 +1,432 @@
+{
+  "task_file": "evals/code_generation_tasks_inplace.json",
+  "repo_path": "/Users/whitney/src/code_rag",
+  "mode": "hybrid",
+  "top_k": 8,
+  "execute": true,
+  "total_tasks": 5,
+  "results": [
+    {
+      "task_id": "inplace-router-error-patterns-out-of-memory",
+      "outcome": "StaticCheckFailure",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposed_files": [
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Extend the existing ERROR_PATTERNS list in src/code_rag/retrieval/router.py so it includes the phrase \"out of memory\". Update the list in place; do not declare a second pattern list elsewhere. Add a unit test test_is_error_query_detects_out_of_memory in tests/test_router.py asserting _is_error_query(\"out of memory error encountered\") returns True.. Found 7 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_handle_router_test_add`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          ".agent_memory/experience.md",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "src/code_rag/generation/answer_service.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,12 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_is_error_query_detects_out_of_memory():\n+    \"\"\"Codegen-eval generic stub for -k 'is_error_query_detects_out_of_memory'. Extend the existing ERROR_PATTERNS list in src/code_rag/retrieval/router.py so it includes the phrase \"out of memory\". Update the list in place; do not declare a second pattern list elsewhere. Add ...\"\"\"\n+    # This minimum-viable test was emitted by the codegen eval's generic\n+    # add_test handler so `pytest -k is_error_query_detects_out_of_memory` collects and passes a real\n+    # function. Future eval contracts should tighten the success_command\n+    # to verify the assertions inside this function.\n+    assert True\n",
+        "test_command": "pytest tests/test_router.py -k is_error_query_detects_out_of_memory -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_router.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_j9infjxw/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_router.py -k is_error_query_detects_out_of_memory -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 72 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/retrieval/router.py",
+          "contains": "\"out of memory\"",
+          "passed": false
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "_is_error_query",
+          "passed": false,
+          "function": "test_is_error_query_detects_out_of_memory"
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "out of memory",
+          "passed": false,
+          "function": "test_is_error_query_detects_out_of_memory"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:20:43.313777+00:00"
+    },
+    {
+      "task_id": "inplace-router-cli-patterns-pytest",
+      "outcome": "StaticCheckFailure",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposed_files": [
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Extend the existing CLI_PATTERNS list in src/code_rag/retrieval/router.py so it includes the literal string \"pytest\". Update the list in place; do not declare a second pattern list elsewhere. Add a unit test test_is_cli_query_detects_pytest in tests/test_router.py asserting _is_cli_query(\"how do I invoke pytest with -k\") returns True.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_handle_router_test_add`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/planning/plan_service.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_deterministic_stubs.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,12 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_is_cli_query_detects_pytest():\n+    \"\"\"Codegen-eval generic stub for -k 'is_cli_query_detects_pytest'. Extend the existing CLI_PATTERNS list in src/code_rag/retrieval/router.py so it includes the literal string \"pytest\". Update the list in place; do not declare a second pattern list elsewhere. Add a...\"\"\"\n+    # This minimum-viable test was emitted by the codegen eval's generic\n+    # add_test handler so `pytest -k is_cli_query_detects_pytest` collects and passes a real\n+    # function. Future eval contracts should tighten the success_command\n+    # to verify the assertions inside this function.\n+    assert True\n",
+        "test_command": "pytest tests/test_router.py -k is_cli_query_detects_pytest -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_router.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_sbdud695/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_router.py -k is_cli_query_detects_pytest -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 72 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/retrieval/router.py",
+          "contains": "\"pytest\"",
+          "passed": false
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "_is_cli_query",
+          "passed": false,
+          "function": "test_is_cli_query_detects_pytest"
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "pytest",
+          "passed": false,
+          "function": "test_is_cli_query_detects_pytest"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:20:45.643356+00:00"
+    },
+    {
+      "task_id": "inplace-router-classify-query-doc-branch",
+      "outcome": "StaticCheckFailure",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposed_files": [
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a documentation query category by (1) adding an _is_doc_query helper to src/code_rag/retrieval/router.py that returns True when the query contains 'documentation', 'docs', 'readme', or 'explain', and (2) modifying the existing classify_query function in place so an _is_doc_query match returns the string \"doc\". Insert the new branch BELOW the config branch and ABOVE the symbol branch. Add a unit test test_classify_query_returns_doc_for_doc_keywords in tests/test_router.py asserting classify_query(\"explain how routing works\") == \"doc\" and a negative case.. Found 8 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/retrieval/sufficiency.py` containing `_query_mentions_docs`.",
+        "retrieved_context": [
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/reranker.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/codegen/patch_validator.py",
+          "src/code_rag/planning/plan_service.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,12 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_classify_query_returns_doc_for_doc_keywords():\n+    \"\"\"Codegen-eval generic stub for -k 'classify_query_returns_doc_for_doc_keywords'. Add a documentation query category by (1) adding an _is_doc_query helper to src/code_rag/retrieval/router.py that returns True when the query contains 'documentation', 'docs', 'readme', or 'explain...\"\"\"\n+    # This minimum-viable test was emitted by the codegen eval's generic\n+    # add_test handler so `pytest -k classify_query_returns_doc_for_doc_keywords` collects and passes a real\n+    # function. Future eval contracts should tighten the success_command\n+    # to verify the assertions inside this function.\n+    assert True\n",
+        "test_command": "pytest tests/test_router.py -k classify_query_returns_doc_for_doc_keywords -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_router.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_naai5p2d/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_router.py -k classify_query_returns_doc_for_doc_keywords -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 72 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/retrieval/router.py",
+          "contains": "_is_doc_query",
+          "passed": false,
+          "function": "classify_query"
+        },
+        {
+          "file": "src/code_rag/retrieval/router.py",
+          "contains": "\"doc\"",
+          "passed": false,
+          "function": "classify_query"
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "classify_query",
+          "passed": false,
+          "function": "test_classify_query_returns_doc_for_doc_keywords"
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "\"doc\"",
+          "passed": false,
+          "function": "test_classify_query_returns_doc_for_doc_keywords"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:20:47.969746+00:00"
+    },
+    {
+      "task_id": "inplace-evaluate-static-check-regex-branch",
+      "outcome": "StaticCheckFailure",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposed_files": [
+        "tests/test_execution_eval.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Modify the existing _evaluate_static_check function in src/code_rag/codegen/execution_eval.py in place so that, when a StaticCheck instance carries a truthy ``regex`` attribute, the helper evaluates the check by calling re.search(regex, segment) against the function-body or file scope. Do not add a separate helper \u2014 the regex branch must live inside _evaluate_static_check itself. Add a unit test test_evaluate_static_check_uses_regex_attribute in tests/test_execution_eval.py that constructs a StaticCheck, sets a regex attribute, and asserts _evaluate_static_check returns passed=True for a matching pattern and False for a non-matching pattern.. Found 4 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_source_edit_regex_check`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "tests/test_reranker.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/tests/test_execution_eval.py\n+++ b/tests/test_execution_eval.py\n@@ -957,3 +957,12 @@\n             tmp_path,\n         )[0]\n         assert not result.passed\n+\n+\n+def test_evaluate_static_check_uses_regex_attribute():\n+    \"\"\"Codegen-eval generic stub for -k 'evaluate_static_check_uses_regex_attribute'. Modify the existing _evaluate_static_check function in src/code_rag/codegen/execution_eval.py in place so that, when a StaticCheck instance carries a truthy ``regex`` attribute, the helper evaluate...\"\"\"\n+    # This minimum-viable test was emitted by the codegen eval's generic\n+    # add_test handler so `pytest -k evaluate_static_check_uses_regex_attribute` collects and passes a real\n+    # function. Future eval contracts should tighten the success_command\n+    # to verify the assertions inside this function.\n+    assert True\n",
+        "test_command": "pytest tests/test_execution_eval.py -k evaluate_static_check_uses_regex_attribute -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_execution_eval.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_77g8wfet/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_execution_eval.py -k evaluate_static_check_uses_regex_attribute -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 61 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/codegen/execution_eval.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_execution_eval.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_execution_eval.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/codegen/execution_eval.py",
+          "contains": "regex",
+          "passed": false,
+          "function": "_evaluate_static_check"
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "StaticCheck",
+          "passed": false,
+          "function": "test_evaluate_static_check_uses_regex_attribute"
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "regex",
+          "passed": false,
+          "function": "test_evaluate_static_check_uses_regex_attribute"
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "_evaluate_static_check",
+          "passed": false,
+          "function": "test_evaluate_static_check_uses_regex_attribute"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:20:50.381905+00:00"
+    },
+    {
+      "task_id": "inplace-config-loader-adaptive-default-true",
+      "outcome": "StaticCheckFailure",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/experiments/config.py",
+        "tests/test_experiments.py"
+      ],
+      "proposed_files": [
+        "tests/test_experiments.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Update the YAML loader in src/code_rag/experiments/config.py so the default value of retrieval.adaptive flips from False to True. The change must be in the existing load_config function body (specifically the retrieval_data.get(\"adaptive\", False) call). Do not add a duplicate loader function. Add a unit test test_load_config_adaptive_defaults_to_true in tests/test_experiments.py that loads a minimal YAML omitting retrieval.adaptive and asserts the resulting cfg.retrieval.adaptive is True.. Found 7 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_source_edit_routing_explanation_config`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/experiments/config.py",
+          "src/code_rag/experiments/config.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/experiments/runner.py",
+          "scripts/run_experiment.py",
+          "README.md",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/tests/test_experiments.py\n+++ b/tests/test_experiments.py\n@@ -447,3 +447,12 @@\n         assert config.retrieval_eval_set == \"\"\n         assert config.planning_eval_set == \"\"\n         assert config.max_iterations == 2\n+\n+\n+def test_load_config_adaptive_defaults_to_true():\n+    \"\"\"Codegen-eval generic stub for -k 'load_config_adaptive_defaults_to_true'. Update the YAML loader in src/code_rag/experiments/config.py so the default value of retrieval.adaptive flips from False to True. The change must be in the existing load_config function body (speci...\"\"\"\n+    # This minimum-viable test was emitted by the codegen eval's generic\n+    # add_test handler so `pytest -k load_config_adaptive_defaults_to_true` collects and passes a real\n+    # function. Future eval contracts should tighten the success_command\n+    # to verify the assertions inside this function.\n+    assert True\n",
+        "test_command": "pytest tests/test_experiments.py -k load_config_adaptive_defaults_to_true -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_experiments.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_rcyvwld5/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_experiments.py -k load_config_adaptive_defaults_to_true -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 21 deselected in 0.03s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/experiments/config.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_experiments.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_experiments.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/experiments/config.py",
+          "contains": "\"adaptive\", True",
+          "passed": false,
+          "function": "load_config"
+        },
+        {
+          "file": "tests/test_experiments.py",
+          "contains": "load_config",
+          "passed": false,
+          "function": "test_load_config_adaptive_defaults_to_true"
+        },
+        {
+          "file": "tests/test_experiments.py",
+          "contains": "adaptive",
+          "passed": false,
+          "function": "test_load_config_adaptive_defaults_to_true"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:20:52.572252+00:00"
+    }
+  ]
+}
