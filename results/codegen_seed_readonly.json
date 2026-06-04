@@ -1,0 +1,209 @@
+{
+  "task_file": "evals/code_generation_tasks.json",
+  "repo_path": "/Users/whitney/src/code_rag",
+  "mode": "hybrid",
+  "top_k": 8,
+  "execute": false,
+  "total_tasks": 5,
+  "results": [
+    {
+      "task_id": "router-test-add",
+      "outcome": "RetrievalMiss",
+      "executed": false,
+      "expected_files": [
+        "tests/test_router.py",
+        "src/code_rag/retrieval/router.py"
+      ],
+      "proposed_files": [
+        "tests/test_chunk_metadata.py",
+        "src/code_rag/retrieval/representations.py",
+        "src/code_rag/chunk_id.py",
+        "src/code_rag/codegen/execution_eval.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.. Found 5 relevant file(s) (after 2 retrieval passes), starting with `tests/test_chunk_metadata.py` containing `test_uuid_is_valid_format`.",
+        "retrieved_context": [
+          "src/code_rag/chunk_id.py",
+          "src/code_rag/retrieval/representations.py",
+          "tests/test_chunk_metadata.py",
+          ".agent_memory/experience.md",
+          "README.md",
+          "README.md",
+          "tests/test_chunk_metadata.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "tests/test_chunk_metadata.py",
+          "tests/test_chunk_metadata.py"
+        ],
+        "patch": "--- a/tests/test_chunk_metadata.py+++ b/tests/test_chunk_metadata.py@@ -449,3 +449,8 @@         )\n \n         assert result.symbol_name is None\n+\n+# TODO: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.\n+# Relevant symbols: test_uuid_is_valid_format, TestChunkIdToUuid, test_deterministic_same_chunk_id, test_uuid_derived_from_chunk_id_prefix\n+# Based on 4 retrieved source chunk(s)\n+# Reason: Contains test_uuid_is_valid_format, TestChunkIdToUuid matching 'test'.\n\n--- a/src/code_rag/retrieval/representations.py+++ b/src/code_rag/retrieval/representations.py@@ -234,3 +234,8 @@     text = chunk.get(\"text\", \"\")\n     chunk[\"math_terms\"] = extract_math_terms(text)\n     return chunk\n+\n+# TODO: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.\n+# Relevant symbols: extract_code_representation\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Architecture file containing extract_code_representation.\n\n--- a/src/code_rag/chunk_id.py+++ b/src/code_rag/chunk_id.py@@ -51,3 +51,8 @@     id_components = f\"{repo}:{branch}:{file_path}:{start_line}:{end_line}:{text_hash}\"\n \n     return hashlib.sha256(id_components.encode(\"utf-8\")).hexdigest()\n+\n+# TODO: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.\n+# Relevant symbols: chunk_id_to_uuid\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains relevant symbols: chunk_id_to_uuid.\n\n--- a/src/code_rag/codegen/execution_eval.py+++ b/src/code_rag/codegen/execution_eval.py@@ -527,3 +527,8 @@     }\n     with p.open(\"a\") as f:\n         f.write(json.dumps(record) + \"\\n\")\n+\n+# TODO: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.\n+# Relevant symbols: create_worktree\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains relevant symbols: create_worktree.\n",
+        "test_command": "pytest tests/test_router.py -k badly_formed_hex -q",
+        "summary": "Proposed 4 change(s) for task: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.. Files: tests/test_chunk_metadata.py, src/code_rag/retrieval/representations.py, src/code_rag/chunk_id.py and 1 more."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "notes": "",
+      "timestamp": "2026-06-04T19:14:07.601543+00:00"
+    },
+    {
+      "task_id": "sparse-tokenization-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/mcp_server.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "src/code_rag/retrieval/router.py",
+        "scripts/search_repo.py",
+        "src/code_rag/planning/__init__.py",
+        "tests/test_vector_store_capabilities.py",
+        "tests/test_sufficiency.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.. Found 9 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/vector_stores/factory.py` containing `sparse_enabled`.",
+        "retrieved_context": [
+          "src/code_rag/vector_stores/factory.py",
+          "src/code_rag/mcp_server.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/retrieval/sparse_vectors.py",
+          "src/code_rag/retrieval/router.py",
+          "src/code_rag/vector_stores/factory.py",
+          "scripts/search_repo.py",
+          "src/code_rag/planning/__init__.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_sufficiency.py"
+        ],
+        "patch": "--- a/src/code_rag/vector_stores/factory.py+++ b/src/code_rag/vector_stores/factory.py@@ -370,3 +370,8 @@             fusion=fusion,\n             query_filter=query_filter,\n         )\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Relevant symbols: sparse_enabled, recreate\n+# Based on 2 retrieved source chunk(s)\n+# Reason: Architecture file containing sparse_enabled, recreate.\n\n--- a/src/code_rag/mcp_server.py+++ b/src/code_rag/mcp_server.py@@ -1126,3 +1126,8 @@ if __name__ == \"__main__\":\n     import asyncio\n     asyncio.run(main())\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Relevant symbols: handle_search_codebase\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Architecture file containing handle_search_codebase.\n\n--- a/src/code_rag/vector_stores/qdrant.py+++ b/src/code_rag/vector_stores/qdrant.py@@ -809,3 +809,8 @@         )\n \n         return self._parse_grouped_results(response.groups)\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Relevant symbols: recreate, sparse_enabled\n+# Based on 2 retrieved source chunk(s)\n+# Reason: Architecture file containing recreate, sparse_enabled.\n\n--- a/src/code_rag/retrieval/sparse_vectors.py+++ b/src/code_rag/retrieval/sparse_vectors.py@@ -290,3 +290,8 @@         indices.append(stable_term_id(term))\n         values.append(w)\n     return indices, values\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Relevant symbols: tokenize_for_sparse\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Architecture file containing tokenize_for_sparse.\n\n--- a/src/code_rag/retrieval/router.py+++ b/src/code_rag/retrieval/router.py@@ -706,3 +706,8 @@             retrieval_mode=\"hybrid\",\n             reason=\"Unclassified query routed to hybrid as safe default.\",\n         )\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Relevant symbols: _route_cli\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Architecture file containing _route_cli.\n\n--- a/scripts/search_repo.py+++ b/scripts/search_repo.py@@ -293,3 +293,8 @@ \n if __name__ == \"__main__\":\n     main()\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Relevant symbols: main\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains relevant symbols: main.\n\n--- a/src/code_rag/planning/__init__.py+++ b/src/code_rag/planning/__init__.py@@ -20,3 +20,7 @@     \"PlanSource\",\n     \"plan_code_change\",\n ]\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Architecture/service file likely involved in the change.\n\n--- a/tests/test_vector_store_capabilities.py+++ b/tests/test_vector_store_capabilities.py@@ -296,3 +296,8 @@         d = config.to_dict()\n         assert \"create_payload_indexes\" in d[\"vector_store\"]\n         assert d[\"vector_store\"][\"create_payload_indexes\"] is True\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Relevant symbols: test_plan_service_no_qdrant_imports\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains test_plan_service_no_qdrant_imports matching 'test'.\n\n--- a/tests/test_sufficiency.py+++ b/tests/test_sufficiency.py@@ -461,3 +461,8 @@         props = PROPOSE_TOOL_SCHEMA.get(\"properties\", {})\n         assert \"include_sufficiency\" in props\n         assert props[\"include_sufficiency\"][\"type\"] == \"boolean\"\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Relevant symbols: TestPlanServiceSufficiencyIntegration\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains TestPlanServiceSufficiencyIntegration matching 'test'.\n",
+        "test_command": "pytest tests/test_sparse_vectors.py -k routing_explanation -q",
+        "summary": "Proposed 9 change(s) for task: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.. Files: src/code_rag/vector_stores/factory.py, src/code_rag/mcp_server.py, src/code_rag/vector_stores/qdrant.py and 6 more."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "notes": "",
+      "timestamp": "2026-06-04T19:14:09.632046+00:00"
+    },
+    {
+      "task_id": "readme-section-update",
+      "outcome": "WrongFile",
+      "executed": false,
+      "expected_files": [
+        "README.md"
+      ],
+      "proposed_files": [
+        "src/code_rag/__main__.py",
+        "src/code_rag/mcp_server.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Update the README.md to add a one-paragraph subsection under 'MCP Server' titled 'Read-only guarantee' clarifying that none of the MCP tools mutate the working tree or apply patches.. Found 3 relevant file(s) (after 2 retrieval passes), starting with `.agent_memory/experience.md`.",
+        "retrieved_context": [
+          "README.md",
+          ".agent_memory/experience.md",
+          "README.md",
+          "README.md",
+          "src/code_rag/__main__.py",
+          "src/code_rag/mcp_server.py",
+          "README.md",
+          "src/code_rag/mcp_server.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/__main__.py+++ b/src/code_rag/__main__.py@@ -11,3 +11,7 @@ \n if __name__ == \"__main__\":\n     asyncio.run(main())\n+\n+# TODO: Update the README.md to add a one-paragraph subsection under 'MCP Server' titled 'Read-only guarantee' clarifying that none of the MCP tools mutate the working tree or apply patches.\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Architecture/service file likely involved in the change.\n\n--- a/src/code_rag/mcp_server.py+++ b/src/code_rag/mcp_server.py@@ -1126,3 +1126,8 @@ if __name__ == \"__main__\":\n     import asyncio\n     asyncio.run(main())\n+\n+# TODO: Update the README.md to add a one-paragraph subsection under 'MCP Server' titled 'Read-only guarantee' clarifying that none of the MCP tools mutate the working tree or apply patches.\n+# Relevant symbols: main\n+# Based on 2 retrieved source chunk(s)\n+# Reason: Contains main matching 'mcp, server'.\n",
+        "test_command": "grep -F 'Read-only guarantee' README.md",
+        "summary": "Proposed 2 change(s) for task: Update the README.md to add a one-paragraph subsection under 'MCP Server' titled 'Read-only guarantee' clarifying that none of the MCP tools mutate the working tree or apply patches.. Files: src/code_rag/__main__.py, src/code_rag/mcp_server.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "notes": "",
+      "timestamp": "2026-06-04T19:14:11.752738+00:00"
+    },
+    {
+      "task_id": "config-parsing-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_experiments_config.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/experiments/runner.py",
+        "src/code_rag/experiments/config.py",
+        "scripts/run_experiment.py",
+        "tests/test_vector_store_capabilities.py",
+        "tests/test_plan_service.py",
+        "tests/test_reranker.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/experiments/runner.py` containing `_run_retrieval_eval`.",
+        "retrieved_context": [
+          "scripts/run_experiment.py",
+          "src/code_rag/experiments/config.py",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/experiments/runner.py",
+          "tests/test_vector_store_capabilities.py",
+          "README.md",
+          "src/code_rag/experiments/runner.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/experiments/runner.py+++ b/src/code_rag/experiments/runner.py@@ -420,3 +420,8 @@         average_confidence_score=metrics.get(\"average_confidence_score\", 0.0),\n         total_cases=result.get(\"total_cases\", 0),\n     )\n+\n+# TODO: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.\n+# Relevant symbols: _run_retrieval_eval, run_experiment, _experiment_environment\n+# Based on 4 retrieved source chunk(s)\n+# Reason: Contains _run_retrieval_eval, run_experiment matching 'experiment'.\n\n--- a/src/code_rag/experiments/config.py+++ b/src/code_rag/experiments/config.py@@ -344,3 +344,8 @@         retrieval=retrieval,\n         eval=eval_config,\n     )\n+\n+# TODO: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.\n+# Relevant symbols: load_config\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains load_config matching 'experiment, config'.\n\n--- a/scripts/run_experiment.py+++ b/scripts/run_experiment.py@@ -92,3 +92,8 @@ \n if __name__ == \"__main__\":\n     main()\n+\n+# TODO: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.\n+# Relevant symbols: main\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains main matching 'experiment'.\n\n--- a/tests/test_vector_store_capabilities.py+++ b/tests/test_vector_store_capabilities.py@@ -296,3 +296,8 @@         d = config.to_dict()\n         assert \"create_payload_indexes\" in d[\"vector_store\"]\n         assert d[\"vector_store\"][\"create_payload_indexes\"] is True\n+\n+# TODO: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.\n+# Relevant symbols: TestExperimentConfigPayloadIndexes, test_search_service_no_qdrant_imports\n+# Based on 2 retrieved source chunk(s)\n+# Reason: Contains TestExperimentConfigPayloadIndexes, test_search_service_no_qdrant_imports matching 'test'.\n\n--- a/tests/test_plan_service.py+++ b/tests/test_plan_service.py@@ -892,3 +892,8 @@ \n         # Should have risks\n         assert len(response.risks) > 0\n+\n+# TODO: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.\n+# Relevant symbols: test_service_is_architecture\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains test_service_is_architecture matching 'test'.\n\n--- a/tests/test_reranker.py+++ b/tests/test_reranker.py@@ -509,3 +509,8 @@ \n         assert \"rerank\" in EVALUATE_PLANNING_TOOL_SCHEMA[\"properties\"]\n         assert \"rerank_limit\" in EVALUATE_PLANNING_TOOL_SCHEMA[\"properties\"]\n+\n+# TODO: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.\n+# Relevant symbols: test_architecture_file_ranks_higher\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains test_architecture_file_ranks_higher matching 'test'.\n",
+        "test_command": "pytest tests/test_experiments_config.py -k adaptive_flag -q",
+        "summary": "Proposed 6 change(s) for task: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.. Files: src/code_rag/experiments/runner.py, src/code_rag/experiments/config.py, scripts/run_experiment.py and 3 more."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "notes": "",
+      "timestamp": "2026-06-04T19:14:13.724793+00:00"
+    },
+    {
+      "task_id": "routing-diagnostic-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_routing_diagnostics.py",
+        "scripts/analyze_routing.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "scripts/analyze_routing.py",
+        "src/code_rag/retrieval/reranker.py",
+        "src/code_rag/experiments/results.py",
+        "scripts/compare_experiments.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.. Found 5 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/retrieval/routing_diagnostics.py` containing `format_markdown_report`.",
+        "retrieved_context": [
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "scripts/analyze_routing.py",
+          "README.md",
+          "src/code_rag/retrieval/reranker.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/experiments/results.py",
+          "scripts/compare_experiments.py",
+          "README.md"
+        ],
+        "patch": "--- a/src/code_rag/retrieval/routing_diagnostics.py+++ b/src/code_rag/retrieval/routing_diagnostics.py@@ -625,3 +625,8 @@             lines.append(\"\")\n \n     return \"\\n\".join(lines)\n+\n+# TODO: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.\n+# Relevant symbols: format_markdown_report, compute_summary, format_category_results, determine_winner, DiagnosticReport\n+# Based on 5 retrieved source chunk(s)\n+# Reason: Contains format_markdown_report, compute_summary matching 'diagnostics'.\n\n--- a/scripts/analyze_routing.py+++ b/scripts/analyze_routing.py@@ -271,3 +271,8 @@ \n if __name__ == \"__main__\":\n     main()\n+\n+# TODO: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.\n+# Relevant symbols: main\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains relevant symbols: main.\n\n--- a/src/code_rag/retrieval/reranker.py+++ b/src/code_rag/retrieval/reranker.py@@ -532,3 +532,8 @@             reranked.append(result)\n \n     return reranked\n+\n+# TODO: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.\n+# Relevant symbols: _compute_penalty\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Architecture file containing _compute_penalty.\n\n--- a/src/code_rag/experiments/results.py+++ b/src/code_rag/experiments/results.py@@ -281,3 +281,8 @@         lines.append(\"| \" + \" | \".join(values) + \" |\")\n \n     return \"\\n\".join(lines)\n+\n+# TODO: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.\n+# Relevant symbols: format_comparison_markdown\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains relevant symbols: format_comparison_markdown.\n\n--- a/scripts/compare_experiments.py+++ b/scripts/compare_experiments.py@@ -82,3 +82,8 @@ \n if __name__ == \"__main__\":\n     main()\n+\n+# TODO: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.\n+# Relevant symbols: main\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Contains relevant symbols: main.\n",
+        "test_command": "pytest tests/test_routing_diagnostics.py -k tie_count -q",
+        "summary": "Proposed 5 change(s) for task: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.. Files: src/code_rag/retrieval/routing_diagnostics.py, scripts/analyze_routing.py, src/code_rag/retrieval/reranker.py and 2 more."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "notes": "",
+      "timestamp": "2026-06-04T19:14:15.732449+00:00"
+    }
+  ]
+}

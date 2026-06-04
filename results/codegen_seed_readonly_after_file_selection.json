@@ -1,0 +1,261 @@
+{
+  "task_file": "evals/code_generation_tasks.json",
+  "repo_path": "/Users/whitney/src/code_rag",
+  "mode": "hybrid",
+  "top_k": 8,
+  "execute": false,
+  "total_tasks": 5,
+  "results": [
+    {
+      "task_id": "router-test-add",
+      "outcome": "RetrievalMiss",
+      "executed": false,
+      "expected_files": [
+        "tests/test_router.py",
+        "src/code_rag/retrieval/router.py"
+      ],
+      "proposed_files": [
+        "tests/test_router.py",
+        "src/code_rag/retrieval/router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.. Found 5 relevant file(s) (after 2 retrieval passes), starting with `tests/test_chunk_metadata.py` containing `test_uuid_is_valid_format`.",
+        "retrieved_context": [
+          "src/code_rag/chunk_id.py",
+          "src/code_rag/retrieval/representations.py",
+          "tests/test_chunk_metadata.py",
+          ".agent_memory/experience.md",
+          "README.md",
+          "README.md",
+          "tests/test_chunk_metadata.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "tests/test_chunk_metadata.py",
+          "tests/test_chunk_metadata.py"
+        ],
+        "patch": "--- a/tests/test_router.py+++ b/tests/test_router.py@@ -636,3 +636,6 @@         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+# TODO: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.\n+# Reason: Codegen eval expected file\n\n--- a/src/code_rag/retrieval/router.py+++ b/src/code_rag/retrieval/router.py@@ -706,3 +706,6 @@             retrieval_mode=\"hybrid\",\n             reason=\"Unclassified query routed to hybrid as safe default.\",\n         )\n+\n+# TODO: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.\n+# Reason: Codegen eval expected file\n",
+        "test_command": "pytest tests/test_router.py -k badly_formed_hex -q",
+        "summary": "Proposed 2 change(s) targeting expected/companion file(s): tests/test_router.py, src/code_rag/retrieval/router.py"
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "tests/test_router.py",
+          "src/code_rag/retrieval/router.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_router.py",
+          "src/code_rag/retrieval/router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T19:24:06.894355+00:00"
+    },
+    {
+      "task_id": "sparse-tokenization-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "proposed_files": [
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.. Found 8 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/vector_stores/factory.py` containing `sparse_enabled`.",
+        "retrieved_context": [
+          "src/code_rag/vector_stores/factory.py",
+          "src/code_rag/mcp_server.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/retrieval/sparse_vectors.py",
+          "src/code_rag/retrieval/router.py",
+          "src/code_rag/vector_stores/factory.py",
+          "src/code_rag/retrieval/sparse_vectors.py",
+          "src/code_rag/planning/__init__.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_sufficiency.py"
+        ],
+        "patch": "--- a/tests/test_sparse_vectors.py+++ b/tests/test_sparse_vectors.py@@ -564,3 +564,6 @@         path_id = stable_term_id(\"src/code_rag/retrieval/router.py\")\n         assert path_id in set(doc_indices)\n         assert path_id in set(q_indices)\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Reason: Codegen eval expected file\n\n--- a/src/code_rag/retrieval/sparse_vectors.py+++ b/src/code_rag/retrieval/sparse_vectors.py@@ -290,3 +290,7 @@         indices.append(stable_term_id(term))\n         values.append(w)\n     return indices, values\n+\n+# TODO: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.\n+# Based on 2 retrieved source chunk(s)\n+# Reason: Codegen eval expected file\n",
+        "test_command": "pytest tests/test_sparse_vectors.py -k routing_explanation -q",
+        "summary": "Proposed 2 change(s) targeting expected/companion file(s): tests/test_sparse_vectors.py, src/code_rag/retrieval/sparse_vectors.py"
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/retrieval/sparse_vectors.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_sparse_vectors.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_sparse_vectors.py",
+          "src/code_rag/retrieval/sparse_vectors.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T19:24:09.071203+00:00"
+    },
+    {
+      "task_id": "readme-section-update",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "README.md"
+      ],
+      "proposed_files": [
+        "README.md"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Update the README.md to add a one-paragraph subsection under 'MCP Server' titled 'Read-only guarantee' clarifying that none of the MCP tools mutate the working tree or apply patches.. Found 3 relevant file(s) (after 2 retrieval passes), starting with `.agent_memory/experience.md`.",
+        "retrieved_context": [
+          "README.md",
+          ".agent_memory/experience.md",
+          "README.md",
+          "README.md",
+          "src/code_rag/mcp_server.py",
+          "src/code_rag/__main__.py",
+          "README.md",
+          "src/code_rag/mcp_server.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/README.md+++ b/README.md@@ -1524,3 +1524,5 @@ - The selected vector database must be running before ingestion or search.\n - BM25 index is in-memory and must be rebuilt each session.\n - MCP tools are read-only; `propose_code_change` generates diffs but does not apply them.\n+\n+<!-- TODO: Update the README.md to add a one-paragraph subsection under 'MCP Server' titled 'Read-only guarantee' clarifying that none of the MCP tools mutate the working tree or apply patches. -->\n",
+        "test_command": "grep -F 'Read-only guarantee' README.md",
+        "summary": "Proposed 1 change(s) targeting expected/companion file(s): README.md"
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "README.md"
+        ],
+        "missing_expected_files": [],
+        "proposed_expected_files": [
+          "README.md"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T19:24:11.318578+00:00"
+    },
+    {
+      "task_id": "config-parsing-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_experiments_config.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/experiments/config.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/experiments/runner.py` containing `_run_retrieval_eval`.",
+        "retrieved_context": [
+          "scripts/run_experiment.py",
+          "src/code_rag/experiments/config.py",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/experiments/runner.py",
+          "tests/test_vector_store_capabilities.py",
+          "README.md",
+          "src/code_rag/experiments/runner.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/experiments/config.py+++ b/src/code_rag/experiments/config.py@@ -344,3 +344,7 @@         retrieval=retrieval,\n         eval=eval_config,\n     )\n+\n+# TODO: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Codegen eval expected file\n",
+        "test_command": "pytest tests/test_experiments_config.py -k adaptive_flag -q",
+        "summary": "Proposed 1 change(s) targeting expected/companion file(s): src/code_rag/experiments/config.py"
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/experiments/config.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_experiments_config.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/experiments/config.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T19:24:13.407149+00:00"
+    },
+    {
+      "task_id": "routing-diagnostic-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_routing_diagnostics.py",
+        "scripts/analyze_routing.py"
+      ],
+      "proposed_files": [
+        "tests/test_routing_diagnostics.py",
+        "scripts/analyze_routing.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.. Found 5 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/retrieval/routing_diagnostics.py` containing `format_markdown_report`.",
+        "retrieved_context": [
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "scripts/analyze_routing.py",
+          "README.md",
+          "src/code_rag/retrieval/reranker.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/experiments/results.py",
+          "scripts/compare_experiments.py",
+          "README.md"
+        ],
+        "patch": "--- a/tests/test_routing_diagnostics.py+++ b/tests/test_routing_diagnostics.py@@ -497,3 +497,6 @@         assert \"**Baseline wins**: 1\" in markdown\n         assert \"## Adaptive Losses\" in markdown\n         assert \"Where is foo?\" in markdown\n+\n+# TODO: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.\n+# Reason: Codegen eval expected file\n\n--- a/scripts/analyze_routing.py+++ b/scripts/analyze_routing.py@@ -271,3 +271,7 @@ \n if __name__ == \"__main__\":\n     main()\n+\n+# TODO: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.\n+# Based on 1 retrieved source chunk(s)\n+# Reason: Codegen eval expected file\n",
+        "test_command": "pytest tests/test_routing_diagnostics.py -k tie_count -q",
+        "summary": "Proposed 2 change(s) targeting expected/companion file(s): tests/test_routing_diagnostics.py, scripts/analyze_routing.py"
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "scripts/analyze_routing.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_routing_diagnostics.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_routing_diagnostics.py",
+          "scripts/analyze_routing.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T19:24:15.424623+00:00"
+    }
+  ]
+}
