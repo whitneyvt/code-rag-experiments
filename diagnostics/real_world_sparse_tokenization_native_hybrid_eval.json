@@ -1,0 +1,759 @@
+{
+  "eval_set": "evals/code_rag_real_world.json",
+  "mode": "hybrid",
+  "top_k": 5,
+  "rerank": false,
+  "rerank_limit": null,
+  "total_queries": 35,
+  "metrics": {
+    "hit_at_1": 0.2,
+    "hit_at_3": 0.2857142857142857,
+    "hit_at_5": 0.4,
+    "mrr": 0.2561904761904762
+  },
+  "symbol_hit_rate": 0.8076923076923077,
+  "category_metrics": {
+    "architecture": {
+      "hit_at_5": 0.2,
+      "mrr": 0.04,
+      "total_queries": 5
+    },
+    "cli": {
+      "hit_at_5": 0.16666666666666666,
+      "mrr": 0.03333333333333333,
+      "total_queries": 6
+    },
+    "conceptual": {
+      "hit_at_5": 0.0,
+      "mrr": 0.0,
+      "total_queries": 3
+    },
+    "config": {
+      "hit_at_5": 0.8333333333333334,
+      "mrr": 0.6166666666666667,
+      "total_queries": 6
+    },
+    "error": {
+      "hit_at_5": 0.25,
+      "mrr": 0.08333333333333333,
+      "total_queries": 4
+    },
+    "symbol": {
+      "hit_at_5": 1.0,
+      "mrr": 0.6333333333333333,
+      "total_queries": 4
+    },
+    "technical": {
+      "hit_at_5": 0.2857142857142857,
+      "mrr": 0.2857142857142857,
+      "total_queries": 7
+    }
+  },
+  "results": [
+    {
+      "id": "error-uuid-badly-formed",
+      "question": "Where is the error handled for badly formed hexadecimal UUID string?",
+      "category": "error",
+      "expected_files": [
+        "src/code_rag/retrieval/router.py"
+      ],
+      "retrieved_files": [
+        "tests/test_router.py",
+        "src/code_rag/chunk_id.py",
+        "tests/test_router.py",
+        "tests/test_chunk_metadata.py",
+        "tests/test_router.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "error-dimension-mismatch",
+      "question": "What code could cause a Qdrant vector dimension mismatch?",
+      "category": "error",
+      "expected_files": [
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "README.md",
+        "src/code_rag/config.py",
+        "README.md",
+        "README.md"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "error-upsert-payload-size",
+      "question": "Where is the Qdrant upsert payload size handled?",
+      "category": "error",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "retrieved_files": [
+        "tests/test_vector_store_capabilities.py",
+        "README.md",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "first_correct_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "error-native-hybrid-unsupported",
+      "question": "Where is native hybrid search validated before use?",
+      "category": "error",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_router.py",
+        "tests/test_router.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "cli-adaptive-flag",
+      "question": "Where is --adaptive parsed in the search CLI?",
+      "category": "cli",
+      "expected_files": [
+        "scripts/search_repo.py"
+      ],
+      "retrieved_files": [
+        "tests/test_sparse_vectors.py",
+        "tests/test_router.py",
+        "tests/test_router.py",
+        "tests/test_router.py",
+        "tests/test_sparse_vectors.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "cli-native-hybrid-flag",
+      "question": "Where is --native_hybrid parsed?",
+      "category": "cli",
+      "expected_files": [
+        "scripts/search_repo.py"
+      ],
+      "retrieved_files": [
+        "tests/test_sparse_vectors.py",
+        "tests/test_router.py",
+        "tests/test_sparse_vectors.py",
+        "tests/test_router.py",
+        "tests/test_router.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "cli-retriever-mode",
+      "question": "How does search_repo.py choose the retriever mode?",
+      "category": "cli",
+      "expected_files": [
+        "scripts/search_repo.py"
+      ],
+      "retrieved_files": [
+        "tests/test_router.py",
+        "README.md",
+        "tests/test_search_cli.py",
+        "tests/test_reranker.py",
+        "tests/test_sparse_vectors.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "cli-evaluate-adaptive",
+      "question": "Where does evaluate_retrieval.py run adaptive evaluation?",
+      "category": "cli",
+      "expected_files": [
+        "scripts/evaluate_retrieval.py"
+      ],
+      "retrieved_files": [
+        "tests/test_sufficiency.py",
+        "README.md",
+        "tests/test_router.py",
+        "tests/test_mcp_server.py",
+        "README.md"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "cli-experiment-yaml",
+      "question": "Where does run_experiment.py load the YAML config?",
+      "category": "cli",
+      "expected_files": [
+        "scripts/run_experiment.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "retrieved_files": [
+        "tests/test_router.py",
+        "tests/test_experiments.py",
+        "src/code_rag/experiments/__init__.py",
+        "tests/test_router.py",
+        "scripts/run_experiment.py"
+      ],
+      "first_correct_rank": 5,
+      "reciprocal_rank": 0.2,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": true
+    },
+    {
+      "id": "cli-run-experiment-script",
+      "question": "What script runs experiment configs?",
+      "category": "cli",
+      "expected_files": [
+        "scripts/run_experiment.py"
+      ],
+      "retrieved_files": [
+        "tests/test_experiments.py",
+        "README.md",
+        "src/code_rag/experiments/runner.py",
+        "tests/test_router.py",
+        "src/code_rag/experiments/__init__.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "config-qdrant-collection",
+      "question": "Where is QDRANT_COLLECTION read?",
+      "category": "config",
+      "expected_files": [
+        "src/code_rag/config.py"
+      ],
+      "retrieved_files": [
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/config.py",
+        "src/code_rag/config.py",
+        "tests/test_collection_strategy.py",
+        "tests/test_collection_strategy.py"
+      ],
+      "first_correct_rank": 2,
+      "reciprocal_rank": 0.5,
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "config-embedding-model",
+      "question": "Where is EMBEDDING_MODEL configured?",
+      "category": "config",
+      "expected_files": [
+        "src/code_rag/config.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/config.py",
+        "src/code_rag/retriever.py",
+        "src/code_rag/retrieval/dense.py",
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/retrieval/dense.py"
+      ],
+      "first_correct_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "config-collection-strategy",
+      "question": "Where is collection_strategy loaded from YAML?",
+      "category": "config",
+      "expected_files": [
+        "src/code_rag/experiments/config.py"
+      ],
+      "retrieved_files": [
+        "tests/test_sparse_vectors.py",
+        "tests/test_collection_strategy.py",
+        "tests/test_collection_strategy.py",
+        "tests/test_collection_strategy.py",
+        "tests/test_router.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "config-retrieval-adaptive",
+      "question": "Where is retrieval.adaptive loaded from YAML?",
+      "category": "config",
+      "expected_files": [
+        "src/code_rag/experiments/config.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/experiments/config.py",
+        "tests/test_experiments.py",
+        "tests/test_sparse_vectors.py",
+        "scripts/analyze_routing.py",
+        "tests/test_experiments.py"
+      ],
+      "first_correct_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "config-fusion-vectors",
+      "question": "Where are fusion_vectors parsed?",
+      "category": "config",
+      "expected_files": [
+        "src/code_rag/experiments/config.py"
+      ],
+      "retrieved_files": [
+        "tests/test_experiments.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "tests/test_experiments.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "first_correct_rank": 5,
+      "reciprocal_rank": 0.2,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": true
+    },
+    {
+      "id": "config-sparse-vectors-env",
+      "question": "Where is QDRANT_ENABLE_SPARSE_VECTORS used?",
+      "category": "config",
+      "expected_files": [
+        "src/code_rag/config.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/config.py",
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/config.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py"
+      ],
+      "first_correct_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "architecture-adaptive-routing",
+      "question": "Which files are involved in adaptive routing?",
+      "category": "architecture",
+      "expected_files": [
+        "src/code_rag/retrieval/router.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "tests/test_router.py",
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "tests/test_routing_diagnostics.py",
+        "src/code_rag/retrieval/routing_diagnostics.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "architecture-native-hybrid",
+      "question": "Which files handle Qdrant native hybrid search?",
+      "category": "architecture",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/retrieval/search_service.py",
+        "tests/test_vector_store_capabilities.py",
+        "src/code_rag/vector_stores/factory.py",
+        "README.md",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "architecture-experiment-execution",
+      "question": "Which files handle experiment execution?",
+      "category": "architecture",
+      "expected_files": [
+        "src/code_rag/experiments/runner.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "retrieved_files": [
+        "tests/test_mcp_server.py",
+        "tests/test_router.py",
+        "tests/test_experiments.py",
+        "tests/test_mcp_server.py",
+        "tests/test_router.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "architecture-mcp-tools",
+      "question": "Which files handle MCP search tools?",
+      "category": "architecture",
+      "expected_files": [
+        "src/code_rag/mcp/tools.py",
+        "src/code_rag/mcp/server.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/planning/plan_service.py",
+        "tests/test_mcp_server.py",
+        "README.md",
+        "tests/test_mcp_server.py",
+        "tests/test_router.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "architecture-multi-vector-fusion",
+      "question": "Which parts of the codebase handle multi-vector fusion?",
+      "category": "architecture",
+      "expected_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/fusion.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/experiments/config.py",
+        "src/code_rag/retrieval/search_service.py",
+        "src/code_rag/retrieval/dense.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "first_correct_rank": 5,
+      "reciprocal_rank": 0.2,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": true
+    },
+    {
+      "id": "technical-rrf",
+      "question": "Where is reciprocal rank fusion implemented?",
+      "category": "technical",
+      "expected_files": [
+        "src/code_rag/retrieval/fusion.py"
+      ],
+      "retrieved_files": [
+        "tests/test_fusion.py",
+        "tests/test_reranker.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_fusion.py",
+        "tests/test_hybrid.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "technical-weighted-fusion",
+      "question": "Where is weighted score fusion implemented?",
+      "category": "technical",
+      "expected_files": [
+        "src/code_rag/retrieval/fusion.py"
+      ],
+      "retrieved_files": [
+        "tests/test_fusion.py",
+        "tests/test_fusion.py",
+        "tests/test_fusion.py",
+        "tests/test_fusion.py",
+        "tests/test_fusion.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "technical-sparse-encoding",
+      "question": "Where are sparse vectors encoded?",
+      "category": "technical",
+      "expected_files": [
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "README.md"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "technical-native-hybrid-impl",
+      "question": "Where is native hybrid search implemented?",
+      "category": "technical",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "technical-payload-indexes",
+      "question": "Where are payload indexes created?",
+      "category": "technical",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "retrieved_files": [
+        "tests/test_vector_store_capabilities.py",
+        "README.md",
+        "src/code_rag/vector_stores/opensearch.py",
+        "tests/test_vector_store_capabilities.py",
+        "src/code_rag/config.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "technical-hybrid-retrieval",
+      "question": "How does hybrid retrieval combine dense and BM25 results?",
+      "category": "technical",
+      "expected_files": [
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_bm25.py",
+        "README.md",
+        "README.md"
+      ],
+      "first_correct_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "technical-path-penalties",
+      "question": "How does hybrid retrieval compute path-based ranking penalties?",
+      "category": "technical",
+      "expected_files": [
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_router.py",
+        "src/code_rag/retrieval/hybrid.py",
+        "tests/test_hybrid.py",
+        "tests/test_eval_metrics.py"
+      ],
+      "first_correct_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "symbol-routing-decision",
+      "question": "Where is RoutingDecision implemented?",
+      "category": "symbol",
+      "expected_files": [
+        "src/code_rag/retrieval/router.py"
+      ],
+      "retrieved_files": [
+        "tests/test_sparse_vectors.py",
+        "tests/test_router.py",
+        "src/code_rag/retrieval/router.py",
+        "src/code_rag/retrieval/routing_diagnostics.py",
+        "src/code_rag/retrieval/router.py"
+      ],
+      "first_correct_rank": 3,
+      "reciprocal_rank": 0.3333333333333333,
+      "hit_at_1": false,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "symbol-fusion-retriever",
+      "question": "Where is FusionRetriever implemented?",
+      "category": "symbol",
+      "expected_files": [
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/retrieval/evaluation_service.py",
+        "tests/test_bm25.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/retrieval/hybrid.py"
+      ],
+      "first_correct_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "symbol-qdrant-vector-store",
+      "question": "Where is QdrantVectorStore implemented?",
+      "category": "symbol",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "tests/test_sufficiency.py",
+        "tests/test_vector_store_capabilities.py",
+        "tests/test_vector_store_capabilities.py"
+      ],
+      "first_correct_rank": 1,
+      "reciprocal_rank": 1.0,
+      "hit_at_1": true,
+      "hit_at_3": true,
+      "hit_at_5": true
+    },
+    {
+      "id": "symbol-vector-store-capabilities",
+      "question": "Where is VectorStoreCapabilities implemented?",
+      "category": "symbol",
+      "expected_files": [
+        "src/code_rag/vector_stores/base.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/base.py"
+      ],
+      "first_correct_rank": 5,
+      "reciprocal_rank": 0.2,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": true
+    },
+    {
+      "id": "conceptual-adaptive-benefits",
+      "question": "What are the benefits of adaptive routing over fixed retrieval modes?",
+      "category": "conceptual",
+      "expected_files": [
+        "src/code_rag/retrieval/router.py"
+      ],
+      "retrieved_files": [
+        "tests/test_routing_diagnostics.py",
+        "tests/test_router.py",
+        "src/code_rag/retrieval/search_service.py",
+        "tests/test_routing_diagnostics.py",
+        "src/code_rag/retrieval/evaluation_service.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "conceptual-sparse-vs-dense",
+      "question": "When should sparse vectors be used instead of dense vectors?",
+      "category": "conceptual",
+      "expected_files": [
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/vector_stores/qdrant.py",
+        "src/code_rag/config.py",
+        "src/code_rag/vector_stores/factory.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    },
+    {
+      "id": "conceptual-grouped-search",
+      "question": "When should grouped search be used for file diversity?",
+      "category": "conceptual",
+      "expected_files": [
+        "src/code_rag/vector_stores/qdrant.py"
+      ],
+      "retrieved_files": [
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_router.py",
+        "tests/test_router.py",
+        "src/code_rag/vector_stores/factory.py",
+        "tests/test_router.py"
+      ],
+      "first_correct_rank": 0,
+      "reciprocal_rank": 0.0,
+      "hit_at_1": false,
+      "hit_at_3": false,
+      "hit_at_5": false
+    }
+  ]
+}

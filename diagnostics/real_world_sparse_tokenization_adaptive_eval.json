@@ -1,0 +1,50 @@
+{
+  "eval_set": "evals/code_rag_real_world.json",
+  "mode": "adaptive",
+  "top_k": 5,
+  "total_queries": 35,
+  "metrics": {
+    "hit_at_1": 0.17142857142857143,
+    "hit_at_3": 0.2857142857142857,
+    "hit_at_5": 0.4,
+    "mrr": 0.2419047619047619
+  },
+  "category_metrics": {
+    "config": {
+      "hit_at_5": 0.8333333333333334,
+      "mrr": 0.5333333333333333,
+      "total_queries": 6
+    },
+    "architecture": {
+      "hit_at_5": 0.2,
+      "mrr": 0.04,
+      "total_queries": 5
+    },
+    "conceptual": {
+      "hit_at_5": 0.0,
+      "mrr": 0.0,
+      "total_queries": 3
+    },
+    "technical": {
+      "hit_at_5": 0.2857142857142857,
+      "mrr": 0.2857142857142857,
+      "total_queries": 7
+    },
+    "symbol": {
+      "hit_at_5": 1.0,
+      "mrr": 0.6333333333333333,
+      "total_queries": 4
+    },
+    "error": {
+      "hit_at_5": 0.25,
+      "mrr": 0.08333333333333333,
+      "total_queries": 4
+    },
+    "cli": {
+      "hit_at_5": 0.16666666666666666,
+      "mrr": 0.03333333333333333,
+      "total_queries": 6
+    }
+  },
+  "results": []
+}

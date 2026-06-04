@@ -222,12 +222,12 @@
       "baseline_rank": 5,
       "baseline_hit_at_5": true,
       "baseline_top_files": [
-        "src/code_rag/vector_stores/factory.py",
-        "src/code_rag/retrieval/evaluation_service.py"
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/vector_stores/factory.py"
       ],
       "baseline_top_symbols": [
-        "supports_native_hybrid",
         "search",
+        "supports_native_hybrid",
         "NativeHybridRetriever",
         "supports_native_hybrid_grouped",
         "native_hybrid_search"
@@ -235,12 +235,12 @@
       "adaptive_rank": 5,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
-        "src/code_rag/vector_stores/factory.py",
-        "src/code_rag/retrieval/evaluation_service.py"
+        "src/code_rag/retrieval/evaluation_service.py",
+        "src/code_rag/vector_stores/factory.py"
       ],
       "adaptive_top_symbols": [
-        "supports_native_hybrid",
         "search",
+        "supports_native_hybrid",
         "NativeHybridRetriever",
         "supports_native_hybrid_grouped",
         "native_hybrid_search"
@@ -268,9 +268,9 @@
       ],
       "baseline_top_symbols": [
         "_is_cli_query",
-        "_route_cli",
         "test_cli_routes_to_hybrid_when_no_native",
         "test_cli_query_classification",
+        "test_detects_cli_flags",
         "search"
       ],
       "adaptive_rank": null,
@@ -282,9 +282,9 @@
       ],
       "adaptive_top_symbols": [
         "_is_cli_query",
-        "_route_cli",
         "test_cli_routes_to_hybrid_when_no_native",
         "test_cli_query_classification",
+        "test_detects_cli_flags",
         "search"
       ],
       "winner": "neither",
@@ -304,12 +304,12 @@
       "baseline_rank": null,
       "baseline_hit_at_5": false,
       "baseline_top_files": [
-        "src/code_rag/vector_stores/factory.py",
-        "tests/test_router.py"
+        "tests/test_router.py",
+        "src/code_rag/vector_stores/factory.py"
       ],
       "baseline_top_symbols": [
-        "supports_native_hybrid",
         "test_detects_cli_flags",
+        "supports_native_hybrid",
         "test_cli_routes_to_hybrid_when_no_native",
         "supports_native_hybrid_grouped",
         "test_cli_query_classification"
@@ -317,12 +317,12 @@
       "adaptive_rank": null,
       "adaptive_hit_at_5": false,
       "adaptive_top_files": [
-        "src/code_rag/vector_stores/factory.py",
-        "tests/test_router.py"
+        "tests/test_router.py",
+        "src/code_rag/vector_stores/factory.py"
       ],
       "adaptive_top_symbols": [
-        "supports_native_hybrid",
         "test_detects_cli_flags",
+        "supports_native_hybrid",
         "test_cli_routes_to_hybrid_when_no_native",
         "supports_native_hybrid_grouped",
         "test_cli_query_classification"
@@ -437,13 +437,13 @@
         "tests/test_router.py",
         "src/code_rag/experiments/__init__.py",
         "tests/test_experiments.py",
-        "tests/test_vector_store_capabilities.py"
+        "tests/test_chunk_metadata.py"
       ],
       "baseline_top_symbols": [
         "main",
         "test_cli_beats_config",
         "test_load_minimal_config",
-        "test_load_config_parses_create_payload_indexes"
+        "test_yaml_extensions"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
@@ -452,13 +452,13 @@
         "tests/test_router.py",
         "src/code_rag/experiments/__init__.py",
         "tests/test_experiments.py",
-        "tests/test_vector_store_capabilities.py"
+        "tests/test_chunk_metadata.py"
       ],
       "adaptive_top_symbols": [
         "main",
         "test_cli_beats_config",
         "test_load_minimal_config",
-        "test_load_config_parses_create_payload_indexes"
+        "test_yaml_extensions"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -480,13 +480,13 @@
         "src/code_rag/retrieval/router.py",
         "src/code_rag/__main__.py",
         "src/code_rag/config.py",
-        "README.md",
-        "tests/test_collection_strategy.py"
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "README.md"
       ],
       "baseline_top_symbols": [
         "_is_cli_query",
         "experiments_path",
-        "test_per_experiment_strategy"
+        "_camel_split"
       ],
       "adaptive_rank": null,
       "adaptive_hit_at_5": false,
@@ -494,13 +494,13 @@
         "src/code_rag/retrieval/router.py",
         "src/code_rag/__main__.py",
         "src/code_rag/config.py",
-        "README.md",
-        "tests/test_collection_strategy.py"
+        "src/code_rag/retrieval/sparse_vectors.py",
+        "README.md"
       ],
       "adaptive_top_symbols": [
         "_is_cli_query",
         "experiments_path",
-        "test_per_experiment_strategy"
+        "_camel_split"
       ],
       "winner": "neither",
       "loss_reason": "no_expected_match"
@@ -655,8 +655,8 @@
       "baseline_top_symbols": [
         "test_detects_yaml_patterns",
         "test_config_query_classification",
-        "test_detects_cli_flags",
         "TestConfigLoading",
+        "test_detects_cli_flags",
         "load_config"
       ],
       "adaptive_rank": 5,
@@ -669,8 +669,8 @@
       "adaptive_top_symbols": [
         "test_detects_yaml_patterns",
         "test_config_query_classification",
-        "test_detects_cli_flags",
         "TestConfigLoading",
+        "test_detects_cli_flags",
         "load_config"
       ],
       "winner": "tie",
@@ -832,8 +832,8 @@
       ],
       "baseline_top_symbols": [
         "search",
-        "supports_native_hybrid_grouped",
         "supports_native_hybrid",
+        "supports_native_hybrid_grouped",
         "NativeHybridRetriever",
         "test_qdrant_capabilities_native_hybrid_enabled"
       ],
@@ -846,8 +846,8 @@
       ],
       "adaptive_top_symbols": [
         "search",
-        "supports_native_hybrid_grouped",
         "supports_native_hybrid",
+        "supports_native_hybrid_grouped",
         "NativeHybridRetriever",
         "test_qdrant_capabilities_native_hybrid_enabled"
       ],
@@ -920,8 +920,8 @@
       "baseline_hit_at_5": false,
       "baseline_top_files": [
         "tests/test_router.py",
-        "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/vector_stores/factory.py"
       ],
       "baseline_top_symbols": [
@@ -934,8 +934,8 @@
       "adaptive_hit_at_5": false,
       "adaptive_top_files": [
         "tests/test_router.py",
-        "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/vector_stores/opensearch.py",
+        "src/code_rag/vector_stores/qdrant.py",
         "src/code_rag/vector_stores/factory.py"
       ],
       "adaptive_top_symbols": [
@@ -1057,30 +1057,30 @@
       "baseline_top_files": [
         "src/code_rag/retrieval/fusion.py",
         "tests/test_fusion.py",
-        "src/code_rag/retrieval/search_service.py",
-        "src/code_rag/retrieval/evaluation_service.py"
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/search_service.py"
       ],
       "baseline_top_symbols": [
         "fuse_results",
         "weighted_score_fusion",
         "test_weighted_method",
-        "FusionVectorSpec",
-        "FusionRetriever"
+        "native_hybrid_search",
+        "FusionVectorSpec"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
       "adaptive_top_files": [
         "src/code_rag/retrieval/fusion.py",
         "tests/test_fusion.py",
-        "src/code_rag/retrieval/search_service.py",
-        "src/code_rag/retrieval/evaluation_service.py"
+        "src/code_rag/vector_stores/factory.py",
+        "src/code_rag/retrieval/search_service.py"
       ],
       "adaptive_top_symbols": [
         "fuse_results",
         "weighted_score_fusion",
         "test_weighted_method",
-        "FusionVectorSpec",
-        "FusionRetriever"
+        "native_hybrid_search",
+        "FusionVectorSpec"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -1317,13 +1317,13 @@
         "src/code_rag/retrieval/router.py",
         "src/code_rag/retrieval/routing_diagnostics.py",
         "src/code_rag.egg-info/top_level.txt",
-        "tests/test_router.py"
+        "tests/test_sparse_vectors.py"
       ],
       "baseline_top_symbols": [
         "_route_fallback",
-        "get_routing_decision",
         "_route_architecture",
-        "TestRoutingDecision"
+        "get_routing_decision",
+        "test_routing_decision"
       ],
       "adaptive_rank": 1,
       "adaptive_hit_at_5": true,
@@ -1331,13 +1331,13 @@
         "src/code_rag/retrieval/router.py",
         "src/code_rag/retrieval/routing_diagnostics.py",
         "src/code_rag.egg-info/top_level.txt",
-        "tests/test_router.py"
+        "tests/test_sparse_vectors.py"
       ],
       "adaptive_top_symbols": [
         "_route_fallback",
-        "get_routing_decision",
         "_route_architecture",
-        "TestRoutingDecision"
+        "get_routing_decision",
+        "test_routing_decision"
       ],
       "winner": "tie",
       "loss_reason": "same_results"
@@ -1495,14 +1495,15 @@
         "src/code_rag/experiments/config.py",
         "src/code_rag/retrieval/routing_diagnostics.py",
         "scripts/analyze_routing.py",
-        "scripts/search_repo.py"
+        "scripts/search_repo.py",
+        "src/code_rag/retrieval/evaluation_service.py"
       ],
       "baseline_top_symbols": [
         "RetrievalConfig",
-        "get_routing_decision",
         "compare_single_query",
         "run_adaptive_retrieval",
-        "main"
+        "main",
+        "run_evaluation"
       ],
       "adaptive_rank": null,
       "adaptive_hit_at_5": false,
@@ -1510,14 +1511,15 @@
         "src/code_rag/experiments/config.py",
         "src/code_rag/retrieval/routing_diagnostics.py",
         "scripts/analyze_routing.py",
-        "scripts/search_repo.py"
+        "scripts/search_repo.py",
+        "src/code_rag/retrieval/evaluation_service.py"
       ],
       "adaptive_top_symbols": [
         "RetrievalConfig",
-        "get_routing_decision",
         "compare_single_query",
         "run_adaptive_retrieval",
-        "main"
+        "main",
+        "run_evaluation"
       ],
       "winner": "neither",
       "loss_reason": "no_expected_match"

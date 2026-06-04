@@ -1,0 +1,76 @@
+{
+  "name": "real_world_adaptive_unixcoder",
+  "timestamp": "2026-06-04T12:05:10.497613",
+  "config": {
+    "name": "real_world_adaptive_unixcoder",
+    "repo_path": "/Users/whitney/src/code_rag",
+    "repo": "code_rag",
+    "branch": "main",
+    "vector_store": {
+      "backend": "qdrant",
+      "collection": "code_chunks",
+      "url": "http://localhost:6333",
+      "create_payload_indexes": true,
+      "collection_strategy": "per_experiment",
+      "enable_sparse_vectors": true,
+      "enable_named_vectors": true,
+      "default_dense_vector_name": "dense",
+      "named_vectors": [],
+      "effective_collection": "code_chunks_exp_real_world_adaptive_unixcoder"
+    },
+    "embedding": {
+      "backend": "unixcoder",
+      "model": "microsoft/unixcoder-base",
+      "representation_type": "code"
+    },
+    "chunking": {
+      "strategy": "ast",
+      "chunk_size": 100,
+      "overlap": 15
+    },
+    "retrieval": {
+      "mode": "hybrid",
+      "top_k": 5,
+      "rerank": false,
+      "rerank_limit": 20,
+      "native_hybrid": true,
+      "prefetch_limit": 20,
+      "group_by_file": false,
+      "group_limit": 0,
+      "group_size": 2,
+      "vector_name": "",
+      "fusion_vectors": [],
+      "fusion_method": "rrf",
+      "adaptive": true
+    },
+    "eval": {
+      "retrieval_eval_set": "evals/code_rag_real_world.json",
+      "planning_eval_set": "",
+      "max_iterations": 2
+    }
+  },
+  "chunk_count": 1586,
+  "timing": {
+    "ingestion_seconds": 62.33,
+    "retrieval_eval_seconds": 1.67,
+    "planning_eval_seconds": 0.0,
+    "total_seconds": 64.0
+  },
+  "retrieval": {
+    "hit_at_1": 0.2,
+    "hit_at_3": 0.2571,
+    "hit_at_5": 0.4,
+    "mrr": 0.2538,
+    "total_queries": 35
+  },
+  "planning": {
+    "file_hit_rate": 0.0,
+    "file_hit_at_1": 0.0,
+    "symbol_hit_rate": 0.0,
+    "validation_hit_rate": 0.0,
+    "source_coverage": 0.0,
+    "average_confidence_score": 0.0,
+    "total_cases": 0
+  },
+  "errors": []
+}
