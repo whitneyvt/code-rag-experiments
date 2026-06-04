@@ -1,0 +1,500 @@
+{
+  "task_file": "evals/code_generation_tasks_unseen.json",
+  "repo_path": "/Users/whitney/src/code_rag",
+  "mode": "hybrid",
+  "top_k": 8,
+  "execute": true,
+  "total_tasks": 6,
+  "results": [
+    {
+      "task_id": "unseen-sparse-dotted-module-router",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "proposed_files": [
+        "tests/test_sparse_vectors.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_sparse_vectors.py that asserts tokenize_for_sparse('code_rag.retrieval.router') preserves 'code_rag.retrieval.router' as a single exact token alongside the segment subtokens.. Found 7 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/vector_stores/factory.py` containing `sparse_enabled`.",
+        "retrieved_context": [
+          "src/code_rag/vector_stores/factory.py",
+          "README.md",
+          "src/code_rag/retrieval/sparse_vectors.py",
+          "src/code_rag/retrieval/sparse_vectors.py",
+          "src/code_rag/retrieval/sparse_vectors.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/tests/test_sparse_vectors.py\n+++ b/tests/test_sparse_vectors.py\n@@ -564,3 +564,12 @@\n         path_id = stable_term_id(\"src/code_rag/retrieval/router.py\")\n         assert path_id in set(doc_indices)\n         assert path_id in set(q_indices)\n+\n+\n+def test_dotted_module_router_preserved():\n+    \"\"\"Codegen-eval template for -k 'dotted_module_router_preserved'. Add a unit test in tests/test_sparse_vectors.py that asserts tokenize_for_sparse('code_rag.retrieval.router') preserves 'code_rag.retrieval.router' as a single exact token alongside the segment sub...\"\"\"\n+    tokens = tokenize_for_sparse(\"code_rag.retrieval.router\")\n+    assert \"code_rag.retrieval.router\" in tokens\n+    assert \"code_rag\" in tokens\n+    assert \"retrieval\" in tokens\n+    assert \"router\" in tokens\n",
+        "test_command": "pytest tests/test_sparse_vectors.py -k dotted_module_router_preserved -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_sparse_vectors.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_rpmn6p63/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_sparse_vectors.py -k dotted_module_router_preserved -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 66 deselected in 0.08s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/retrieval/sparse_vectors.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_sparse_vectors.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_sparse_vectors.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "tests/test_sparse_vectors.py",
+          "contains": "tokenize_for_sparse",
+          "passed": true,
+          "function": "test_dotted_module_router_preserved"
+        },
+        {
+          "file": "tests/test_sparse_vectors.py",
+          "contains": "code_rag.retrieval.router",
+          "passed": true,
+          "function": "test_dotted_module_router_preserved"
+        },
+        {
+          "file": "tests/test_sparse_vectors.py",
+          "contains": "assert",
+          "passed": true,
+          "function": "test_dotted_module_router_preserved"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:17.719313+00:00"
+    },
+    {
+      "task_id": "unseen-router-dense-vector-name-config",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "tests/test_router.py",
+        "src/code_rag/retrieval/router.py"
+      ],
+      "proposed_files": [
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_router.py that asserts _is_config_query returns True when the query contains the env var name QDRANT_DEFAULT_DENSE_VECTOR_NAME.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_match_test_template`.",
+        "retrieved_context": [
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/router.py",
+          "src/code_rag/config.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "README.md",
+          "README.md",
+          "README.md",
+          "src/code_rag/planning/plan_service.py"
+        ],
+        "patch": "--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,10 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_dense_vector_name_config():\n+    \"\"\"Codegen-eval template for -k 'dense_vector_name_config'. Add a unit test in tests/test_router.py that asserts _is_config_query returns True when the query contains the env var name QDRANT_DEFAULT_DENSE_VECTOR_NAME.\"\"\"\n+    assert _is_config_query(\n+        \"Where is QDRANT_DEFAULT_DENSE_VECTOR_NAME configured?\"\n+    ) is True\n",
+        "test_command": "pytest tests/test_router.py -k dense_vector_name_config -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_router.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_ki5jnm6j/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_router.py -k dense_vector_name_config -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 72 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/retrieval/router.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_router.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "tests/test_router.py",
+          "contains": "_is_config_query",
+          "passed": true,
+          "function": "test_dense_vector_name_config"
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "QDRANT_DEFAULT_DENSE_VECTOR_NAME",
+          "passed": true,
+          "function": "test_dense_vector_name_config"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:19.986535+00:00"
+    },
+    {
+      "task_id": "unseen-cli-routing-explanation-help",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "tests/test_search_cli.py",
+        "scripts/search_repo.py"
+      ],
+      "proposed_files": [
+        "tests/test_search_cli.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_search_cli.py that runs `scripts/search_repo.py --help` and asserts the output contains the literal flag '--routing_explanation'.. Found 3 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_source_edit_routing_explanation_config`.",
+        "retrieved_context": [
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_reranker.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/tests/test_search_cli.py\n+++ b/tests/test_search_cli.py\n@@ -2,6 +2,7 @@\n \n import subprocess\n import sys\n+from pathlib import Path\n \n \n class TestSearchCLIArguments:\n@@ -99,3 +100,9 @@\n         assert \"dense\" in result.stdout\n         assert \"bm25\" in result.stdout\n         assert \"hybrid\" in result.stdout\n+\n+\n+def test_routing_explanation_help():\n+    \"\"\"Codegen-eval template for -k 'routing_explanation_help'. Add a unit test in tests/test_search_cli.py that runs `scripts/search_repo.py --help` and asserts the output contains the literal flag '--routing_explanation'.\"\"\"\n+    script = Path(\"scripts/search_repo.py\").read_text()\n+    assert \"--routing_explanation\" in script\n",
+        "test_command": "pytest tests/test_search_cli.py -k routing_explanation_help -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_search_cli.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_uf27fro4/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_search_cli.py -k routing_explanation_help -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 8 deselected in 0.01s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "tests/test_search_cli.py",
+          "scripts/search_repo.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_search_cli.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "tests/test_search_cli.py",
+          "contains": "--routing_explanation",
+          "passed": true,
+          "function": "test_routing_explanation_help"
+        },
+        {
+          "file": "tests/test_search_cli.py",
+          "contains": "search_repo.py",
+          "passed": true,
+          "function": "test_routing_explanation_help"
+        },
+        {
+          "file": "tests/test_search_cli.py",
+          "contains": "read_text",
+          "passed": true,
+          "function": "test_routing_explanation_help"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:22.191130+00:00"
+    },
+    {
+      "task_id": "unseen-diagnostic-category-counts",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "tests/test_routing_diagnostics.py",
+        "src/code_rag/retrieval/routing_diagnostics.py"
+      ],
+      "proposed_files": [
+        "tests/test_routing_diagnostics.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_routing_diagnostics.py that verifies compute_summary returns category_counts mapping each eval_category to the number of QueryDiagnostic records in that category.. Found 7 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_handle_routing_diagnostic_test_add`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/reranker.py",
+          "README.md",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/retrieval/evaluation_service.py",
+          "tests/test_sufficiency.py"
+        ],
+        "patch": "--- a/tests/test_routing_diagnostics.py\n+++ b/tests/test_routing_diagnostics.py\n@@ -497,3 +497,51 @@\n         assert \"**Baseline wins**: 1\" in markdown\n         assert \"## Adaptive Losses\" in markdown\n         assert \"Where is foo?\" in markdown\n+\n+\n+def test_category_counts_summary():\n+    \"\"\"Codegen-eval template for -k 'category_counts_summary'. Add a unit test in tests/test_routing_diagnostics.py that verifies compute_summary returns category_counts mapping each eval_category to the number of QueryDiagnostic records in that category.\"\"\"\n+    diagnostics = [\n+        QueryDiagnostic(\n+            question=\"Q1\",\n+            expected_files=[\"a.py\"],\n+            expected_symbols=None,\n+            eval_category=\"symbol\",\n+            router_query_type=\"symbol\",\n+            router_selected_mode=\"hybrid\",\n+            router_reason=\"t\",\n+            baseline_mode=\"hybrid\",\n+            baseline_rank=1,\n+            baseline_hit_at_5=True,\n+            baseline_top_files=[\"a.py\"],\n+            baseline_top_symbols=[],\n+            adaptive_rank=1,\n+            adaptive_hit_at_5=True,\n+            adaptive_top_files=[\"a.py\"],\n+            adaptive_top_symbols=[],\n+            winner=\"tie\",\n+            loss_reason=\"same_results\",\n+        ),\n+        QueryDiagnostic(\n+            question=\"Q2\",\n+            expected_files=[\"b.py\"],\n+            expected_symbols=None,\n+            eval_category=\"technical\",\n+            router_query_type=\"technical\",\n+            router_selected_mode=\"hybrid\",\n+            router_reason=\"t\",\n+            baseline_mode=\"hybrid\",\n+            baseline_rank=1,\n+            baseline_hit_at_5=True,\n+            baseline_top_files=[\"b.py\"],\n+            baseline_top_symbols=[],\n+            adaptive_rank=1,\n+            adaptive_hit_at_5=True,\n+            adaptive_top_files=[\"b.py\"],\n+            adaptive_top_symbols=[],\n+            winner=\"tie\",\n+            loss_reason=\"same_results\",\n+        ),\n+    ]\n+    summary = compute_summary(diagnostics)\n+    assert summary.category_counts == {\"symbol\": 1, \"technical\": 1}\n",
+        "test_command": "pytest tests/test_routing_diagnostics.py -k category_counts_summary -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_routing_diagnostics.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_85n9blwr/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_routing_diagnostics.py -k category_counts_summary -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 35 deselected in 0.07s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/retrieval/routing_diagnostics.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_routing_diagnostics.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_routing_diagnostics.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "tests/test_routing_diagnostics.py",
+          "contains": "compute_summary",
+          "passed": true,
+          "function": "test_category_counts_summary"
+        },
+        {
+          "file": "tests/test_routing_diagnostics.py",
+          "contains": "category_counts",
+          "passed": true,
+          "function": "test_category_counts_summary"
+        },
+        {
+          "file": "tests/test_routing_diagnostics.py",
+          "contains": "QueryDiagnostic",
+          "passed": true,
+          "function": "test_category_counts_summary"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:24.439618+00:00"
+    },
+    {
+      "task_id": "unseen-experiment-mrr-default",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "tests/test_experiments.py",
+        "src/code_rag/experiments/results.py"
+      ],
+      "proposed_files": [
+        "tests/test_experiments.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_experiments.py that asserts RetrievalMetrics() defaults mrr to 0.0 and hit_at_5 to 0.0 when constructed with no arguments.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_inplace_template_config_adaptive_default_true`.",
+        "retrieved_context": [
+          "src/code_rag/experiments/results.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/experiments/runner.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/tests/test_experiments.py\n+++ b/tests/test_experiments.py\n@@ -447,3 +447,10 @@\n         assert config.retrieval_eval_set == \"\"\n         assert config.planning_eval_set == \"\"\n         assert config.max_iterations == 2\n+\n+\n+def test_retrieval_metrics_mrr_default():\n+    \"\"\"Codegen-eval template for -k 'retrieval_metrics_mrr_default'. Add a unit test in tests/test_experiments.py that asserts RetrievalMetrics() defaults mrr to 0.0 and hit_at_5 to 0.0 when constructed with no arguments.\"\"\"\n+    metrics = RetrievalMetrics()\n+    assert metrics.mrr == 0.0\n+    assert metrics.hit_at_5 == 0.0\n",
+        "test_command": "pytest tests/test_experiments.py -k retrieval_metrics_mrr_default -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_experiments.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen__uo95q95/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_experiments.py -k retrieval_metrics_mrr_default -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 21 deselected in 0.03s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/experiments/results.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_experiments.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_experiments.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "tests/test_experiments.py",
+          "contains": "RetrievalMetrics",
+          "passed": true,
+          "function": "test_retrieval_metrics_mrr_default"
+        },
+        {
+          "file": "tests/test_experiments.py",
+          "contains": "mrr",
+          "passed": true,
+          "function": "test_retrieval_metrics_mrr_default"
+        },
+        {
+          "file": "tests/test_experiments.py",
+          "contains": "0.0",
+          "passed": true,
+          "function": "test_retrieval_metrics_mrr_default"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:26.718246+00:00"
+    },
+    {
+      "task_id": "unseen-sparse-screaming-env-var",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "proposed_files": [
+        "tests/test_sparse_vectors.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_sparse_vectors.py that calls encode_sparse_query on a query containing the env var QDRANT_DEFAULT_DENSE_VECTOR_NAME and asserts the exact lowercased form receives PATH_LIKE_WEIGHT.. Found 5 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_match_test_template`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/config.py",
+          "src/code_rag/config.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/vector_stores/factory.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "README.md",
+          "src/code_rag/planning/plan_service.py"
+        ],
+        "patch": "--- a/tests/test_sparse_vectors.py\n+++ b/tests/test_sparse_vectors.py\n@@ -564,3 +564,9 @@\n         path_id = stable_term_id(\"src/code_rag/retrieval/router.py\")\n         assert path_id in set(doc_indices)\n         assert path_id in set(q_indices)\n+\n+\n+def test_screaming_env_var_path_weight():\n+    \"\"\"Codegen-eval template for -k 'screaming_env_var_path_weight'. Add a unit test in tests/test_sparse_vectors.py that calls encode_sparse_query on a query containing the env var QDRANT_DEFAULT_DENSE_VECTOR_NAME and asserts the exact lowercased form receives PATH...\"\"\"\n+    weighted = dict(tokenize_for_sparse_weighted(\"QDRANT_DEFAULT_DENSE_VECTOR_NAME\"))\n+    assert weighted[\"qdrant_default_dense_vector_name\"] == PATH_LIKE_WEIGHT\n",
+        "test_command": "pytest tests/test_sparse_vectors.py -k screaming_env_var_path_weight -q",
+        "summary": "Deterministic handler 'handle_generic_add_test_task' produced 1 change(s) targeting tests/test_sparse_vectors.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_rkd4tx6n/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_sparse_vectors.py -k screaming_env_var_path_weight -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 66 deselected in 0.08s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "tests/test_sparse_vectors.py",
+          "src/code_rag/retrieval/sparse_vectors.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_sparse_vectors.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_generic_add_test_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "tests/test_sparse_vectors.py",
+          "contains": "tokenize_for_sparse_weighted",
+          "passed": true,
+          "function": "test_screaming_env_var_path_weight"
+        },
+        {
+          "file": "tests/test_sparse_vectors.py",
+          "contains": "QDRANT_DEFAULT_DENSE_VECTOR_NAME",
+          "passed": true,
+          "function": "test_screaming_env_var_path_weight"
+        },
+        {
+          "file": "tests/test_sparse_vectors.py",
+          "contains": "PATH_LIKE_WEIGHT",
+          "passed": true,
+          "function": "test_screaming_env_var_path_weight"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:29.026232+00:00"
+    }
+  ]
+}

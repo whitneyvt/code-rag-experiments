@@ -1,0 +1,287 @@
+{
+  "task_file": "evals/code_generation_tasks_inplace.json",
+  "repo_path": "/Users/whitney/src/code_rag",
+  "mode": "hybrid",
+  "top_k": 8,
+  "execute": false,
+  "total_tasks": 5,
+  "results": [
+    {
+      "task_id": "inplace-router-error-patterns-out-of-memory",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Extend the existing ERROR_PATTERNS list in src/code_rag/retrieval/router.py so it includes the phrase \"out of memory\". Update the list in place; do not declare a second pattern list elsewhere. Add a unit test test_is_error_query_detects_out_of_memory in tests/test_router.py asserting _is_error_query(\"out of memory error encountered\") returns True.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_inplace_template_error_patterns_oom`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          ".agent_memory/experience.md",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/retrieval/router.py\n+++ b/src/code_rag/retrieval/router.py\n@@ -149,6 +149,7 @@\n     \"failed to\",\n     \"cannot\",\n     \"unable to\",\n+    \"out of memory\",\n ]\n \n # Stack trace pattern: File \"...\", line \\d+\n\n--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,11 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_is_error_query_detects_out_of_memory():\n+    from code_rag.retrieval.router import _is_error_query\n+\n+    assert _is_error_query(\"out of memory error encountered\") is True\n+    assert _is_error_query(\"the process ran out of memory\") is True\n+    assert _is_error_query(\"hello world\") is False\n",
+        "test_command": "pytest tests/test_router.py -k is_error_query_detects_out_of_memory -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/retrieval/router.py, tests/test_router.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [],
+      "notes": "",
+      "timestamp": "2026-06-04T22:34:18.108684+00:00"
+    },
+    {
+      "task_id": "inplace-router-cli-patterns-pytest",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Extend the existing CLI_PATTERNS list in src/code_rag/retrieval/router.py so it includes the literal string \"pytest\". Update the list in place; do not declare a second pattern list elsewhere. Add a unit test test_is_cli_query_detects_pytest in tests/test_router.py asserting _is_cli_query(\"how do I invoke pytest with -k\") returns True.. Found 4 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_inplace_template_cli_patterns_pytest`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/retrieval/router.py\n+++ b/src/code_rag/retrieval/router.py\n@@ -168,6 +168,7 @@\n     \"evaluate_retrieval.py\",\n     \"analyze_routing.py\",\n     \"ingest.py\",\n+    \"pytest\",\n ]\n \n # Config/env/YAML indicators - env vars and config keys are exact identifiers\n\n--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,11 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_is_cli_query_detects_pytest():\n+    from code_rag.retrieval.router import _is_cli_query\n+\n+    assert _is_cli_query(\"how do I invoke pytest with -k\") is True\n+    assert _is_cli_query(\"run pytest tests/test_router.py\") is True\n+    assert _is_cli_query(\"explain the QdrantVectorStore class\") is False\n",
+        "test_command": "pytest tests/test_router.py -k is_cli_query_detects_pytest -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/retrieval/router.py, tests/test_router.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [],
+      "notes": "",
+      "timestamp": "2026-06-04T22:34:20.065199+00:00"
+    },
+    {
+      "task_id": "inplace-router-classify-query-doc-branch",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a documentation query category by (1) adding an _is_doc_query helper to src/code_rag/retrieval/router.py that returns True when the query contains 'documentation', 'docs', 'readme', or 'explain', and (2) modifying the existing classify_query function in place so an _is_doc_query match returns the string \"doc\". Insert the new branch BELOW the config branch and ABOVE the symbol branch. Add a unit test test_classify_query_returns_doc_for_doc_keywords in tests/test_router.py asserting classify_query(\"explain how routing works\") == \"doc\" and a negative case.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/retrieval/sufficiency.py` containing `_extract_query_terms`.",
+        "retrieved_context": [
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/reranker.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/retrieval/router.py\n+++ b/src/code_rag/retrieval/router.py\n@@ -320,6 +320,15 @@\n     return False\n \n \n+def _is_doc_query(query: str) -> bool:\n+    \"\"\"Detect documentation/readme/docs/explain queries.\"\"\"\n+    q = (query or \"\").lower()\n+    return any(\n+        kw in q\n+        for kw in (\"documentation\", \"docs\", \"readme\", \"explain\")\n+    )\n+\n+\n def classify_query(query: str) -> str:\n     \"\"\"Classify query into a category.\n \n@@ -357,6 +366,11 @@\n     # Priority 4: Config/env/YAML queries need exact identifier matching\n     if _is_config_query(query):\n         return \"config\"\n+\n+    # Documentation queries (codegen-eval in-place edit)\n+    if _is_doc_query(query):\n+        return \"doc\"\n+\n \n     # Priority 5: Symbol queries can use direct lookup\n     if _is_symbol_query(query):\n\n--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,13 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_classify_query_returns_doc_for_doc_keywords():\n+    from code_rag.retrieval.router import classify_query\n+\n+    assert classify_query(\"explain how routing works\") == \"doc\"\n+    assert classify_query(\"Where is the README updated?\") == \"doc\"\n+    assert classify_query(\"check the documentation for usage\") == \"doc\"\n+    # Non-doc queries should still route elsewhere.\n+    assert classify_query(\"ValueError: dimension mismatch\") == \"error\"\n",
+        "test_command": "pytest tests/test_router.py -k classify_query_returns_doc_for_doc_keywords -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/retrieval/router.py, tests/test_router.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [],
+      "notes": "",
+      "timestamp": "2026-06-04T22:34:22.047308+00:00"
+    },
+    {
+      "task_id": "inplace-evaluate-static-check-regex-branch",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Modify the existing _evaluate_static_check function in src/code_rag/codegen/execution_eval.py in place so that, when a StaticCheck instance carries a truthy ``regex`` attribute, the helper evaluates the check by calling re.search(regex, segment) against the function-body or file scope. Do not add a separate helper \u2014 the regex branch must live inside _evaluate_static_check itself. Add a unit test test_evaluate_static_check_uses_regex_attribute in tests/test_execution_eval.py that constructs a StaticCheck, sets a regex attribute, and asserts _evaluate_static_check returns passed=True for a matching pattern and False for a non-matching pattern.. Found 4 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_inplace_template_static_check_regex_branch`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_reranker.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/codegen/execution_eval.py\n+++ b/src/code_rag/codegen/execution_eval.py\n@@ -713,7 +713,15 @@\n             return False, (\n                 f\"function {check.function!r} not found in {check.file}\"\n             )\n+        regex = getattr(check, \"regex\", None)\n+        if regex:\n+            import re\n+            return bool(re.search(regex, segment)), \"\"\n         return (check.contains in segment), \"\"\n+    regex = getattr(check, \"regex\", None)\n+    if regex:\n+        import re\n+        return bool(re.search(regex, source)), \"\"\n     return (check.contains in source), \"\"\n \n \n\n--- a/tests/test_execution_eval.py\n+++ b/tests/test_execution_eval.py\n@@ -957,3 +957,27 @@\n             tmp_path,\n         )[0]\n         assert not result.passed\n+\n+\n+def test_evaluate_static_check_uses_regex_attribute(tmp_path):\n+    from code_rag.codegen.execution_eval import (\n+        StaticCheck,\n+        _evaluate_static_check,\n+    )\n+\n+    target = tmp_path / \"x.py\"\n+    target.write_text(\n+        \"def some_function():\\n\"\n+        \"    return 42\\n\"\n+    )\n+\n+    check = StaticCheck(file=\"x.py\", contains=\"\")\n+    # Dynamic attribute set: the StaticCheck dataclass isn't frozen,\n+    # so dataclass instances accept ad-hoc attributes for regex tests.\n+    check.regex = r\"return\\s+\\d+\"\n+    passed, _ = _evaluate_static_check(check, tmp_path)\n+    assert passed is True\n+\n+    check.regex = r\"this-will-not-match\"\n+    passed, _ = _evaluate_static_check(check, tmp_path)\n+    assert passed is False\n",
+        "test_command": "pytest tests/test_execution_eval.py -k evaluate_static_check_uses_regex_attribute -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/codegen/execution_eval.py, tests/test_execution_eval.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/codegen/execution_eval.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_execution_eval.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/codegen/execution_eval.py",
+          "tests/test_execution_eval.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [],
+      "notes": "",
+      "timestamp": "2026-06-04T22:34:24.011775+00:00"
+    },
+    {
+      "task_id": "inplace-config-loader-adaptive-default-true",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "src/code_rag/experiments/config.py",
+        "tests/test_experiments.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/experiments/config.py",
+        "tests/test_experiments.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Update the YAML loader in src/code_rag/experiments/config.py so the default value of retrieval.adaptive flips from False to True. The change must be in the existing load_config function body (specifically the retrieval_data.get(\"adaptive\", False) call). Do not add a duplicate loader function. Add a unit test test_load_config_adaptive_defaults_to_true in tests/test_experiments.py that loads a minimal YAML omitting retrieval.adaptive and asserts the resulting cfg.retrieval.adaptive is True.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_inplace_template_config_adaptive_default_true`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/experiments/config.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/experiments/config.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "scripts/run_experiment.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/experiments/config.py\n+++ b/src/code_rag/experiments/config.py\n@@ -323,7 +323,7 @@\n         vector_name=retrieval_data.get(\"vector_name\", \"\"),\n         fusion_vectors=fusion_vectors,\n         fusion_method=retrieval_data.get(\"fusion_method\", \"rrf\"),\n-        adaptive=retrieval_data.get(\"adaptive\", False),\n+        adaptive=retrieval_data.get(\"adaptive\", True),\n     )\n \n     eval_data = data.get(\"eval\", {})\n\n--- a/tests/test_experiments.py\n+++ b/tests/test_experiments.py\n@@ -447,3 +447,21 @@\n         assert config.retrieval_eval_set == \"\"\n         assert config.planning_eval_set == \"\"\n         assert config.max_iterations == 2\n+\n+\n+def test_load_config_adaptive_defaults_to_true():\n+    import tempfile\n+\n+    from code_rag.experiments.config import load_config\n+\n+    yaml_content = (\n+        \"name: codegen_inplace_adaptive_default\\n\"\n+        \"repo_path: /tmp/repo\\n\"\n+    )\n+    with tempfile.NamedTemporaryFile(\n+        mode=\"w\", suffix=\".yaml\", delete=False,\n+    ) as f:\n+        f.write(yaml_content)\n+        f.flush()\n+        cfg = load_config(f.name)\n+    assert cfg.retrieval.adaptive is True\n",
+        "test_command": "pytest tests/test_experiments.py -k load_config_adaptive_defaults_to_true -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/experiments/config.py, tests/test_experiments.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/experiments/config.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_experiments.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/experiments/config.py",
+          "tests/test_experiments.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [],
+      "notes": "",
+      "timestamp": "2026-06-04T22:34:25.975296+00:00"
+    }
+  ]
+}

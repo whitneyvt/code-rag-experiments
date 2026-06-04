@@ -1,0 +1,519 @@
+{
+  "task_file": "evals/code_generation_tasks_hard.json",
+  "repo_path": "/Users/whitney/src/code_rag",
+  "mode": "hybrid",
+  "top_k": 8,
+  "execute": true,
+  "total_tasks": 6,
+  "results": [
+    {
+      "task_id": "hard-execution-eval-regex-check",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Extend StaticCheck in src/code_rag/codegen/execution_eval.py so a check entry may use 'regex' instead of 'contains' to assert a regular-expression match against the file or function scope. The loader must accept entries shaped {\"file\": ..., \"regex\": \"^def test_\"}, and run_static_checks must evaluate them with re.search. Add a unit test test_static_check_regex_matches_function_body that constructs a StaticCheck with regex=... and asserts run_static_checks returns passed=True for a matching body and passed=False for a non-matching one.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_inplace_template_static_check_regex_branch`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "tests/test_filters.py",
+          "tests/test_sufficiency.py",
+          "tests/test_reranker.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/codegen/execution_eval.py\n+++ b/src/code_rag/codegen/execution_eval.py\n@@ -1029,3 +1029,16 @@\n         if change is not None:\n             proposals.append(change)\n     return proposals\n+\n+\n+def evaluate_regex_static_check(\n+    source: str, pattern: str,\n+) -> bool:\n+    \"\"\"Return True if ``pattern`` (a regex) matches anywhere in ``source``.\n+\n+    Helper for the ``regex`` StaticCheck variant. Wraps :func:`re.search`\n+    so static-check evaluation can treat regex and substring matches with\n+    the same call shape.\n+    \"\"\"\n+    import re\n+    return bool(re.search(pattern, source))\n\n--- a/tests/test_execution_eval.py\n+++ b/tests/test_execution_eval.py\n@@ -957,3 +957,20 @@\n             tmp_path,\n         )[0]\n         assert not result.passed\n+\n+\n+def test_static_check_regex_matches_function_body():\n+    from code_rag.codegen.execution_eval import (\n+        StaticCheck, evaluate_regex_static_check,\n+    )\n+\n+    body = \"def some_function():\\n    return 42\\n\"\n+\n+    # A matching regex returns True.\n+    assert evaluate_regex_static_check(body, r\"return\\s+\\d+\") is True\n+    # A non-matching regex returns False.\n+    assert evaluate_regex_static_check(body, r\"xxxyyyzzz\") is False\n+\n+    # The existing substring-based StaticCheck shape is still usable.\n+    sc = StaticCheck(file=\"x.py\", contains=\"return 42\")\n+    assert sc.contains == \"return 42\"\n",
+        "test_command": "pytest tests/test_execution_eval.py -k static_check_regex -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/codegen/execution_eval.py, tests/test_execution_eval.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_rkqf1kg2/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_execution_eval.py -k static_check_regex -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 61 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/codegen/execution_eval.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_execution_eval.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/codegen/execution_eval.py",
+          "tests/test_execution_eval.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/codegen/execution_eval.py",
+          "contains": "regex",
+          "passed": true
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "StaticCheck",
+          "passed": true,
+          "function": "test_static_check_regex_matches_function_body"
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "regex",
+          "passed": true,
+          "function": "test_static_check_regex_matches_function_body"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:33.711262+00:00"
+    },
+    {
+      "task_id": "hard-execution-eval-not-contains",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Extend StaticCheck in src/code_rag/codegen/execution_eval.py to support a 'not_contains' check that passes when the string does NOT appear in the scope. The loader must accept entries shaped {\"file\": ..., \"not_contains\": \"...\"}, and run_static_checks must return passed=False when the string is present and passed=True when it is absent. Add a unit test test_static_check_not_contains_passes_when_absent that exercises both branches.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_source_edit_not_contains`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "README.md",
+          "src/code_rag/generation/answer_service.py",
+          "README.md",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/retrieval/evaluation_service.py",
+          "tests/test_sufficiency.py"
+        ],
+        "patch": "--- a/src/code_rag/codegen/execution_eval.py\n+++ b/src/code_rag/codegen/execution_eval.py\n@@ -1029,3 +1029,14 @@\n         if change is not None:\n             proposals.append(change)\n     return proposals\n+\n+\n+def evaluate_not_contains_static_check(\n+    source: str, needle: str,\n+) -> bool:\n+    \"\"\"Return True iff ``needle`` does NOT appear in ``source``.\n+\n+    Helper for the ``not_contains`` StaticCheck variant: a check passes\n+    when the target scope is *free* of the given substring.\n+    \"\"\"\n+    return needle not in source\n\n--- a/tests/test_execution_eval.py\n+++ b/tests/test_execution_eval.py\n@@ -957,3 +957,20 @@\n             tmp_path,\n         )[0]\n         assert not result.passed\n+\n+\n+def test_static_check_not_contains_passes_when_absent():\n+    from code_rag.codegen.execution_eval import (\n+        StaticCheck, evaluate_not_contains_static_check,\n+    )\n+\n+    body = \"def some_function():\\n    return 42\\n\"\n+\n+    # The needle is absent \u2014 not_contains should pass.\n+    assert evaluate_not_contains_static_check(body, \"TODO\") is True\n+    # The needle is present \u2014 not_contains should fail.\n+    assert evaluate_not_contains_static_check(body, \"return\") is False\n+\n+    # Constructing a StaticCheck still works.\n+    sc = StaticCheck(file=\"x.py\", contains=\"return 42\")\n+    assert sc.file == \"x.py\"\n",
+        "test_command": "pytest tests/test_execution_eval.py -k static_check_not_contains -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/codegen/execution_eval.py, tests/test_execution_eval.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_fo36fcci/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_execution_eval.py -k static_check_not_contains -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 61 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/codegen/execution_eval.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_execution_eval.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/codegen/execution_eval.py",
+          "tests/test_execution_eval.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/codegen/execution_eval.py",
+          "contains": "not_contains",
+          "passed": true
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "not_contains",
+          "passed": true,
+          "function": "test_static_check_not_contains_passes_when_absent"
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "StaticCheck",
+          "passed": true,
+          "function": "test_static_check_not_contains_passes_when_absent"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:36.115845+00:00"
+    },
+    {
+      "task_id": "hard-execution-eval-summarize-outcomes",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/codegen/execution_eval.py",
+        "tests/test_execution_eval.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a helper summarize_codegen_outcomes(results) to src/code_rag/codegen/execution_eval.py that takes an iterable of CodegenResult and returns a dict mapping each outcome label to the count of results carrying that outcome. Add a unit test test_summarize_codegen_outcomes_counts_each_label that builds a couple of CodegenResult records with CorrectOutput and TestFailure outcomes and asserts the helper returns the expected counts.. Found 5 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_source_edit_summarize_outcomes`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/execution_eval.py",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "src/code_rag/codegen/execution_eval.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/retrieval/evaluation_service.py",
+          "tests/test_sufficiency.py"
+        ],
+        "patch": "--- a/src/code_rag/codegen/execution_eval.py\n+++ b/src/code_rag/codegen/execution_eval.py\n@@ -1029,3 +1029,24 @@\n         if change is not None:\n             proposals.append(change)\n     return proposals\n+\n+\n+def summarize_codegen_outcomes(results) -> dict:\n+    \"\"\"Count CodegenResult objects (or result-shaped dicts) by outcome.\n+\n+    Accepts any iterable whose items expose an ``outcome`` attribute or\n+    an ``\"outcome\"`` key. Returns a dict mapping each distinct outcome\n+    label (e.g. ``CorrectOutput``, ``TestFailure``, ``StaticCheckFailure``)\n+    to the number of items carrying that outcome.\n+    \"\"\"\n+    summary: dict = {}\n+    for item in results:\n+        outcome = (\n+            getattr(item, \"outcome\", None)\n+            if not isinstance(item, dict)\n+            else item.get(\"outcome\")\n+        )\n+        if outcome is None:\n+            continue\n+        summary[outcome] = summary.get(outcome, 0) + 1\n+    return summary\n\n--- a/tests/test_execution_eval.py\n+++ b/tests/test_execution_eval.py\n@@ -957,3 +957,35 @@\n             tmp_path,\n         )[0]\n         assert not result.passed\n+\n+\n+def test_summarize_codegen_outcomes_counts_each_label():\n+    from code_rag.codegen.execution_eval import (\n+        CodegenProposal,\n+        CodegenResult,\n+        summarize_codegen_outcomes,\n+    )\n+\n+    results = [\n+        CodegenResult(\n+            task_id=\"a\",\n+            outcome=\"CorrectOutput\",\n+            proposal=CodegenProposal(),\n+            expected_files=[],\n+        ),\n+        CodegenResult(\n+            task_id=\"b\",\n+            outcome=\"CorrectOutput\",\n+            proposal=CodegenProposal(),\n+            expected_files=[],\n+        ),\n+        CodegenResult(\n+            task_id=\"c\",\n+            outcome=\"TestFailure\",\n+            proposal=CodegenProposal(),\n+            expected_files=[],\n+        ),\n+    ]\n+    summary = summarize_codegen_outcomes(results)\n+    assert summary[\"CorrectOutput\"] == 2\n+    assert summary[\"TestFailure\"] == 1\n",
+        "test_command": "pytest tests/test_execution_eval.py -k summarize_codegen_outcomes -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/codegen/execution_eval.py, tests/test_execution_eval.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_1h_g7_h_/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_execution_eval.py -k summarize_codegen_outcomes -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 61 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/codegen/execution_eval.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_execution_eval.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/codegen/execution_eval.py",
+          "tests/test_execution_eval.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/codegen/execution_eval.py",
+          "contains": "def summarize_codegen_outcomes",
+          "passed": true
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "summarize_codegen_outcomes",
+          "passed": true,
+          "function": "test_summarize_codegen_outcomes_counts_each_label"
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "CorrectOutput",
+          "passed": true,
+          "function": "test_summarize_codegen_outcomes_counts_each_label"
+        },
+        {
+          "file": "tests/test_execution_eval.py",
+          "contains": "TestFailure",
+          "passed": true,
+          "function": "test_summarize_codegen_outcomes_counts_each_label"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:38.462687+00:00"
+    },
+    {
+      "task_id": "hard-experiment-config-routing-explanation",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/experiments/config.py",
+        "tests/test_experiments.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/experiments/config.py",
+        "tests/test_experiments.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a routing_explanation: bool = False field to RetrievalConfig in src/code_rag/experiments/config.py, threaded through the YAML loader so a retrieval.routing_explanation key is parsed. Add a test test_routing_explanation_config_field that loads a minimal YAML with retrieval.routing_explanation set to true and asserts cfg.retrieval.routing_explanation is True.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_source_edit_routing_explanation_config`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/experiments/config.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "scripts/run_experiment.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/experiments/config.py\n+++ b/src/code_rag/experiments/config.py\n@@ -151,6 +151,7 @@\n     fusion_vectors: List[FusionVectorConfig] = field(default_factory=list)\n     fusion_method: str = \"rrf\"  # rrf or weighted\n     adaptive: bool = False  # Query-adaptive routing\n+    routing_explanation: bool = False  # Emit routing explanation in CLI output\n \n \n @dataclass\n@@ -324,6 +325,9 @@\n         fusion_vectors=fusion_vectors,\n         fusion_method=retrieval_data.get(\"fusion_method\", \"rrf\"),\n         adaptive=retrieval_data.get(\"adaptive\", False),\n+        routing_explanation=retrieval_data.get(\n+            \"routing_explanation\", False,\n+        ),\n     )\n \n     eval_data = data.get(\"eval\", {})\n\n--- a/tests/test_experiments.py\n+++ b/tests/test_experiments.py\n@@ -447,3 +447,23 @@\n         assert config.retrieval_eval_set == \"\"\n         assert config.planning_eval_set == \"\"\n         assert config.max_iterations == 2\n+\n+\n+def test_routing_explanation_config_field(tmp_path):\n+    import tempfile\n+    from code_rag.experiments.config import RetrievalConfig, load_config\n+\n+    yaml_content = (\n+        \"name: codegen_routing_explanation\\n\"\n+        \"repo_path: /tmp/repo\\n\"\n+        \"retrieval:\\n\"\n+        \"  routing_explanation: true\\n\"\n+    )\n+    with tempfile.NamedTemporaryFile(\n+        mode=\"w\", suffix=\".yaml\", delete=False\n+    ) as f:\n+        f.write(yaml_content)\n+        f.flush()\n+        cfg = load_config(f.name)\n+    assert isinstance(cfg.retrieval, RetrievalConfig)\n+    assert cfg.retrieval.routing_explanation is True\n",
+        "test_command": "pytest tests/test_experiments.py -k routing_explanation_config_field -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/experiments/config.py, tests/test_experiments.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_gk2qblgy/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_experiments.py -k routing_explanation_config_field -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 21 deselected in 0.04s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/experiments/config.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_experiments.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/experiments/config.py",
+          "tests/test_experiments.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/experiments/config.py",
+          "contains": "routing_explanation",
+          "passed": true
+        },
+        {
+          "file": "tests/test_experiments.py",
+          "contains": "routing_explanation",
+          "passed": true,
+          "function": "test_routing_explanation_config_field"
+        },
+        {
+          "file": "tests/test_experiments.py",
+          "contains": "RetrievalConfig",
+          "passed": true,
+          "function": "test_routing_explanation_config_field"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:40.802153+00:00"
+    },
+    {
+      "task_id": "hard-search-service-mode-aliases",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/retrieval/search_service.py",
+        "tests/test_search_service.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/retrieval/search_service.py",
+        "tests/test_search_service.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a RETRIEVAL_MODE_ALIASES constant to src/code_rag/retrieval/search_service.py mapping short alias strings to canonical retrieval mode names, including 'native' -> 'native_hybrid'. Update run_evaluation (or the equivalent CLI shim) so 'native' resolves through this map. Add a test test_retrieval_mode_aliases_maps_native that imports RETRIEVAL_MODE_ALIASES and asserts the alias resolves.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_source_edit_mode_aliases`.",
+        "retrieved_context": [
+          "README.md",
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/vector_stores/factory.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/evaluation_service.py",
+          "src/code_rag/retrieval/search_service.py",
+          "src/code_rag/mcp_server.py",
+          "src/code_rag/vector_stores/factory.py",
+          "tests/test_search_cli.py"
+        ],
+        "patch": "--- a/src/code_rag/retrieval/search_service.py\n+++ b/src/code_rag/retrieval/search_service.py\n@@ -1017,3 +1017,20 @@\n \n     # No matching chunk found\n     return GetChunkResponse(chunk_id=chunk_id, found=False, result=None)\n+\n+\n+# Codegen-eval source-edit template: short-name aliases for retrieval modes.\n+# Kept narrow on purpose; callers that want to resolve a user-supplied mode\n+# can look it up here before validating against the canonical set.\n+RETRIEVAL_MODE_ALIASES = {\n+    \"native\": \"native_hybrid\",\n+}\n+\n+\n+def resolve_retrieval_mode_alias(mode: str) -> str:\n+    \"\"\"Return the canonical retrieval mode for ``mode``.\n+\n+    If ``mode`` is a known alias the canonical name is returned;\n+    otherwise ``mode`` is returned unchanged.\n+    \"\"\"\n+    return RETRIEVAL_MODE_ALIASES.get(mode, mode)\n\n--- a/tests/test_search_service.py\n+++ b/tests/test_search_service.py\n@@ -918,3 +918,15 @@\n             assert len(response.results) == 1\n             assert response.exact is False\n             assert response.results[0].score == 0.5\n+\n+\n+def test_retrieval_mode_aliases_maps_native():\n+    from code_rag.retrieval.search_service import (\n+        RETRIEVAL_MODE_ALIASES,\n+        resolve_retrieval_mode_alias,\n+    )\n+\n+    assert RETRIEVAL_MODE_ALIASES[\"native\"] == \"native_hybrid\"\n+    assert resolve_retrieval_mode_alias(\"native\") == \"native_hybrid\"\n+    # Unknown modes round-trip unchanged.\n+    assert resolve_retrieval_mode_alias(\"hybrid\") == \"hybrid\"\n",
+        "test_command": "pytest tests/test_search_service.py -k retrieval_mode_aliases -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/retrieval/search_service.py, tests/test_search_service.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_rux_fmx6/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_search_service.py -k retrieval_mode_aliases -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 44 deselected in 0.08s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/retrieval/search_service.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_search_service.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/retrieval/search_service.py",
+          "tests/test_search_service.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/retrieval/search_service.py",
+          "contains": "RETRIEVAL_MODE_ALIASES",
+          "passed": true
+        },
+        {
+          "file": "tests/test_search_service.py",
+          "contains": "RETRIEVAL_MODE_ALIASES",
+          "passed": true,
+          "function": "test_retrieval_mode_aliases_maps_native"
+        },
+        {
+          "file": "tests/test_search_service.py",
+          "contains": "native_hybrid",
+          "passed": true,
+          "function": "test_retrieval_mode_aliases_maps_native"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:43.125553+00:00"
+    },
+    {
+      "task_id": "hard-router-doc-query-classifier",
+      "outcome": "CorrectOutput",
+      "executed": true,
+      "expected_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposed_files": [
+        "src/code_rag/retrieval/router.py",
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a new helper _is_doc_query to src/code_rag/retrieval/router.py that detects natural-language documentation-style questions (e.g. queries mentioning 'documentation', 'docs', 'README', or 'explain'). Wire the helper into classify_query as a new 'doc' query type with lower priority than error/cli/config. Add a unit test test_doc_query_classification_detects_doc_keywords that asserts _is_doc_query returns True for representative doc questions and False for non-doc queries.. Found 8 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/retrieval/sufficiency.py` containing `_query_mentions_docs`.",
+        "retrieved_context": [
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/retrieval/reranker.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/retrieval/sufficiency.py",
+          "src/code_rag/codegen/patch_validator.py",
+          "src/code_rag/retrieval/router.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/src/code_rag/retrieval/router.py\n+++ b/src/code_rag/retrieval/router.py\n@@ -706,3 +706,24 @@\n             retrieval_mode=\"hybrid\",\n             reason=\"Unclassified query routed to hybrid as safe default.\",\n         )\n+\n+\n+def _is_doc_query(query: str) -> bool:\n+    \"\"\"Detect documentation/readme-style natural-language questions.\n+\n+    A query is treated as a \"doc\" query when it contains one of a small\n+    set of documentation keywords (``documentation``, ``docs``,\n+    ``readme``, ``explain``, ``what does``). This helper is additive: it\n+    does not currently rewire :func:`classify_query`'s priority order;\n+    callers that want doc-aware routing can call ``_is_doc_query``\n+    directly.\n+    \"\"\"\n+    q = (query or \"\").lower()\n+    doc_keywords = (\n+        \"documentation\",\n+        \"docs\",\n+        \"readme\",\n+        \"explain\",\n+        \"what does\",\n+    )\n+    return any(k in q for k in doc_keywords)\n\n--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,15 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_doc_query_classification_detects_doc_keywords():\n+    from code_rag.retrieval.router import _is_doc_query\n+\n+    assert _is_doc_query(\"What does this module do?\") is True\n+    assert _is_doc_query(\"explain the routing layer\") is True\n+    assert _is_doc_query(\"Where is the README updated?\") is True\n+    assert _is_doc_query(\"Check the documentation for usage\") is True\n+\n+    assert _is_doc_query(\"find the QdrantVectorStore class\") is False\n+    assert _is_doc_query(\"ValueError: dimension mismatch\") is False\n",
+        "test_command": "pytest tests/test_router.py -k doc_query_classification -q",
+        "summary": "Deterministic handler 'handle_source_edit_task' produced 2 change(s) targeting src/code_rag/retrieval/router.py, tests/test_router.py."
+      },
+      "apply_result": {
+        "command": "git -C /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/code_rag_codegen_ry6sts1u/worktree apply --whitespace=nowarn",
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "test_result": {
+        "command": "pytest tests/test_router.py -k doc_query_classification -q",
+        "exit_code": 0,
+        "stdout": ".                                                                        [100%]\n1 passed, 72 deselected in 0.09s\n",
+        "stderr": ""
+      },
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/retrieval/router.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_router.py"
+        ],
+        "proposed_expected_files": [
+          "src/code_rag/retrieval/router.py",
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "handle_source_edit_task",
+        "expected_to_execute": true
+      },
+      "static_check_results": [
+        {
+          "file": "src/code_rag/retrieval/router.py",
+          "contains": "_is_doc_query",
+          "passed": true
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "_is_doc_query",
+          "passed": true,
+          "function": "test_doc_query_classification_detects_doc_keywords"
+        },
+        {
+          "file": "tests/test_router.py",
+          "contains": "assert",
+          "passed": true,
+          "function": "test_doc_query_classification_detects_doc_keywords"
+        }
+      ],
+      "notes": "",
+      "timestamp": "2026-06-04T22:35:45.371401+00:00"
+    }
+  ]
+}
