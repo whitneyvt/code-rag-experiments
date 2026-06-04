@@ -1,0 +1,266 @@
+{
+  "task_file": "evals/code_generation_tasks.json",
+  "repo_path": "/Users/whitney/src/code_rag",
+  "mode": "hybrid",
+  "top_k": 8,
+  "execute": false,
+  "total_tasks": 5,
+  "results": [
+    {
+      "task_id": "router-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_router.py",
+        "src/code_rag/retrieval/router.py"
+      ],
+      "proposed_files": [
+        "tests/test_router.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_router.py that verifies _is_error_query returns True for a string containing the phrase 'badly formed hexadecimal UUID'.. Found 6 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_handle_router_test_add`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/chunk_id.py",
+          "tests/test_chunk_metadata.py",
+          "src/code_rag/retrieval/representations.py",
+          "README.md",
+          "tests/test_chunk_metadata.py",
+          "README.md",
+          ".agent_memory/experience.md",
+          "tests/test_hybrid.py",
+          "src/code_rag/codegen/deterministic_stubs.py"
+        ],
+        "patch": "--- a/tests/test_router.py\n+++ b/tests/test_router.py\n@@ -636,3 +636,10 @@\n         # Contains conceptual prefix but has technical term\n         query = \"how does BM25 ranking work?\"\n         assert classify_query(query) == \"technical\"\n+\n+\n+def test_badly_formed_hexadecimal_uuid_is_error_query():\n+    \"\"\"Codegen-eval: the canonical UUID-error phrase routes as error.\"\"\"\n+    assert (\n+        _is_error_query(\"badly formed hexadecimal UUID string\") is True\n+    )\n",
+        "test_command": "pytest tests/test_router.py -k badly_formed_hex -q",
+        "summary": "Deterministic handler '_handle_router_test_add' produced 1 change(s) targeting tests/test_router.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [],
+        "missing_expected_files": [
+          "tests/test_router.py",
+          "src/code_rag/retrieval/router.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_router.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "_handle_router_test_add",
+        "expected_to_execute": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T20:06:29.378606+00:00"
+    },
+    {
+      "task_id": "sparse-tokenization-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_sparse_vectors.py",
+        "src/code_rag/retrieval/sparse_vectors.py"
+      ],
+      "proposed_files": [],
+      "proposal": {
+        "phase": "no_change_needed",
+        "plan": "Plan for: Add a unit test in tests/test_sparse_vectors.py that verifies tokenize_for_sparse('--routing_explanation') emits both '--routing_explanation' and 'routing_explanation' as exact tokens.. Found 9 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/vector_stores/factory.py` containing `sparse_enabled`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/vector_stores/factory.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/vector_stores/qdrant.py",
+          "src/code_rag/retrieval/sparse_vectors.py",
+          "src/code_rag/mcp_server.py",
+          "src/code_rag/retrieval/router.py",
+          "src/code_rag/vector_stores/factory.py",
+          "src/code_rag/planning/__init__.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_sufficiency.py"
+        ],
+        "patch": "",
+        "test_command": "pytest tests/test_sparse_vectors.py -k routing_explanation -q",
+        "summary": "Deterministic handler '_handle_sparse_tokenization_test_add' matched but the existing code already satisfies the task; success_command can run directly with an empty patch."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/retrieval/sparse_vectors.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_sparse_vectors.py"
+        ],
+        "proposed_expected_files": [],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": false,
+        "deterministic_handler": true,
+        "handler_name": "_handle_sparse_tokenization_test_add",
+        "expected_to_execute": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T20:06:32.499426+00:00"
+    },
+    {
+      "task_id": "readme-section-update",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "README.md"
+      ],
+      "proposed_files": [
+        "README.md"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Update the README.md to add a one-paragraph subsection under 'MCP Server' titled 'Read-only guarantee' clarifying that none of the MCP tools mutate the working tree or apply patches.. Found 4 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_handle_readme_section_update`.",
+        "retrieved_context": [
+          "README.md",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          ".agent_memory/experience.md",
+          "README.md",
+          "src/code_rag/mcp_server.py",
+          "README.md",
+          "src/code_rag/__main__.py",
+          "README.md",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "--- a/README.md\n+++ b/README.md\n@@ -475,6 +475,13 @@\n does not work end-to-end, the outcome label tells you whether to invest in\n better retrieval, better planning, better diff generation, or better test\n selection.\n+\n+\n+### Read-only guarantee\n+\n+- MCP tools never mutate the live working tree; `propose_code_change` emits a unified diff and never applies it.\n+- Codegen `--execute` mode applies patches only inside a throwaway `git worktree` in a temp directory.\n+- No `apply_code_change` tool exists; there is no autonomous code mutation path.\n \n ## Storage Layout\n \n",
+        "test_command": "grep -F 'Read-only guarantee' README.md",
+        "summary": "Deterministic handler '_handle_readme_section_update' produced 1 change(s) targeting README.md."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "README.md"
+        ],
+        "missing_expected_files": [],
+        "proposed_expected_files": [
+          "README.md"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "_handle_readme_section_update",
+        "expected_to_execute": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T20:06:34.498889+00:00"
+    },
+    {
+      "task_id": "config-parsing-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_experiments_config.py",
+        "src/code_rag/experiments/config.py"
+      ],
+      "proposed_files": [
+        "tests/test_experiments_config.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_experiments_config.py that loads a minimal experiment YAML with retrieval.adaptive=true and asserts load_config returns config.retrieval.adaptive is True.. Found 7 relevant file(s) (after 2 retrieval passes), starting with `scripts/run_experiment.py` containing `main`.",
+        "retrieved_context": [
+          "scripts/run_experiment.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/experiments/config.py",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/experiments/runner.py",
+          "src/code_rag/experiments/runner.py",
+          "tests/test_vector_store_capabilities.py",
+          "src/code_rag/experiments/runner.py",
+          "tests/test_vector_store_capabilities.py",
+          "tests/test_plan_service.py",
+          "tests/test_reranker.py"
+        ],
+        "patch": "diff --git a/tests/test_experiments_config.py b/tests/test_experiments_config.py\nnew file mode 100644\n--- /dev/null\n+++ b/tests/test_experiments_config.py\n@@ -0,0 +1,26 @@\n+\"\"\"Targeted test for retrieval.adaptive parsing in load_config.\n+\n+Generated by the deterministic codegen handler for the\n+``config-parsing-test-add`` eval task. Kept narrow: a single function with\n+the substring ``adaptive_flag`` so ``pytest -k adaptive_flag`` selects it.\n+\"\"\"\n+\n+import tempfile\n+\n+from code_rag.experiments.config import load_config\n+\n+\n+def test_adaptive_flag_is_parsed():\n+    yaml_content = (\n+        \"name: codegen_adaptive_flag\\n\"\n+        \"repo_path: /tmp/repo\\n\"\n+        \"retrieval:\\n\"\n+        \"  adaptive: true\\n\"\n+    )\n+    with tempfile.NamedTemporaryFile(\n+        mode=\"w\", suffix=\".yaml\", delete=False\n+    ) as f:\n+        f.write(yaml_content)\n+        f.flush()\n+        config = load_config(f.name)\n+    assert config.retrieval.adaptive is True\n",
+        "test_command": "pytest tests/test_experiments_config.py -k adaptive_flag -q",
+        "summary": "Deterministic handler '_handle_config_parsing_test_add' produced 1 change(s) targeting tests/test_experiments_config.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "src/code_rag/experiments/config.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_experiments_config.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_experiments_config.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "_handle_config_parsing_test_add",
+        "expected_to_execute": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T20:06:36.920983+00:00"
+    },
+    {
+      "task_id": "routing-diagnostic-test-add",
+      "outcome": "UnknownFailure",
+      "executed": false,
+      "expected_files": [
+        "tests/test_routing_diagnostics.py",
+        "scripts/analyze_routing.py"
+      ],
+      "proposed_files": [
+        "tests/test_routing_diagnostics.py"
+      ],
+      "proposal": {
+        "phase": "proposed",
+        "plan": "Plan for: Add a unit test in tests/test_routing_diagnostics.py that verifies the diagnostics summary correctly counts ties when adaptive and baseline return identical first_correct_rank for every query.. Found 5 relevant file(s) (after 2 retrieval passes), starting with `src/code_rag/codegen/deterministic_stubs.py` containing `_handle_routing_diagnostic_test_add`.",
+        "retrieved_context": [
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "src/code_rag/retrieval/routing_diagnostics.py",
+          "scripts/analyze_routing.py",
+          "README.md",
+          "src/code_rag/retrieval/reranker.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "tests/test_hybrid.py",
+          "src/code_rag/codegen/deterministic_stubs.py",
+          "README.md"
+        ],
+        "patch": "--- a/tests/test_routing_diagnostics.py\n+++ b/tests/test_routing_diagnostics.py\n@@ -497,3 +497,34 @@\n         assert \"**Baseline wins**: 1\" in markdown\n         assert \"## Adaptive Losses\" in markdown\n         assert \"Where is foo?\" in markdown\n+\n+\n+def test_tie_count_when_all_queries_tie():\n+    \"\"\"Codegen-eval: all-tie diagnostics roll up into summary.ties.\"\"\"\n+    diagnostics = [\n+        QueryDiagnostic(\n+            question=f\"Q{i}\",\n+            expected_files=[\"a.py\"],\n+            expected_symbols=None,\n+            eval_category=\"symbol\",\n+            router_query_type=\"symbol\",\n+            router_selected_mode=\"hybrid\",\n+            router_reason=\"t\",\n+            baseline_mode=\"hybrid\",\n+            baseline_rank=1,\n+            baseline_hit_at_5=True,\n+            baseline_top_files=[\"a.py\"],\n+            baseline_top_symbols=[],\n+            adaptive_rank=1,\n+            adaptive_hit_at_5=True,\n+            adaptive_top_files=[\"a.py\"],\n+            adaptive_top_symbols=[],\n+            winner=\"tie\",\n+            loss_reason=\"same_results\",\n+        )\n+        for i in range(3)\n+    ]\n+    summary = compute_summary(diagnostics)\n+    assert summary.ties == 3\n+    assert summary.adaptive_wins == 0\n+    assert summary.baseline_wins == 0\n",
+        "test_command": "pytest tests/test_routing_diagnostics.py -k tie_count -q",
+        "summary": "Deterministic handler '_handle_routing_diagnostic_test_add' produced 1 change(s) targeting tests/test_routing_diagnostics.py."
+      },
+      "apply_result": null,
+      "test_result": null,
+      "selection": {
+        "retrieved_expected_files": [
+          "scripts/analyze_routing.py"
+        ],
+        "missing_expected_files": [
+          "tests/test_routing_diagnostics.py"
+        ],
+        "proposed_expected_files": [
+          "tests/test_routing_diagnostics.py"
+        ],
+        "unexpected_proposed_files": [],
+        "companion_files": [],
+        "has_patch": true,
+        "deterministic_handler": true,
+        "handler_name": "_handle_routing_diagnostic_test_add",
+        "expected_to_execute": true
+      },
+      "notes": "",
+      "timestamp": "2026-06-04T20:06:38.931732+00:00"
+    }
+  ]
+}
