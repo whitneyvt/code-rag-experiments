@@ -1,0 +1,36 @@
+N=  50, epsilon= 0.75, relL2=1.382e+00
+N=  50, epsilon= 1.50, relL2=1.330e+00
+N=  50, epsilon= 3.00, relL2=1.230e+00
+N= 100, epsilon= 0.75, relL2=4.906e-01
+N= 100, epsilon= 1.50, relL2=4.734e-01
+N= 100, epsilon= 3.00, relL2=4.516e-01
+N= 500, epsilon= 0.75, relL2=2.788e-02
+N= 500, epsilon= 1.50, relL2=2.910e-02
+N= 500, epsilon= 3.00, relL2=3.361e-02
+N=1000, epsilon= 0.75, relL2=7.258e-03
+N=1000, epsilon= 1.50, relL2=7.545e-03
+N=1000, epsilon= 3.00, relL2=9.413e-03
+N=2000, epsilon= 0.75, relL2=3.599e-03
+N=2000, epsilon= 1.50, relL2=2.827e-03
+N=2000, epsilon= 3.00, relL2=1.895e-03
+N=  50, epsilon= 0.75, relL2=1.382e+00
+N=  50, epsilon= 1.50, relL2=1.330e+00
+N=  50, epsilon= 3.00, relL2=1.230e+00
+N= 100, epsilon= 0.75, relL2=4.906e-01
+N= 100, epsilon= 1.50, relL2=4.734e-01
+N= 100, epsilon= 3.00, relL2=4.516e-01
+N= 500, epsilon= 0.75, relL2=2.788e-02
+N= 500, epsilon= 1.50, relL2=2.910e-02
+N= 500, epsilon= 3.00, relL2=3.361e-02
+N=1000, epsilon= 0.75, relL2=7.258e-03
+N=1000, epsilon= 1.50, relL2=7.545e-03
+N=1000, epsilon= 3.00, relL2=9.413e-03
+N=2000, epsilon= 0.75, relL2=3.599e-03
+N=2000, epsilon= 1.50, relL2=2.827e-03
+N=2000, epsilon= 3.00, relL2=1.895e-03
+script_a error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_a_ru1jpfdx/easy_scalar_c4_matern_errors.txt
+script_b error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_b_h790k1dl/easy_scalar_c4_matern_errors.txt
+schema_a=easy
+schema_b=easy
+All parsed error rows match within tolerance.
+MATCH=True

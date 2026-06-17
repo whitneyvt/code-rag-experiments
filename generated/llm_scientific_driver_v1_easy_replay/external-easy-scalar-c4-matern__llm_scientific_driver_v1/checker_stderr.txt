@@ -1,0 +1,4 @@
+/private/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_easy_f55itdom/ragcode.py:156: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
+/Users/whitney/src/code_rag/evals/external_interpolation/easy_scalar_c4_matern_driver.py:156: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()

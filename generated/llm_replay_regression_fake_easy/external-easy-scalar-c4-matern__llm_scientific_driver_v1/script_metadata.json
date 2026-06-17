@@ -1,0 +1,105 @@
+{
+  "task_id": "external-easy-scalar-c4-matern",
+  "difficulty": "easy",
+  "generator": "llm_scientific_driver_v1",
+  "prompt_hash": "sha256:0590ac3b95a498475ec2c025eb05f31f540c9ae0e631da1c63ed9751874f0ed5",
+  "prompt_length": 2002,
+  "generated_script_hash": "sha256:b63155cea802ce9b7c3800570791e87b9d7f6cee9cfe3c524ffe3cfb938ed23b",
+  "generated_script_length": 5707,
+  "selected_retrieval_files": [
+    "README.md",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/geometry/core.py"
+  ],
+  "matched_required_symbols": [
+    "RBF",
+    "interpolation"
+  ],
+  "missing_required_symbols": [
+    "Matern"
+  ],
+  "checker_outcome": "CheckerPass",
+  "constants_in_script": {
+    "SEED": true,
+    "EPSILONS": true,
+    "NODE_COUNTS": true
+  },
+  "constants_in_prompt_or_retrieval": {
+    "SEED": false,
+    "EPSILONS": true,
+    "NODE_COUNTS": true
+  },
+  "overfit_signals": [
+    "EPSILONS=[0.75, 1.5, 3.0] sourced from 'fallback_default' (no prompt/retrieval/manifest evidence) but appears verbatim in the generated script",
+    "parameter_value_mismatch: seed=17 (source 'retrieval') but generated script uses 4"
+  ],
+  "possible_overfit": true,
+  "extracted_parameters": {
+    "seed": 17,
+    "node_counts": [
+      50,
+      100,
+      500,
+      1000,
+      2000
+    ],
+    "epsilons": [
+      0.75,
+      1.5,
+      3.0
+    ],
+    "evaluation_size": 500,
+    "poly_orders": [],
+    "domain": [
+      -1.0,
+      1.0
+    ],
+    "output_schema": "easy"
+  },
+  "parameter_sources": {
+    "seed": "retrieval",
+    "node_counts": "prompt",
+    "epsilons": "fallback_default",
+    "evaluation_size": "prompt",
+    "domain": "prompt",
+    "output_schema": "prompt"
+  },
+  "fallback_defaults_used": [
+    "epsilons"
+  ],
+  "missing_parameters": [],
+  "expected_parameters_from_manifest": {},
+  "script_parameters": {
+    "seed": 4,
+    "node_counts": [
+      50,
+      100,
+      500,
+      1000,
+      2000
+    ],
+    "epsilons": [
+      0.75,
+      1.5,
+      3.0
+    ],
+    "evaluation_size": 500
+  },
+  "parameter_value_mismatches": [
+    {
+      "field": "seed",
+      "expected_or_extracted": 17,
+      "script_value": 4,
+      "source": "retrieval"
+    }
+  ],
+  "llm_diagnostics": {
+    "provider_name": "fake_easy",
+    "model": null,
+    "chunks_included": 8,
+    "extracted_python_length": 5707,
+    "prompt_length": 12444,
+    "prompt_packet_hash": "sha256:35047007bdc37f3278045e43268746d483861e5313a9ef499f9e90768ce48157",
+    "raw_response_hash": "sha256:8797c923d820be141cefe0b320970931ee8e0a3362ba8b4a93a42a22d36fa4fa"
+  }
+}
