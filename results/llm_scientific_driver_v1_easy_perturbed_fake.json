@@ -1,0 +1,50 @@
+{
+  "tasks": [
+    {
+      "id": "external-easy-perturbed-wording",
+      "difficulty": "easy",
+      "prompt_file": "evals/external_interpolation/prompt_easy_perturbed.txt",
+      "ground_truth_file": "evals/external_interpolation/easy_scalar_c4_matern_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_scalar_rbf_driver",
+      "requires_kernelpack_branch": false,
+      "expected_parameters": {}
+    }
+  ],
+  "results": [
+    {
+      "task_id": "external-easy-perturbed-wording",
+      "difficulty": "easy",
+      "outcome": "CheckerPass",
+      "checker": {
+        "exit_code": 0,
+        "stdout": "N=  50, epsilon= 0.75, relL2=1.382e+00\nN=  50, epsilon= 1.50, relL2=1.330e+00\nN=  50, epsilon= 3.00, relL2=1.230e+00\nN= 100, epsilon= 0.75, relL2=4.906e-01\nN= 100, epsilon= 1.50, relL2=4.734e-01\nN= 100, epsilon= 3.00, relL2=4.516e-01\nN= 500, epsilon= 0.75, relL2=2.788e-02\nN= 500, epsilon= 1.50, relL2=2.910e-02\nN= 500, epsilon= 3.00, relL2=3.361e-02\nN=1000, epsilon= 0.75, relL2=7.258e-03\nN=1000, epsilon= 1.50, relL2=7.545e-03\nN=1000, epsilon= 3.00, relL2=9.413e-03\nN=2000, epsilon= 0.75, relL2=3.599e-03\nN=2000, epsilon= 1.50, relL2=2.827e-03\nN=2000, epsilon= 3.00, relL2=1.895e-03\nN=  50, epsilon= 0.75, relL2=1.382e+00\nN=  50, epsilon= 1.50, relL2=1.330e+00\nN=  50, epsilon= 3.00, relL2=1.230e+00\nN= 100, epsilon= 0.75, relL2=4.906e-01\nN= 100, epsilon= 1.50, relL2=4.734e-01\nN= 100, epsilon= 3.00, relL2=4.516e-01\nN= 500, epsilon= 0.75, relL2=2.788e-02\nN= 500, epsilon= 1.50, relL2=2.910e-02\nN= 500, epsilon= 3.00, relL2=3.361e-02\nN=1000, epsilon= 0.75, relL2=7.258e-03\nN=1000, epsilon= 1.50, relL2=7.545e-03\nN=1000, epsilon= 3.00, relL2=9.413e-03\nN=2000, epsilon= 0.75, relL2=3.599e-03\nN=2000, epsilon= 1.50, relL2=2.827e-03\nN=2000, epsilon= 3.00, relL2=1.895e-03\nscript_a error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_a_3_rkzygw/easy_scalar_c4_matern_errors.txt\nscript_b error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_b_1dp3uz7_/easy_scalar_c4_matern_errors.txt\nschema_a=easy\nschema_b=easy\nAll parsed error rows match within tolerance.\nMATCH=True\n",
+        "stderr": "/private/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_easy_2npb9ws2/ragcode.py:156: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown\n  plt.show()\n/Users/whitney/src/code_rag/evals/external_interpolation/easy_scalar_c4_matern_driver.py:156: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown\n  plt.show()\n",
+        "outcome": "CheckerPass",
+        "parsed": {
+          "match": true,
+          "schema_a": "easy",
+          "schema_b": "easy",
+          "message": "MATCH=True",
+          "no_error_file": false,
+          "schema_mismatch": false,
+          "configuration_mismatch": false,
+          "metric_mismatch": false
+        },
+        "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_easy_2npb9ws2/ragcode.py",
+        "ground_truth_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/easy_scalar_c4_matern_driver.py",
+        "checker_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/checker.py"
+      },
+      "generated_script_path": "/Users/whitney/src/code-rag-experiments/generated/llm_scientific_driver_v1_easy_perturbed_fake/external-easy-perturbed-wording__llm_scientific_driver_v1/ragcode.py",
+      "prompt_excerpt": "Produce a self-contained Python driver that performs single-output\n(scalar) field interpolation using a compactly-decaying smooth Matern\nRBF whose Matern smoothness order corresponds to C^4 continuity. Use\nNumPy for the linear algebra core; SciPy and Matplotlib are fine for\nthe solver and the plots.",
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/rbffd/core.py"
+      ],
+      "generator": "llm_scientific_driver_v1",
+      "notes": "archived to /Users/whitney/src/code-rag-experiments/generated/llm_scientific_driver_v1_easy_perturbed_fake/external-easy-perturbed-wording__llm_scientific_driver_v1/ragcode.py"
+    }
+  ]
+}
