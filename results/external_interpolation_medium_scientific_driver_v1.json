@@ -1,0 +1,50 @@
+{
+  "tasks": [
+    {
+      "id": "external-medium-divergence-free-kernel",
+      "difficulty": "medium",
+      "prompt_file": "evals/external_interpolation/prompt_medium.txt",
+      "ground_truth_file": "evals/external_interpolation/medium_df_c4_matern_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_divergence_free_global_driver",
+      "requires_kernelpack_branch": true
+    }
+  ],
+  "results": [
+    {
+      "task_id": "external-medium-divergence-free-kernel",
+      "difficulty": "medium",
+      "outcome": "CheckerPass",
+      "checker": {
+        "exit_code": 0,
+        "stdout": "N=  50, epsilon=0.50, relL2(u)=2.568e-01, relL2(v)=1.736e-01, relL2(vec)=2.212e-01\nN=  50, epsilon=1.00, relL2(u)=2.659e-01, relL2(v)=1.787e-01, relL2(vec)=2.286e-01\nN=  50, epsilon=2.00, relL2(u)=2.837e-01, relL2(v)=1.979e-01, relL2(vec)=2.467e-01\nN= 100, epsilon=0.50, relL2(u)=4.923e-02, relL2(v)=5.539e-02, relL2(vec)=5.225e-02\nN= 100, epsilon=1.00, relL2(u)=5.203e-02, relL2(v)=5.655e-02, relL2(vec)=5.422e-02\nN= 100, epsilon=2.00, relL2(u)=6.334e-02, relL2(v)=6.667e-02, relL2(vec)=6.495e-02\nN= 500, epsilon=0.50, relL2(u)=6.678e-03, relL2(v)=8.189e-03, relL2(vec)=7.434e-03\nN= 500, epsilon=1.00, relL2(u)=7.587e-03, relL2(v)=8.143e-03, relL2(vec)=7.856e-03\nN= 500, epsilon=2.00, relL2(u)=1.117e-02, relL2(v)=8.376e-03, relL2(vec)=9.937e-03\nN=1000, epsilon=0.50, relL2(u)=1.133e-03, relL2(v)=1.191e-03, relL2(vec)=1.161e-03\nN=1000, epsilon=1.00, relL2(u)=1.187e-03, relL2(v)=1.423e-03, relL2(vec)=1.304e-03\nN=1000, epsilon=2.00, relL2(u)=1.444e-03, relL2(v)=2.060e-03, relL2(vec)=1.764e-03\nN=2000, epsilon=0.50, relL2(u)=5.193e-04, relL2(v)=2.301e-04, relL2(vec)=4.082e-04\nN=2000, epsilon=1.00, relL2(u)=5.048e-04, relL2(v)=2.354e-04, relL2(vec)=4.001e-04\nN=2000, epsilon=2.00, relL2(u)=4.875e-04, relL2(v)=3.728e-04, relL2(vec)=4.368e-04\nN=  50, epsilon=0.50, relL2(u)=2.568e-01, relL2(v)=1.736e-01, relL2(vec)=2.212e-01\nN=  50, epsilon=1.00, relL2(u)=2.659e-01, relL2(v)=1.787e-01, relL2(vec)=2.286e-01\nN=  50, epsilon=2.00, relL2(u)=2.837e-01, relL2(v)=1.979e-01, relL2(vec)=2.467e-01\nN= 100, epsilon=0.50, relL2(u)=4.923e-02, relL2(v)=5.539e-02, relL2(vec)=5.225e-02\nN= 100, epsilon=1.00, relL2(u)=5.203e-02, relL2(v)=5.655e-02, relL2(vec)=5.422e-02\nN= 100, epsilon=2.00, relL2(u)=6.334e-02, relL2(v)=6.667e-02, relL2(vec)=6.495e-02\nN= 500, epsilon=0.50, relL2(u)=6.678e-03, relL2(v)=8.189e-03, relL2(vec)=7.434e-03\nN= 500, epsilon=1.00, relL2(u)=7.587e-03, relL2(v)=8.143e-03, relL2(vec)=7.856e-03\nN= 500, epsilon=2.00, relL2(u)=1.117e-02, relL2(v)=8.376e-03, relL2(vec)=9.937e-03\nN=1000, epsilon=0.50, relL2(u)=1.133e-03, relL2(v)=1.191e-03, relL2(vec)=1.161e-03\nN=1000, epsilon=1.00, relL2(u)=1.187e-03, relL2(v)=1.423e-03, relL2(vec)=1.304e-03\nN=1000, epsilon=2.00, relL2(u)=1.444e-03, relL2(v)=2.060e-03, relL2(vec)=1.764e-03\nN=2000, epsilon=0.50, relL2(u)=5.193e-04, relL2(v)=2.301e-04, relL2(vec)=4.082e-04\nN=2000, epsilon=1.00, relL2(u)=5.048e-04, relL2(v)=2.354e-04, relL2(vec)=4.001e-04\nN=2000, epsilon=2.00, relL2(u)=4.875e-04, relL2(v)=3.728e-04, relL2(vec)=4.368e-04\nscript_a error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_a_el8732s5/medium_df_c4_matern_errors.txt\nscript_b error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_b_uuyp898b/medium_df_c4_matern_errors.txt\nschema_a=medium\nschema_b=medium\nAll parsed error rows match within tolerance.\nMATCH=True\n",
+        "stderr": "/Users/whitney/src/code_rag/evals/external_interpolation/medium_df_c4_matern_driver.py:192: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown\n  plt.show()\n",
+        "outcome": "CheckerPass",
+        "parsed": {
+          "match": true,
+          "schema_a": "medium",
+          "schema_b": "medium",
+          "message": "MATCH=True",
+          "no_error_file": false,
+          "schema_mismatch": false,
+          "configuration_mismatch": false,
+          "metric_mismatch": false
+        },
+        "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_medium_kkagkd42/ragcode.py",
+        "ground_truth_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/medium_df_c4_matern_driver.py",
+        "checker_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/checker.py"
+      },
+      "generated_script_path": "/Users/whitney/src/code-rag-experiments/generated/scientific_driver_v1/external-medium-divergence-free-kernel__scientific_driver_v1/ragcode.py",
+      "prompt_excerpt": "Write a standalone Python driver script that performs divergence-free vector\nfield interpolation in 2D using a global divergence-free C4 Matern kernel.\nMake sure to use proper NumPy techniques to keep the implementation efficient,\nand it is fine to use SciPy and Matplotlib.\n\nYou have been provided w",
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/solvers/detail/incompressible_euler_bdf_backend.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/dual.py"
+      ],
+      "generator": "scientific_driver_v1",
+      "notes": "archived to /Users/whitney/src/code-rag-experiments/generated/scientific_driver_v1/external-medium-divergence-free-kernel__scientific_driver_v1/ragcode.py"
+    }
+  ]
+}

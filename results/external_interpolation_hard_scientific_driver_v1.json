@@ -1,0 +1,50 @@
+{
+  "tasks": [
+    {
+      "id": "external-hard-divergence-free-kernel",
+      "difficulty": "hard",
+      "prompt_file": "evals/external_interpolation/prompt_hard.txt",
+      "ground_truth_file": "evals/external_interpolation/hard_local_dfphs_poly_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_divergence_free_local_driver",
+      "requires_kernelpack_branch": true
+    }
+  ],
+  "results": [
+    {
+      "task_id": "external-hard-divergence-free-kernel",
+      "difficulty": "hard",
+      "outcome": "CheckerPass",
+      "checker": {
+        "exit_code": 0,
+        "stdout": "Running poly_order=4, phs_degree=5, stencil_size=41\n  N=  50 -> relL2(u)=2.325e+00, relL2(v)=2.094e+00, relL2(vec)=2.278e+00\n  N= 100 -> relL2(u)=1.039e+00, relL2(v)=8.029e-01, relL2(vec)=9.946e-01\n  N= 500 -> relL2(u)=2.623e-01, relL2(v)=2.649e-01, relL2(vec)=2.629e-01\n  N=1000 -> relL2(u)=3.938e-03, relL2(v)=1.101e-02, relL2(vec)=6.131e-03\n  N=2000 -> relL2(u)=2.045e-03, relL2(v)=9.093e-03, relL2(vec)=4.535e-03\nRunning poly_order=6, phs_degree=7, stencil_size=71\n  N=  50 -> relL2(u)=1.154e+01, relL2(v)=1.067e+01, relL2(vec)=1.136e+01\n  N= 100 -> relL2(u)=4.711e+00, relL2(v)=7.294e+00, relL2(vec)=5.354e+00\n  N= 500 -> relL2(u)=3.684e-01, relL2(v)=4.237e-01, relL2(vec)=3.806e-01\n  N=1000 -> relL2(u)=2.132e-03, relL2(v)=2.233e-02, relL2(vec)=1.038e-02\n  N=2000 -> relL2(u)=1.979e-04, relL2(v)=1.074e-03, relL2(vec)=5.215e-04\nRunning poly_order=4, phs_degree=5, stencil_size=41\n  N=  50 -> relL2(u)=2.325e+00, relL2(v)=2.094e+00, relL2(vec)=2.278e+00\n  N= 100 -> relL2(u)=1.039e+00, relL2(v)=8.029e-01, relL2(vec)=9.946e-01\n  N= 500 -> relL2(u)=2.623e-01, relL2(v)=2.649e-01, relL2(vec)=2.629e-01\n  N=1000 -> relL2(u)=3.938e-03, relL2(v)=1.101e-02, relL2(vec)=6.131e-03\n  N=2000 -> relL2(u)=2.045e-03, relL2(v)=9.093e-03, relL2(vec)=4.535e-03\nRunning poly_order=6, phs_degree=7, stencil_size=71\n  N=  50 -> relL2(u)=1.154e+01, relL2(v)=1.067e+01, relL2(vec)=1.136e+01\n  N= 100 -> relL2(u)=4.711e+00, relL2(v)=7.294e+00, relL2(vec)=5.354e+00\n  N= 500 -> relL2(u)=3.684e-01, relL2(v)=4.237e-01, relL2(vec)=3.806e-01\n  N=1000 -> relL2(u)=2.132e-03, relL2(v)=2.233e-02, relL2(vec)=1.038e-02\n  N=2000 -> relL2(u)=1.979e-04, relL2(v)=1.074e-03, relL2(vec)=5.215e-04\nscript_a error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_a_kqrj4fuo/hard_local_dfphs_poly_errors.txt\nscript_b error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_b_973o08hd/hard_local_dfphs_poly_errors.txt\nschema_a=hard\nschema_b=hard\nAll parsed error rows match within tolerance.\nMATCH=True\n",
+        "stderr": "/Users/whitney/src/code_rag/evals/external_interpolation/hard_local_dfphs_poly_driver.py:314: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown\n  plt.show()\n",
+        "outcome": "CheckerPass",
+        "parsed": {
+          "match": true,
+          "schema_a": "hard",
+          "schema_b": "hard",
+          "message": "MATCH=True",
+          "no_error_file": false,
+          "schema_mismatch": false,
+          "configuration_mismatch": false,
+          "metric_mismatch": false
+        },
+        "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_hard_70eve1sm/ragcode.py",
+        "ground_truth_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/hard_local_dfphs_poly_driver.py",
+        "checker_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/checker.py"
+      },
+      "generated_script_path": "/Users/whitney/src/code-rag-experiments/generated/scientific_driver_v1/external-hard-divergence-free-kernel__scientific_driver_v1/ragcode.py",
+      "prompt_excerpt": "Write a standalone Python driver script that performs localized\ndivergence-free interpolation in 2D using a divergence-free polyharmonic spline\nkernel plus a divergence-free polynomial augmentation. Make sure to use proper\nNumPy techniques to keep the implementation efficient, and it is fine to use\n",
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/geometry/core.py"
+      ],
+      "generator": "scientific_driver_v1",
+      "notes": "archived to /Users/whitney/src/code-rag-experiments/generated/scientific_driver_v1/external-hard-divergence-free-kernel__scientific_driver_v1/ragcode.py"
+    }
+  ]
+}
