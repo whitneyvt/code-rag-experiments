@@ -1,0 +1,36 @@
+N=  50, epsilon=0.50, relL2(u)=2.568e-01, relL2(v)=1.736e-01, relL2(vec)=2.212e-01
+N=  50, epsilon=1.00, relL2(u)=2.659e-01, relL2(v)=1.787e-01, relL2(vec)=2.286e-01
+N=  50, epsilon=2.00, relL2(u)=2.837e-01, relL2(v)=1.979e-01, relL2(vec)=2.467e-01
+N= 100, epsilon=0.50, relL2(u)=4.923e-02, relL2(v)=5.539e-02, relL2(vec)=5.225e-02
+N= 100, epsilon=1.00, relL2(u)=5.203e-02, relL2(v)=5.655e-02, relL2(vec)=5.422e-02
+N= 100, epsilon=2.00, relL2(u)=6.334e-02, relL2(v)=6.667e-02, relL2(vec)=6.495e-02
+N= 500, epsilon=0.50, relL2(u)=6.678e-03, relL2(v)=8.189e-03, relL2(vec)=7.434e-03
+N= 500, epsilon=1.00, relL2(u)=7.587e-03, relL2(v)=8.143e-03, relL2(vec)=7.856e-03
+N= 500, epsilon=2.00, relL2(u)=1.117e-02, relL2(v)=8.376e-03, relL2(vec)=9.937e-03
+N=1000, epsilon=0.50, relL2(u)=1.133e-03, relL2(v)=1.191e-03, relL2(vec)=1.161e-03
+N=1000, epsilon=1.00, relL2(u)=1.187e-03, relL2(v)=1.423e-03, relL2(vec)=1.304e-03
+N=1000, epsilon=2.00, relL2(u)=1.444e-03, relL2(v)=2.060e-03, relL2(vec)=1.764e-03
+N=2000, epsilon=0.50, relL2(u)=5.193e-04, relL2(v)=2.301e-04, relL2(vec)=4.082e-04
+N=2000, epsilon=1.00, relL2(u)=5.048e-04, relL2(v)=2.354e-04, relL2(vec)=4.001e-04
+N=2000, epsilon=2.00, relL2(u)=4.875e-04, relL2(v)=3.728e-04, relL2(vec)=4.368e-04
+N=  50, epsilon=0.50, relL2(u)=2.568e-01, relL2(v)=1.736e-01, relL2(vec)=2.212e-01
+N=  50, epsilon=1.00, relL2(u)=2.659e-01, relL2(v)=1.787e-01, relL2(vec)=2.286e-01
+N=  50, epsilon=2.00, relL2(u)=2.837e-01, relL2(v)=1.979e-01, relL2(vec)=2.467e-01
+N= 100, epsilon=0.50, relL2(u)=4.923e-02, relL2(v)=5.539e-02, relL2(vec)=5.225e-02
+N= 100, epsilon=1.00, relL2(u)=5.203e-02, relL2(v)=5.655e-02, relL2(vec)=5.422e-02
+N= 100, epsilon=2.00, relL2(u)=6.334e-02, relL2(v)=6.667e-02, relL2(vec)=6.495e-02
+N= 500, epsilon=0.50, relL2(u)=6.678e-03, relL2(v)=8.189e-03, relL2(vec)=7.434e-03
+N= 500, epsilon=1.00, relL2(u)=7.587e-03, relL2(v)=8.143e-03, relL2(vec)=7.856e-03
+N= 500, epsilon=2.00, relL2(u)=1.117e-02, relL2(v)=8.376e-03, relL2(vec)=9.937e-03
+N=1000, epsilon=0.50, relL2(u)=1.133e-03, relL2(v)=1.191e-03, relL2(vec)=1.161e-03
+N=1000, epsilon=1.00, relL2(u)=1.187e-03, relL2(v)=1.423e-03, relL2(vec)=1.304e-03
+N=1000, epsilon=2.00, relL2(u)=1.444e-03, relL2(v)=2.060e-03, relL2(vec)=1.764e-03
+N=2000, epsilon=0.50, relL2(u)=5.193e-04, relL2(v)=2.301e-04, relL2(vec)=4.082e-04
+N=2000, epsilon=1.00, relL2(u)=5.048e-04, relL2(v)=2.354e-04, relL2(vec)=4.001e-04
+N=2000, epsilon=2.00, relL2(u)=4.875e-04, relL2(v)=3.728e-04, relL2(vec)=4.368e-04
+script_a error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_a_ua29ei2b/medium_df_c4_matern_errors.txt
+script_b error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_b_i4q5pk8x/medium_df_c4_matern_errors.txt
+schema_a=medium
+schema_b=medium
+All parsed error rows match within tolerance.
+MATCH=True
