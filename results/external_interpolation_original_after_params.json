@@ -1,0 +1,147 @@
+{
+  "tasks": [
+    {
+      "id": "external-easy-scalar-c4-matern",
+      "difficulty": "easy",
+      "prompt_file": "evals/external_interpolation/prompt_easy.txt",
+      "ground_truth_file": "evals/external_interpolation/easy_scalar_c4_matern_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_scalar_rbf_driver",
+      "requires_kernelpack_branch": false,
+      "expected_parameters": {}
+    },
+    {
+      "id": "external-medium-divergence-free-kernel",
+      "difficulty": "medium",
+      "prompt_file": "evals/external_interpolation/prompt_medium.txt",
+      "ground_truth_file": "evals/external_interpolation/medium_df_c4_matern_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_divergence_free_global_driver",
+      "requires_kernelpack_branch": true,
+      "expected_parameters": {}
+    },
+    {
+      "id": "external-hard-divergence-free-kernel",
+      "difficulty": "hard",
+      "prompt_file": "evals/external_interpolation/prompt_hard.txt",
+      "ground_truth_file": "evals/external_interpolation/hard_local_dfphs_poly_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_divergence_free_local_driver",
+      "requires_kernelpack_branch": true,
+      "expected_parameters": {}
+    }
+  ],
+  "results": [
+    {
+      "task_id": "external-easy-scalar-c4-matern",
+      "difficulty": "easy",
+      "outcome": "CheckerPass",
+      "checker": {
+        "exit_code": 0,
+        "stdout": "N=  50, epsilon= 0.75, relL2=1.382e+00\nN=  50, epsilon= 1.50, relL2=1.330e+00\nN=  50, epsilon= 3.00, relL2=1.230e+00\nN= 100, epsilon= 0.75, relL2=4.906e-01\nN= 100, epsilon= 1.50, relL2=4.734e-01\nN= 100, epsilon= 3.00, relL2=4.516e-01\nN= 500, epsilon= 0.75, relL2=2.788e-02\nN= 500, epsilon= 1.50, relL2=2.910e-02\nN= 500, epsilon= 3.00, relL2=3.361e-02\nN=1000, epsilon= 0.75, relL2=7.258e-03\nN=1000, epsilon= 1.50, relL2=7.545e-03\nN=1000, epsilon= 3.00, relL2=9.413e-03\nN=2000, epsilon= 0.75, relL2=3.599e-03\nN=2000, epsilon= 1.50, relL2=2.827e-03\nN=2000, epsilon= 3.00, relL2=1.895e-03\nN=  50, epsilon= 0.75, relL2=1.382e+00\nN=  50, epsilon= 1.50, relL2=1.330e+00\nN=  50, epsilon= 3.00, relL2=1.230e+00\nN= 100, epsilon= 0.75, relL2=4.906e-01\nN= 100, epsilon= 1.50, relL2=4.734e-01\nN= 100, epsilon= 3.00, relL2=4.516e-01\nN= 500, epsilon= 0.75, relL2=2.788e-02\nN= 500, epsilon= 1.50, relL2=2.910e-02\nN= 500, epsilon= 3.00, relL2=3.361e-02\nN=1000, epsilon= 0.75, relL2=7.258e-03\nN=1000, epsilon= 1.50, relL2=7.545e-03\nN=1000, epsilon= 3.00, relL2=9.413e-03\nN=2000, epsilon= 0.75, relL2=3.599e-03\nN=2000, epsilon= 1.50, relL2=2.827e-03\nN=2000, epsilon= 3.00, relL2=1.895e-03\nscript_a error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_a_lvxk596p/easy_scalar_c4_matern_errors.txt\nscript_b error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_b_broyjxnz/easy_scalar_c4_matern_errors.txt\nschema_a=easy\nschema_b=easy\nAll parsed error rows match within tolerance.\nMATCH=True\n",
+        "stderr": "/Users/whitney/src/code_rag/evals/external_interpolation/easy_scalar_c4_matern_driver.py:156: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown\n  plt.show()\n",
+        "outcome": "CheckerPass",
+        "parsed": {
+          "match": true,
+          "schema_a": "easy",
+          "schema_b": "easy",
+          "message": "MATCH=True",
+          "no_error_file": false,
+          "schema_mismatch": false,
+          "configuration_mismatch": false,
+          "metric_mismatch": false
+        },
+        "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_easy_5vaz0x2m/ragcode.py",
+        "ground_truth_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/easy_scalar_c4_matern_driver.py",
+        "checker_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/checker.py"
+      },
+      "generated_script_path": "/Users/whitney/src/code-rag-experiments/generated/external_interpolation_original_after_params/external-easy-scalar-c4-matern__scientific_driver_v1/ragcode.py",
+      "prompt_excerpt": "Write a standalone Python driver script that performs scalar field interpolation\nusing a scalar-valued radial basis function. Make sure to use proper NumPy\ntechniques to keep the implementation efficient, and it is fine to use SciPy\nand Matplotlib.\n\nYou have been provided with relevant code embeddin",
+      "retrieved_files": [
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/solvers/multispecies_diffusion.py",
+        "src/kernelpack/solvers/pu_sl_advection.py",
+        "examples/poisson_convergence_2d_neumann.py",
+        "examples/pusl_incompressible_euler_convergence_2d.py",
+        "README.md"
+      ],
+      "generator": "scientific_driver_v1",
+      "notes": "archived to /Users/whitney/src/code-rag-experiments/generated/external_interpolation_original_after_params/external-easy-scalar-c4-matern__scientific_driver_v1/ragcode.py"
+    },
+    {
+      "task_id": "external-medium-divergence-free-kernel",
+      "difficulty": "medium",
+      "outcome": "CheckerPass",
+      "checker": {
+        "exit_code": 0,
+        "stdout": "N=  50, epsilon=0.50, relL2(u)=2.568e-01, relL2(v)=1.736e-01, relL2(vec)=2.212e-01\nN=  50, epsilon=1.00, relL2(u)=2.659e-01, relL2(v)=1.787e-01, relL2(vec)=2.286e-01\nN=  50, epsilon=2.00, relL2(u)=2.837e-01, relL2(v)=1.979e-01, relL2(vec)=2.467e-01\nN= 100, epsilon=0.50, relL2(u)=4.923e-02, relL2(v)=5.539e-02, relL2(vec)=5.225e-02\nN= 100, epsilon=1.00, relL2(u)=5.203e-02, relL2(v)=5.655e-02, relL2(vec)=5.422e-02\nN= 100, epsilon=2.00, relL2(u)=6.334e-02, relL2(v)=6.667e-02, relL2(vec)=6.495e-02\nN= 500, epsilon=0.50, relL2(u)=6.678e-03, relL2(v)=8.189e-03, relL2(vec)=7.434e-03\nN= 500, epsilon=1.00, relL2(u)=7.587e-03, relL2(v)=8.143e-03, relL2(vec)=7.856e-03\nN= 500, epsilon=2.00, relL2(u)=1.117e-02, relL2(v)=8.376e-03, relL2(vec)=9.937e-03\nN=1000, epsilon=0.50, relL2(u)=1.133e-03, relL2(v)=1.191e-03, relL2(vec)=1.161e-03\nN=1000, epsilon=1.00, relL2(u)=1.187e-03, relL2(v)=1.423e-03, relL2(vec)=1.304e-03\nN=1000, epsilon=2.00, relL2(u)=1.444e-03, relL2(v)=2.060e-03, relL2(vec)=1.764e-03\nN=2000, epsilon=0.50, relL2(u)=5.193e-04, relL2(v)=2.301e-04, relL2(vec)=4.082e-04\nN=2000, epsilon=1.00, relL2(u)=5.048e-04, relL2(v)=2.354e-04, relL2(vec)=4.001e-04\nN=2000, epsilon=2.00, relL2(u)=4.875e-04, relL2(v)=3.728e-04, relL2(vec)=4.368e-04\nN=  50, epsilon=0.50, relL2(u)=2.568e-01, relL2(v)=1.736e-01, relL2(vec)=2.212e-01\nN=  50, epsilon=1.00, relL2(u)=2.659e-01, relL2(v)=1.787e-01, relL2(vec)=2.286e-01\nN=  50, epsilon=2.00, relL2(u)=2.837e-01, relL2(v)=1.979e-01, relL2(vec)=2.467e-01\nN= 100, epsilon=0.50, relL2(u)=4.923e-02, relL2(v)=5.539e-02, relL2(vec)=5.225e-02\nN= 100, epsilon=1.00, relL2(u)=5.203e-02, relL2(v)=5.655e-02, relL2(vec)=5.422e-02\nN= 100, epsilon=2.00, relL2(u)=6.334e-02, relL2(v)=6.667e-02, relL2(vec)=6.495e-02\nN= 500, epsilon=0.50, relL2(u)=6.678e-03, relL2(v)=8.189e-03, relL2(vec)=7.434e-03\nN= 500, epsilon=1.00, relL2(u)=7.587e-03, relL2(v)=8.143e-03, relL2(vec)=7.856e-03\nN= 500, epsilon=2.00, relL2(u)=1.117e-02, relL2(v)=8.376e-03, relL2(vec)=9.937e-03\nN=1000, epsilon=0.50, relL2(u)=1.133e-03, relL2(v)=1.191e-03, relL2(vec)=1.161e-03\nN=1000, epsilon=1.00, relL2(u)=1.187e-03, relL2(v)=1.423e-03, relL2(vec)=1.304e-03\nN=1000, epsilon=2.00, relL2(u)=1.444e-03, relL2(v)=2.060e-03, relL2(vec)=1.764e-03\nN=2000, epsilon=0.50, relL2(u)=5.193e-04, relL2(v)=2.301e-04, relL2(vec)=4.082e-04\nN=2000, epsilon=1.00, relL2(u)=5.048e-04, relL2(v)=2.354e-04, relL2(vec)=4.001e-04\nN=2000, epsilon=2.00, relL2(u)=4.875e-04, relL2(v)=3.728e-04, relL2(vec)=4.368e-04\nscript_a error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_a_1np44gdm/medium_df_c4_matern_errors.txt\nscript_b error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_b_j1whd48c/medium_df_c4_matern_errors.txt\nschema_a=medium\nschema_b=medium\nAll parsed error rows match within tolerance.\nMATCH=True\n",
+        "stderr": "/Users/whitney/src/code_rag/evals/external_interpolation/medium_df_c4_matern_driver.py:192: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown\n  plt.show()\n",
+        "outcome": "CheckerPass",
+        "parsed": {
+          "match": true,
+          "schema_a": "medium",
+          "schema_b": "medium",
+          "message": "MATCH=True",
+          "no_error_file": false,
+          "schema_mismatch": false,
+          "configuration_mismatch": false,
+          "metric_mismatch": false
+        },
+        "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_medium_fhxrq3cb/ragcode.py",
+        "ground_truth_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/medium_df_c4_matern_driver.py",
+        "checker_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/checker.py"
+      },
+      "generated_script_path": "/Users/whitney/src/code-rag-experiments/generated/external_interpolation_original_after_params/external-medium-divergence-free-kernel__scientific_driver_v1/ragcode.py",
+      "prompt_excerpt": "Write a standalone Python driver script that performs divergence-free vector\nfield interpolation in 2D using a global divergence-free C4 Matern kernel.\nMake sure to use proper NumPy techniques to keep the implementation efficient,\nand it is fine to use SciPy and Matplotlib.\n\nYou have been provided w",
+      "retrieved_files": [
+        "src/kernelpack/divfree/__init__.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/_numba.py",
+        "src/kernelpack/rbffd/core.py"
+      ],
+      "generator": "scientific_driver_v1",
+      "notes": "archived to /Users/whitney/src/code-rag-experiments/generated/external_interpolation_original_after_params/external-medium-divergence-free-kernel__scientific_driver_v1/ragcode.py"
+    },
+    {
+      "task_id": "external-hard-divergence-free-kernel",
+      "difficulty": "hard",
+      "outcome": "CheckerPass",
+      "checker": {
+        "exit_code": 0,
+        "stdout": "Running poly_order=4, phs_degree=5, stencil_size=41\n  N=  50 -> relL2(u)=2.325e+00, relL2(v)=2.094e+00, relL2(vec)=2.278e+00\n  N= 100 -> relL2(u)=1.039e+00, relL2(v)=8.029e-01, relL2(vec)=9.946e-01\n  N= 500 -> relL2(u)=2.623e-01, relL2(v)=2.649e-01, relL2(vec)=2.629e-01\n  N=1000 -> relL2(u)=3.938e-03, relL2(v)=1.101e-02, relL2(vec)=6.131e-03\n  N=2000 -> relL2(u)=2.045e-03, relL2(v)=9.093e-03, relL2(vec)=4.535e-03\nRunning poly_order=6, phs_degree=7, stencil_size=71\n  N=  50 -> relL2(u)=1.154e+01, relL2(v)=1.067e+01, relL2(vec)=1.136e+01\n  N= 100 -> relL2(u)=4.711e+00, relL2(v)=7.294e+00, relL2(vec)=5.354e+00\n  N= 500 -> relL2(u)=3.684e-01, relL2(v)=4.237e-01, relL2(vec)=3.806e-01\n  N=1000 -> relL2(u)=2.132e-03, relL2(v)=2.233e-02, relL2(vec)=1.038e-02\n  N=2000 -> relL2(u)=1.979e-04, relL2(v)=1.074e-03, relL2(vec)=5.215e-04\nRunning poly_order=4, phs_degree=5, stencil_size=41\n  N=  50 -> relL2(u)=2.325e+00, relL2(v)=2.094e+00, relL2(vec)=2.278e+00\n  N= 100 -> relL2(u)=1.039e+00, relL2(v)=8.029e-01, relL2(vec)=9.946e-01\n  N= 500 -> relL2(u)=2.623e-01, relL2(v)=2.649e-01, relL2(vec)=2.629e-01\n  N=1000 -> relL2(u)=3.938e-03, relL2(v)=1.101e-02, relL2(vec)=6.131e-03\n  N=2000 -> relL2(u)=2.045e-03, relL2(v)=9.093e-03, relL2(vec)=4.535e-03\nRunning poly_order=6, phs_degree=7, stencil_size=71\n  N=  50 -> relL2(u)=1.154e+01, relL2(v)=1.067e+01, relL2(vec)=1.136e+01\n  N= 100 -> relL2(u)=4.711e+00, relL2(v)=7.294e+00, relL2(vec)=5.354e+00\n  N= 500 -> relL2(u)=3.684e-01, relL2(v)=4.237e-01, relL2(vec)=3.806e-01\n  N=1000 -> relL2(u)=2.132e-03, relL2(v)=2.233e-02, relL2(vec)=1.038e-02\n  N=2000 -> relL2(u)=1.979e-04, relL2(v)=1.074e-03, relL2(vec)=5.215e-04\nscript_a error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_a_qaspb7e_/hard_local_dfphs_poly_errors.txt\nscript_b error file: /var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragcheck_b_av2aztp_/hard_local_dfphs_poly_errors.txt\nschema_a=hard\nschema_b=hard\nAll parsed error rows match within tolerance.\nMATCH=True\n",
+        "stderr": "/Users/whitney/src/code_rag/evals/external_interpolation/hard_local_dfphs_poly_driver.py:314: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown\n  plt.show()\n",
+        "outcome": "CheckerPass",
+        "parsed": {
+          "match": true,
+          "schema_a": "hard",
+          "schema_b": "hard",
+          "message": "MATCH=True",
+          "no_error_file": false,
+          "schema_mismatch": false,
+          "configuration_mismatch": false,
+          "metric_mismatch": false
+        },
+        "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_hard_uq48qp0g/ragcode.py",
+        "ground_truth_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/hard_local_dfphs_poly_driver.py",
+        "checker_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/checker.py"
+      },
+      "generated_script_path": "/Users/whitney/src/code-rag-experiments/generated/external_interpolation_original_after_params/external-hard-divergence-free-kernel__scientific_driver_v1/ragcode.py",
+      "prompt_excerpt": "Write a standalone Python driver script that performs localized\ndivergence-free interpolation in 2D using a divergence-free polyharmonic spline\nkernel plus a divergence-free polynomial augmentation. Make sure to use proper\nNumPy techniques to keep the implementation efficient, and it is fine to use\n",
+      "retrieved_files": [
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/divfree/__init__.py",
+        "src/kernelpack/solvers/_pu.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/_numba.py"
+      ],
+      "generator": "scientific_driver_v1",
+      "notes": "archived to /Users/whitney/src/code-rag-experiments/generated/external_interpolation_original_after_params/external-hard-divergence-free-kernel__scientific_driver_v1/ragcode.py"
+    }
+  ]
+}
