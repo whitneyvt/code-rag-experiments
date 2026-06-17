@@ -1,0 +1,456 @@
+{
+  "task_id": "external-easy-perturbed-wording",
+  "difficulty": "easy",
+  "generator": "scientific_driver_v1",
+  "chunk_count": 14,
+  "top_files": [
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/geometry/core.py",
+    "src/kernelpack/geometry/core.py"
+  ],
+  "top_symbols": [
+    "initialize_geometry",
+    "initialize_geometry",
+    "default_diff_order",
+    "dfc4_matern_blocks",
+    "bc_op",
+    "from_accuracy",
+    "evaluate_gradient",
+    "_solve_augmented_rbf_system"
+  ],
+  "chunks": [
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "initialize_geometry",
+      "chunk_type": "method",
+      "score": 0.016129032258064516,
+      "start_line": 182,
+      "end_line": 198,
+      "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # Normalize the stencil cloud around its centroid and assemble the\n        # augmented RBF-FD interpolation matrix once. Every operator row for\n        # this stencil reuses the same left-hand side.\n        self.coeffs_already_computed = False\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        sel"
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "initialize_geometry",
+      "chunk_type": "method",
+      "score": 0.027809742999616416,
+      "start_line": 384,
+      "end_line": 407,
+      "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # The WLS backend fits the same polynomial space as the RBF backend but\n        # replaces the augmented interpolation solve with a weighted local least\n        # squares reconstruction matrix.\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        self.fit_ell = sp.ell\n        self.fit_npoly = sp.npo"
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "default_diff_order",
+      "chunk_type": "method",
+      "score": 0.029857397504456328,
+      "start_line": 136,
+      "end_line": 145,
+      "text_preview": "@staticmethod\n    def default_diff_order(op: str) -> int:\n        op = str(op).lower()\n        if op in {\"interp\", \"interpolation\", \"identity\"}:\n            return 0\n        if op in {\"grad\", \"gradient\", \"dx\", \"dy\", \"dz\"}:\n            return 1\n        if op in {\"lap\", \"laplacian\", \"bc\", \"boundary\"}:\n            return 2\n        raise ValueError(f\"unknown operator {op}\")"
+    },
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "dfc4_matern_blocks",
+      "chunk_type": "function",
+      "score": 0.032018442622950824,
+      "start_line": 124,
+      "end_line": 155,
+      "text_preview": "def dfc4_matern_blocks(\n    X: np.ndarray,\n    Y: np.ndarray,\n    epsilon: float,\n    *,\n    use_periodic: bool = False,\n    periodic_dims: np.ndarray | None = None,\n) -> tuple[np.ndarray, ...]:\n    X = np.asarray(X, dtype=float)\n    Y = np.asarray(Y, dtype=float)\n    if X.ndim != 2 or Y.ndim != 2 or X.shape[1] != Y.shape[1]:\n        raise ValueError(\"X and Y must be 2D arrays with matching column"
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "bc_op",
+      "chunk_type": "method",
+      "score": 0.027984344422700584,
+      "start_line": 434,
+      "end_line": 444,
+      "text_preview": "def bc_op(self, _sp: StencilProperties, _op: OpProperties, neu_coeff: float, dir_coeff: float, _r_rhs: np.ndarray, _x_subset: np.ndarray, _x: np.ndarray, x_at_origin_subset: np.ndarray, _x_at_origin: np.ndarray, nr_subset: np.ndarray) -> np.ndarray:\n        total = np.zeros((self.fit_npoly, x_at_origin_subset.shape[0]))\n        if neu_coeff != 0:\n            for d in range(self.s_dim):\n           "
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "from_accuracy",
+      "chunk_type": "method",
+      "score": 0.016129032258064516,
+      "start_line": 56,
+      "end_line": 90,
+      "text_preview": "@classmethod\n    def from_accuracy(\n        cls,\n        *,\n        operator: str = \"lap\",\n        convergence_order: int | None = None,\n        diff_op_order: int | None = None,\n        dimension: int,\n        approximation: str = \"rbf\",\n        stencil_factor: float | None = None,\n        spline_degree: int | None = None,\n        tree_mode: str = \"all\",\n        point_set: str = \"interior_boundar"
+    },
+    {
+      "file_path": "src/kernelpack/geometry/core.py",
+      "symbol_name": "evaluate_gradient",
+      "chunk_type": "method",
+      "score": 0.03252247488101534,
+      "start_line": 265,
+      "end_line": 276,
+      "text_preview": "def evaluate_gradient(self, xe: np.ndarray) -> np.ndarray:\n        # Differentiate the RBF interpolant analytically with respect to each\n        # physical coordinate.\n        xe = np.asarray(xe, dtype=float)\n        r = distance_matrix(xe, self.centers)\n        dphi = self.m_spline_degree * r ** max(self.m_spline_degree - 2, 0)\n        invr = np.divide(1.0, r, out=np.zeros_like(r), where=r > 0)\n "
+    },
+    {
+      "file_path": "src/kernelpack/geometry/core.py",
+      "symbol_name": "_solve_augmented_rbf_system",
+      "chunk_type": "function",
+      "score": 0.01639344262295082,
+      "start_line": 198,
+      "end_line": 216,
+      "text_preview": "def _solve_augmented_rbf_system(kernel: np.ndarray, poly: np.ndarray, rhs: np.ndarray) -> tuple[np.ndarray, np.ndarray]:\n    # Solve the usual augmented RBF interpolation system\n    #\n    #   [K  P][w] = [rhs]\n    #   [P' 0][c]   [ 0 ]\n    #\n    # by block elimination. The polynomial block is tiny in the level-set\n    # builder, so it is cheaper to factor only the dense kernel block and\n    # form"
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "phs_rbf",
+      "chunk_type": "method",
+      "score": 0.015873015873015872,
+      "start_line": 339,
+      "end_line": 341,
+      "text_preview": "@staticmethod\n    def phs_rbf(r: np.ndarray, degree: int) -> np.ndarray:\n        return phs_kernel_matrix(r, degree)"
+    },
+    {
+      "file_path": "src/kernelpack/solvers/multispecies_diffusion.py",
+      "symbol_name": "MultiSpeciesDiffusionSolver",
+      "chunk_type": "class",
+      "score": 0.015625,
+      "start_line": 13,
+      "end_line": 25,
+      "text_preview": "@dataclass\nclass MultiSpeciesDiffusionSolver:\n    domain: DomainDescriptor = field(default_factory=DomainDescriptor)\n    xi: int = 0\n    dt: float = 0.0\n    nu: float = 0.0\n    num_omp_threads: int = 1\n    solvers: list[DiffusionSolver] = field(default_factory=list)\n    num_species: int = 0\n    lap_assembler: str = \"fd\"\n    bc_assembler: str = \"fd\"\n    lap_stencil: str = \"rbf\"\n    bc_stencil: str "
+    },
+    {
+      "file_path": "src/kernelpack/solvers/pu_sl_advection.py",
+      "symbol_name": "rk4_step",
+      "chunk_type": "function",
+      "score": 0.015873015873015872,
+      "start_line": 358,
+      "end_line": 367,
+      "text_preview": "def rk4_step(t: float, x: np.ndarray, dt: float, velocity: Callable[[float, np.ndarray], np.ndarray]) -> np.ndarray:\n    x1 = x\n    k1 = velocity(t, x1)\n    x2 = x + 0.5 * dt * k1\n    k2 = velocity(t + 0.5 * dt, x2)\n    x3 = x + 0.5 * dt * k2\n    k3 = velocity(t + 0.5 * dt, x3)\n    x4 = x + dt * k3\n    k4 = velocity(t + dt, x4)\n    return x + (dt / 6.0) * (k1 + 2.0 * k2 + 2.0 * k3 + k4)"
+    },
+    {
+      "file_path": "examples/poisson_convergence_2d_neumann.py",
+      "symbol_name": "parse_args",
+      "chunk_type": "function",
+      "score": 0.018974358974358972,
+      "start_line": 184,
+      "end_line": 192,
+      "text_preview": "def parse_args() -> argparse.Namespace:\n    parser = argparse.ArgumentParser(description=\"Run a 2D pure-Neumann Poisson convergence study for KernelPack Python.\")\n    parser.add_argument(\"--backend\", default=\"rbf\", choices=[\"rbf\", \"wls\"], help=\"Stencil backend to use.\")\n    parser.add_argument(\"--assembler\", default=\"fd\", choices=[\"fd\", \"fdo\"], help=\"Assembler to use.\")\n    parser.add_argument(\"--"
+    },
+    {
+      "file_path": "examples/pusl_incompressible_euler_convergence_2d.py",
+      "symbol_name": "save_outputs",
+      "chunk_type": "function",
+      "score": 0.020914158305462654,
+      "start_line": 195,
+      "end_line": 232,
+      "text_preview": "def save_outputs(results: list[CaseResult], rates: list[float], finest_fields: dict[str, np.ndarray] | None, out_dir: Path) -> None:\n    out_dir.mkdir(parents=True, exist_ok=True)\n    payload = {\n        \"results\": [asdict(r) for r in results],\n        \"rates\": rates,\n    }\n    (out_dir / \"pusl_incompressible_euler_convergence_2d.json\").write_text(json.dumps(payload, indent=2))\n\n    try:\n        i"
+    },
+    {
+      "file_path": "README.md",
+      "symbol_name": "",
+      "chunk_type": "text",
+      "score": 0.028370221327967807,
+      "start_line": 341,
+      "end_line": 440,
+      "text_preview": "bc_stencil=\"rbf\",\n)\n\n# Choose the diffusivity and time step.\nnu = 0.25\ndt = 0.02\n\n# Use a named target order instead of a magic number.\ntarget_order = 4\nsolver.init(domain, target_order, dt, nu)\n\n# Define a manufactured transient problem with Dirichlet data.\nu_exact = lambda time, X: np.exp(-time) * (X[:, 0] ** 2 + X[:, 1] ** 2)\nforcing = lambda nu_value, time, X: (\n    -np.exp(-time) * (X[:, 0] *"
+    }
+  ],
+  "proposer_diagnostics": {
+    "difficulty": "easy",
+    "matched_symbols": [
+      "RBF",
+      "c4_matern",
+      "Matern",
+      "interpolant"
+    ],
+    "referenced_files": [
+      "src/kernelpack/rbffd/core.py",
+      "src/kernelpack/divfree/core.py",
+      "src/kernelpack/geometry/core.py",
+      "src/kernelpack/solvers/multispecies_diffusion.py",
+      "src/kernelpack/solvers/pu_sl_advection.py",
+      "examples/poisson_convergence_2d_neumann.py",
+      "examples/pusl_incompressible_euler_convergence_2d.py",
+      "README.md"
+    ],
+    "symbol_hits_by_file": {
+      "src/kernelpack/rbffd/core.py": [
+        "RBF"
+      ],
+      "src/kernelpack/divfree/core.py": [
+        "c4_matern",
+        "Matern"
+      ],
+      "src/kernelpack/geometry/core.py": [
+        "RBF",
+        "interpolant"
+      ],
+      "src/kernelpack/solvers/multispecies_diffusion.py": [
+        "RBF"
+      ],
+      "examples/poisson_convergence_2d_neumann.py": [
+        "RBF"
+      ],
+      "README.md": [
+        "RBF"
+      ]
+    },
+    "generated_retrieval_queries": [
+      "C4 Matern scalar radial basis function interpolation",
+      "global scalar RBF interpolant",
+      "relative L2 error interpolation ablation"
+    ],
+    "matched_required_symbols": [
+      "RBF",
+      "Matern",
+      "interpolation"
+    ],
+    "missing_required_symbols": [],
+    "selected_context_files": [
+      "src/kernelpack/rbffd/core.py",
+      "src/kernelpack/divfree/core.py",
+      "src/kernelpack/geometry/core.py",
+      "src/kernelpack/solvers/multispecies_diffusion.py",
+      "src/kernelpack/solvers/pu_sl_advection.py",
+      "examples/poisson_convergence_2d_neumann.py",
+      "examples/pusl_incompressible_euler_convergence_2d.py",
+      "README.md"
+    ],
+    "selected_context_symbols": [
+      "initialize_geometry",
+      "default_diff_order",
+      "dfc4_matern_blocks",
+      "bc_op",
+      "from_accuracy",
+      "evaluate_gradient",
+      "_solve_augmented_rbf_system",
+      "phs_rbf",
+      "MultiSpeciesDiffusionSolver",
+      "rk4_step",
+      "parse_args",
+      "save_outputs"
+    ],
+    "retrieval_conditioned": true
+  },
+  "scientific_retrieval": {
+    "difficulty": "easy",
+    "prompt_length": 1675,
+    "queries": [
+      "C4 Matern scalar radial basis function interpolation",
+      "global scalar RBF interpolant",
+      "relative L2 error interpolation ablation"
+    ],
+    "per_query_runs": [
+      {
+        "query": "C4 Matern scalar radial basis function interpolation",
+        "top_files": [
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/rbffd/core.py",
+          "src/kernelpack/rbffd/core.py",
+          "src/kernelpack/rbffd/core.py",
+          "src/kernelpack/rbffd/core.py"
+        ],
+        "top_symbols": [
+          "dfc4_matern_blocks",
+          "default_diff_order",
+          "bc_op",
+          "initialize_geometry",
+          "initialize_geometry"
+        ],
+        "chunk_count": 6
+      },
+      {
+        "query": "global scalar RBF interpolant",
+        "top_files": [
+          "src/kernelpack/geometry/core.py",
+          "examples/poisson_convergence_2d_neumann.py",
+          "src/kernelpack/geometry/core.py",
+          "src/kernelpack/rbffd/core.py",
+          "src/kernelpack/solvers/multispecies_diffusion.py"
+        ],
+        "top_symbols": [
+          "evaluate_gradient",
+          "parse_args",
+          "_solve_augmented_rbf_system",
+          "phs_rbf",
+          "MultiSpeciesDiffusionSolver"
+        ],
+        "chunk_count": 6
+      },
+      {
+        "query": "relative L2 error interpolation ablation",
+        "top_files": [
+          "src/kernelpack/rbffd/core.py",
+          "README.md",
+          "src/kernelpack/rbffd/core.py",
+          "examples/pusl_incompressible_euler_convergence_2d.py",
+          "src/kernelpack/rbffd/core.py"
+        ],
+        "top_symbols": [
+          "default_diff_order",
+          "",
+          "initialize_geometry",
+          "save_outputs",
+          "initialize_geometry"
+        ],
+        "chunk_count": 6
+      }
+    ],
+    "selected_files": [
+      "src/kernelpack/rbffd/core.py",
+      "src/kernelpack/divfree/core.py",
+      "src/kernelpack/geometry/core.py",
+      "src/kernelpack/solvers/multispecies_diffusion.py",
+      "src/kernelpack/solvers/pu_sl_advection.py",
+      "examples/poisson_convergence_2d_neumann.py",
+      "examples/pusl_incompressible_euler_convergence_2d.py",
+      "README.md"
+    ],
+    "selected_symbols": [
+      "initialize_geometry",
+      "default_diff_order",
+      "dfc4_matern_blocks",
+      "bc_op",
+      "from_accuracy",
+      "evaluate_gradient",
+      "_solve_augmented_rbf_system",
+      "phs_rbf",
+      "MultiSpeciesDiffusionSolver",
+      "rk4_step",
+      "parse_args",
+      "save_outputs"
+    ],
+    "selected_chunks": [
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "initialize_geometry",
+        "chunk_type": "method",
+        "score": 0.016129032258064516,
+        "start_line": 182,
+        "end_line": 198,
+        "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # Normalize the stencil cloud around its centroid and assemble the\n        # augmented RBF-FD interpolation matrix once. Every operator row for\n        # this stencil reuses the same left-hand side.\n        self.coeffs_already_computed = False\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        sel"
+      },
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "initialize_geometry",
+        "chunk_type": "method",
+        "score": 0.027809742999616416,
+        "start_line": 384,
+        "end_line": 407,
+        "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # The WLS backend fits the same polynomial space as the RBF backend but\n        # replaces the augmented interpolation solve with a weighted local least\n        # squares reconstruction matrix.\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        self.fit_ell = sp.ell\n        self.fit_npoly = sp.npo"
+      },
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "default_diff_order",
+        "chunk_type": "method",
+        "score": 0.029857397504456328,
+        "start_line": 136,
+        "end_line": 145,
+        "text_preview": "@staticmethod\n    def default_diff_order(op: str) -> int:\n        op = str(op).lower()\n        if op in {\"interp\", \"interpolation\", \"identity\"}:\n            return 0\n        if op in {\"grad\", \"gradient\", \"dx\", \"dy\", \"dz\"}:\n            return 1\n        if op in {\"lap\", \"laplacian\", \"bc\", \"boundary\"}:\n            return 2\n        raise ValueError(f\"unknown operator {op}\")"
+      },
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "dfc4_matern_blocks",
+        "chunk_type": "function",
+        "score": 0.032018442622950824,
+        "start_line": 124,
+        "end_line": 155,
+        "text_preview": "def dfc4_matern_blocks(\n    X: np.ndarray,\n    Y: np.ndarray,\n    epsilon: float,\n    *,\n    use_periodic: bool = False,\n    periodic_dims: np.ndarray | None = None,\n) -> tuple[np.ndarray, ...]:\n    X = np.asarray(X, dtype=float)\n    Y = np.asarray(Y, dtype=float)\n    if X.ndim != 2 or Y.ndim != 2 or X.shape[1] != Y.shape[1]:\n        raise ValueError(\"X and Y must be 2D arrays with matching column"
+      },
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "bc_op",
+        "chunk_type": "method",
+        "score": 0.027984344422700584,
+        "start_line": 434,
+        "end_line": 444,
+        "text_preview": "def bc_op(self, _sp: StencilProperties, _op: OpProperties, neu_coeff: float, dir_coeff: float, _r_rhs: np.ndarray, _x_subset: np.ndarray, _x: np.ndarray, x_at_origin_subset: np.ndarray, _x_at_origin: np.ndarray, nr_subset: np.ndarray) -> np.ndarray:\n        total = np.zeros((self.fit_npoly, x_at_origin_subset.shape[0]))\n        if neu_coeff != 0:\n            for d in range(self.s_dim):\n           "
+      },
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "from_accuracy",
+        "chunk_type": "method",
+        "score": 0.016129032258064516,
+        "start_line": 56,
+        "end_line": 90,
+        "text_preview": "@classmethod\n    def from_accuracy(\n        cls,\n        *,\n        operator: str = \"lap\",\n        convergence_order: int | None = None,\n        diff_op_order: int | None = None,\n        dimension: int,\n        approximation: str = \"rbf\",\n        stencil_factor: float | None = None,\n        spline_degree: int | None = None,\n        tree_mode: str = \"all\",\n        point_set: str = \"interior_boundar"
+      },
+      {
+        "file_path": "src/kernelpack/geometry/core.py",
+        "symbol_name": "evaluate_gradient",
+        "chunk_type": "method",
+        "score": 0.03252247488101534,
+        "start_line": 265,
+        "end_line": 276,
+        "text_preview": "def evaluate_gradient(self, xe: np.ndarray) -> np.ndarray:\n        # Differentiate the RBF interpolant analytically with respect to each\n        # physical coordinate.\n        xe = np.asarray(xe, dtype=float)\n        r = distance_matrix(xe, self.centers)\n        dphi = self.m_spline_degree * r ** max(self.m_spline_degree - 2, 0)\n        invr = np.divide(1.0, r, out=np.zeros_like(r), where=r > 0)\n "
+      },
+      {
+        "file_path": "src/kernelpack/geometry/core.py",
+        "symbol_name": "_solve_augmented_rbf_system",
+        "chunk_type": "function",
+        "score": 0.01639344262295082,
+        "start_line": 198,
+        "end_line": 216,
+        "text_preview": "def _solve_augmented_rbf_system(kernel: np.ndarray, poly: np.ndarray, rhs: np.ndarray) -> tuple[np.ndarray, np.ndarray]:\n    # Solve the usual augmented RBF interpolation system\n    #\n    #   [K  P][w] = [rhs]\n    #   [P' 0][c]   [ 0 ]\n    #\n    # by block elimination. The polynomial block is tiny in the level-set\n    # builder, so it is cheaper to factor only the dense kernel block and\n    # form"
+      },
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "phs_rbf",
+        "chunk_type": "method",
+        "score": 0.015873015873015872,
+        "start_line": 339,
+        "end_line": 341,
+        "text_preview": "@staticmethod\n    def phs_rbf(r: np.ndarray, degree: int) -> np.ndarray:\n        return phs_kernel_matrix(r, degree)"
+      },
+      {
+        "file_path": "src/kernelpack/solvers/multispecies_diffusion.py",
+        "symbol_name": "MultiSpeciesDiffusionSolver",
+        "chunk_type": "class",
+        "score": 0.015625,
+        "start_line": 13,
+        "end_line": 25,
+        "text_preview": "@dataclass\nclass MultiSpeciesDiffusionSolver:\n    domain: DomainDescriptor = field(default_factory=DomainDescriptor)\n    xi: int = 0\n    dt: float = 0.0\n    nu: float = 0.0\n    num_omp_threads: int = 1\n    solvers: list[DiffusionSolver] = field(default_factory=list)\n    num_species: int = 0\n    lap_assembler: str = \"fd\"\n    bc_assembler: str = \"fd\"\n    lap_stencil: str = \"rbf\"\n    bc_stencil: str "
+      },
+      {
+        "file_path": "src/kernelpack/solvers/pu_sl_advection.py",
+        "symbol_name": "rk4_step",
+        "chunk_type": "function",
+        "score": 0.015873015873015872,
+        "start_line": 358,
+        "end_line": 367,
+        "text_preview": "def rk4_step(t: float, x: np.ndarray, dt: float, velocity: Callable[[float, np.ndarray], np.ndarray]) -> np.ndarray:\n    x1 = x\n    k1 = velocity(t, x1)\n    x2 = x + 0.5 * dt * k1\n    k2 = velocity(t + 0.5 * dt, x2)\n    x3 = x + 0.5 * dt * k2\n    k3 = velocity(t + 0.5 * dt, x3)\n    x4 = x + dt * k3\n    k4 = velocity(t + dt, x4)\n    return x + (dt / 6.0) * (k1 + 2.0 * k2 + 2.0 * k3 + k4)"
+      },
+      {
+        "file_path": "examples/poisson_convergence_2d_neumann.py",
+        "symbol_name": "parse_args",
+        "chunk_type": "function",
+        "score": 0.018974358974358972,
+        "start_line": 184,
+        "end_line": 192,
+        "text_preview": "def parse_args() -> argparse.Namespace:\n    parser = argparse.ArgumentParser(description=\"Run a 2D pure-Neumann Poisson convergence study for KernelPack Python.\")\n    parser.add_argument(\"--backend\", default=\"rbf\", choices=[\"rbf\", \"wls\"], help=\"Stencil backend to use.\")\n    parser.add_argument(\"--assembler\", default=\"fd\", choices=[\"fd\", \"fdo\"], help=\"Assembler to use.\")\n    parser.add_argument(\"--"
+      },
+      {
+        "file_path": "examples/pusl_incompressible_euler_convergence_2d.py",
+        "symbol_name": "save_outputs",
+        "chunk_type": "function",
+        "score": 0.020914158305462654,
+        "start_line": 195,
+        "end_line": 232,
+        "text_preview": "def save_outputs(results: list[CaseResult], rates: list[float], finest_fields: dict[str, np.ndarray] | None, out_dir: Path) -> None:\n    out_dir.mkdir(parents=True, exist_ok=True)\n    payload = {\n        \"results\": [asdict(r) for r in results],\n        \"rates\": rates,\n    }\n    (out_dir / \"pusl_incompressible_euler_convergence_2d.json\").write_text(json.dumps(payload, indent=2))\n\n    try:\n        i"
+      },
+      {
+        "file_path": "README.md",
+        "symbol_name": "",
+        "chunk_type": "text",
+        "score": 0.028370221327967807,
+        "start_line": 341,
+        "end_line": 440,
+        "text_preview": "bc_stencil=\"rbf\",\n)\n\n# Choose the diffusivity and time step.\nnu = 0.25\ndt = 0.02\n\n# Use a named target order instead of a magic number.\ntarget_order = 4\nsolver.init(domain, target_order, dt, nu)\n\n# Define a manufactured transient problem with Dirichlet data.\nu_exact = lambda time, X: np.exp(-time) * (X[:, 0] ** 2 + X[:, 1] ** 2)\nforcing = lambda nu_value, time, X: (\n    -np.exp(-time) * (X[:, 0] *"
+      }
+    ],
+    "matched_required_symbols": [
+      "RBF",
+      "Matern",
+      "interpolation"
+    ],
+    "missing_required_symbols": [],
+    "retrieval_conditioned": true,
+    "note": ""
+  }
+}

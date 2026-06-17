@@ -1,0 +1,2 @@
+/Users/whitney/src/code_rag/evals/external_interpolation/hard_local_dfphs_poly_driver.py:314: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()

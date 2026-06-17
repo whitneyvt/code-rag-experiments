@@ -1,0 +1,37 @@
+{
+  "task_id": "external-medium-divergence-free-kernel",
+  "difficulty": "medium",
+  "generator": "scientific_driver_v1",
+  "prompt_hash": "sha256:9629c1c9284905d7f587e4c6b04bf1491ec812ec5cd69890061102b69c4d1af9",
+  "prompt_length": 2279,
+  "generated_script_hash": "sha256:e1b9f1f36cd93ae9d1f239b6b14db34470cf7254fc508d75b5248dfe6dbd4c33",
+  "generated_script_length": 8950,
+  "selected_retrieval_files": [
+    "src/kernelpack/divfree/__init__.py",
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/_numba.py",
+    "src/kernelpack/rbffd/core.py"
+  ],
+  "matched_required_symbols": [
+    "dfc4_matern_blocks",
+    "DivFreeGram",
+    "DivFreePHSInterpolant",
+    "divergence free"
+  ],
+  "missing_required_symbols": [],
+  "checker_outcome": "CheckerPass",
+  "constants_in_script": {
+    "SEED": true,
+    "EPSILONS": true,
+    "NODE_COUNTS": true
+  },
+  "constants_in_prompt_or_retrieval": {
+    "SEED": false,
+    "EPSILONS": true,
+    "NODE_COUNTS": true
+  },
+  "overfit_signals": [
+    "SEED=7 appears in generated script (via 'seed' marker) but not in prompt or retrieved context"
+  ],
+  "possible_overfit": true
+}

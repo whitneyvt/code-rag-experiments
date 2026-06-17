@@ -1,0 +1,534 @@
+{
+  "task_id": "external-hard-perturbed-wording",
+  "difficulty": "hard",
+  "generator": "scientific_driver_v1",
+  "chunk_count": 16,
+  "top_files": [
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/divfree/__init__.py",
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/solvers/_pu.py",
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/rbffd/core.py"
+  ],
+  "top_symbols": [
+    "DivFreePHSInterpolant",
+    "",
+    "initialize",
+    "DFPHS",
+    "local_operator_weights",
+    "LocalDivFreeInterpolator",
+    "fit",
+    "initialize_geometry"
+  ],
+  "chunks": [
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "DivFreePHSInterpolant",
+      "chunk_type": "class",
+      "score": 0.029857397504456328,
+      "start_line": 341,
+      "end_line": 420,
+      "text_preview": "@dataclass\nclass DivFreePHSInterpolant:\n    Dim: int = 0\n    PhsDegree: int = 0\n    PolyDegree: int = 0\n    Nodes: np.ndarray = field(default_factory=lambda: np.zeros((0, 0)))\n    Values: np.ndarray = field(default_factory=lambda: np.zeros((0, 0)))\n    RBFCoeffs: np.ndarray = field(default_factory=lambda: np.zeros(0))\n    PolyCoeffs: np.ndarray = field(default_factory=lambda: np.zeros(0))\n    Sadd"
+    },
+    {
+      "file_path": "src/kernelpack/divfree/__init__.py",
+      "symbol_name": "",
+      "chunk_type": "text",
+      "score": 0.01639344262295082,
+      "start_line": 1,
+      "end_line": 19,
+      "text_preview": "from .core import (\n    DFPHS,\n    DivFreeGram,\n    DivFreePHSInterpolant,\n    LocalDivFreeInterpolator,\n    df_poly_basis_from_jacobi,\n    dfc4_matern_blocks,\n    dfc4_matern_gram_matrix,\n)\n\n__all__ = [\n    \"DFPHS\",\n    \"DivFreeGram\",\n    \"DivFreePHSInterpolant\",\n    \"LocalDivFreeInterpolator\",\n    \"df_poly_basis_from_jacobi\",\n    \"dfc4_matern_blocks\",\n    \"dfc4_matern_gram_matrix\",\n]"
+    },
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "initialize",
+      "chunk_type": "method",
+      "score": 0.03200204813108039,
+      "start_line": 367,
+      "end_line": 409,
+      "text_preview": "def initialize(\n        self,\n        X: np.ndarray,\n        U: np.ndarray,\n        polyDegree: int,\n        phsDegree: int,\n        *,\n        Recurrence: Callable[[int], tuple[np.ndarray, np.ndarray]] | None = None,\n        PolyOptions: dict[str, object] | None = None,\n    ) -> None:\n        X = np.asarray(X, dtype=float)\n        U = np.asarray(U, dtype=float)\n        if X.ndim != 2 or U.ndim !="
+    },
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "DFPHS",
+      "chunk_type": "function",
+      "score": 0.01639344262295082,
+      "start_line": 20,
+      "end_line": 43,
+      "text_preview": "def DFPHS(dim: int, m_in: int) -> tuple[tuple[tuple[Callable[..., np.ndarray], ...], ...], ...]:\n    # Preserve the Matlab-facing prototype for callers that want callable block\n    # entries, but route the heavy matrix work through direct block builders.\n    dim = int(dim)\n    m = int(m_in)\n    if dim not in {2, 3}:\n        raise ValueError(\"divergence-free PHS is only supported in 2D and 3D\")\n   "
+    },
+    {
+      "file_path": "src/kernelpack/solvers/_pu.py",
+      "symbol_name": "local_operator_weights",
+      "chunk_type": "function",
+      "score": 0.02797339593114241,
+      "start_line": 276,
+      "end_line": 301,
+      "text_preview": "def local_operator_weights(\n    stencil: RBFStencil,\n    xq: np.ndarray,\n    sp: StencilProperties,\n    op_name: str,\n    nr: np.ndarray,\n    neu_coeff: float,\n    dir_coeff: float,\n) -> np.ndarray:\n    xq = np.asarray(xq, dtype=float).reshape(1, -1)\n    xloc = stencil.x_stencil\n    xc = (xq - stencil.xm) / stencil.width\n    r = distance_matrix(xq, xloc)\n    op = OpProperties(nosolve=False, select"
+    },
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "LocalDivFreeInterpolator",
+      "chunk_type": "class",
+      "score": 0.031009615384615385,
+      "start_line": 423,
+      "end_line": 435,
+      "text_preview": "@dataclass\nclass LocalDivFreeInterpolator:\n    Nodes: np.ndarray = field(default_factory=lambda: np.zeros((0, 0)))\n    Values: np.ndarray = field(default_factory=lambda: np.zeros((0, 0)))\n    PolyDegree: int = 0\n    PhsDegree: int = 0\n    StencilSize: int = 0\n    Tree: cKDTree | None = None\n    CenterModels: list[DivFreePHSInterpolant | None] = field(default_factory=list)\n    StencilIndices: list["
+    },
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "fit",
+      "chunk_type": "method",
+      "score": 0.03128054740957967,
+      "start_line": 437,
+      "end_line": 460,
+      "text_preview": "@staticmethod\n    def fit(\n        X: np.ndarray,\n        U: np.ndarray,\n        polyDegree: int,\n        phsDegree: int,\n        stencilSize: int,\n        *,\n        Recurrence: Callable[[int], tuple[np.ndarray, np.ndarray]] | None = None,\n        PolyOptions: dict[str, object] | None = None,\n        ActiveCenters: np.ndarray | None = None,\n    ) -> \"LocalDivFreeInterpolator\":\n        obj = Local"
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "initialize_geometry",
+      "chunk_type": "method",
+      "score": 0.030834914611005692,
+      "start_line": 182,
+      "end_line": 198,
+      "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # Normalize the stencil cloud around its centroid and assemble the\n        # augmented RBF-FD interpolation matrix once. Every operator row for\n        # this stencil reuses the same left-hand side.\n        self.coeffs_already_computed = False\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        sel"
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "initialize_geometry",
+      "chunk_type": "method",
+      "score": 0.029877369007803793,
+      "start_line": 384,
+      "end_line": 407,
+      "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # The WLS backend fits the same polynomial space as the RBF backend but\n        # replaces the augmented interpolation solve with a weighted local least\n        # squares reconstruction matrix.\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        self.fit_ell = sp.ell\n        self.fit_npoly = sp.npo"
+    },
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "DivFreeGram",
+      "chunk_type": "function",
+      "score": 0.015873015873015872,
+      "start_line": 103,
+      "end_line": 109,
+      "text_preview": "def DivFreeGram(_dfrbf: object, X: np.ndarray, Y: np.ndarray, _r: np.ndarray | None = None, *, degree: int | None = None) -> np.ndarray:\n    if degree is None:\n        try:\n            degree = int(_dfrbf[0][0]._divfree_degree)  # type: ignore[index, attr-defined]\n        except Exception as exc:\n            raise ValueError(\"DivFreeGram needs either a DFPHS kernel tuple or an explicit degree keyw"
+    },
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "_diff_tensor_from_coords",
+      "chunk_type": "function",
+      "score": 0.015625,
+      "start_line": 46,
+      "end_line": 64,
+      "text_preview": "def _diff_tensor_from_coords(\n    dim: int,\n    r: np.ndarray,\n    i: int,\n    j: int,\n    coords: tuple[np.ndarray, ...],\n) -> np.ndarray:\n    diff = np.zeros(r.shape + (dim,), dtype=float)\n    if i == j:\n        if len(coords) != 2:\n            raise ValueError(\"diagonal DFPHS entries expect two coordinate arrays\")\n        diff[:, :, i] = np.asarray(coords[0], dtype=float) - np.asarray(coords[1]"
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "grad_op",
+      "chunk_type": "method",
+      "score": 0.015625,
+      "start_line": 431,
+      "end_line": 432,
+      "text_preview": "def grad_op(self, _sp: StencilProperties, op: OpProperties, _r_rhs: np.ndarray, _x_subset: np.ndarray, _x: np.ndarray, x_at_origin_subset: np.ndarray, _x_at_origin: np.ndarray) -> np.ndarray:\n        return self.basis.evaluate(x_at_origin_subset, _unit_multi_index(self.s_dim, op.selectdim), True).T / self.width"
+    },
+    {
+      "file_path": "src/kernelpack/divfree/core.py",
+      "symbol_name": "df_poly_basis_from_jacobi",
+      "chunk_type": "function",
+      "score": 0.031754032258064516,
+      "start_line": 275,
+      "end_line": 338,
+      "text_preview": "def df_poly_basis_from_jacobi(\n    p: np.ndarray,\n    p_out: int,\n    recurrence: Callable[[int], tuple[np.ndarray, np.ndarray]] | None = None,\n    opts: dict[str, object] | None = None,\n) -> tuple[np.ndarray, DivFreePolynomialData]:\n    p = np.asarray(p, dtype=float)\n    if p.ndim != 2 or p.shape[1] not in {2, 3}:\n        raise ValueError(\"p must have shape (m, 2) or (m, 3)\")\n    if recurrence is"
+    },
+    {
+      "file_path": "src/kernelpack/geometry/core.py",
+      "symbol_name": "evaluate_gradient",
+      "chunk_type": "method",
+      "score": 0.01639344262295082,
+      "start_line": 265,
+      "end_line": 276,
+      "text_preview": "def evaluate_gradient(self, xe: np.ndarray) -> np.ndarray:\n        # Differentiate the RBF interpolant analytically with respect to each\n        # physical coordinate.\n        xe = np.asarray(xe, dtype=float)\n        r = distance_matrix(xe, self.centers)\n        dphi = self.m_spline_degree * r ** max(self.m_spline_degree - 2, 0)\n        invr = np.divide(1.0, r, out=np.zeros_like(r), where=r > 0)\n "
+    },
+    {
+      "file_path": "src/kernelpack/solvers/_pu.py",
+      "symbol_name": "build_patch_stencil",
+      "chunk_type": "function",
+      "score": 0.015625,
+      "start_line": 244,
+      "end_line": 247,
+      "text_preview": "def build_patch_stencil(xnodes: np.ndarray, sp: StencilProperties) -> RBFStencil:\n    stencil = RBFStencil()\n    stencil.initialize_geometry(np.asarray(xnodes, dtype=float), sp)\n    return stencil"
+    },
+    {
+      "file_path": "src/kernelpack/_numba.py",
+      "symbol_name": "divfree_gram_matrix",
+      "chunk_type": "function",
+      "score": 0.027272727272727275,
+      "start_line": 351,
+      "end_line": 378,
+      "text_preview": "def divfree_gram_matrix(x: np.ndarray, y: np.ndarray, degree: int) -> np.ndarray:\n    x = np.asarray(x, dtype=float)\n    y = np.asarray(y, dtype=float)\n    if x.ndim != 2 or y.ndim != 2 or x.shape[1] != y.shape[1]:\n        raise ValueError(\"x and y must be 2D arrays with matching column counts\")\n    if x.shape[1] not in {2, 3}:\n        raise ValueError(\"divergence-free kernels are only supported i"
+    }
+  ],
+  "proposer_diagnostics": {
+    "difficulty": "hard",
+    "matched_symbols": [
+      "DivFreePHSInterpolant",
+      "df_poly_basis_from_jacobi",
+      "saddle",
+      "LocalDivFreeInterpolator",
+      "DFPHS",
+      "stencil"
+    ],
+    "referenced_files": [
+      "src/kernelpack/divfree/core.py",
+      "src/kernelpack/divfree/__init__.py",
+      "src/kernelpack/solvers/_pu.py",
+      "src/kernelpack/rbffd/core.py",
+      "src/kernelpack/geometry/core.py",
+      "src/kernelpack/_numba.py"
+    ],
+    "symbol_hits_by_file": {
+      "src/kernelpack/divfree/core.py": [
+        "DivFreePHSInterpolant",
+        "df_poly_basis_from_jacobi",
+        "saddle",
+        "DFPHS",
+        "LocalDivFreeInterpolator",
+        "stencil"
+      ],
+      "src/kernelpack/divfree/__init__.py": [
+        "LocalDivFreeInterpolator",
+        "DivFreePHSInterpolant",
+        "DFPHS",
+        "df_poly_basis_from_jacobi"
+      ],
+      "src/kernelpack/solvers/_pu.py": [
+        "stencil"
+      ],
+      "src/kernelpack/rbffd/core.py": [
+        "stencil"
+      ]
+    },
+    "generated_retrieval_queries": [
+      "DFPHS divergence free polyharmonic spline",
+      "LocalDivFreeInterpolator",
+      "df_poly_basis_from_jacobi",
+      "local divergence free interpolation polynomial",
+      "divfree gram matrix stencil"
+    ],
+    "matched_required_symbols": [
+      "DFPHS",
+      "LocalDivFreeInterpolator",
+      "df_poly_basis_from_jacobi",
+      "divfree_gram_matrix"
+    ],
+    "missing_required_symbols": [],
+    "selected_context_files": [
+      "src/kernelpack/divfree/core.py",
+      "src/kernelpack/divfree/__init__.py",
+      "src/kernelpack/solvers/_pu.py",
+      "src/kernelpack/rbffd/core.py",
+      "src/kernelpack/geometry/core.py",
+      "src/kernelpack/_numba.py"
+    ],
+    "selected_context_symbols": [
+      "DivFreePHSInterpolant",
+      "initialize",
+      "DFPHS",
+      "local_operator_weights",
+      "LocalDivFreeInterpolator",
+      "fit",
+      "initialize_geometry",
+      "DivFreeGram",
+      "_diff_tensor_from_coords",
+      "grad_op",
+      "df_poly_basis_from_jacobi",
+      "evaluate_gradient",
+      "build_patch_stencil",
+      "divfree_gram_matrix"
+    ],
+    "retrieval_conditioned": true
+  },
+  "scientific_retrieval": {
+    "difficulty": "hard",
+    "prompt_length": 2641,
+    "queries": [
+      "DFPHS divergence free polyharmonic spline",
+      "LocalDivFreeInterpolator",
+      "df_poly_basis_from_jacobi",
+      "local divergence free interpolation polynomial",
+      "divfree gram matrix stencil"
+    ],
+    "per_query_runs": [
+      {
+        "query": "DFPHS divergence free polyharmonic spline",
+        "top_files": [
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/geometry/core.py",
+          "src/kernelpack/solvers/heterogeneous_multispecies_diffusion.py"
+        ],
+        "top_symbols": [
+          "initialize",
+          "DivFreePHSInterpolant",
+          "DFPHS",
+          "evaluate_gradient",
+          "init"
+        ],
+        "chunk_count": 6
+      },
+      {
+        "query": "LocalDivFreeInterpolator",
+        "top_files": [
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/divfree/__init__.py",
+          "tests/test_divfree.py",
+          "tests/test_divfree.py"
+        ],
+        "top_symbols": [
+          "fit",
+          "LocalDivFreeInterpolator",
+          "",
+          "test_local_divfree_interpolator_reproduces_nodal_values",
+          "test_local_divfree_interpolator_smoke_3d"
+        ],
+        "chunk_count": 6
+      },
+      {
+        "query": "df_poly_basis_from_jacobi",
+        "top_files": [
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/divfree/core.py",
+          "tests/test_divfree.py",
+          "src/kernelpack/divfree/__init__.py"
+        ],
+        "top_symbols": [
+          "df_poly_basis_from_jacobi",
+          "initialize",
+          "DivFreePHSInterpolant",
+          "test_divfree_polynomial_basis_shape_and_eval",
+          ""
+        ],
+        "chunk_count": 6
+      },
+      {
+        "query": "local divergence free interpolation polynomial",
+        "top_files": [
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/rbffd/core.py",
+          "src/kernelpack/divfree/core.py",
+          "README.md",
+          "src/kernelpack/solvers/_pu.py"
+        ],
+        "top_symbols": [
+          "initialize",
+          "initialize_geometry",
+          "DFPHS",
+          "",
+          "local_operator_weights"
+        ],
+        "chunk_count": 6
+      },
+      {
+        "query": "divfree gram matrix stencil",
+        "top_files": [
+          "src/kernelpack/rbffd/core.py",
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/solvers/_pu.py",
+          "src/kernelpack/divfree/core.py",
+          "src/kernelpack/solvers/_pu.py"
+        ],
+        "top_symbols": [
+          "initialize_geometry",
+          "DFPHS",
+          "local_operator_weights",
+          "DivFreeGram",
+          "build_patch_stencil"
+        ],
+        "chunk_count": 6
+      }
+    ],
+    "selected_files": [
+      "src/kernelpack/divfree/core.py",
+      "src/kernelpack/divfree/__init__.py",
+      "src/kernelpack/solvers/_pu.py",
+      "src/kernelpack/rbffd/core.py",
+      "src/kernelpack/geometry/core.py",
+      "src/kernelpack/_numba.py"
+    ],
+    "selected_symbols": [
+      "DivFreePHSInterpolant",
+      "initialize",
+      "DFPHS",
+      "local_operator_weights",
+      "LocalDivFreeInterpolator",
+      "fit",
+      "initialize_geometry",
+      "DivFreeGram",
+      "_diff_tensor_from_coords",
+      "grad_op",
+      "df_poly_basis_from_jacobi",
+      "evaluate_gradient",
+      "build_patch_stencil",
+      "divfree_gram_matrix"
+    ],
+    "selected_chunks": [
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "DivFreePHSInterpolant",
+        "chunk_type": "class",
+        "score": 0.029857397504456328,
+        "start_line": 341,
+        "end_line": 420,
+        "text_preview": "@dataclass\nclass DivFreePHSInterpolant:\n    Dim: int = 0\n    PhsDegree: int = 0\n    PolyDegree: int = 0\n    Nodes: np.ndarray = field(default_factory=lambda: np.zeros((0, 0)))\n    Values: np.ndarray = field(default_factory=lambda: np.zeros((0, 0)))\n    RBFCoeffs: np.ndarray = field(default_factory=lambda: np.zeros(0))\n    PolyCoeffs: np.ndarray = field(default_factory=lambda: np.zeros(0))\n    Sadd"
+      },
+      {
+        "file_path": "src/kernelpack/divfree/__init__.py",
+        "symbol_name": "",
+        "chunk_type": "text",
+        "score": 0.01639344262295082,
+        "start_line": 1,
+        "end_line": 19,
+        "text_preview": "from .core import (\n    DFPHS,\n    DivFreeGram,\n    DivFreePHSInterpolant,\n    LocalDivFreeInterpolator,\n    df_poly_basis_from_jacobi,\n    dfc4_matern_blocks,\n    dfc4_matern_gram_matrix,\n)\n\n__all__ = [\n    \"DFPHS\",\n    \"DivFreeGram\",\n    \"DivFreePHSInterpolant\",\n    \"LocalDivFreeInterpolator\",\n    \"df_poly_basis_from_jacobi\",\n    \"dfc4_matern_blocks\",\n    \"dfc4_matern_gram_matrix\",\n]"
+      },
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "initialize",
+        "chunk_type": "method",
+        "score": 0.03200204813108039,
+        "start_line": 367,
+        "end_line": 409,
+        "text_preview": "def initialize(\n        self,\n        X: np.ndarray,\n        U: np.ndarray,\n        polyDegree: int,\n        phsDegree: int,\n        *,\n        Recurrence: Callable[[int], tuple[np.ndarray, np.ndarray]] | None = None,\n        PolyOptions: dict[str, object] | None = None,\n    ) -> None:\n        X = np.asarray(X, dtype=float)\n        U = np.asarray(U, dtype=float)\n        if X.ndim != 2 or U.ndim !="
+      },
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "DFPHS",
+        "chunk_type": "function",
+        "score": 0.01639344262295082,
+        "start_line": 20,
+        "end_line": 43,
+        "text_preview": "def DFPHS(dim: int, m_in: int) -> tuple[tuple[tuple[Callable[..., np.ndarray], ...], ...], ...]:\n    # Preserve the Matlab-facing prototype for callers that want callable block\n    # entries, but route the heavy matrix work through direct block builders.\n    dim = int(dim)\n    m = int(m_in)\n    if dim not in {2, 3}:\n        raise ValueError(\"divergence-free PHS is only supported in 2D and 3D\")\n   "
+      },
+      {
+        "file_path": "src/kernelpack/solvers/_pu.py",
+        "symbol_name": "local_operator_weights",
+        "chunk_type": "function",
+        "score": 0.02797339593114241,
+        "start_line": 276,
+        "end_line": 301,
+        "text_preview": "def local_operator_weights(\n    stencil: RBFStencil,\n    xq: np.ndarray,\n    sp: StencilProperties,\n    op_name: str,\n    nr: np.ndarray,\n    neu_coeff: float,\n    dir_coeff: float,\n) -> np.ndarray:\n    xq = np.asarray(xq, dtype=float).reshape(1, -1)\n    xloc = stencil.x_stencil\n    xc = (xq - stencil.xm) / stencil.width\n    r = distance_matrix(xq, xloc)\n    op = OpProperties(nosolve=False, select"
+      },
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "LocalDivFreeInterpolator",
+        "chunk_type": "class",
+        "score": 0.031009615384615385,
+        "start_line": 423,
+        "end_line": 435,
+        "text_preview": "@dataclass\nclass LocalDivFreeInterpolator:\n    Nodes: np.ndarray = field(default_factory=lambda: np.zeros((0, 0)))\n    Values: np.ndarray = field(default_factory=lambda: np.zeros((0, 0)))\n    PolyDegree: int = 0\n    PhsDegree: int = 0\n    StencilSize: int = 0\n    Tree: cKDTree | None = None\n    CenterModels: list[DivFreePHSInterpolant | None] = field(default_factory=list)\n    StencilIndices: list["
+      },
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "fit",
+        "chunk_type": "method",
+        "score": 0.03128054740957967,
+        "start_line": 437,
+        "end_line": 460,
+        "text_preview": "@staticmethod\n    def fit(\n        X: np.ndarray,\n        U: np.ndarray,\n        polyDegree: int,\n        phsDegree: int,\n        stencilSize: int,\n        *,\n        Recurrence: Callable[[int], tuple[np.ndarray, np.ndarray]] | None = None,\n        PolyOptions: dict[str, object] | None = None,\n        ActiveCenters: np.ndarray | None = None,\n    ) -> \"LocalDivFreeInterpolator\":\n        obj = Local"
+      },
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "initialize_geometry",
+        "chunk_type": "method",
+        "score": 0.030834914611005692,
+        "start_line": 182,
+        "end_line": 198,
+        "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # Normalize the stencil cloud around its centroid and assemble the\n        # augmented RBF-FD interpolation matrix once. Every operator row for\n        # this stencil reuses the same left-hand side.\n        self.coeffs_already_computed = False\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        sel"
+      },
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "initialize_geometry",
+        "chunk_type": "method",
+        "score": 0.029877369007803793,
+        "start_line": 384,
+        "end_line": 407,
+        "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # The WLS backend fits the same polynomial space as the RBF backend but\n        # replaces the augmented interpolation solve with a weighted local least\n        # squares reconstruction matrix.\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        self.fit_ell = sp.ell\n        self.fit_npoly = sp.npo"
+      },
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "DivFreeGram",
+        "chunk_type": "function",
+        "score": 0.015873015873015872,
+        "start_line": 103,
+        "end_line": 109,
+        "text_preview": "def DivFreeGram(_dfrbf: object, X: np.ndarray, Y: np.ndarray, _r: np.ndarray | None = None, *, degree: int | None = None) -> np.ndarray:\n    if degree is None:\n        try:\n            degree = int(_dfrbf[0][0]._divfree_degree)  # type: ignore[index, attr-defined]\n        except Exception as exc:\n            raise ValueError(\"DivFreeGram needs either a DFPHS kernel tuple or an explicit degree keyw"
+      },
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "_diff_tensor_from_coords",
+        "chunk_type": "function",
+        "score": 0.015625,
+        "start_line": 46,
+        "end_line": 64,
+        "text_preview": "def _diff_tensor_from_coords(\n    dim: int,\n    r: np.ndarray,\n    i: int,\n    j: int,\n    coords: tuple[np.ndarray, ...],\n) -> np.ndarray:\n    diff = np.zeros(r.shape + (dim,), dtype=float)\n    if i == j:\n        if len(coords) != 2:\n            raise ValueError(\"diagonal DFPHS entries expect two coordinate arrays\")\n        diff[:, :, i] = np.asarray(coords[0], dtype=float) - np.asarray(coords[1]"
+      },
+      {
+        "file_path": "src/kernelpack/rbffd/core.py",
+        "symbol_name": "grad_op",
+        "chunk_type": "method",
+        "score": 0.015625,
+        "start_line": 431,
+        "end_line": 432,
+        "text_preview": "def grad_op(self, _sp: StencilProperties, op: OpProperties, _r_rhs: np.ndarray, _x_subset: np.ndarray, _x: np.ndarray, x_at_origin_subset: np.ndarray, _x_at_origin: np.ndarray) -> np.ndarray:\n        return self.basis.evaluate(x_at_origin_subset, _unit_multi_index(self.s_dim, op.selectdim), True).T / self.width"
+      },
+      {
+        "file_path": "src/kernelpack/divfree/core.py",
+        "symbol_name": "df_poly_basis_from_jacobi",
+        "chunk_type": "function",
+        "score": 0.031754032258064516,
+        "start_line": 275,
+        "end_line": 338,
+        "text_preview": "def df_poly_basis_from_jacobi(\n    p: np.ndarray,\n    p_out: int,\n    recurrence: Callable[[int], tuple[np.ndarray, np.ndarray]] | None = None,\n    opts: dict[str, object] | None = None,\n) -> tuple[np.ndarray, DivFreePolynomialData]:\n    p = np.asarray(p, dtype=float)\n    if p.ndim != 2 or p.shape[1] not in {2, 3}:\n        raise ValueError(\"p must have shape (m, 2) or (m, 3)\")\n    if recurrence is"
+      },
+      {
+        "file_path": "src/kernelpack/geometry/core.py",
+        "symbol_name": "evaluate_gradient",
+        "chunk_type": "method",
+        "score": 0.01639344262295082,
+        "start_line": 265,
+        "end_line": 276,
+        "text_preview": "def evaluate_gradient(self, xe: np.ndarray) -> np.ndarray:\n        # Differentiate the RBF interpolant analytically with respect to each\n        # physical coordinate.\n        xe = np.asarray(xe, dtype=float)\n        r = distance_matrix(xe, self.centers)\n        dphi = self.m_spline_degree * r ** max(self.m_spline_degree - 2, 0)\n        invr = np.divide(1.0, r, out=np.zeros_like(r), where=r > 0)\n "
+      },
+      {
+        "file_path": "src/kernelpack/solvers/_pu.py",
+        "symbol_name": "build_patch_stencil",
+        "chunk_type": "function",
+        "score": 0.015625,
+        "start_line": 244,
+        "end_line": 247,
+        "text_preview": "def build_patch_stencil(xnodes: np.ndarray, sp: StencilProperties) -> RBFStencil:\n    stencil = RBFStencil()\n    stencil.initialize_geometry(np.asarray(xnodes, dtype=float), sp)\n    return stencil"
+      },
+      {
+        "file_path": "src/kernelpack/_numba.py",
+        "symbol_name": "divfree_gram_matrix",
+        "chunk_type": "function",
+        "score": 0.027272727272727275,
+        "start_line": 351,
+        "end_line": 378,
+        "text_preview": "def divfree_gram_matrix(x: np.ndarray, y: np.ndarray, degree: int) -> np.ndarray:\n    x = np.asarray(x, dtype=float)\n    y = np.asarray(y, dtype=float)\n    if x.ndim != 2 or y.ndim != 2 or x.shape[1] != y.shape[1]:\n        raise ValueError(\"x and y must be 2D arrays with matching column counts\")\n    if x.shape[1] not in {2, 3}:\n        raise ValueError(\"divergence-free kernels are only supported i"
+      }
+    ],
+    "matched_required_symbols": [
+      "DFPHS",
+      "LocalDivFreeInterpolator",
+      "df_poly_basis_from_jacobi",
+      "divfree_gram_matrix"
+    ],
+    "missing_required_symbols": [],
+    "retrieval_conditioned": true,
+    "note": ""
+  }
+}

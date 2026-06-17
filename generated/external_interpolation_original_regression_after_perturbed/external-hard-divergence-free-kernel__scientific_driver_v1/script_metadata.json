@@ -1,0 +1,39 @@
+{
+  "task_id": "external-hard-divergence-free-kernel",
+  "difficulty": "hard",
+  "generator": "scientific_driver_v1",
+  "prompt_hash": "sha256:49bf77172c24b31a26f858bf81a960b19053a32e51ced1f0298559410a5044d7",
+  "prompt_length": 3038,
+  "generated_script_hash": "sha256:7c652d42429a58377459eb083a559b0c30d418a375f4ff19041e5ab08d6c3e26",
+  "generated_script_length": 13464,
+  "selected_retrieval_files": [
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/divfree/__init__.py",
+    "src/kernelpack/solvers/_pu.py",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/geometry/core.py",
+    "src/kernelpack/_numba.py"
+  ],
+  "matched_required_symbols": [
+    "DFPHS",
+    "LocalDivFreeInterpolator",
+    "df_poly_basis_from_jacobi",
+    "divfree_gram_matrix"
+  ],
+  "missing_required_symbols": [],
+  "checker_outcome": "CheckerPass",
+  "constants_in_script": {
+    "SEED": true,
+    "ORDERS": true,
+    "NODE_COUNTS": true
+  },
+  "constants_in_prompt_or_retrieval": {
+    "SEED": false,
+    "ORDERS": true,
+    "NODE_COUNTS": true
+  },
+  "overfit_signals": [
+    "SEED=12 appears in generated script (via 'seed' marker) but not in prompt or retrieved context"
+  ],
+  "possible_overfit": true
+}

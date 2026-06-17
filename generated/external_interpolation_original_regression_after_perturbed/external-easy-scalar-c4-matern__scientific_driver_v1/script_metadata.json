@@ -1,0 +1,40 @@
+{
+  "task_id": "external-easy-scalar-c4-matern",
+  "difficulty": "easy",
+  "generator": "scientific_driver_v1",
+  "prompt_hash": "sha256:0590ac3b95a498475ec2c025eb05f31f540c9ae0e631da1c63ed9751874f0ed5",
+  "prompt_length": 2002,
+  "generated_script_hash": "sha256:7b3e8ce035c830cb8113f6f35c31e8490467b8fd310f4299b402a6ce72ec58eb",
+  "generated_script_length": 7031,
+  "selected_retrieval_files": [
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/divfree/core.py",
+    "src/kernelpack/geometry/core.py",
+    "src/kernelpack/solvers/multispecies_diffusion.py",
+    "src/kernelpack/solvers/pu_sl_advection.py",
+    "examples/poisson_convergence_2d_neumann.py",
+    "examples/pusl_incompressible_euler_convergence_2d.py",
+    "README.md"
+  ],
+  "matched_required_symbols": [
+    "RBF",
+    "Matern",
+    "interpolation"
+  ],
+  "missing_required_symbols": [],
+  "checker_outcome": "CheckerPass",
+  "constants_in_script": {
+    "SEED": true,
+    "EPSILONS": true,
+    "NODE_COUNTS": true
+  },
+  "constants_in_prompt_or_retrieval": {
+    "SEED": false,
+    "EPSILONS": true,
+    "NODE_COUNTS": true
+  },
+  "overfit_signals": [
+    "SEED=4 appears in generated script (via 'seed' marker) but not in prompt or retrieved context"
+  ],
+  "possible_overfit": true
+}

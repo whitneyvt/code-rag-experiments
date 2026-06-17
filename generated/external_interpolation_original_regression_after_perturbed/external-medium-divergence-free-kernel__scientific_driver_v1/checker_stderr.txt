@@ -1,0 +1,2 @@
+/Users/whitney/src/code_rag/evals/external_interpolation/medium_df_c4_matern_driver.py:192: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
