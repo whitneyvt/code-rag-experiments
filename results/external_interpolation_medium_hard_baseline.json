@@ -1,0 +1,94 @@
+{
+  "tasks": [
+    {
+      "id": "external-medium-divergence-free-kernel",
+      "difficulty": "medium",
+      "prompt_file": "evals/external_interpolation/prompt_medium.txt",
+      "ground_truth_file": "evals/external_interpolation/medium_df_c4_matern_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_divergence_free_global_driver",
+      "requires_kernelpack_branch": true
+    },
+    {
+      "id": "external-hard-divergence-free-kernel",
+      "difficulty": "hard",
+      "prompt_file": "evals/external_interpolation/prompt_hard.txt",
+      "ground_truth_file": "evals/external_interpolation/hard_local_dfphs_poly_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_divergence_free_local_driver",
+      "requires_kernelpack_branch": true
+    }
+  ],
+  "results": [
+    {
+      "task_id": "external-medium-divergence-free-kernel",
+      "difficulty": "medium",
+      "outcome": "GeneratedScriptRuntimeError",
+      "checker": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "external_interpolation: no baseline generator for this task; real proposer integration is the next milestone.\nTraceback (most recent call last):\n  File \"/Users/whitney/src/code_rag/evals/external_interpolation/checker.py\", line 191, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/whitney/src/code_rag/evals/external_interpolation/checker.py\", line 172, in main\n    error_file_a = run_script(script_a, Path(tmp_a))\n  File \"/Users/whitney/src/code_rag/evals/external_interpolation/checker.py\", line 156, in run_script\n    subprocess.run([sys.executable, str(script)], check=True, env=env, cwd=str(script.parent))\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py\", line 577, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['/Users/whitney/src/code_rag/.venv/bin/python3', '/private/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_medium_96qwpdt5/ragcode.py']' returned non-zero exit status 2.\n",
+        "outcome": "GeneratedScriptRuntimeError",
+        "parsed": {
+          "match": null,
+          "schema_a": null,
+          "schema_b": null,
+          "message": "",
+          "no_error_file": false,
+          "schema_mismatch": false,
+          "configuration_mismatch": false,
+          "metric_mismatch": false
+        },
+        "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_medium_96qwpdt5/ragcode.py",
+        "ground_truth_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/medium_df_c4_matern_driver.py",
+        "checker_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/checker.py"
+      },
+      "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_medium_96qwpdt5/ragcode.py",
+      "prompt_excerpt": "Write a standalone Python driver script that performs divergence-free vector\nfield interpolation in 2D using a global divergence-free C4 Matern kernel.\nMake sure to use proper NumPy techniques to keep the implementation efficient,\nand it is fine to use SciPy and Matplotlib.\n\nYou have been provided w",
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/solvers/detail/incompressible_euler_bdf_backend.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/dual.py"
+      ],
+      "generator": "placeholder_non_easy",
+      "notes": "placeholder generator emitted intentional failure; real proposer for this difficulty is not yet wired up"
+    },
+    {
+      "task_id": "external-hard-divergence-free-kernel",
+      "difficulty": "hard",
+      "outcome": "GeneratedScriptRuntimeError",
+      "checker": {
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "external_interpolation: no baseline generator for this task; real proposer integration is the next milestone.\nTraceback (most recent call last):\n  File \"/Users/whitney/src/code_rag/evals/external_interpolation/checker.py\", line 191, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/whitney/src/code_rag/evals/external_interpolation/checker.py\", line 172, in main\n    error_file_a = run_script(script_a, Path(tmp_a))\n  File \"/Users/whitney/src/code_rag/evals/external_interpolation/checker.py\", line 156, in run_script\n    subprocess.run([sys.executable, str(script)], check=True, env=env, cwd=str(script.parent))\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/subprocess.py\", line 577, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command '['/Users/whitney/src/code_rag/.venv/bin/python3', '/private/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_hard_xjqkijwu/ragcode.py']' returned non-zero exit status 2.\n",
+        "outcome": "GeneratedScriptRuntimeError",
+        "parsed": {
+          "match": null,
+          "schema_a": null,
+          "schema_b": null,
+          "message": "",
+          "no_error_file": false,
+          "schema_mismatch": false,
+          "configuration_mismatch": false,
+          "metric_mismatch": false
+        },
+        "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_hard_xjqkijwu/ragcode.py",
+        "ground_truth_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/hard_local_dfphs_poly_driver.py",
+        "checker_script_path": "/Users/whitney/src/code_rag/evals/external_interpolation/checker.py"
+      },
+      "generated_script_path": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragsystem_hard_xjqkijwu/ragcode.py",
+      "prompt_excerpt": "Write a standalone Python driver script that performs localized\ndivergence-free interpolation in 2D using a divergence-free polyharmonic spline\nkernel plus a divergence-free polynomial augmentation. Make sure to use proper\nNumPy techniques to keep the implementation efficient, and it is fine to use\n",
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/geometry/core.py"
+      ],
+      "generator": "placeholder_non_easy",
+      "notes": "placeholder generator emitted intentional failure; real proposer for this difficulty is not yet wired up"
+    }
+  ]
+}

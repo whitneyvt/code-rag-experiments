@@ -1,0 +1,104 @@
+==============================
+QUERY: C4 Matern kernel
+==============================
+[1] Score: 0.032266
+    File: src/kernelpack/divfree/core.py:124-155
+    Symbol: dfc4_matern_blocks
+[2] Score: 0.027972
+    File: src/kernelpack/divfree/core.py:67-100
+    Symbol: _evaluate_dfphs_entry
+[3] Score: 0.016129
+    File: src/kernelpack/_numba.py:281-292
+    Symbol: build_augmented_rbf_lhs
+
+==============================
+QUERY: radial basis function interpolation
+==============================
+[1] Score: 0.032266
+    File: src/kernelpack/rbffd/core.py:182-198
+    Symbol: initialize_geometry
+[2] Score: 0.031054
+    File: src/kernelpack/rbffd/core.py:136-145
+    Symbol: default_diff_order
+[3] Score: 0.030769
+    File: src/kernelpack/rbffd/core.py:384-407
+    Symbol: initialize_geometry
+
+==============================
+QUERY: divergence free kernel
+==============================
+[1] Score: 0.032258
+    File: src/kernelpack/divfree/core.py:20-43
+    Symbol: DFPHS
+[2] Score: 0.031258
+    File: src/kernelpack/divfree/core.py:367-409
+    Symbol: initialize
+[3] Score: 0.031025
+    File: src/kernelpack/_numba.py:351-378
+    Symbol: divfree_gram_matrix
+
+==============================
+QUERY: conservation of mass kernel
+==============================
+[1] Score: 0.028992
+    File: src/kernelpack/divfree/core.py:67-100
+    Symbol: _evaluate_dfphs_entry
+[2] Score: 0.016393
+    File: src/kernelpack/_numba.py:281-292
+    Symbol: build_augmented_rbf_lhs
+[3] Score: 0.016393
+    File: src/kernelpack/solvers/pu_sl_fd_advection_diffusion.py:47-48
+    Symbol: enable_homogeneous_neumann_mass_conservation
+
+==============================
+QUERY: vector valued interpolation
+==============================
+[1] Score: 0.032258
+    File: src/kernelpack/rbffd/core.py:136-145
+    Symbol: default_diff_order
+[2] Score: 0.030798
+    File: src/kernelpack/geometry/core.py:198-216
+    Symbol: _solve_augmented_rbf_system
+[3] Score: 0.030303
+    File: src/kernelpack/rbffd/core.py:182-198
+    Symbol: initialize_geometry
+
+==============================
+QUERY: RBF-FD
+==============================
+[1] Score: 0.029551
+    File: src/kernelpack/solvers/multispecies_diffusion.py:13-25
+    Symbol: MultiSpeciesDiffusionSolver
+[2] Score: 0.026786
+    File: src/kernelpack/solvers/variable_poisson.py:47-70
+    Symbol: VariablePoissonSolver
+[3] Score: 0.021707
+    File: examples/poisson_convergence_2d_neumann.py:184-192
+    Symbol: parse_args
+
+==============================
+QUERY: DFPHS divergence free polyharmonic spline
+==============================
+[1] Score: 0.032002
+    File: src/kernelpack/divfree/core.py:367-409
+    Symbol: initialize
+[2] Score: 0.029857
+    File: src/kernelpack/divfree/core.py:341-420
+    Symbol: DivFreePHSInterpolant
+[3] Score: 0.016393
+    File: src/kernelpack/divfree/core.py:20-43
+    Symbol: DFPHS
+
+==============================
+QUERY: global RBF interpolant
+==============================
+[1] Score: 0.032018
+    File: src/kernelpack/geometry/core.py:265-276
+    Symbol: evaluate_gradient
+[2] Score: 0.019211
+    File: examples/poisson_convergence_2d_neumann.py:184-192
+    Symbol: parse_args
+[3] Score: 0.016393
+    File: src/kernelpack/geometry/core.py:198-216
+    Symbol: _solve_augmented_rbf_system
+
