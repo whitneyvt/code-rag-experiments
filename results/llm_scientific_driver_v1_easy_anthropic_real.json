@@ -1,0 +1,32 @@
+{
+  "tasks": [
+    {
+      "id": "external-easy-scalar-c4-matern",
+      "difficulty": "easy",
+      "prompt_file": "evals/external_interpolation/prompt_easy.txt",
+      "ground_truth_file": "evals/external_interpolation/easy_scalar_c4_matern_driver.py",
+      "checker_file": "evals/external_interpolation/checker.py",
+      "generated_filename": "ragcode.py",
+      "category": "standalone_scalar_rbf_driver",
+      "requires_kernelpack_branch": false,
+      "expected_parameters": {}
+    }
+  ],
+  "results": [
+    {
+      "task_id": "external-easy-scalar-c4-matern",
+      "difficulty": "easy",
+      "outcome": "LLMProviderUnavailable",
+      "checker": null,
+      "generated_script_path": "",
+      "prompt_excerpt": "Write a standalone Python driver script that performs scalar field interpolation\nusing a scalar-valued radial basis function. Make sure to use proper NumPy\ntechniques to keep the implementation efficient, and it is fine to use SciPy\nand Matplotlib.\n\nYou have been provided with relevant code embeddin",
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/geometry/core.py"
+      ],
+      "generator": "llm_scientific_driver_v1",
+      "notes": "LLM provider 'anthropic' unavailable: ANTHROPIC_API_KEY environment variable is not set"
+    }
+  ]
+}
