@@ -1,0 +1,88 @@
+```python
+"""Intentionally-wrong easy driver — used to verify diagnostics flag failures."""
+
+from __future__ import annotations
+
+import os
+from pathlib import Path
+
+import matplotlib
+
+matplotlib.use("Agg")
+
+import matplotlib.pyplot as plt  # noqa: E402
+import numpy as np  # noqa: E402
+from scipy.linalg import solve  # noqa: E402
+from scipy.spatial.distance import cdist  # noqa: E402
+
+
+# Wrong: domain is [0, 1]^2 instead of [-1, 1]^2.
+DOMAIN_LOW = 0.0
+DOMAIN_HIGH = 1.0
+# Wrong: epsilon grid does not match the prompt / extracted parameters.
+EPSILONS = [0.1, 0.2, 0.4]
+# Wrong: missing 50 and 2000 from the expected grid.
+NODE_COUNTS = [100, 250, 500, 1000]
+# Wrong: deliberately mismatched seed.
+SEED = 99
+EVAL_SIZE = 500
+NUGGET = 1e-10
+ERROR_FILENAME = "easy_intentionally_wrong_errors.txt"
+
+
+def target_field(x):
+    x0 = x[:, 0]
+    x1 = x[:, 1]
+    return (
+        np.sin(2.0 * np.pi * x0) * np.cos(3.0 * np.pi * x1)
+        + 0.2 * np.exp(-5.0 * ((x0 - 0.25) ** 2 + (x1 + 0.10) ** 2))
+    )
+
+
+def wrong_gaussian_kernel(x, y, epsilon):
+    """Gaussian RBF instead of C^4 Matern — should trigger
+    kernel_formula_mismatch."""
+    r = cdist(x, y)
+    return np.exp(-(epsilon * r) ** 2)
+
+
+def relative_l2(reference, approximation):
+    return float(
+        np.linalg.norm(reference - approximation)
+        / np.linalg.norm(reference)
+    )
+
+
+def main():
+    rng = np.random.default_rng(SEED)
+    outdir = Path(
+        os.environ.get("RAGSYSTEM_OUTPUT_DIR", ".")
+    ).resolve()
+    outdir.mkdir(parents=True, exist_ok=True)
+
+    x_eval = rng.uniform(DOMAIN_LOW, DOMAIN_HIGH, size=(EVAL_SIZE, 2))
+    y_true = target_field(x_eval)
+
+    errors = np.zeros((len(NODE_COUNTS), len(EPSILONS)))
+    for i, n in enumerate(NODE_COUNTS):
+        x_train = rng.uniform(DOMAIN_LOW, DOMAIN_HIGH, size=(n, 2))
+        y_train = target_field(x_train)
+        for j, eps in enumerate(EPSILONS):
+            k = wrong_gaussian_kernel(x_train, x_train, eps)
+            k = k + NUGGET * np.eye(k.shape[0])
+            weights = solve(k, y_train, assume_a="pos")
+            y_pred = wrong_gaussian_kernel(x_eval, x_train, eps) @ weights
+            errors[i, j] = relative_l2(y_true, y_pred)
+
+    error_path = outdir / ERROR_FILENAME
+    with error_path.open("w", encoding="utf-8") as fh:
+        fh.write("# intentionally_wrong=True\n")
+        fh.write("# columns: N epsilon rel_l2\n")
+        for i, n in enumerate(NODE_COUNTS):
+            for j, eps in enumerate(EPSILONS):
+                fh.write(f"{n} {eps:.8f} {errors[i, j]:.16e}\n")
+
+
+if __name__ == "__main__":
+    main()
+```

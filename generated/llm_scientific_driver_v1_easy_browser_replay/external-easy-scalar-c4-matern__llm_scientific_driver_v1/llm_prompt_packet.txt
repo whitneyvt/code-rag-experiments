@@ -1,0 +1,359 @@
+You are writing a single self-contained Python driver script for a scientific computing task. The script will be compared to a ground-truth driver by an automated checker. Follow the constraints exactly.
+
+TASK:
+Write a standalone Python driver script that performs scalar field interpolation
+using a scalar-valued radial basis function. Make sure to use proper NumPy
+techniques to keep the implementation efficient, and it is fine to use SciPy
+and Matplotlib.
+
+You have been provided with relevant code embeddings for this task. Use those
+code embeddings as supporting implementation context when constructing the
+driver, especially for the logic structure, kernel assembly style, experiment
+organization, and plotting flow, while still producing a single self-contained
+script.
+
+The script should:
+
+1. Define a smooth synthetic scalar target field on a 2D square domain:
+   f(x, y) = sin(2*pi*x)*cos(3*pi*y) + 0.2*exp(-5*((x-0.25)^2 + (y+0.10)^2)).
+2. Use the square domain [-1, 1] x [-1, 1].
+3. Generate interpolation nodes and a separate evaluation set by drawing them
+   uniformly at random from that domain with a fixed random seed. Use exactly
+   500 evaluation nodes, and ensure that the interpolation nodes are distinct.
+4. Use a global scalar C4 Matern kernel interpolant.
+5. Do an ablation study over interpolation node count and kernel shape
+   parameter, using node counts [50, 100, 500, 1000, 2000].
+6. For each configuration, fit the interpolant, evaluate it on the test set,
+   compute a relative L2 error, and print the results.
+7. Write the resulting ablation errors to a plain text file with one line per
+   configuration. The file should contain a comment header describing the
+   columns, and each data line should store the configuration and error in a
+   simple numeric row format:
+   N epsilon rel_l2
+8. Make at least one plot summarizing the ablation results.
+9. Also make a qualitative plot showing the true scalar field, a predicted
+   scalar field, and the pointwise error for one representative configuration.
+10. If an environment variable such as RAGSYSTEM_OUTPUT_DIR is set, write the
+   plots and error text file there.
+
+The output should be a single self-contained driver script.
+
+DIFFICULTY: easy
+
+CHECKER CONTRACT:
+The script will be executed by:
+    python ragcode.py
+inside a fresh temporary directory, with the environment variable
+RAGSYSTEM_OUTPUT_DIR set to that directory. A separate `checker.py`
+will then execute the ground-truth driver in its own temp directory
+and compare the two `*_errors.txt` files row by row, within
+atol=1e-8 and rtol=1e-6.
+
+The script MUST:
+- be a single freestanding Python file (no relative imports, no
+  package layout)
+- read RAGSYSTEM_OUTPUT_DIR from os.environ and write every output
+  file inside that directory
+- emit exactly one file matching the glob `*_errors.txt` whose
+  contents are:
+    * a comment-header line (starting with `#`) describing the
+      columns
+    * one data row per ablation configuration
+    * each data row using the exact column ordering specified in
+      the OUTPUT SCHEMA section below
+- use the values listed in the EXTRACTED PARAMETERS section
+  unless one is missing (in which case fall back to a clearly
+  documented default and note it in a comment)
+- use a deterministic RNG seed (the one in the parameters)
+- import only NumPy, SciPy, and Matplotlib from third-party (set
+  matplotlib.use('Agg') before importing pyplot)
+- not require any network access
+- not reference any absolute path from the development machine
+
+Plots, qualitative figures, and additional logging are optional;
+the errors text file is the only artefact the checker reads.
+
+OUTPUT SCHEMA:
+Each data row in the *_errors.txt file must contain exactly three numeric columns separated by whitespace, in the order: N epsilon rel_l2.
+
+EXTRACTED PARAMETERS:
+{
+  "domain": [
+    -1.0,
+    1.0
+  ],
+  "epsilons": [
+    0.75,
+    1.5,
+    3.0
+  ],
+  "evaluation_size": 500,
+  "node_counts": [
+    50,
+    100,
+    500,
+    1000,
+    2000
+  ],
+  "output_schema": "easy",
+  "poly_orders": [],
+  "seed": 17
+}
+
+PARAMETER SOURCES:
+{
+  "domain": "prompt",
+  "epsilons": "fallback_default",
+  "evaluation_size": "prompt",
+  "node_counts": "prompt",
+  "output_schema": "prompt",
+  "seed": "retrieval"
+}
+
+REQUIRED RETRIEVAL SYMBOLS:
+{
+  "matched": [
+    "RBF",
+    "interpolation"
+  ],
+  "missing": [
+    "Matern"
+  ]
+}
+
+RETRIEVED KERNELPACK CONTEXT (top 8 chunks):
+[1] file: README.md:426-522
+    chunk_type: text
+    text:
+    `project_to_best_fit_plane`, and `phs_kernel`
+
+    These classes are intended to support the same overall workflow as the Matlab
+    version:
+
+    1. fit a geometric model to input sites
+    2. sample boundary points and normals
+    3. build an implicit level set
+    4. use that level set for node clipping and solver workflows
+
+    ### `kernelpack.nodes`
+
+    This package handles point generation and geometry clipping:
+
+    - `generate_poisson_nodes_in_box`
+    - `clip_points_by_geometry`
+    - `bounding_box_extents`
+    - `DomainNodeGenerator`
+
+    The node-generation path supports:
+
+    - deterministic seeded box sampling
+    - geometry-aware clipping
+    - outer refinement bands near boundaries
+    - assembly of interior, boundary, and ghost nodes into a `DomainDescriptor`
+
+    ### `kernelpack.domain`
+
+    `DomainDescriptor` is the compact container that links 
+        ... (truncated)
+
+[2] file: README.md:1-100
+    chunk_type: text
+    text:
+    # kernelpack-python
+
+    `kernelpack-python` is a Python-first port of
+    [`kernelpack-matlab`](https://github.com/ShankarLab/kernelpack-matlab).
+
+    It brings the main geometry, node-generation, polynomial, RBF-FD, and solver
+    ingredients of KernelPack into a Python codebase that is efficient,
+    inspectable, and ready for scripting, experimentation, and extension.
+
+    This is a real port, not a placeholder wrapper around the Matlab project. The
+    goal is to keep the same overall KernelPack-style workflow while leaning into
+    Python strengths such as NumPy/SciPy vectorization, sparse linear algebra, and
+    testable modular code.
+
+    The current implementation also uses targeted Numba acceleration for several
+    hot numerical kernels, so the Python port is not limited to a purely
+    interpretive implementation.
+
+    ## What i
+        ... (truncated)
+
+[3] file: README.md:86-185
+    chunk_type: text
+    text:
+    ## Installation
+
+    From the repository root:
+
+    ```bash
+    python -m venv .venv
+    .venv\Scripts\activate
+    python -m pip install -e .[dev]
+    ```
+
+    This installs the compiled-stack dependencies used by the package, including
+    `numpy`, `scipy`, `matplotlib`, `pytest`, and `numba`.
+
+    `numba` is used opportunistically. The accelerated kernels are part of the
+    normal package path, and editable installs pick them up automatically.
+
+    Run the test suite with:
+
+    ```bash
+    python -m pytest -q
+    ```
+
+    ## Examples and checks
+
+    Current Python checks live in:
+
+    - [`tests/test_poly.py`](/E:/kernelpack-python/tests/test_poly.py:1)
+    - [`tests/test_nodes_rbffd.py`](/E:/kernelpack-python/tests/test_nodes_rbffd.py:1)
+    - [`tests/test_solvers.py`](/E:/kernelpack-python/tests/test_solvers.py:1)
+
+    The examples below are written as direct Pyt
+        ... (truncated)
+
+[4] file: README.md:171-270
+    chunk_type: text
+    text:
+    from kernelpack.nodes import DomainNodeGenerator
+
+    # Generate an interior-plus-boundary domain from a geometry and target spacing.
+    generator = DomainNodeGenerator()
+    domain = generator.build_domain_descriptor_from_geometry(
+        surface,
+        0.08,
+        seed=17,
+        strip_count=5,
+        do_outer_refinement=True,
+        outer_fraction_of_h=0.5,
+        outer_refinement_zone_size_as_multiple_of_h=2.0,
+    )
+
+    # Pull out the packed node sets.
+    xi = domain.get_interior_nodes()
+    xb = domain.get_bdry_nodes()
+    xg = domain.get_ghost_nodes()
+
+    # Visualize the packed node sets.
+    fig, ax = plt.subplots(figsize=(6, 6))
+    ax.plot(xi[:, 0], xi[:, 1], ".", ms=3, color="tab:blue", label="interior")
+    ax.plot(xb[:, 0], xb[:, 1], ".", ms=3, color="tab:teal", label="boundary")
+    ax.plot(xg[:, 0], xg[:, 1], ".", ms=3, color="goldenrod", l
+        ... (truncated)
+
+[5] file: README.md:341-440
+    chunk_type: text
+    text:
+    bc_stencil="rbf",
+    )
+
+    # Choose the diffusivity and time step.
+    nu = 0.25
+    dt = 0.02
+
+    # Use a named target order instead of a magic number.
+    target_order = 4
+    solver.init(domain, target_order, dt, nu)
+
+    # Define a manufactured transient problem with Dirichlet data.
+    u_exact = lambda time, X: np.exp(-time) * (X[:, 0] ** 2 + X[:, 1] ** 2)
+    forcing = lambda nu_value, time, X: (
+        -np.exp(-time) * (X[:, 0] ** 2 + X[:, 1] ** 2)
+        - 4.0 * nu_value * np.exp(-time)
+    )
+    neu_coeff = lambda Xb: np.zeros(Xb.shape[0])
+    dir_coeff = lambda Xb: np.ones(Xb.shape[0])
+    bc = lambda neu_coeffs, dir_coeffs, nr, time, Xb: u_exact(time, Xb)
+
+    # March the solution to a final time.
+    t_final = 0.50
+    nsteps = int(round(t_final / dt))
+    x_phys = domain.get_int_bdry_nodes()
+
+    solver.set_initial_state(u_exact(0.0, x_phys))
+    times = [0.
+        ... (truncated)
+
+[6] file: README.md:256-355
+    chunk_type: text
+    text:
+    surface = EmbeddedSurface()
+    surface.set_data_sites(curve)
+    surface.build_closed_geometric_model_ps(2, 0.06, curve.shape[0])
+    surface.build_level_set_from_geometric_model()
+
+    # Generate interior, boundary, and ghost nodes.
+    generator = DomainNodeGenerator()
+    domain = generator.build_domain_descriptor_from_geometry(
+        surface,
+        0.08,
+        seed=17,
+        strip_count=5,
+    )
+
+    # Set up an RBF-FD Poisson solve on that domain.
+    solver = PoissonSolver(
+        lap_assembler="fd",
+        bc_assembler="fd",
+        lap_stencil="rbf",
+        bc_stencil="rbf",
+    )
+
+    # Use a named target order instead of a magic number.
+    target_order = 4
+    solver.init(domain, target_order)
+
+    # Manufactured pure-Neumann problem on the unit disk.
+    u_exact = lambda X: (X[:, 0] ** 2 + X[:, 1] ** 2) ** 2 - (X[:, 0] ** 2 + X[:, 1] ** 2) + 1.0 / 6.0
+    forc
+        ... (truncated)
+
+[7] file: src/kernelpack/rbffd/core.py:384-407
+    symbol: initialize_geometry
+    chunk_type: method
+    text:
+    def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:
+            # The WLS backend fits the same polynomial space as the RBF backend but
+            # replaces the augmented interpolation solve with a weighted local least
+            # squares reconstruction matrix.
+            self.s_dim = x.shape[1]
+            self.n = x.shape[0]
+            self.fit_ell = sp.ell
+            self.fit_npoly = sp.npoly
+            self.x_stencil = x
+            self.xm = x[0]
+            r2 = np.sum((x - self.xm) ** 2, axis=1)
+            self.width = max(float(np.sqrt(r2.max(initial=0.0))), 1.0)
+            self.xc = (x - self.xm) / self.width
+            self.basis = _basis_template(self.s_dim, self.fit_ell, "legendre")
+            p = self.basis.evaluate(self.xc, _zero_derivative(self.s_dim), True)
+            self.node_weights = np.clip
+        ... (truncated)
+
+[8] file: src/kernelpack/geometry/core.py:388-456
+    symbol: build_closed_geometric_model_ps
+    chunk_type: method
+    text:
+    def build_closed_geometric_model_ps(self, dim: int, rad: float, nb: int, ne: int | None = None, method: int = 1, supersample_fac: int = 2) -> None:
+            # Build the smooth closed geometry model and then choose an evaluation
+            # sample set. The 2D and 3D cases share the same idea but use different
+            # parameterizations and sampling strategies.
+            self.sep_rad = rad
+            self.nd = min(nb, self.data_sites.shape[0])
+            data = self.data_sites[: self.nd]
+            degree = 7
+            ntarget = ne if ne is not None else self._estimate_evaluation_count(dim, rad, True)
+            if dim == 2:
+                t = chord_length_param(data, True)
+                theta = 2.0 * np.pi * t
+                r, _ = periodic_chord_distance(theta, theta)
+                k = phs_kernel(r, degree)
+         
+        ... (truncated)
+
+OUTPUT:
+Return only Python code. Do not include any prose explanation outside the code itself. You may wrap the code in a single ```python``` fence or return it raw; both are accepted by the harness.

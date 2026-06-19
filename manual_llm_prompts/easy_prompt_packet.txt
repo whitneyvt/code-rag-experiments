@@ -1,0 +1,291 @@
+You are writing a single self-contained Python driver script for a scientific computing task. The script will be compared to a ground-truth driver by an automated checker. Follow the constraints exactly.
+
+TASK:
+Write a standalone Python driver script that performs scalar field interpolation
+using a scalar-valued radial basis function. Make sure to use proper NumPy
+techniques to keep the implementation efficient, and it is fine to use SciPy
+and Matplotlib.
+
+You have been provided with relevant code embeddings for this task. Use those
+code embeddings as supporting implementation context when constructing the
+driver, especially for the logic structure, kernel assembly style, experiment
+organization, and plotting flow, while still producing a single self-contained
+script.
+
+The script should:
+
+1. Define a smooth synthetic scalar target field on a 2D square domain:
+   f(x, y) = sin(2*pi*x)*cos(3*pi*y) + 0.2*exp(-5*((x-0.25)^2 + (y+0.10)^2)).
+2. Use the square domain [-1, 1] x [-1, 1].
+3. Generate interpolation nodes and a separate evaluation set by drawing them
+   uniformly at random from that domain with a fixed random seed. Use exactly
+   500 evaluation nodes, and ensure that the interpolation nodes are distinct.
+4. Use a global scalar C4 Matern kernel interpolant.
+5. Do an ablation study over interpolation node count and kernel shape
+   parameter, using node counts [50, 100, 500, 1000, 2000].
+6. For each configuration, fit the interpolant, evaluate it on the test set,
+   compute a relative L2 error, and print the results.
+7. Write the resulting ablation errors to a plain text file with one line per
+   configuration. The file should contain a comment header describing the
+   columns, and each data line should store the configuration and error in a
+   simple numeric row format:
+   N epsilon rel_l2
+8. Make at least one plot summarizing the ablation results.
+9. Also make a qualitative plot showing the true scalar field, a predicted
+   scalar field, and the pointwise error for one representative configuration.
+10. If an environment variable such as RAGSYSTEM_OUTPUT_DIR is set, write the
+   plots and error text file there.
+
+The output should be a single self-contained driver script.
+
+DIFFICULTY: easy
+
+CHECKER CONTRACT:
+The script will be executed by:
+    python ragcode.py
+inside a fresh temporary directory, with the environment variable
+RAGSYSTEM_OUTPUT_DIR set to that directory. A separate `checker.py`
+will then execute the ground-truth driver in its own temp directory
+and compare the two `*_errors.txt` files row by row, within
+atol=1e-8 and rtol=1e-6.
+
+The script MUST:
+- be a single freestanding Python file (no relative imports, no
+  package layout)
+- read RAGSYSTEM_OUTPUT_DIR from os.environ and write every output
+  file inside that directory
+- emit exactly one file matching the glob `*_errors.txt` whose
+  contents are:
+    * a comment-header line (starting with `#`) describing the
+      columns
+    * one data row per ablation configuration
+    * each data row using the exact column ordering specified in
+      the OUTPUT SCHEMA section below
+- use the values listed in the EXTRACTED PARAMETERS section
+  unless one is missing (in which case fall back to a clearly
+  documented default and note it in a comment)
+- use a deterministic RNG seed (the one in the parameters)
+- import only NumPy, SciPy, and Matplotlib from third-party (set
+  matplotlib.use('Agg') before importing pyplot)
+- not require any network access
+- not reference any absolute path from the development machine
+
+Plots, qualitative figures, and additional logging are optional;
+the errors text file is the only artefact the checker reads.
+
+OUTPUT SCHEMA:
+Each data row in the *_errors.txt file must contain exactly three numeric columns separated by whitespace, in the order: N epsilon rel_l2.
+
+EXTRACTED PARAMETERS:
+{
+  "domain": [
+    -1.0,
+    1.0
+  ],
+  "epsilons": [
+    0.75,
+    1.5,
+    3.0
+  ],
+  "evaluation_size": 500,
+  "node_counts": [
+    50,
+    100,
+    500,
+    1000,
+    2000
+  ],
+  "output_schema": "easy",
+  "poly_orders": [],
+  "seed": 4
+}
+
+PARAMETER SOURCES:
+{
+  "domain": "prompt",
+  "epsilons": "fallback_default",
+  "evaluation_size": "prompt",
+  "node_counts": "prompt",
+  "output_schema": "prompt",
+  "seed": "fallback_default"
+}
+
+REQUIRED RETRIEVAL SYMBOLS:
+{
+  "matched": [
+    "RBF",
+    "Matern",
+    "interpolation"
+  ],
+  "missing": []
+}
+
+RETRIEVED KERNELPACK CONTEXT (top 8 chunks):
+[1] file: src/kernelpack/rbffd/core.py:182-198
+    symbol: initialize_geometry
+    chunk_type: method
+    text:
+    def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:
+            # Normalize the stencil cloud around its centroid and assemble the
+            # augmented RBF-FD interpolation matrix once. Every operator row for
+            # this stencil reuses the same left-hand side.
+            self.coeffs_already_computed = False
+            self.s_dim = x.shape[1]
+            self.n = x.shape[0]
+            self.x_stencil = x
+            self.ell = sp.ell
+            self.npoly = sp.npoly
+            self.r_stencil = distance_matrix(x, x)
+            self.width = max(float(self.r_stencil.max(initial=0.0)), 1.0)
+            self.xm, self.xc, self.width = normalize_stencil_points(x, self.width)
+            self.basis = _basis_template(self.s_dim, self.ell, "legendre")
+            p = self.basis.evaluate(self.xc, _zero_derivative(sel
+        ... (truncated)
+
+[2] file: src/kernelpack/rbffd/core.py:384-407
+    symbol: initialize_geometry
+    chunk_type: method
+    text:
+    def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:
+            # The WLS backend fits the same polynomial space as the RBF backend but
+            # replaces the augmented interpolation solve with a weighted local least
+            # squares reconstruction matrix.
+            self.s_dim = x.shape[1]
+            self.n = x.shape[0]
+            self.fit_ell = sp.ell
+            self.fit_npoly = sp.npoly
+            self.x_stencil = x
+            self.xm = x[0]
+            r2 = np.sum((x - self.xm) ** 2, axis=1)
+            self.width = max(float(np.sqrt(r2.max(initial=0.0))), 1.0)
+            self.xc = (x - self.xm) / self.width
+            self.basis = _basis_template(self.s_dim, self.fit_ell, "legendre")
+            p = self.basis.evaluate(self.xc, _zero_derivative(self.s_dim), True)
+            self.node_weights = np.clip
+        ... (truncated)
+
+[3] file: src/kernelpack/rbffd/core.py:136-145
+    symbol: default_diff_order
+    chunk_type: method
+    text:
+    @staticmethod
+        def default_diff_order(op: str) -> int:
+            op = str(op).lower()
+            if op in {"interp", "interpolation", "identity"}:
+                return 0
+            if op in {"grad", "gradient", "dx", "dy", "dz"}:
+                return 1
+            if op in {"lap", "laplacian", "bc", "boundary"}:
+                return 2
+            raise ValueError(f"unknown operator {op}")
+
+[4] file: src/kernelpack/divfree/core.py:124-155
+    symbol: dfc4_matern_blocks
+    chunk_type: function
+    text:
+    def dfc4_matern_blocks(
+        X: np.ndarray,
+        Y: np.ndarray,
+        epsilon: float,
+        *,
+        use_periodic: bool = False,
+        periodic_dims: np.ndarray | None = None,
+    ) -> tuple[np.ndarray, ...]:
+        X = np.asarray(X, dtype=float)
+        Y = np.asarray(Y, dtype=float)
+        if X.ndim != 2 or Y.ndim != 2 or X.shape[1] != Y.shape[1]:
+            raise ValueError("X and Y must be 2D arrays with matching column counts")
+        if X.shape[1] not in {2, 3}:
+            raise ValueError("DF C4 Matern kernels are only supported in 2D and 3D")
+        if not (float(epsilon) > 0.0):
+            raise ValueError("epsilon must be positive")
+
+        periodic_mask = _normalize_periodic_dims(use_periodic, periodic_dims, X.shape[1])
+        if X.shape[1] == 2:
+            if np.all(periodic_mask):
+                A, B, D = dfc4_blocks_periodic_
+        ... (truncated)
+
+[5] file: src/kernelpack/rbffd/core.py:434-444
+    symbol: bc_op
+    chunk_type: method
+    text:
+    def bc_op(self, _sp: StencilProperties, _op: OpProperties, neu_coeff: float, dir_coeff: float, _r_rhs: np.ndarray, _x_subset: np.ndarray, _x: np.ndarray, x_at_origin_subset: np.ndarray, _x_at_origin: np.ndarray, nr_subset: np.ndarray) -> np.ndarray:
+            total = np.zeros((self.fit_npoly, x_at_origin_subset.shape[0]))
+            if neu_coeff != 0:
+                for d in range(self.s_dim):
+                    grad = self.basis.evaluate(x_at_origin_subset, _unit_multi_index(self.s_dim, d), True)
+                    total += neu_coeff * (grad.T * nr_subset[:, d]) / self.width
+            if dir_coeff != 0:
+                total += dir_coeff * self.basis.evaluate(x_at_origin_subset, np.zeros((1, self.s_dim), dtype=int), True).T
+            if neu_coeff == 0 and dir_coeff == 0:
+                raise ValueError("both boun
+        ... (truncated)
+
+[6] file: src/kernelpack/rbffd/core.py:56-90
+    symbol: from_accuracy
+    chunk_type: method
+    text:
+    @classmethod
+        def from_accuracy(
+            cls,
+            *,
+            operator: str = "lap",
+            convergence_order: int | None = None,
+            diff_op_order: int | None = None,
+            dimension: int,
+            approximation: str = "rbf",
+            stencil_factor: float | None = None,
+            spline_degree: int | None = None,
+            tree_mode: str = "all",
+            point_set: str = "interior_boundary",
+        ) -> "StencilProperties":
+            # Translate a user-facing accuracy request into the internal stencil
+            # parameters used by the discrete operator builders. The exact formulas
+            # here are heuristic but intentionally mirror the Matlab-side defaults.
+            q = cls.default_diff_order(operator) if diff_op_order is None else diff_op_order
+            p = 2 if convergence_order is No
+        ... (truncated)
+
+[7] file: src/kernelpack/geometry/core.py:265-276
+    symbol: evaluate_gradient
+    chunk_type: method
+    text:
+    def evaluate_gradient(self, xe: np.ndarray) -> np.ndarray:
+            # Differentiate the RBF interpolant analytically with respect to each
+            # physical coordinate.
+            xe = np.asarray(xe, dtype=float)
+            r = distance_matrix(xe, self.centers)
+            dphi = self.m_spline_degree * r ** max(self.m_spline_degree - 2, 0)
+            invr = np.divide(1.0, r, out=np.zeros_like(r), where=r > 0)
+            grad = np.zeros((xe.shape[0], self.dim), dtype=float)
+            for d in range(self.dim):
+                delta = xe[:, d : d + 1] - self.centers[None, :, d]
+                grad[:, d] = ((dphi * delta * invr) @ self.weights) + self.poly_coeffs[d + 1]
+            return grad
+
+[8] file: src/kernelpack/geometry/core.py:198-216
+    symbol: _solve_augmented_rbf_system
+    chunk_type: function
+    text:
+    def _solve_augmented_rbf_system(kernel: np.ndarray, poly: np.ndarray, rhs: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        # Solve the usual augmented RBF interpolation system
+        #
+        #   [K  P][w] = [rhs]
+        #   [P' 0][c]   [ 0 ]
+        #
+        # by block elimination. The polynomial block is tiny in the level-set
+        # builder, so it is cheaper to factor only the dense kernel block and
+        # form the small Schur complement than to solve the full saddle-point
+        # system directly.
+        rhs = np.asarray(rhs, dtype=float)
+        lu, piv = linalg.lu_factor(kernel, overwrite_a=False, check_finite=False)
+        y = linalg.lu_solve((lu, piv), rhs, check_finite=False)
+        z = linalg.lu_solve((lu, piv), poly, check_finite=False)
+        schur = poly.T @ z
+        schur_rhs = poly.T @ y
+        poly_coeffs = linalg.
+        ... (truncated)
+
+OUTPUT:
+Return only Python code. Do not include any prose explanation outside the code itself. You may wrap the code in a single ```python``` fence or return it raw; both are accepted by the harness.

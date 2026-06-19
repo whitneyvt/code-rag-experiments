@@ -1,0 +1,176 @@
+{
+  "task_id": "external-easy-scalar-c4-matern",
+  "difficulty": "easy",
+  "generator": "llm_scientific_driver_v1",
+  "chunk_count": 8,
+  "top_files": [
+    "README.md",
+    "README.md",
+    "README.md",
+    "README.md",
+    "README.md",
+    "README.md",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/geometry/core.py"
+  ],
+  "top_symbols": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "initialize_geometry",
+    "build_closed_geometric_model_ps"
+  ],
+  "chunks": [
+    {
+      "file_path": "README.md",
+      "symbol_name": "",
+      "chunk_type": "text",
+      "score": 0.032266458495966696,
+      "start_line": 426,
+      "end_line": 522,
+      "text_preview": "`project_to_best_fit_plane`, and `phs_kernel`\n\nThese classes are intended to support the same overall workflow as the Matlab\nversion:\n\n1. fit a geometric model to input sites\n2. sample boundary points and normals\n3. build an implicit level set\n4. use that level set for node clipping and solver workflows\n\n### `kernelpack.nodes`\n\nThis package handles point generation and geometry clipping:\n\n- `gener"
+    },
+    {
+      "file_path": "README.md",
+      "symbol_name": "",
+      "chunk_type": "text",
+      "score": 0.03225806451612903,
+      "start_line": 1,
+      "end_line": 100,
+      "text_preview": "# kernelpack-python\n\n`kernelpack-python` is a Python-first port of\n[`kernelpack-matlab`](https://github.com/ShankarLab/kernelpack-matlab).\n\nIt brings the main geometry, node-generation, polynomial, RBF-FD, and solver\ningredients of KernelPack into a Python codebase that is efficient,\ninspectable, and ready for scripting, experimentation, and extension.\n\nThis is a real port, not a placeholder wrapp"
+    },
+    {
+      "file_path": "README.md",
+      "symbol_name": "",
+      "chunk_type": "text",
+      "score": 0.03177805800756621,
+      "start_line": 86,
+      "end_line": 185,
+      "text_preview": "## Installation\n\nFrom the repository root:\n\n```bash\npython -m venv .venv\n.venv\\Scripts\\activate\npython -m pip install -e .[dev]\n```\n\nThis installs the compiled-stack dependencies used by the package, including\n`numpy`, `scipy`, `matplotlib`, `pytest`, and `numba`.\n\n`numba` is used opportunistically. The accelerated kernels are part of the\nnormal package path, and editable installs pick them up aut"
+    },
+    {
+      "file_path": "README.md",
+      "symbol_name": "",
+      "chunk_type": "text",
+      "score": 0.02976190476190476,
+      "start_line": 171,
+      "end_line": 270,
+      "text_preview": "from kernelpack.nodes import DomainNodeGenerator\n\n# Generate an interior-plus-boundary domain from a geometry and target spacing.\ngenerator = DomainNodeGenerator()\ndomain = generator.build_domain_descriptor_from_geometry(\n    surface,\n    0.08,\n    seed=17,\n    strip_count=5,\n    do_outer_refinement=True,\n    outer_fraction_of_h=0.5,\n    outer_refinement_zone_size_as_multiple_of_h=2.0,\n)\n\n# Pull o"
+    },
+    {
+      "file_path": "README.md",
+      "symbol_name": "",
+      "chunk_type": "text",
+      "score": 0.028612012987012988,
+      "start_line": 341,
+      "end_line": 440,
+      "text_preview": "bc_stencil=\"rbf\",\n)\n\n# Choose the diffusivity and time step.\nnu = 0.25\ndt = 0.02\n\n# Use a named target order instead of a magic number.\ntarget_order = 4\nsolver.init(domain, target_order, dt, nu)\n\n# Define a manufactured transient problem with Dirichlet data.\nu_exact = lambda time, X: np.exp(-time) * (X[:, 0] ** 2 + X[:, 1] ** 2)\nforcing = lambda nu_value, time, X: (\n    -np.exp(-time) * (X[:, 0] *"
+    },
+    {
+      "file_path": "README.md",
+      "symbol_name": "",
+      "chunk_type": "text",
+      "score": 0.027651515151515153,
+      "start_line": 256,
+      "end_line": 355,
+      "text_preview": "surface = EmbeddedSurface()\nsurface.set_data_sites(curve)\nsurface.build_closed_geometric_model_ps(2, 0.06, curve.shape[0])\nsurface.build_level_set_from_geometric_model()\n\n# Generate interior, boundary, and ghost nodes.\ngenerator = DomainNodeGenerator()\ndomain = generator.build_domain_descriptor_from_geometry(\n    surface,\n    0.08,\n    seed=17,\n    strip_count=5,\n)\n\n# Set up an RBF-FD Poisson solv"
+    },
+    {
+      "file_path": "src/kernelpack/rbffd/core.py",
+      "symbol_name": "initialize_geometry",
+      "chunk_type": "method",
+      "score": 0.015384615384615385,
+      "start_line": 384,
+      "end_line": 407,
+      "text_preview": "def initialize_geometry(self, x: np.ndarray, sp: StencilProperties) -> None:\n        # The WLS backend fits the same polynomial space as the RBF backend but\n        # replaces the augmented interpolation solve with a weighted local least\n        # squares reconstruction matrix.\n        self.s_dim = x.shape[1]\n        self.n = x.shape[0]\n        self.fit_ell = sp.ell\n        self.fit_npoly = sp.npo"
+    },
+    {
+      "file_path": "src/kernelpack/geometry/core.py",
+      "symbol_name": "build_closed_geometric_model_ps",
+      "chunk_type": "method",
+      "score": 0.015151515151515152,
+      "start_line": 388,
+      "end_line": 456,
+      "text_preview": "def build_closed_geometric_model_ps(self, dim: int, rad: float, nb: int, ne: int | None = None, method: int = 1, supersample_fac: int = 2) -> None:\n        # Build the smooth closed geometry model and then choose an evaluation\n        # sample set. The 2D and 3D cases share the same idea but use different\n        # parameterizations and sampling strategies.\n        self.sep_rad = rad\n        self."
+    }
+  ],
+  "proposer_diagnostics": {
+    "difficulty": "easy",
+    "matched_symbols": [
+      "RBF"
+    ],
+    "referenced_files": [
+      "README.md",
+      "src/kernelpack/rbffd/core.py",
+      "src/kernelpack/geometry/core.py"
+    ],
+    "symbol_hits_by_file": {
+      "README.md": [
+        "RBF"
+      ],
+      "src/kernelpack/rbffd/core.py": [
+        "RBF"
+      ]
+    },
+    "generated_retrieval_queries": [
+      "C4 Matern scalar radial basis function interpolation",
+      "global scalar RBF interpolant",
+      "relative L2 error interpolation ablation"
+    ],
+    "matched_required_symbols": [
+      "RBF",
+      "interpolation"
+    ],
+    "missing_required_symbols": [
+      "Matern"
+    ],
+    "selected_context_files": [
+      "README.md",
+      "src/kernelpack/rbffd/core.py",
+      "src/kernelpack/geometry/core.py"
+    ],
+    "selected_context_symbols": [
+      "initialize_geometry",
+      "build_closed_geometric_model_ps"
+    ],
+    "retrieval_conditioned": true,
+    "extracted_parameters": {
+      "seed": 17,
+      "node_counts": [
+        50,
+        100,
+        500,
+        1000,
+        2000
+      ],
+      "epsilons": [
+        0.75,
+        1.5,
+        3.0
+      ],
+      "evaluation_size": 500,
+      "poly_orders": [],
+      "domain": [
+        -1.0,
+        1.0
+      ],
+      "output_schema": "easy"
+    },
+    "parameter_sources": {
+      "seed": "retrieval",
+      "node_counts": "prompt",
+      "epsilons": "fallback_default",
+      "evaluation_size": "prompt",
+      "domain": "prompt",
+      "output_schema": "prompt"
+    },
+    "missing_parameters": [],
+    "fallback_defaults_used": [
+      "epsilons"
+    ]
+  },
+  "scientific_retrieval": null
+}
