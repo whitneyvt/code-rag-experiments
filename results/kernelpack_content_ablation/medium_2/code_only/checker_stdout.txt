@@ -1,0 +1,20 @@
+{
+  "task_id": "kp_medium_2",
+  "required_repo_components": 4,
+  "matched_required_repo_components": 4,
+  "missed_required_repo_components": [],
+  "repo_claim_total": 4,
+  "verified_repo_claims": 4,
+  "hallucinated_repo_claims": 0,
+  "innate_claim_total": 4,
+  "correct_innate_claims": 4,
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_2/code_only/prediction_medium_2_code_only.py",
+  "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_i0xog3n4/kp_medium_2_summary.json",
+  "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_i0xog3n4/kp_medium_2_thought_process.json"
+}

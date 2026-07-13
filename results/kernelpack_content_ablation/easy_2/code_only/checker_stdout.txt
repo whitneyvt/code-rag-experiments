@@ -1,0 +1,22 @@
+{
+  "task_id": "kp_easy_2",
+  "required_repo_components": 4,
+  "matched_required_repo_components": 3,
+  "missed_required_repo_components": [
+    "domain_descriptor_setup"
+  ],
+  "repo_claim_total": 3,
+  "verified_repo_claims": 3,
+  "hallucinated_repo_claims": 0,
+  "innate_claim_total": 5,
+  "correct_innate_claims": 5,
+  "repo_recall": 0.75,
+  "repo_precision": 1.0,
+  "repo_f1": 0.8571428571428571,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 0.9523809523809524,
+  "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_2/code_only/prediction_easy_2_code_only.py",
+  "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_m9bwxai5/kp_easy_2_summary.json",
+  "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_m9bwxai5/kp_easy_2_thought_process.json"
+}

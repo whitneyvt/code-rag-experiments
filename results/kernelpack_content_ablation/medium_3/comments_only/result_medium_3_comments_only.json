@@ -1,0 +1,91 @@
+{
+  "task": "medium_3",
+  "task_id": "kp_medium_3",
+  "difficulty": "medium",
+  "arm": "comments_only",
+  "retrieval_budget": 5,
+  "retrieval_calls_used": 5,
+  "repo_recall": 0.8,
+  "repo_precision": 1.0,
+  "repo_f1": 0.888888888888889,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 0.9629629629629629,
+  "matched_required_repo_components": 4,
+  "missed_required_repo_components": [
+    "mean_aligned_error_postprocess"
+  ],
+  "retrieved_files": [
+    "README.md",
+    "src/kernelpack/geometry/core.py",
+    "src/kernelpack/nodes/core.py",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/solvers/_common.py",
+    "src/kernelpack/solvers/diffusion.py"
+  ],
+  "retrieved_symbols": [
+    "_ensure_boundary_operator",
+    "_get_boundary_coefficients",
+    "_parse_poisson_options",
+    "_poisson_strip_sample",
+    "_take_step",
+    "build_closed_geometric_model_ps",
+    "build_ilu_preconditioner",
+    "build_initial_guess",
+    "build_stencil_properties",
+    "evaluate_forcing_callback",
+    "evaluate_node_callback",
+    "from_accuracy",
+    "resample_closed_curve_by_arc_length",
+    "resolve_stencil_factory"
+  ],
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 4,
+  "first_required_component_found_at_call": 1,
+  "all_required_components_found_at_call": null,
+  "matched_subset_eligible": 4,
+  "comments_available_for_required_components": [
+    "curve_geometry_setup",
+    "domain_generation",
+    "poisson_solver_setup",
+    "mixed_boundary_solve_call"
+  ],
+  "required_components_without_comment_evidence": [
+    "mean_aligned_error_postprocess"
+  ],
+  "components_matched_by_retrieval": [
+    "curve_geometry_setup",
+    "domain_generation",
+    "poisson_solver_setup",
+    "mixed_boundary_solve_call"
+  ],
+  "components_missed_by_retrieval": [
+    "mean_aligned_error_postprocess"
+  ],
+  "matched_subset_chunks": 63,
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_3/comments_only/prediction_medium_3_comments_only.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_medium_3",
+    "required_repo_components": 5,
+    "matched_required_repo_components": 4,
+    "missed_required_repo_components": [
+      "mean_aligned_error_postprocess"
+    ],
+    "repo_claim_total": 4,
+    "verified_repo_claims": 4,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 0.8,
+    "repo_precision": 1.0,
+    "repo_f1": 0.888888888888889,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 0.9629629629629629,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_3/comments_only/prediction_medium_3_comments_only.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_yleojd23/kp_medium_3_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_yleojd23/kp_medium_3_thought_process.json"
+  }
+}

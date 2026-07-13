@@ -1,0 +1,1124 @@
+{
+  "benchmark_dir": "/Users/whitney/src/code-rag-experiments/benchmarks/kernelpack_python_retrieval",
+  "collection": "code_chunks_kernelpack_ram_v2",
+  "budget": 5,
+  "arms": [
+    "code_only",
+    "comments_only"
+  ],
+  "tasks": [
+    "easy",
+    "easy_2",
+    "easy_3",
+    "medium",
+    "medium_2",
+    "medium_3"
+  ],
+  "retrieval_mechanism": "query-time in-memory re-embedding over v2 coarse-chunk payloads (matched subset only; no separate collections, no payload filter)",
+  "coverage": {
+    "total_chunks": 365,
+    "chunks_with_comments": 63,
+    "comment_coverage_fraction": 0.1726027397260274,
+    "matched_subset_chunks": 63,
+    "excluded_no_comment_chunks": 302
+  },
+  "per_task_comment_coverage": {
+    "easy": {
+      "available": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "fd_operator_assembly",
+        "scalar_c4_kernel_eval"
+      ],
+      "excluded": []
+    },
+    "easy_2": {
+      "available": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "wls_operator_assembly",
+        "fdo_operator_assembly"
+      ],
+      "excluded": []
+    },
+    "easy_3": {
+      "available": [
+        "poisson_sampler_setup",
+        "spacing_check",
+        "scalar_c4_kernel_eval"
+      ],
+      "excluded": []
+    },
+    "medium": {
+      "available": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "poisson_solve_call"
+      ],
+      "excluded": [
+        "mean_aligned_error_postprocess"
+      ]
+    },
+    "medium_2": {
+      "available": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "variable_poisson_solver_setup",
+        "variable_poisson_solve_call"
+      ],
+      "excluded": []
+    },
+    "medium_3": {
+      "available": [
+        "curve_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "mixed_boundary_solve_call"
+      ],
+      "excluded": [
+        "mean_aligned_error_postprocess"
+      ]
+    }
+  },
+  "results": [
+    {
+      "task": "easy",
+      "task_id": "kp_easy",
+      "difficulty": "easy",
+      "arm": "code_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 0.5,
+      "repo_precision": 1.0,
+      "repo_f1": 0.6666666666666666,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 0.8888888888888888,
+      "matched_required_repo_components": 2,
+      "missed_required_repo_components": [
+        "domain_descriptor_setup",
+        "scalar_c4_kernel_eval"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/diffusion.py",
+        "src/kernelpack/solvers/poisson.py"
+      ],
+      "retrieved_symbols": [
+        "FDDiffOp",
+        "FDODiffOp",
+        "_compute_weights_interior",
+        "_pick_centers",
+        "assemble_op",
+        "build_domain_descriptor_from_geometry",
+        "init",
+        "initialize_geometry"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 5,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": null,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "fd_operator_assembly",
+        "scalar_c4_kernel_eval"
+      ],
+      "required_components_without_comment_evidence": [],
+      "components_matched_by_retrieval": [
+        "stencil_properties_setup",
+        "fd_operator_assembly"
+      ],
+      "components_missed_by_retrieval": [
+        "domain_descriptor_setup",
+        "scalar_c4_kernel_eval"
+      ],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy/code_only/prediction_easy_code_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_easy",
+        "required_repo_components": 4,
+        "matched_required_repo_components": 2,
+        "missed_required_repo_components": [
+          "domain_descriptor_setup",
+          "scalar_c4_kernel_eval"
+        ],
+        "repo_claim_total": 2,
+        "verified_repo_claims": 2,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 0.5,
+        "repo_precision": 1.0,
+        "repo_f1": 0.6666666666666666,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 0.8888888888888888,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy/code_only/prediction_easy_code_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_jezxh8yk/kp_easy_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_jezxh8yk/kp_easy_thought_process.json"
+      }
+    },
+    {
+      "task": "easy",
+      "task_id": "kp_easy",
+      "difficulty": "easy",
+      "arm": "comments_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 1.0,
+      "repo_precision": 1.0,
+      "repo_f1": 1.0,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 1.0,
+      "matched_required_repo_components": 4,
+      "missed_required_repo_components": [],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/domain/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py"
+      ],
+      "retrieved_symbols": [
+        "FDDiffOp",
+        "_compute_weights_interior",
+        "_has_conflicting_neighbor",
+        "_pick_centers",
+        "assemble_op",
+        "compute_weights",
+        "evaluate_gradient",
+        "from_accuracy",
+        "initialize_geometry",
+        "query_knn",
+        "set_nodes",
+        "stable_solve"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 4,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": 5,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "fd_operator_assembly",
+        "scalar_c4_kernel_eval"
+      ],
+      "required_components_without_comment_evidence": [],
+      "components_matched_by_retrieval": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "fd_operator_assembly",
+        "scalar_c4_kernel_eval"
+      ],
+      "components_missed_by_retrieval": [],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy/comments_only/prediction_easy_comments_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_easy",
+        "required_repo_components": 4,
+        "matched_required_repo_components": 4,
+        "missed_required_repo_components": [],
+        "repo_claim_total": 4,
+        "verified_repo_claims": 4,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 1.0,
+        "repo_precision": 1.0,
+        "repo_f1": 1.0,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 1.0,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy/comments_only/prediction_easy_comments_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3sopqo8m/kp_easy_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3sopqo8m/kp_easy_thought_process.json"
+      }
+    },
+    {
+      "task": "easy_2",
+      "task_id": "kp_easy_2",
+      "difficulty": "easy",
+      "arm": "code_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 0.75,
+      "repo_precision": 1.0,
+      "repo_f1": 0.8571428571428571,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 0.9523809523809524,
+      "matched_required_repo_components": 3,
+      "missed_required_repo_components": [
+        "domain_descriptor_setup"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/diffusion.py",
+        "src/kernelpack/solvers/poisson.py"
+      ],
+      "retrieved_symbols": [
+        "FDDiffOp",
+        "FDODiffOp",
+        "_compute_weights_interior",
+        "_pick_centers",
+        "assemble_op",
+        "build_domain_descriptor_from_geometry",
+        "init",
+        "initialize_geometry"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 5,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": null,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "wls_operator_assembly",
+        "fdo_operator_assembly"
+      ],
+      "required_components_without_comment_evidence": [],
+      "components_matched_by_retrieval": [
+        "stencil_properties_setup",
+        "wls_operator_assembly",
+        "fdo_operator_assembly"
+      ],
+      "components_missed_by_retrieval": [
+        "domain_descriptor_setup"
+      ],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_2/code_only/prediction_easy_2_code_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_easy_2",
+        "required_repo_components": 4,
+        "matched_required_repo_components": 3,
+        "missed_required_repo_components": [
+          "domain_descriptor_setup"
+        ],
+        "repo_claim_total": 3,
+        "verified_repo_claims": 3,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 5,
+        "correct_innate_claims": 5,
+        "repo_recall": 0.75,
+        "repo_precision": 1.0,
+        "repo_f1": 0.8571428571428571,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 0.9523809523809524,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_2/code_only/prediction_easy_2_code_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_m9bwxai5/kp_easy_2_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_m9bwxai5/kp_easy_2_thought_process.json"
+      }
+    },
+    {
+      "task": "easy_2",
+      "task_id": "kp_easy_2",
+      "difficulty": "easy",
+      "arm": "comments_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 1.0,
+      "repo_precision": 1.0,
+      "repo_f1": 1.0,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 1.0,
+      "matched_required_repo_components": 4,
+      "missed_required_repo_components": [],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/domain/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py"
+      ],
+      "retrieved_symbols": [
+        "FDDiffOp",
+        "_compute_weights_interior",
+        "_has_conflicting_neighbor",
+        "_pick_centers",
+        "assemble_op",
+        "compute_weights",
+        "evaluate_gradient",
+        "from_accuracy",
+        "initialize_geometry",
+        "query_knn",
+        "set_nodes",
+        "stable_solve"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 4,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": 5,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "wls_operator_assembly",
+        "fdo_operator_assembly"
+      ],
+      "required_components_without_comment_evidence": [],
+      "components_matched_by_retrieval": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "wls_operator_assembly",
+        "fdo_operator_assembly"
+      ],
+      "components_missed_by_retrieval": [],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_2/comments_only/prediction_easy_2_comments_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_easy_2",
+        "required_repo_components": 4,
+        "matched_required_repo_components": 4,
+        "missed_required_repo_components": [],
+        "repo_claim_total": 4,
+        "verified_repo_claims": 4,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 5,
+        "correct_innate_claims": 5,
+        "repo_recall": 1.0,
+        "repo_precision": 1.0,
+        "repo_f1": 1.0,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 1.0,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_2/comments_only/prediction_easy_2_comments_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_m1vuhum7/kp_easy_2_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_m1vuhum7/kp_easy_2_thought_process.json"
+      }
+    },
+    {
+      "task": "easy_3",
+      "task_id": "kp_easy_3",
+      "difficulty": "easy",
+      "arm": "code_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 0.3333333333333333,
+      "repo_precision": 1.0,
+      "repo_f1": 0.5,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 0.8333333333333334,
+      "matched_required_repo_components": 1,
+      "missed_required_repo_components": [
+        "scalar_c4_kernel_eval",
+        "spacing_check"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py"
+      ],
+      "retrieved_symbols": [
+        "FDDiffOp",
+        "FDODiffOp",
+        "_assemble_one",
+        "_compute_weights_interior",
+        "_parse_poisson_options",
+        "_pick_centers",
+        "_poisson_strip_sample",
+        "assemble_op",
+        "bc_op",
+        "compute_weights",
+        "evaluate_node_callback",
+        "from_accuracy",
+        "generate_interior_nodes_from_geometry",
+        "generate_poisson_nodes_in_box",
+        "initialize_geometry"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 4,
+      "first_required_component_found_at_call": 4,
+      "all_required_components_found_at_call": null,
+      "matched_subset_eligible": 3,
+      "comments_available_for_required_components": [
+        "poisson_sampler_setup",
+        "spacing_check",
+        "scalar_c4_kernel_eval"
+      ],
+      "required_components_without_comment_evidence": [],
+      "components_matched_by_retrieval": [
+        "poisson_sampler_setup"
+      ],
+      "components_missed_by_retrieval": [
+        "spacing_check",
+        "scalar_c4_kernel_eval"
+      ],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_3/code_only/prediction_easy_3_code_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_easy_3",
+        "required_repo_components": 3,
+        "matched_required_repo_components": 1,
+        "missed_required_repo_components": [
+          "scalar_c4_kernel_eval",
+          "spacing_check"
+        ],
+        "repo_claim_total": 1,
+        "verified_repo_claims": 1,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 0.3333333333333333,
+        "repo_precision": 1.0,
+        "repo_f1": 0.5,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 0.8333333333333334,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_3/code_only/prediction_easy_3_code_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_p64whxce/kp_easy_3_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_p64whxce/kp_easy_3_thought_process.json"
+      }
+    },
+    {
+      "task": "easy_3",
+      "task_id": "kp_easy_3",
+      "difficulty": "easy",
+      "arm": "comments_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 4,
+      "repo_recall": 1.0,
+      "repo_precision": 1.0,
+      "repo_f1": 1.0,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 1.0,
+      "matched_required_repo_components": 3,
+      "missed_required_repo_components": [],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py"
+      ],
+      "retrieved_symbols": [
+        "_assemble_one",
+        "_compute_weights_interior",
+        "_parse_poisson_options",
+        "_pick_centers",
+        "bc_op",
+        "clip_points_by_geometry",
+        "compute_weights",
+        "evaluate_gradient",
+        "evaluate_node_callback",
+        "from_accuracy",
+        "generate_poisson_nodes_in_box",
+        "initialize_geometry",
+        "stable_solve"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 3,
+      "first_required_component_found_at_call": 4,
+      "all_required_components_found_at_call": 4,
+      "matched_subset_eligible": 3,
+      "comments_available_for_required_components": [
+        "poisson_sampler_setup",
+        "spacing_check",
+        "scalar_c4_kernel_eval"
+      ],
+      "required_components_without_comment_evidence": [],
+      "components_matched_by_retrieval": [
+        "poisson_sampler_setup",
+        "spacing_check",
+        "scalar_c4_kernel_eval"
+      ],
+      "components_missed_by_retrieval": [],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_3/comments_only/prediction_easy_3_comments_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_easy_3",
+        "required_repo_components": 3,
+        "matched_required_repo_components": 3,
+        "missed_required_repo_components": [],
+        "repo_claim_total": 3,
+        "verified_repo_claims": 3,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 1.0,
+        "repo_precision": 1.0,
+        "repo_f1": 1.0,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 1.0,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy_3/comments_only/prediction_easy_3_comments_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_dlzm8pf2/kp_easy_3_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_dlzm8pf2/kp_easy_3_thought_process.json"
+      }
+    },
+    {
+      "task": "medium",
+      "task_id": "kp_medium",
+      "difficulty": "medium",
+      "arm": "code_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 0.8,
+      "repo_precision": 1.0,
+      "repo_f1": 0.888888888888889,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 0.9629629629629629,
+      "matched_required_repo_components": 4,
+      "missed_required_repo_components": [
+        "mean_aligned_error_postprocess"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/domain/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py",
+        "src/kernelpack/solvers/diffusion.py",
+        "src/kernelpack/solvers/poisson.py",
+        "src/kernelpack/solvers/pu_sl_fd_advection_diffusion.py",
+        "src/kernelpack/solvers/pu_sl_pu_advection_diffusion.py"
+      ],
+      "retrieved_symbols": [
+        "FDDiffOp",
+        "PUSLFDAdvectionDiffusionReactionSolver",
+        "PUSLPUAdvectionDiffusionReactionSolver",
+        "_ensure_boundary_operator",
+        "_get_boundary_coefficients",
+        "_pick_centers",
+        "_take_step",
+        "assemble_op",
+        "build_closed_geometric_model_ps",
+        "build_domain_descriptor_from_geometry",
+        "build_initial_guess",
+        "from_accuracy",
+        "init",
+        "initialize_geometry",
+        "set_nodes",
+        "solve"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 3,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": null,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "poisson_solve_call"
+      ],
+      "required_components_without_comment_evidence": [
+        "mean_aligned_error_postprocess"
+      ],
+      "components_matched_by_retrieval": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "poisson_solve_call"
+      ],
+      "components_missed_by_retrieval": [
+        "mean_aligned_error_postprocess"
+      ],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium/code_only/prediction_medium_code_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_medium",
+        "required_repo_components": 5,
+        "matched_required_repo_components": 4,
+        "missed_required_repo_components": [
+          "mean_aligned_error_postprocess"
+        ],
+        "repo_claim_total": 4,
+        "verified_repo_claims": 4,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 0.8,
+        "repo_precision": 1.0,
+        "repo_f1": 0.888888888888889,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 0.9629629629629629,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium/code_only/prediction_medium_code_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_hjyydxf7/kp_medium_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_hjyydxf7/kp_medium_thought_process.json"
+      }
+    },
+    {
+      "task": "medium",
+      "task_id": "kp_medium",
+      "difficulty": "medium",
+      "arm": "comments_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 0.8,
+      "repo_precision": 1.0,
+      "repo_f1": 0.888888888888889,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 0.9629629629629629,
+      "matched_required_repo_components": 4,
+      "missed_required_repo_components": [
+        "mean_aligned_error_postprocess"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py",
+        "src/kernelpack/solvers/diffusion.py",
+        "src/kernelpack/solvers/poisson.py"
+      ],
+      "retrieved_symbols": [
+        "_ensure_boundary_operator",
+        "_get_boundary_coefficients",
+        "_has_conflicting_neighbor",
+        "_solve_augmented_rbf_system",
+        "build_closed_geometric_model_ps",
+        "build_initial_guess",
+        "build_system_matrix",
+        "evaluate_forcing_callback",
+        "evaluate_node_callback",
+        "from_accuracy",
+        "generate_poisson_nodes_in_box",
+        "init",
+        "solve"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 4,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": null,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "poisson_solve_call"
+      ],
+      "required_components_without_comment_evidence": [
+        "mean_aligned_error_postprocess"
+      ],
+      "components_matched_by_retrieval": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "poisson_solve_call"
+      ],
+      "components_missed_by_retrieval": [
+        "mean_aligned_error_postprocess"
+      ],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium/comments_only/prediction_medium_comments_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_medium",
+        "required_repo_components": 5,
+        "matched_required_repo_components": 4,
+        "missed_required_repo_components": [
+          "mean_aligned_error_postprocess"
+        ],
+        "repo_claim_total": 4,
+        "verified_repo_claims": 4,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 0.8,
+        "repo_precision": 1.0,
+        "repo_f1": 0.888888888888889,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 0.9629629629629629,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium/comments_only/prediction_medium_comments_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_jnhseiso/kp_medium_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_jnhseiso/kp_medium_thought_process.json"
+      }
+    },
+    {
+      "task": "medium_2",
+      "task_id": "kp_medium_2",
+      "difficulty": "medium",
+      "arm": "code_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 4,
+      "repo_recall": 1.0,
+      "repo_precision": 1.0,
+      "repo_f1": 1.0,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 1.0,
+      "matched_required_repo_components": 4,
+      "missed_required_repo_components": [],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/poly/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py",
+        "src/kernelpack/solvers/diffusion.py",
+        "src/kernelpack/solvers/poisson.py",
+        "src/kernelpack/solvers/pu_sl_fd_advection_diffusion.py",
+        "src/kernelpack/solvers/pu_sl_pu_advection_diffusion.py"
+      ],
+      "retrieved_symbols": [
+        "PUSLFDAdvectionDiffusionReactionSolver",
+        "PUSLPUAdvectionDiffusionReactionSolver",
+        "_parse_poisson_options",
+        "_take_step",
+        "build_closed_geometric_model_ps",
+        "build_domain_descriptor_from_geometry",
+        "build_initial_guess",
+        "build_stencil_properties",
+        "evaluate",
+        "evaluate_node_callback",
+        "generate_interior_nodes_from_geometry",
+        "init",
+        "initialize_geometry",
+        "resolve_stencil_factory"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 3,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": 4,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "variable_poisson_solver_setup",
+        "variable_poisson_solve_call"
+      ],
+      "required_components_without_comment_evidence": [],
+      "components_matched_by_retrieval": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "variable_poisson_solver_setup",
+        "variable_poisson_solve_call"
+      ],
+      "components_missed_by_retrieval": [],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_2/code_only/prediction_medium_2_code_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_medium_2",
+        "required_repo_components": 4,
+        "matched_required_repo_components": 4,
+        "missed_required_repo_components": [],
+        "repo_claim_total": 4,
+        "verified_repo_claims": 4,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 1.0,
+        "repo_precision": 1.0,
+        "repo_f1": 1.0,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 1.0,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_2/code_only/prediction_medium_2_code_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_i0xog3n4/kp_medium_2_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_i0xog3n4/kp_medium_2_thought_process.json"
+      }
+    },
+    {
+      "task": "medium_2",
+      "task_id": "kp_medium_2",
+      "difficulty": "medium",
+      "arm": "comments_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 1.0,
+      "repo_precision": 1.0,
+      "repo_f1": 1.0,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 1.0,
+      "matched_required_repo_components": 4,
+      "missed_required_repo_components": [],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/solvers/_common.py",
+        "src/kernelpack/solvers/diffusion.py"
+      ],
+      "retrieved_symbols": [
+        "_ensure_boundary_operator",
+        "_get_boundary_coefficients",
+        "_has_conflicting_neighbor",
+        "_parse_poisson_options",
+        "_poisson_strip_sample",
+        "_solve_augmented_rbf_system",
+        "_take_step",
+        "build_closed_geometric_model_ps",
+        "build_ilu_preconditioner",
+        "build_initial_guess",
+        "build_stencil_properties",
+        "evaluate_forcing_callback",
+        "evaluate_node_callback",
+        "generate_poisson_nodes_in_box",
+        "resolve_stencil_factory"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 4,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": 5,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "variable_poisson_solver_setup",
+        "variable_poisson_solve_call"
+      ],
+      "required_components_without_comment_evidence": [],
+      "components_matched_by_retrieval": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "variable_poisson_solver_setup",
+        "variable_poisson_solve_call"
+      ],
+      "components_missed_by_retrieval": [],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_2/comments_only/prediction_medium_2_comments_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_medium_2",
+        "required_repo_components": 4,
+        "matched_required_repo_components": 4,
+        "missed_required_repo_components": [],
+        "repo_claim_total": 4,
+        "verified_repo_claims": 4,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 1.0,
+        "repo_precision": 1.0,
+        "repo_f1": 1.0,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 1.0,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_2/comments_only/prediction_medium_2_comments_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_56obbenv/kp_medium_2_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_56obbenv/kp_medium_2_thought_process.json"
+      }
+    },
+    {
+      "task": "medium_3",
+      "task_id": "kp_medium_3",
+      "difficulty": "medium",
+      "arm": "code_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 0.8,
+      "repo_precision": 1.0,
+      "repo_f1": 0.888888888888889,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 0.9629629629629629,
+      "matched_required_repo_components": 4,
+      "missed_required_repo_components": [
+        "mean_aligned_error_postprocess"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/domain/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/poly/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py",
+        "src/kernelpack/solvers/diffusion.py",
+        "src/kernelpack/solvers/poisson.py",
+        "src/kernelpack/solvers/pu_sl_fd_advection_diffusion.py",
+        "src/kernelpack/solvers/pu_sl_pu_advection_diffusion.py"
+      ],
+      "retrieved_symbols": [
+        "PUSLFDAdvectionDiffusionReactionSolver",
+        "PUSLPUAdvectionDiffusionReactionSolver",
+        "PolynomialBasis",
+        "_parse_poisson_options",
+        "_pick_centers",
+        "_take_step",
+        "assemble_op",
+        "build_closed_geometric_model_ps",
+        "build_initial_guess",
+        "build_stencil_properties",
+        "evaluate",
+        "evaluate_node_callback",
+        "from_accuracy",
+        "init",
+        "initialize_geometry",
+        "resolve_stencil_factory",
+        "set_nodes"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 4,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": null,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "curve_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "mixed_boundary_solve_call"
+      ],
+      "required_components_without_comment_evidence": [
+        "mean_aligned_error_postprocess"
+      ],
+      "components_matched_by_retrieval": [
+        "curve_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "mixed_boundary_solve_call"
+      ],
+      "components_missed_by_retrieval": [
+        "mean_aligned_error_postprocess"
+      ],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_3/code_only/prediction_medium_3_code_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_medium_3",
+        "required_repo_components": 5,
+        "matched_required_repo_components": 4,
+        "missed_required_repo_components": [
+          "mean_aligned_error_postprocess"
+        ],
+        "repo_claim_total": 4,
+        "verified_repo_claims": 4,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 0.8,
+        "repo_precision": 1.0,
+        "repo_f1": 0.888888888888889,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 0.9629629629629629,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_3/code_only/prediction_medium_3_code_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_p3b_ig0l/kp_medium_3_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_p3b_ig0l/kp_medium_3_thought_process.json"
+      }
+    },
+    {
+      "task": "medium_3",
+      "task_id": "kp_medium_3",
+      "difficulty": "medium",
+      "arm": "comments_only",
+      "retrieval_budget": 5,
+      "retrieval_calls_used": 5,
+      "repo_recall": 0.8,
+      "repo_precision": 1.0,
+      "repo_f1": 0.888888888888889,
+      "innate_precision": 1.0,
+      "code_alignment": 1.0,
+      "final_score": 0.9629629629629629,
+      "matched_required_repo_components": 4,
+      "missed_required_repo_components": [
+        "mean_aligned_error_postprocess"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py",
+        "src/kernelpack/solvers/diffusion.py"
+      ],
+      "retrieved_symbols": [
+        "_ensure_boundary_operator",
+        "_get_boundary_coefficients",
+        "_parse_poisson_options",
+        "_poisson_strip_sample",
+        "_take_step",
+        "build_closed_geometric_model_ps",
+        "build_ilu_preconditioner",
+        "build_initial_guess",
+        "build_stencil_properties",
+        "evaluate_forcing_callback",
+        "evaluate_node_callback",
+        "from_accuracy",
+        "resample_closed_curve_by_arc_length",
+        "resolve_stencil_factory"
+      ],
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 4,
+      "first_required_component_found_at_call": 1,
+      "all_required_components_found_at_call": null,
+      "matched_subset_eligible": 4,
+      "comments_available_for_required_components": [
+        "curve_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "mixed_boundary_solve_call"
+      ],
+      "required_components_without_comment_evidence": [
+        "mean_aligned_error_postprocess"
+      ],
+      "components_matched_by_retrieval": [
+        "curve_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "mixed_boundary_solve_call"
+      ],
+      "components_missed_by_retrieval": [
+        "mean_aligned_error_postprocess"
+      ],
+      "matched_subset_chunks": 63,
+      "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_3/comments_only/prediction_medium_3_comments_only.py",
+      "checker_ok": true,
+      "checker_error": null,
+      "checker_score_full": {
+        "task_id": "kp_medium_3",
+        "required_repo_components": 5,
+        "matched_required_repo_components": 4,
+        "missed_required_repo_components": [
+          "mean_aligned_error_postprocess"
+        ],
+        "repo_claim_total": 4,
+        "verified_repo_claims": 4,
+        "hallucinated_repo_claims": 0,
+        "innate_claim_total": 4,
+        "correct_innate_claims": 4,
+        "repo_recall": 0.8,
+        "repo_precision": 1.0,
+        "repo_f1": 0.888888888888889,
+        "innate_precision": 1.0,
+        "code_alignment": 1.0,
+        "final_score": 0.9629629629629629,
+        "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/medium_3/comments_only/prediction_medium_3_comments_only.py",
+        "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_yleojd23/kp_medium_3_summary.json",
+        "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_yleojd23/kp_medium_3_thought_process.json"
+      }
+    }
+  ]
+}

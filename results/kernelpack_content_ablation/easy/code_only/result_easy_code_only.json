@@ -1,0 +1,83 @@
+{
+  "task": "easy",
+  "task_id": "kp_easy",
+  "difficulty": "easy",
+  "arm": "code_only",
+  "retrieval_budget": 5,
+  "retrieval_calls_used": 5,
+  "repo_recall": 0.5,
+  "repo_precision": 1.0,
+  "repo_f1": 0.6666666666666666,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 0.8888888888888888,
+  "matched_required_repo_components": 2,
+  "missed_required_repo_components": [
+    "domain_descriptor_setup",
+    "scalar_c4_kernel_eval"
+  ],
+  "retrieved_files": [
+    "README.md",
+    "src/kernelpack/nodes/core.py",
+    "src/kernelpack/rbffd/core.py",
+    "src/kernelpack/solvers/diffusion.py",
+    "src/kernelpack/solvers/poisson.py"
+  ],
+  "retrieved_symbols": [
+    "FDDiffOp",
+    "FDODiffOp",
+    "_compute_weights_interior",
+    "_pick_centers",
+    "assemble_op",
+    "build_domain_descriptor_from_geometry",
+    "init",
+    "initialize_geometry"
+  ],
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 5,
+  "first_required_component_found_at_call": 1,
+  "all_required_components_found_at_call": null,
+  "matched_subset_eligible": 4,
+  "comments_available_for_required_components": [
+    "domain_descriptor_setup",
+    "stencil_properties_setup",
+    "fd_operator_assembly",
+    "scalar_c4_kernel_eval"
+  ],
+  "required_components_without_comment_evidence": [],
+  "components_matched_by_retrieval": [
+    "stencil_properties_setup",
+    "fd_operator_assembly"
+  ],
+  "components_missed_by_retrieval": [
+    "domain_descriptor_setup",
+    "scalar_c4_kernel_eval"
+  ],
+  "matched_subset_chunks": 63,
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy/code_only/prediction_easy_code_only.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_easy",
+    "required_repo_components": 4,
+    "matched_required_repo_components": 2,
+    "missed_required_repo_components": [
+      "domain_descriptor_setup",
+      "scalar_c4_kernel_eval"
+    ],
+    "repo_claim_total": 2,
+    "verified_repo_claims": 2,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 0.5,
+    "repo_precision": 1.0,
+    "repo_f1": 0.6666666666666666,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 0.8888888888888888,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_content_ablation/easy/code_only/prediction_easy_code_only.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_jezxh8yk/kp_easy_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_jezxh8yk/kp_easy_thought_process.json"
+  }
+}
