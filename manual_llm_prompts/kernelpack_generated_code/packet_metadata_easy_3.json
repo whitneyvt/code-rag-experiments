@@ -1,0 +1,31 @@
+{
+  "task": "easy_3",
+  "task_id": "kp_easy_3",
+  "chunk_count": 1,
+  "retrieved_files": [
+    "tests/test_nodes_rbffd.py"
+  ],
+  "retrieved_symbols": [
+    "test_poisson_sampler_and_geometry_clip"
+  ],
+  "matched_components": [
+    "poisson_sampler_setup",
+    "spacing_check",
+    "scalar_c4_kernel_eval"
+  ],
+  "missed_components": [],
+  "retrieval_calls_used": 1,
+  "budget": 5,
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 0,
+  "successful_reformulations": 0,
+  "query_variant_counts": {
+    "specific": 1,
+    "symbol_only": 0,
+    "marker_only": 0,
+    "file_hint": 0,
+    "broad_concept": 0
+  },
+  "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_easy_3.txt",
+  "arm": "fine_to_coarse"
+}

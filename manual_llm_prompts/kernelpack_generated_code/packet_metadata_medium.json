@@ -1,0 +1,59 @@
+{
+  "task": "medium",
+  "task_id": "kp_medium",
+  "chunk_count": 26,
+  "retrieved_files": [
+    "README.md",
+    "src/kernelpack/domain/core.py",
+    "src/kernelpack/geometry/core.py",
+    "src/kernelpack/nodes/__init__.py",
+    "src/kernelpack/nodes/core.py",
+    "src/kernelpack/solvers/poisson.py",
+    "tests/test_solvers.py"
+  ],
+  "retrieved_symbols": [
+    "DomainNodeGenerator",
+    "PoissonSolver",
+    "_build_boundary_state",
+    "build_closed_geometric_model_ps",
+    "build_domain_descriptor_from_geometry",
+    "build_geometric_model_ps",
+    "build_level_set_from_geometric_model",
+    "build_test_domain",
+    "generate_interior_nodes_from_geometry",
+    "generate_poisson_nodes",
+    "get_bdry_nodes",
+    "get_domain_descriptor",
+    "get_int_bdry_nodes",
+    "get_num_bdry_nodes",
+    "get_num_int_bdry_nodes",
+    "init",
+    "solve",
+    "test_nonlinear_variable_poisson_solver_checks",
+    "test_poisson_solver_checks",
+    "test_variable_poisson_solver_checks",
+    "test_variable_poisson_solver_matches_mixed_bc_case"
+  ],
+  "matched_components": [
+    "circle_geometry_setup",
+    "domain_generation",
+    "poisson_solver_setup",
+    "poisson_solve_call",
+    "mean_aligned_error_postprocess"
+  ],
+  "missed_components": [],
+  "retrieval_calls_used": 4,
+  "budget": 5,
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 0,
+  "successful_reformulations": 0,
+  "query_variant_counts": {
+    "specific": 4,
+    "symbol_only": 0,
+    "marker_only": 0,
+    "file_hint": 0,
+    "broad_concept": 0
+  },
+  "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_medium.txt",
+  "arm": "fine_to_coarse"
+}

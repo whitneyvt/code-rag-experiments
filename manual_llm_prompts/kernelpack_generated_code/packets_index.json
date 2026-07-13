@@ -1,0 +1,260 @@
+{
+  "benchmark_dir": "/Users/whitney/src/code-rag-experiments/benchmarks/kernelpack_python_retrieval",
+  "budget": 5,
+  "arm": "fine_to_coarse",
+  "tasks": [
+    "easy",
+    "easy_2",
+    "easy_3",
+    "medium",
+    "medium_2",
+    "medium_3"
+  ],
+  "packets": [
+    {
+      "task": "easy",
+      "task_id": "kp_easy",
+      "chunk_count": 2,
+      "retrieved_files": [
+        "tests/test_nodes_rbffd.py"
+      ],
+      "retrieved_symbols": [
+        "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+        "test_rbffd_laplacian"
+      ],
+      "matched_components": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "fd_operator_assembly",
+        "scalar_c4_kernel_eval"
+      ],
+      "missed_components": [],
+      "retrieval_calls_used": 3,
+      "budget": 5,
+      "empty_retrieval_calls": 2,
+      "weak_retrieval_calls": 0,
+      "successful_reformulations": 1,
+      "query_variant_counts": {
+        "specific": 1,
+        "symbol_only": 1,
+        "marker_only": 1,
+        "file_hint": 0,
+        "broad_concept": 0
+      },
+      "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_easy.txt",
+      "arm": "fine_to_coarse"
+    },
+    {
+      "task": "easy_2",
+      "task_id": "kp_easy_2",
+      "chunk_count": 2,
+      "retrieved_files": [
+        "tests/test_nodes_rbffd.py"
+      ],
+      "retrieved_symbols": [
+        "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+        "test_rbffd_laplacian"
+      ],
+      "matched_components": [
+        "domain_descriptor_setup",
+        "stencil_properties_setup",
+        "wls_operator_assembly",
+        "fdo_operator_assembly"
+      ],
+      "missed_components": [],
+      "retrieval_calls_used": 3,
+      "budget": 5,
+      "empty_retrieval_calls": 2,
+      "weak_retrieval_calls": 0,
+      "successful_reformulations": 1,
+      "query_variant_counts": {
+        "specific": 1,
+        "symbol_only": 1,
+        "marker_only": 1,
+        "file_hint": 0,
+        "broad_concept": 0
+      },
+      "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_easy_2.txt",
+      "arm": "fine_to_coarse"
+    },
+    {
+      "task": "easy_3",
+      "task_id": "kp_easy_3",
+      "chunk_count": 1,
+      "retrieved_files": [
+        "tests/test_nodes_rbffd.py"
+      ],
+      "retrieved_symbols": [
+        "test_poisson_sampler_and_geometry_clip"
+      ],
+      "matched_components": [
+        "poisson_sampler_setup",
+        "spacing_check",
+        "scalar_c4_kernel_eval"
+      ],
+      "missed_components": [],
+      "retrieval_calls_used": 1,
+      "budget": 5,
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 0,
+      "successful_reformulations": 0,
+      "query_variant_counts": {
+        "specific": 1,
+        "symbol_only": 0,
+        "marker_only": 0,
+        "file_hint": 0,
+        "broad_concept": 0
+      },
+      "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_easy_3.txt",
+      "arm": "fine_to_coarse"
+    },
+    {
+      "task": "medium",
+      "task_id": "kp_medium",
+      "chunk_count": 26,
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/domain/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/__init__.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/solvers/poisson.py",
+        "tests/test_solvers.py"
+      ],
+      "retrieved_symbols": [
+        "DomainNodeGenerator",
+        "PoissonSolver",
+        "_build_boundary_state",
+        "build_closed_geometric_model_ps",
+        "build_domain_descriptor_from_geometry",
+        "build_geometric_model_ps",
+        "build_level_set_from_geometric_model",
+        "build_test_domain",
+        "generate_interior_nodes_from_geometry",
+        "generate_poisson_nodes",
+        "get_bdry_nodes",
+        "get_domain_descriptor",
+        "get_int_bdry_nodes",
+        "get_num_bdry_nodes",
+        "get_num_int_bdry_nodes",
+        "init",
+        "solve",
+        "test_nonlinear_variable_poisson_solver_checks",
+        "test_poisson_solver_checks",
+        "test_variable_poisson_solver_checks",
+        "test_variable_poisson_solver_matches_mixed_bc_case"
+      ],
+      "matched_components": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "poisson_solve_call",
+        "mean_aligned_error_postprocess"
+      ],
+      "missed_components": [],
+      "retrieval_calls_used": 4,
+      "budget": 5,
+      "empty_retrieval_calls": 0,
+      "weak_retrieval_calls": 0,
+      "successful_reformulations": 0,
+      "query_variant_counts": {
+        "specific": 4,
+        "symbol_only": 0,
+        "marker_only": 0,
+        "file_hint": 0,
+        "broad_concept": 0
+      },
+      "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_medium.txt",
+      "arm": "fine_to_coarse"
+    },
+    {
+      "task": "medium_2",
+      "task_id": "kp_medium_2",
+      "chunk_count": 8,
+      "retrieved_files": [
+        "examples/poisson_convergence_2d_neumann.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/poly/core.py",
+        "tests/test_pu_solvers.py",
+        "tests/test_solvers.py"
+      ],
+      "retrieved_symbols": [
+        "_local_radius",
+        "build_test_domain",
+        "evaluate",
+        "make_circle_data_sites",
+        "test_nonlinear_variable_poisson_solver_checks",
+        "test_poisson_solver_checks",
+        "test_variable_poisson_solver_matches_mixed_bc_case"
+      ],
+      "matched_components": [
+        "circle_geometry_setup",
+        "domain_generation",
+        "variable_poisson_solver_setup",
+        "variable_poisson_solve_call"
+      ],
+      "missed_components": [],
+      "retrieval_calls_used": 4,
+      "budget": 5,
+      "empty_retrieval_calls": 3,
+      "weak_retrieval_calls": 0,
+      "successful_reformulations": 1,
+      "query_variant_counts": {
+        "specific": 1,
+        "symbol_only": 1,
+        "marker_only": 1,
+        "file_hint": 1,
+        "broad_concept": 0
+      },
+      "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_medium_2.txt",
+      "arm": "fine_to_coarse"
+    },
+    {
+      "task": "medium_3",
+      "task_id": "kp_medium_3",
+      "chunk_count": 15,
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/domain/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "tests/test_pu_solvers.py",
+        "tests/test_solvers.py"
+      ],
+      "retrieved_symbols": [
+        "build_test_domain",
+        "get_bdry_nodes",
+        "get_int_bdry_nodes",
+        "get_num_bdry_nodes",
+        "get_num_int_bdry_nodes",
+        "test_diffusion_solver_checks",
+        "test_nonlinear_variable_poisson_solver_checks",
+        "test_poisson_solver_checks",
+        "test_variable_poisson_solver_checks",
+        "test_variable_poisson_solver_matches_mixed_bc_case"
+      ],
+      "matched_components": [
+        "curve_geometry_setup",
+        "domain_generation",
+        "poisson_solver_setup",
+        "mixed_boundary_solve_call",
+        "mean_aligned_error_postprocess"
+      ],
+      "missed_components": [],
+      "retrieval_calls_used": 5,
+      "budget": 5,
+      "empty_retrieval_calls": 3,
+      "weak_retrieval_calls": 0,
+      "successful_reformulations": 1,
+      "query_variant_counts": {
+        "specific": 2,
+        "symbol_only": 1,
+        "marker_only": 1,
+        "file_hint": 1,
+        "broad_concept": 0
+      },
+      "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_medium_3.txt",
+      "arm": "fine_to_coarse"
+    }
+  ]
+}

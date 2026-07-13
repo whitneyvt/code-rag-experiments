@@ -1,0 +1,781 @@
+# KernelPack generated-code task: medium_3 (task_id=kp_medium_3)
+
+You are given a coding task, retrieved KernelPack repository context, and a
+strict output contract. Produce ONE Python prediction script that solves the
+task AND records honest provenance for every component.
+
+Task prompt
+===========
+Write a standalone Python driver that solves a mixed-boundary Poisson problem
+on a smooth closed curve using `kernelpack-python`.
+
+Use the repository code embeddings as implementation context. The goal is to
+retrieve the geometry construction, domain-generation workflow, and
+`PoissonSolver` usage pattern from `kernelpack-python`, then implement a clear
+driver around those pieces.
+
+The script should:
+
+1. Define a nontrivial exact solution `u(x,y)`.
+2. Define the forcing term that matches the exact solution.
+3. Define a boundary callback that combines nonzero Neumann and Dirichlet
+   coefficients, so the mixed-boundary branch is exercised.
+4. Build a smooth closed curve from sampled boundary points.
+5. Build a smooth geometry with `EmbeddedSurface`,
+   `set_data_sites`, `build_closed_geometric_model_ps`, and
+   `build_level_set_from_geometric_model`.
+6. Use `DomainNodeGenerator.build_domain_descriptor_from_geometry` to create a
+   2D domain with boundary refinement enabled.
+7. Construct a `PoissonSolver` with `lap_assembler="fd"`,
+   `bc_assembler="fd"`, `lap_stencil="rbf"`, and `bc_stencil="rbf"`.
+8. Call `init(domain, xi)` and solve the mixed-boundary problem.
+9. Compute a mean-aligned error before reporting final norms.
+10. Write a JSON summary file named `kp_medium_3_summary.json` with at least:
+    - `h`
+    - `n_physical`
+    - `num_boundary_nodes`
+    - `linf`
+    - `l2`
+    - `used_nullspace_augmentation`
+11. If `RAGSYSTEM_OUTPUT_DIR` is set, write the summary file there.
+12. Also write a provenance file named
+    `kp_medium_3_thought_process.json` there.
+
+The provenance file must be structured JSON, not free-form chain-of-thought.
+Use this schema:
+
+```json
+{
+  "task_id": "kp_medium_3",
+  "entries": [
+    {
+      "component_id": "string",
+      "origin": "repo | innate | hybrid",
+      "summary": "short description",
+      "repo_symbols": ["symbol", "..."],
+      "repo_refs": ["relative/path.py:start-end", "..."],
+      "code_markers": ["exact snippet from generated code", "..."]
+    }
+  ]
+}
+```
+
+Use `repo` for parts you retrieved from `kernelpack-python`, `innate` for
+parts you authored without repo retrieval, and `hybrid` only if both are true.
+
+Strict provenance requirements:
+
+- Write the file exactly as valid JSON, with no markdown fences.
+- Use the exact filename `kp_medium_3_thought_process.json`.
+- Include one provenance entry for every major code block you wrote.
+- For `repo` and `hybrid` entries:
+  - `repo_refs` must be nonempty.
+  - `repo_symbols` must be nonempty.
+  - `code_markers` must contain exact substrings that appear in your generated
+    script.
+- For `innate` entries:
+  - `repo_refs` must be `[]`.
+  - `repo_symbols` must be `[]`.
+- Do not write free-form reasoning paragraphs. Only emit the structured JSON
+  provenance file.
+
+The output should be a single self-contained driver script.
+
+Manifest requirements
+=====================
+task_id: kp_medium_3
+summary_filename: kp_medium_3_summary.json
+thought_filename: kp_medium_3_thought_process.json
+
+Required repo components (each MUST appear in your thought-process with origin='repo'):
+- component_id: curve_geometry_setup
+    required_repo_symbols: ['EmbeddedSurface', 'set_data_sites', 'build_closed_geometric_model_ps', 'build_level_set_from_geometric_model']
+    allowed_repo_refs: ['tests/test_solvers.py:6-12']
+    required_code_markers: ['geometry.EmbeddedSurface()', '.set_data_sites(', '.build_closed_geometric_model_ps(', '.build_level_set_from_geometric_model()']
+- component_id: domain_generation
+    required_repo_symbols: ['DomainNodeGenerator', 'build_domain_descriptor_from_geometry']
+    allowed_repo_refs: ['tests/test_solvers.py:13-22', 'src/kernelpack/nodes/core.py:600-620']
+    required_code_markers: ['nodes.DomainNodeGenerator()', '.build_domain_descriptor_from_geometry(']
+- component_id: poisson_solver_setup
+    required_repo_symbols: ['PoissonSolver', 'init']
+    allowed_repo_refs: ['tests/test_solvers.py:30-31', 'src/kernelpack/solvers/poisson.py:24-68']
+    required_code_markers: ['solvers.PoissonSolver(', '.init(domain,']
+- component_id: mixed_boundary_solve_call
+    required_repo_symbols: ['solve']
+    allowed_repo_refs: ['tests/test_solvers.py:32-37', 'src/kernelpack/solvers/poisson.py:70-122']
+    required_code_markers: ['.solve(', 'neu_coeff', 'dir_coeff', 'boundary_data']
+- component_id: mean_aligned_error_postprocess
+    required_repo_symbols: ['get_int_bdry_nodes']
+    allowed_repo_refs: ['examples/poisson_convergence_2d_neumann.py:149-160']
+    required_code_markers: ['domain.get_int_bdry_nodes()', 'err = solve_result["u"] - u_true', 'err = err - np.mean(err)']
+
+Allowed innate components (label these origin='innate', with no repo_refs / repo_symbols):
+  ['exact_solution_definition', 'forcing_definition', 'boundary_data_definition', 'summary_writer']
+
+Retrieved context
+=================
+15 chunk(s) retrieved under the operating point.
+
+----------------------------------------------------------------------
+file_path: src/kernelpack/domain/core.py
+symbol_name: get_int_bdry_nodes
+chunk_type: fine_window
+lines: 138:139
+score: 0.8660
+context_header: file: src/kernelpack/domain/core.py
+lines: 138-139
+symbol: get_int_bdry_nodes
+chunk_type: method
+parent: null
+imports: __future__.annotations, dataclasses.dataclass, dataclasses.field, numpy as np, scipy.spatial.cKDTree, kernelpack.geometry.distance_matrix
+neighbors:
+- get_interior_nodes
+- get_bdry_nodes
+- get_ghost_nodes
+- get_all_nodes
+text:
+def get_int_bdry_nodes(self) -> np.ndarray:
+        return self.x
+----------------------------------------------------------------------
+file_path: src/kernelpack/nodes/core.py
+symbol_name: get_bdry_nodes
+chunk_type: fine_window
+lines: 626:627
+score: 0.8580
+context_header: file: src/kernelpack/nodes/core.py
+lines: 626-627
+symbol: get_bdry_nodes
+chunk_type: method
+parent: null
+imports: __future__.annotations, dataclasses.dataclass, dataclasses.field, itertools.product, typing.Callable, numpy as np, scipy.spatial.cKDTree, kernelpack.domain.DomainDescriptor, kernelpack.geometry.RBFLevelSet
+neighbors:
+- clip_to_geometry
+- build_domain_descriptor_from_geometry
+- get_interior_nodes
+- get_ghost_nodes
+text:
+def get_bdry_nodes(self) -> np.ndarray:
+        return self.xb
+----------------------------------------------------------------------
+file_path: src/kernelpack/domain/core.py
+symbol_name: get_num_int_bdry_nodes
+chunk_type: fine_window
+lines: 162:163
+score: 0.8567
+context_header: file: src/kernelpack/domain/core.py
+lines: 162-163
+symbol: get_num_int_bdry_nodes
+chunk_type: method
+parent: null
+imports: __future__.annotations, dataclasses.dataclass, dataclasses.field, numpy as np, scipy.spatial.cKDTree, kernelpack.geometry.distance_matrix
+neighbors:
+- get_sep_rad
+- get_dim
+- get_num_total_nodes
+- get_num_interior_nodes
+text:
+def get_num_int_bdry_nodes(self) -> int:
+        return self.x.shape[0]
+----------------------------------------------------------------------
+file_path: src/kernelpack/domain/core.py
+symbol_name: get_num_bdry_nodes
+chunk_type: fine_window
+lines: 168:169
+score: 0.8523
+context_header: file: src/kernelpack/domain/core.py
+lines: 168-169
+symbol: get_num_bdry_nodes
+chunk_type: method
+parent: null
+imports: __future__.annotations, dataclasses.dataclass, dataclasses.field, numpy as np, scipy.spatial.cKDTree, kernelpack.geometry.distance_matrix
+neighbors:
+- get_num_total_nodes
+- get_num_int_bdry_nodes
+- get_num_interior_nodes
+- _set_total_nodes
+text:
+def get_num_bdry_nodes(self) -> int:
+        return self.xb.shape[0]
+----------------------------------------------------------------------
+file_path: src/kernelpack/domain/core.py
+symbol_name: get_bdry_nodes
+chunk_type: fine_window
+lines: 132:133
+score: 0.8515
+context_header: file: src/kernelpack/domain/core.py
+lines: 132-133
+symbol: get_bdry_nodes
+chunk_type: method
+parent: null
+imports: __future__.annotations, dataclasses.dataclass, dataclasses.field, numpy as np, scipy.spatial.cKDTree, kernelpack.geometry.distance_matrix
+neighbors:
+- get_tree_points
+- get_tree_globals
+- get_interior_nodes
+- get_ghost_nodes
+text:
+def get_bdry_nodes(self) -> np.ndarray:
+        return self.xb
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: test_nonlinear_variable_poisson_solver_checks
+chunk_type: function
+lines: 150:210
+score: 0.8473
+context_header: file: tests/test_solvers.py
+lines: 150-210
+symbol: test_nonlinear_variable_poisson_solver_checks
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- test_poisson_solver_checks
+- test_variable_poisson_solver_checks
+- test_variable_poisson_solver_matches_mixed_bc_case
+- test_diffusion_solver_checks
+text:
+def test_nonlinear_variable_poisson_solver_checks():
+    domain = build_test_domain()
+
+    def exact_solution(x):
+        return 1.0 + np.sin(x[:, 0]) * np.sin(x[:, 1]) + 0.25 * np.cos(0.5 * x[:, 0])
+
+    def exp_scaled(u, scale):
+        return np.exp(scale * u)
+
+    def forcing(x, _u):
+        sx = np.sin(x[:, 0])
+        sy = np.sin(x[:, 1])
+        cx = np.cos(x[:, 0])
+        cy = np.cos(x[:, 1])
+        ux = cx * sy - 0.125 * np.sin(0.5 * x[:, 0])
+        uy = sx * cy
+        lap = -2.0 * sx * sy - 0.0625 * np.cos(0.5 * x[:, 0])
+        grad_sq = ux**2 + uy**2
+        a = exp_scaled(exact_solution(x), 0.2)
+        return -a * lap - 0.2 * a * grad_sq
+
+    def forcing_u(x, u):
+        return np.zeros(x.shape[0])
+
+    def coeff(x, u):
+        return exp_scaled(u, 0.2)
+
+    def coeff_u(x, u):
+        return 0.2 * exp_scaled(u, 0.2)
+
+    def normal_derivative(nr, x):
+        dx = np.cos(x[:, 0]) * np.sin(x[:, 1]) - 0.125 * np.sin(0.5 * x[:, 0])
+        dy = np.sin(x[:, 0]) * np.cos(x[:, 1])
+        return nr[:, 0] * dx + nr[:, 1] * dy
+
+    neu_coeff = lambda xb: 0.6 + 0.15 * xb[:, 0] ** 2 + 0.05 * xb[:, 1] ** 2
+    dir_coeff = lambda xb: 1.0 + 0.1 * xb[:, 0] ** 2 + 0.08 * xb[:, 1] ** 2
+
+    solver = solvers.NonlinearVariablePoissonSolver(lap_assembler="fdo", bc_assembler="fd", lap_stencil="rbf", bc_stencil="rbf")
+    solver.init(domain, 4)
+    solver.set_nonlinear_tolerance(1.0e-10)
+    solver.set_linear_tolerance(1.0e-10)
+    solver.set_max_nonlinear_iterations(12)
+    result = solver.solve(
+        forcing,
+        forcing_u,
+        coeff,
+        coeff_u,
+        neu_c
+... [truncated]
+----------------------------------------------------------------------
+file_path: README.md
+symbol_name: (none)
+chunk_type: text
+lines: 256:355
+score: 0.8385
+context_header: file: README.md
+lines: 256-355
+symbol: null
+chunk_type: text
+parent: null
+imports: []
+neighbors: []
+text:
+surface = EmbeddedSurface()
+surface.set_data_sites(curve)
+surface.build_closed_geometric_model_ps(2, 0.06, curve.shape[0])
+surface.build_level_set_from_geometric_model()
+
+# Generate interior, boundary, and ghost nodes.
+generator = DomainNodeGenerator()
+domain = generator.build_domain_descriptor_from_geometry(
+    surface,
+    0.08,
+    seed=17,
+    strip_count=5,
+)
+
+# Set up an RBF-FD Poisson solve on that domain.
+solver = PoissonSolver(
+    lap_assembler="fd",
+    bc_assembler="fd",
+    lap_stencil="rbf",
+    bc_stencil="rbf",
+)
+
+# Use a named target order instead of a magic number.
+target_order = 4
+solver.init(domain, target_order)
+
+# Manufactured pure-Neumann problem on the unit disk.
+u_exact = lambda X: (X[:, 0] ** 2 + X[:, 1] ** 2) ** 2 - (X[:, 0] ** 2 + X[:, 1] ** 2) + 1.0 / 6.0
+forcing = lambda X: 4.0 - 16.0 * (X[:, 0] ** 2 + X[:, 1] ** 2)
+neu_coeff = lambda Xb: np.ones(Xb.shape[0])
+dir_coeff = lambda Xb: np.zeros(Xb.shape[0])
+bc = lambda neu_coeffs, dir_coeffs, nr, Xb: np.sum(
+    np.column_stack(
+        [
+            4.0 * Xb[:, 0] * (Xb[:, 0] ** 2 + Xb[:, 1] ** 2) - 2.0 * Xb[:, 0],
+            4.0 * Xb[:, 1] * (Xb[:, 0] ** 2 + Xb[:, 1] ** 2) - 2.0 * Xb[:, 1],
+        ]
+    )
+    * nr,
+    axis=1,
+)
+
+# Solve and align the mean for comparison.
+result = solver.solve(forcing, neu_coeff, dir_coeff, bc)
+x_phys = domain.get_int_bdry_nodes()
+u = result["u"]
+u_true = u_exact(x_phys)
+u = u - np.mean(u - u_true)
+err = u - u_true
+
+# Plot the solution and its nodal error.
+tri = mtri.Triangulation(x_phys[:, 0], x_phys[:, 1])
+fig, axes = plt.subplots(2, 1, figsize=(6.5, 8), con
+... [truncated]
+----------------------------------------------------------------------
+file_path: src/kernelpack/geometry/core.py
+symbol_name: get_bdry_nodes
+chunk_type: fine_window
+lines: 775:776
+score: 0.8367
+context_header: file: src/kernelpack/geometry/core.py
+lines: 775-776
+symbol: get_bdry_nodes
+chunk_type: method
+parent: null
+imports: __future__.annotations, dataclasses.dataclass, dataclasses.field, itertools.product, numpy as np, scipy.linalg, scipy.spatial.Delaunay, scipy.spatial.cKDTree, kernelpack._numba.dense_distance_matrix, kernelpack._numba.phs_kernel_matrix
+neighbors:
+- compute_bounding_box
+- compute_uniform_bounding_box
+- get_level_set
+- get_uniform_bdry_nodes
+text:
+def get_bdry_nodes(self) -> np.ndarray:
+        return self.xb
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: build_test_domain
+chunk_type: function
+lines: 6:22
+score: 0.8143
+context_header: file: tests/test_solvers.py
+lines: 6-22
+symbol: build_test_domain
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- test_poisson_solver_checks
+- test_variable_poisson_solver_checks
+- test_variable_poisson_solver_matches_mixed_bc_case
+text:
+def build_test_domain():
+    t = np.linspace(0, 2 * np.pi, 80, endpoint=False)
+    curve = np.column_stack([np.cos(t), 0.8 * np.sin(t)])
+    surface = geometry.EmbeddedSurface()
+    surface.set_data_sites(curve)
+    surface.build_closed_geometric_model_ps(2, 0.06, curve.shape[0])
+    surface.build_level_set_from_geometric_model()
+    generator = nodes.DomainNodeGenerator()
+    return generator.build_domain_descriptor_from_geometry(
+        surface,
+        0.1,
+        seed=17,
+        strip_count=5,
+        do_outer_refinement=True,
+        outer_fraction_of_h=0.5,
+        outer_refinement_zone_size_as_multiple_of_h=2.0,
+    )
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: test_poisson_solver_checks
+chunk_type: function
+lines: 25:60
+score: 0.8037
+context_header: file: tests/test_solvers.py
+lines: 25-60
+symbol: test_poisson_solver_checks
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- build_test_domain
+- test_variable_poisson_solver_checks
+- test_variable_poisson_solver_matches_mixed_bc_case
+- test_nonlinear_variable_poisson_solver_checks
+text:
+def test_poisson_solver_checks():
+    domain = build_test_domain()
+    u_exact = lambda x: x[:, 0] ** 2 + x[:, 1] ** 2
+    u_true = u_exact(domain.get_int_bdry_nodes())
+
+    wls_solver = solvers.PoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="wls", bc_stencil="wls")
+    wls_solver.init(domain, 3)
+    wls_result = wls_solver.solve(
+        lambda xeq: -4 * np.ones(xeq.shape[0]),
+        lambda xb: np.zeros(xb.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda neu_coeffs, dir_coeffs, nr, xb: u_exact(xb),
+    )
+    assert np.max(np.abs(wls_result["u"] - u_true)) < 2.5e-1
+
+    rbf_solver = solvers.PoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="rbf", bc_stencil="rbf")
+    rbf_solver.init(domain, 3)
+    rbf_result = rbf_solver.solve(
+        lambda xeq: -4 * np.ones(xeq.shape[0]),
+        lambda xb: np.zeros(xb.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda neu_coeffs, dir_coeffs, nr, xb: u_exact(xb),
+    )
+    assert np.max(np.abs(rbf_result["u"] - u_true)) < 6e-1
+
+    zero_neu_solver = solvers.PoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="wls", bc_stencil="wls")
+    zero_neu_solver.init(domain, 3)
+    zero_neu_result = zero_neu_solver.solve(
+        lambda xeq: np.zeros(xeq.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda xb: np.zeros(xb.shape[0]),
+        lambda neu_coeffs, dir_coeffs, nr, xb: np.zeros(xb.shape[0]),
+    )
+    assert zero_neu_result["used_nullspace_augmentation"]
+    assert np.max(np.abs(zero_neu_result["u"])) < 1e-8
+    assert zero_neu_solver.last_sol
+... [truncated]
+----------------------------------------------------------------------
+file_path: tests/test_pu_solvers.py
+symbol_name: build_test_domain
+chunk_type: function
+lines: 7:23
+score: 0.7883
+context_header: file: tests/test_pu_solvers.py
+lines: 7-23
+symbol: build_test_domain
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers, kernelpack.solvers._pu.pu_localized_evaluate, kernelpack.solvers._pu.pu_patch_geometry
+neighbors:
+- test_pu_localized_evaluate_reproduces_nodal_values
+- test_pu_diffusion_solver_checks
+- test_multispecies_pu_diffusion_solver_checks
+text:
+def build_test_domain():
+    t = np.linspace(0, 2 * np.pi, 80, endpoint=False)
+    curve = np.column_stack([np.cos(t), 0.8 * np.sin(t)])
+    surface = geometry.EmbeddedSurface()
+    surface.set_data_sites(curve)
+    surface.build_closed_geometric_model_ps(2, 0.06, curve.shape[0])
+    surface.build_level_set_from_geometric_model()
+    generator = nodes.DomainNodeGenerator()
+    return generator.build_domain_descriptor_from_geometry(
+        surface,
+        0.1,
+        seed=17,
+        strip_count=5,
+        do_outer_refinement=True,
+        outer_fraction_of_h=0.5,
+        outer_refinement_zone_size_as_multiple_of_h=2.0,
+    )
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: test_variable_poisson_solver_checks
+chunk_type: function
+lines: 63:103
+score: 0.7874
+context_header: file: tests/test_solvers.py
+lines: 63-103
+symbol: test_variable_poisson_solver_checks
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- build_test_domain
+- test_poisson_solver_checks
+- test_variable_poisson_solver_matches_mixed_bc_case
+- test_nonlinear_variable_poisson_solver_checks
+text:
+def test_variable_poisson_solver_checks():
+    domain = build_test_domain()
+    u_exact = lambda x: x[:, 0] ** 2 + x[:, 1] ** 2
+    a_coeff = lambda x: 2 + x[:, 0] + 0.2 * x[:, 1]
+    forcing = lambda x: -(4 * a_coeff(x) + 2 * x[:, 0] + 0.4 * x[:, 1])
+    u_true = u_exact(domain.get_int_bdry_nodes())
+
+    wls_solver = solvers.VariablePoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="wls", bc_stencil="wls")
+    wls_solver.init(domain, 3)
+    wls_result = wls_solver.solve(
+        forcing,
+        a_coeff,
+        lambda xb: np.zeros(xb.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda neu_coeffs, dir_coeffs, nr, xb: u_exact(xb),
+    )
+    assert np.max(np.abs(wls_result["u"] - u_true)) < 4e-1
+
+    rbf_solver = solvers.VariablePoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="rbf", bc_stencil="rbf")
+    rbf_solver.init(domain, 3)
+    rbf_result = rbf_solver.solve(
+        forcing,
+        a_coeff,
+        lambda xb: np.zeros(xb.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda neu_coeffs, dir_coeffs, nr, xb: u_exact(xb),
+    )
+    assert np.max(np.abs(rbf_result["u"] - u_true)) < 6e-1
+    assert rbf_result["PDE"].shape[0] == domain.get_num_int_bdry_nodes()
+
+    zero_neu_solver = solvers.VariablePoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="wls", bc_stencil="wls")
+    zero_neu_solver.init(domain, 3)
+    zero_neu_result = zero_neu_solver.solve(
+        lambda xeq: np.zeros(xeq.shape[0]),
+        lambda xeq: np.ones(xeq.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda xb: np.z
+... [truncated]
+----------------------------------------------------------------------
+file_path: README.md
+symbol_name: (none)
+chunk_type: text
+lines: 86:185
+score: 0.7869
+context_header: file: README.md
+lines: 86-185
+symbol: null
+chunk_type: text
+parent: null
+imports: []
+neighbors: []
+text:
+## Installation
+
+From the repository root:
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -e .[dev]
+```
+
+This installs the compiled-stack dependencies used by the package, including
+`numpy`, `scipy`, `matplotlib`, `pytest`, and `numba`.
+
+`numba` is used opportunistically. The accelerated kernels are part of the
+normal package path, and editable installs pick them up automatically.
+
+Run the test suite with:
+
+```bash
+python -m pytest -q
+```
+
+## Examples and checks
+
+Current Python checks live in:
+
+- [`tests/test_poly.py`](/E:/kernelpack-python/tests/test_poly.py:1)
+- [`tests/test_nodes_rbffd.py`](/E:/kernelpack-python/tests/test_nodes_rbffd.py:1)
+- [`tests/test_solvers.py`](/E:/kernelpack-python/tests/test_solvers.py:1)
+
+The examples below are written as direct Python snippets so you can paste them
+into a script, notebook, or REPL.
+
+## Quick examples
+
+### Smooth 2D geometry
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+from kernelpack.geometry import EmbeddedSurface
+
+# Define a smooth closed planar boundary.
+t = np.linspace(0.0, 2.0 * np.pi, 50, endpoint=False)
+curve = np.column_stack([np.cos(t), 0.7 * np.sin(t)])
+
+# Build the geometric model and level set.
+surface = EmbeddedSurface()
+surface.set_data_sites(curve)
+surface.build_closed_geometric_model_ps(2, 0.05, curve.shape[0])
+surface.build_level_set_from_geometric_model()
+
+# Extract boundary samples and normals from the fitted representation.
+xb = surface.get_sample_sites()
+nrmls = surface.get_nrmls()
+
+# Plot the fitted boundary samples and normals.
+fig, ax = plt.subplots(figsize=
+... [truncated]
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: test_diffusion_solver_checks
+chunk_type: function
+lines: 213:250
+score: 0.7868
+context_header: file: tests/test_solvers.py
+lines: 213-250
+symbol: test_diffusion_solver_checks
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- test_variable_poisson_solver_checks
+- test_variable_poisson_solver_matches_mixed_bc_case
+- test_nonlinear_variable_poisson_solver_checks
+- test_multispecies_diffusion_solver_checks
+text:
+def test_diffusion_solver_checks():
+    domain = build_test_domain()
+    nu = 0.25
+    dt = 0.02
+    xphys = domain.get_int_bdry_nodes()
+    u_exact = lambda time, x: np.exp(-time) * (x[:, 0] ** 2 + x[:, 1] ** 2)
+    forcing = lambda nu_value, time, x: -np.exp(-time) * (x[:, 0] ** 2 + x[:, 1] ** 2) - 4 * nu_value * np.exp(-time)
+    neu_coeff_fixed = lambda xb: np.zeros(xb.shape[0])
+    dir_coeff_fixed = lambda xb: np.ones(xb.shape[0])
+    bc = lambda neu_coeffs, dir_coeffs, nr, time, xb: u_exact(time, xb)
+
+    wls_solver = solvers.DiffusionSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="wls", bc_stencil="wls")
+    wls_solver.init(domain, 3, dt, nu)
+    wls_solver.set_initial_state(u_exact(0, xphys))
+    u1 = wls_solver.bdf1_step(dt, forcing, neu_coeff_fixed, dir_coeff_fixed, bc)
+    assert np.max(np.abs(u1 - u_exact(dt, xphys))) < 3e-1
+    u2 = wls_solver.bdf2_step(2 * dt, forcing, neu_coeff_fixed, dir_coeff_fixed, bc)
+    assert np.max(np.abs(u2 - u_exact(2 * dt, xphys))) < 3.5e-1
+    u3 = wls_solver.bdf3_step(3 * dt, forcing, neu_coeff_fixed, dir_coeff_fixed, bc)
+    assert np.max(np.abs(u3 - u_exact(3 * dt, xphys))) < 4e-1
+
+    rbf_solver = solvers.DiffusionSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="rbf", bc_stencil="rbf")
+    rbf_solver.init(domain, 3, dt, nu)
+    rbf_solver.set_initial_state(u_exact(0, xphys))
+    u1_rbf = rbf_solver.bdf1_step(
+        dt,
+        forcing,
+        lambda time, xb: np.zeros(xb.shape[0]),
+        lambda time, xb: np.ones(xb.shape[0]),
+        bc,
+    )
+    assert np.max(np.abs(u1_rbf - u_exact(dt, xphys))) < 7
+... [truncated]
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: test_variable_poisson_solver_matches_mixed_bc_case
+chunk_type: function
+lines: 106:147
+score: 0.7825
+context_header: file: tests/test_solvers.py
+lines: 106-147
+symbol: test_variable_poisson_solver_matches_mixed_bc_case
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- build_test_domain
+- test_poisson_solver_checks
+- test_variable_poisson_solver_checks
+- test_nonlinear_variable_poisson_solver_checks
+text:
+def test_variable_poisson_solver_matches_mixed_bc_case():
+    domain = build_test_domain()
+
+    def exact_solution(x):
+        return 1.0 + np.sin(x[:, 0]) * np.sin(x[:, 1]) + 0.25 * np.cos(0.5 * x[:, 0])
+
+    def coeff_field(x):
+        return 1.4 + 0.2 * np.sin(x[:, 0]) + 0.15 * np.cos(x[:, 1])
+
+    def forcing(x):
+        sx = np.sin(x[:, 0])
+        sy = np.sin(x[:, 1])
+        cx = np.cos(x[:, 0])
+        cy = np.cos(x[:, 1])
+        ux = cx * sy - 0.125 * np.sin(0.5 * x[:, 0])
+        uy = sx * cy
+        lap = -2.0 * sx * sy - 0.0625 * np.cos(0.5 * x[:, 0])
+        ax = 0.2 * np.cos(x[:, 0])
+        ay = -0.15 * np.sin(x[:, 1])
+        return -coeff_field(x) * lap - ax * ux - ay * uy
+
+    def normal_derivative(nr, x):
+        dx = np.cos(x[:, 0]) * np.sin(x[:, 1]) - 0.125 * np.sin(0.5 * x[:, 0])
+        dy = np.sin(x[:, 0]) * np.cos(x[:, 1])
+        return nr[:, 0] * dx + nr[:, 1] * dy
+
+    neu_coeff = lambda xb: 0.6 + 0.15 * xb[:, 0] ** 2 + 0.05 * xb[:, 1] ** 2
+    dir_coeff = lambda xb: 1.0 + 0.1 * xb[:, 0] ** 2 + 0.08 * xb[:, 1] ** 2
+
+    solver = solvers.VariablePoissonSolver(lap_assembler="fdo", bc_assembler="fd", lap_stencil="rbf", bc_stencil="rbf")
+    solver.init(domain, 4)
+    result = solver.solve(
+        forcing,
+        coeff_field,
+        neu_coeff,
+        dir_coeff,
+        lambda neu, dir_, nr, xb: neu * normal_derivative(nr, xb) + dir_ * exact_solution(xb),
+    )
+    assert np.max(np.abs(result["u"] - exact_solution(domain.get_int_bdry_nodes()))) < 2.5e-1
+    assert np.array_equal(solver.get_output_nodes(), domain.get_int_bdry_nodes())
+    assert s
+... [truncated]
+
+Retrieval coverage note (for your awareness; still verify against the
+retrieved context yourself):
+- components with retrieved evidence: ['curve_geometry_setup', 'domain_generation', 'poisson_solver_setup', 'mixed_boundary_solve_call', 'mean_aligned_error_postprocess']
+- components WITHOUT retrieved evidence: []
+
+Instructions
+============
+1. Write exactly ONE self-contained Python file (name it prediction_medium_3.py).
+2. It must run start-to-finish and, using RAGSYSTEM_OUTPUT_DIR when present
+   (falling back to the current directory), write two files:
+     - kp_medium_3_summary.json: the benchmark-required summary JSON.
+     - kp_medium_3_thought_process.json: the thought-process JSON with an 'entries' list.
+3. The only non-stdlib imports allowed are numpy/scipy and valid kernelpack imports.
+4. Each thought-process entry has: component_id, origin, summary, repo_symbols,
+   repo_refs, code_markers.
+
+Provenance rules (STRICT)
+-------------------------
+- If a component comes from the retrieved KernelPack context above, mark it
+  origin='repo' and include valid repo_refs (from allowed_repo_refs),
+  repo_symbols (the required symbols), and code_markers (which MUST appear
+  verbatim in your Python file).
+- If a component is ordinary Python/NumPy/SciPy logic or glue code, mark it
+  origin='innate' with empty repo_refs and repo_symbols.
+- Do NOT invent repository references. Do NOT claim repo provenance unless the
+  retrieved context actually supports it.
+- Every required code marker you claim must literally appear in the code you write.
+
+
+Scoring reminder
+================
+repo_recall: Did you include all required repo components?
+repo_precision: Were claimed repo refs valid?
+repo_f1: Balance of repo recall and repo precision.
+innate_precision: Did you correctly label innate pieces?
+code_alignment: Do claimed repo markers actually appear in the code?
+final_score: Average of repo_f1, innate_precision, and code_alignment.
+
+Output format
+=============
+Return exactly one fenced Python code block (```python ... ```) containing
+the complete prediction_medium_3.py. No prose outside the code block.

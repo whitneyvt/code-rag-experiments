@@ -1,0 +1,33 @@
+{
+  "task": "easy_2",
+  "task_id": "kp_easy_2",
+  "chunk_count": 2,
+  "retrieved_files": [
+    "tests/test_nodes_rbffd.py"
+  ],
+  "retrieved_symbols": [
+    "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+    "test_rbffd_laplacian"
+  ],
+  "matched_components": [
+    "domain_descriptor_setup",
+    "stencil_properties_setup",
+    "wls_operator_assembly",
+    "fdo_operator_assembly"
+  ],
+  "missed_components": [],
+  "retrieval_calls_used": 3,
+  "budget": 5,
+  "empty_retrieval_calls": 2,
+  "weak_retrieval_calls": 0,
+  "successful_reformulations": 1,
+  "query_variant_counts": {
+    "specific": 1,
+    "symbol_only": 1,
+    "marker_only": 1,
+    "file_hint": 0,
+    "broad_concept": 0
+  },
+  "packet_path": "/Users/whitney/src/code-rag-experiments/manual_llm_prompts/kernelpack_generated_code/prompt_easy_2.txt",
+  "arm": "fine_to_coarse"
+}

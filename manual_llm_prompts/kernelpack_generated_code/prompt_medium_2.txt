@@ -1,0 +1,505 @@
+# KernelPack generated-code task: medium_2 (task_id=kp_medium_2)
+
+You are given a coding task, retrieved KernelPack repository context, and a
+strict output contract. Produce ONE Python prediction script that solves the
+task AND records honest provenance for every component.
+
+Task prompt
+===========
+Write a standalone Python driver that solves a variable-coefficient Poisson
+problem on a smooth circular domain using `kernelpack-python`.
+
+Use the repository code embeddings as implementation context. The goal is to
+retrieve the geometry setup, domain-generation path, and
+`VariablePoissonSolver` workflow from `kernelpack-python`, then implement a
+clear driver around those pieces.
+
+The script should:
+
+1. Define a nontrivial exact solution `u(x,y)`.
+2. Define a spatially varying scalar coefficient field `a(x,y)`.
+3. Define the corresponding forcing term for `-div(a grad u)`.
+4. Build circle data sites with
+   `t = linspace(0, 2*pi, n, endpoint=False)` and points
+   `(cos(t), sin(t))`.
+5. Build a smooth geometry with `EmbeddedSurface`,
+   `set_data_sites`, `build_closed_geometric_model_ps`, and
+   `build_level_set_from_geometric_model`.
+6. Use `DomainNodeGenerator.build_domain_descriptor_from_geometry` to create a
+   2D domain with outer refinement enabled.
+7. Construct a `VariablePoissonSolver` with `lap_assembler="fd"`,
+   `bc_assembler="fd"`, and both `wls` and `rbf` stencil configurations in
+   two separate solves.
+8. Solve the same variable-coefficient problem with the `wls` solver and the
+   `rbf` solver.
+9. Report max and L2 error norms for both solver configurations.
+10. Write a JSON summary file named `kp_medium_2_summary.json` with at least:
+    - `h`
+    - `n_physical`
+    - `wls_linf`
+    - `wls_l2`
+    - `rbf_linf`
+    - `rbf_l2`
+    - `wls_used_nullspace_augmentation`
+    - `rbf_used_nullspace_augmentation`
+11. If `RAGSYSTEM_OUTPUT_DIR` is set, write the summary file there.
+12. Also write a provenance file named
+    `kp_medium_2_thought_process.json` there.
+
+The provenance file must be structured JSON, not free-form chain-of-thought.
+Use this schema:
+
+```json
+{
+  "task_id": "kp_medium_2",
+  "entries": [
+    {
+      "component_id": "string",
+      "origin": "repo | innate | hybrid",
+      "summary": "short description",
+      "repo_symbols": ["symbol", "..."],
+      "repo_refs": ["relative/path.py:start-end", "..."],
+      "code_markers": ["exact snippet from generated code", "..."]
+    }
+  ]
+}
+```
+
+Use `repo` for parts you retrieved from `kernelpack-python`, `innate` for
+parts you authored without repo retrieval, and `hybrid` only if both are true.
+
+Strict provenance requirements:
+
+- Write the file exactly as valid JSON, with no markdown fences.
+- Use the exact filename `kp_medium_2_thought_process.json`.
+- Include one provenance entry for every major code block you wrote.
+- For `repo` and `hybrid` entries:
+  - `repo_refs` must be nonempty.
+  - `repo_symbols` must be nonempty.
+  - `code_markers` must contain exact substrings that appear in your generated
+    script.
+- For `innate` entries:
+  - `repo_refs` must be `[]`.
+  - `repo_symbols` must be `[]`.
+- Do not write free-form reasoning paragraphs. Only emit the structured JSON
+  provenance file.
+
+The output should be a single self-contained driver script.
+
+Manifest requirements
+=====================
+task_id: kp_medium_2
+summary_filename: kp_medium_2_summary.json
+thought_filename: kp_medium_2_thought_process.json
+
+Required repo components (each MUST appear in your thought-process with origin='repo'):
+- component_id: circle_geometry_setup
+    required_repo_symbols: ['EmbeddedSurface', 'set_data_sites', 'build_closed_geometric_model_ps', 'build_level_set_from_geometric_model']
+    allowed_repo_refs: ['tests/test_solvers.py:6-12']
+    required_code_markers: ['geometry.EmbeddedSurface()', '.set_data_sites(', '.build_closed_geometric_model_ps(', '.build_level_set_from_geometric_model()']
+- component_id: domain_generation
+    required_repo_symbols: ['DomainNodeGenerator', 'build_domain_descriptor_from_geometry']
+    allowed_repo_refs: ['tests/test_solvers.py:13-22', 'src/kernelpack/nodes/core.py:600-620']
+    required_code_markers: ['nodes.DomainNodeGenerator()', '.build_domain_descriptor_from_geometry(']
+- component_id: variable_poisson_solver_setup
+    required_repo_symbols: ['VariablePoissonSolver', 'init']
+    allowed_repo_refs: ['tests/test_solvers.py:70-82', 'src/kernelpack/solvers/variable_poisson.py:47-113']
+    required_code_markers: ['solvers.VariablePoissonSolver(', '.init(domain,']
+- component_id: variable_poisson_solve_call
+    required_repo_symbols: ['solve']
+    allowed_repo_refs: ['tests/test_solvers.py:72-89', 'src/kernelpack/solvers/variable_poisson.py:115-178']
+    required_code_markers: ['.solve(', 'a_coeff', 'neu_coeff', 'dir_coeff']
+
+Allowed innate components (label these origin='innate', with no repo_refs / repo_symbols):
+  ['exact_solution_definition', 'coefficient_field_definition', 'forcing_definition', 'summary_writer']
+
+Retrieved context
+=================
+8 chunk(s) retrieved under the operating point.
+
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: build_test_domain
+chunk_type: function
+lines: 6:22
+score: 0.7678
+context_header: file: tests/test_solvers.py
+lines: 6-22
+symbol: build_test_domain
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- test_poisson_solver_checks
+- test_variable_poisson_solver_checks
+- test_variable_poisson_solver_matches_mixed_bc_case
+text:
+def build_test_domain():
+    t = np.linspace(0, 2 * np.pi, 80, endpoint=False)
+    curve = np.column_stack([np.cos(t), 0.8 * np.sin(t)])
+    surface = geometry.EmbeddedSurface()
+    surface.set_data_sites(curve)
+    surface.build_closed_geometric_model_ps(2, 0.06, curve.shape[0])
+    surface.build_level_set_from_geometric_model()
+    generator = nodes.DomainNodeGenerator()
+    return generator.build_domain_descriptor_from_geometry(
+        surface,
+        0.1,
+        seed=17,
+        strip_count=5,
+        do_outer_refinement=True,
+        outer_fraction_of_h=0.5,
+        outer_refinement_zone_size_as_multiple_of_h=2.0,
+    )
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: test_nonlinear_variable_poisson_solver_checks
+chunk_type: function
+lines: 150:210
+score: 0.7662
+context_header: file: tests/test_solvers.py
+lines: 150-210
+symbol: test_nonlinear_variable_poisson_solver_checks
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- test_poisson_solver_checks
+- test_variable_poisson_solver_checks
+- test_variable_poisson_solver_matches_mixed_bc_case
+- test_diffusion_solver_checks
+text:
+def test_nonlinear_variable_poisson_solver_checks():
+    domain = build_test_domain()
+
+    def exact_solution(x):
+        return 1.0 + np.sin(x[:, 0]) * np.sin(x[:, 1]) + 0.25 * np.cos(0.5 * x[:, 0])
+
+    def exp_scaled(u, scale):
+        return np.exp(scale * u)
+
+    def forcing(x, _u):
+        sx = np.sin(x[:, 0])
+        sy = np.sin(x[:, 1])
+        cx = np.cos(x[:, 0])
+        cy = np.cos(x[:, 1])
+        ux = cx * sy - 0.125 * np.sin(0.5 * x[:, 0])
+        uy = sx * cy
+        lap = -2.0 * sx * sy - 0.0625 * np.cos(0.5 * x[:, 0])
+        grad_sq = ux**2 + uy**2
+        a = exp_scaled(exact_solution(x), 0.2)
+        return -a * lap - 0.2 * a * grad_sq
+
+    def forcing_u(x, u):
+        return np.zeros(x.shape[0])
+
+    def coeff(x, u):
+        return exp_scaled(u, 0.2)
+
+    def coeff_u(x, u):
+        return 0.2 * exp_scaled(u, 0.2)
+
+    def normal_derivative(nr, x):
+        dx = np.cos(x[:, 0]) * np.sin(x[:, 1]) - 0.125 * np.sin(0.5 * x[:, 0])
+        dy = np.sin(x[:, 0]) * np.cos(x[:, 1])
+        return nr[:, 0] * dx + nr[:, 1] * dy
+
+    neu_coeff = lambda xb: 0.6 + 0.15 * xb[:, 0] ** 2 + 0.05 * xb[:, 1] ** 2
+    dir_coeff = lambda xb: 1.0 + 0.1 * xb[:, 0] ** 2 + 0.08 * xb[:, 1] ** 2
+
+    solver = solvers.NonlinearVariablePoissonSolver(lap_assembler="fdo", bc_assembler="fd", lap_stencil="rbf", bc_stencil="rbf")
+    solver.init(domain, 4)
+    solver.set_nonlinear_tolerance(1.0e-10)
+    solver.set_linear_tolerance(1.0e-10)
+    solver.set_max_nonlinear_iterations(12)
+    result = solver.solve(
+        forcing,
+        forcing_u,
+        coeff,
+        coeff_u,
+        neu_c
+... [truncated]
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: test_variable_poisson_solver_matches_mixed_bc_case
+chunk_type: function
+lines: 106:147
+score: 0.7636
+context_header: file: tests/test_solvers.py
+lines: 106-147
+symbol: test_variable_poisson_solver_matches_mixed_bc_case
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- build_test_domain
+- test_poisson_solver_checks
+- test_variable_poisson_solver_checks
+- test_nonlinear_variable_poisson_solver_checks
+text:
+def test_variable_poisson_solver_matches_mixed_bc_case():
+    domain = build_test_domain()
+
+    def exact_solution(x):
+        return 1.0 + np.sin(x[:, 0]) * np.sin(x[:, 1]) + 0.25 * np.cos(0.5 * x[:, 0])
+
+    def coeff_field(x):
+        return 1.4 + 0.2 * np.sin(x[:, 0]) + 0.15 * np.cos(x[:, 1])
+
+    def forcing(x):
+        sx = np.sin(x[:, 0])
+        sy = np.sin(x[:, 1])
+        cx = np.cos(x[:, 0])
+        cy = np.cos(x[:, 1])
+        ux = cx * sy - 0.125 * np.sin(0.5 * x[:, 0])
+        uy = sx * cy
+        lap = -2.0 * sx * sy - 0.0625 * np.cos(0.5 * x[:, 0])
+        ax = 0.2 * np.cos(x[:, 0])
+        ay = -0.15 * np.sin(x[:, 1])
+        return -coeff_field(x) * lap - ax * ux - ay * uy
+
+    def normal_derivative(nr, x):
+        dx = np.cos(x[:, 0]) * np.sin(x[:, 1]) - 0.125 * np.sin(0.5 * x[:, 0])
+        dy = np.sin(x[:, 0]) * np.cos(x[:, 1])
+        return nr[:, 0] * dx + nr[:, 1] * dy
+
+    neu_coeff = lambda xb: 0.6 + 0.15 * xb[:, 0] ** 2 + 0.05 * xb[:, 1] ** 2
+    dir_coeff = lambda xb: 1.0 + 0.1 * xb[:, 0] ** 2 + 0.08 * xb[:, 1] ** 2
+
+    solver = solvers.VariablePoissonSolver(lap_assembler="fdo", bc_assembler="fd", lap_stencil="rbf", bc_stencil="rbf")
+    solver.init(domain, 4)
+    result = solver.solve(
+        forcing,
+        coeff_field,
+        neu_coeff,
+        dir_coeff,
+        lambda neu, dir_, nr, xb: neu * normal_derivative(nr, xb) + dir_ * exact_solution(xb),
+    )
+    assert np.max(np.abs(result["u"] - exact_solution(domain.get_int_bdry_nodes()))) < 2.5e-1
+    assert np.array_equal(solver.get_output_nodes(), domain.get_int_bdry_nodes())
+    assert s
+... [truncated]
+----------------------------------------------------------------------
+file_path: tests/test_solvers.py
+symbol_name: test_poisson_solver_checks
+chunk_type: function
+lines: 25:60
+score: 0.7634
+context_header: file: tests/test_solvers.py
+lines: 25-60
+symbol: test_poisson_solver_checks
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- build_test_domain
+- test_variable_poisson_solver_checks
+- test_variable_poisson_solver_matches_mixed_bc_case
+- test_nonlinear_variable_poisson_solver_checks
+text:
+def test_poisson_solver_checks():
+    domain = build_test_domain()
+    u_exact = lambda x: x[:, 0] ** 2 + x[:, 1] ** 2
+    u_true = u_exact(domain.get_int_bdry_nodes())
+
+    wls_solver = solvers.PoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="wls", bc_stencil="wls")
+    wls_solver.init(domain, 3)
+    wls_result = wls_solver.solve(
+        lambda xeq: -4 * np.ones(xeq.shape[0]),
+        lambda xb: np.zeros(xb.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda neu_coeffs, dir_coeffs, nr, xb: u_exact(xb),
+    )
+    assert np.max(np.abs(wls_result["u"] - u_true)) < 2.5e-1
+
+    rbf_solver = solvers.PoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="rbf", bc_stencil="rbf")
+    rbf_solver.init(domain, 3)
+    rbf_result = rbf_solver.solve(
+        lambda xeq: -4 * np.ones(xeq.shape[0]),
+        lambda xb: np.zeros(xb.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda neu_coeffs, dir_coeffs, nr, xb: u_exact(xb),
+    )
+    assert np.max(np.abs(rbf_result["u"] - u_true)) < 6e-1
+
+    zero_neu_solver = solvers.PoissonSolver(lap_assembler="fd", bc_assembler="fd", lap_stencil="wls", bc_stencil="wls")
+    zero_neu_solver.init(domain, 3)
+    zero_neu_result = zero_neu_solver.solve(
+        lambda xeq: np.zeros(xeq.shape[0]),
+        lambda xb: np.ones(xb.shape[0]),
+        lambda xb: np.zeros(xb.shape[0]),
+        lambda neu_coeffs, dir_coeffs, nr, xb: np.zeros(xb.shape[0]),
+    )
+    assert zero_neu_result["used_nullspace_augmentation"]
+    assert np.max(np.abs(zero_neu_result["u"])) < 1e-8
+    assert zero_neu_solver.last_sol
+... [truncated]
+----------------------------------------------------------------------
+file_path: src/kernelpack/nodes/core.py
+symbol_name: _local_radius
+chunk_type: function
+lines: 292:308
+score: 0.7497
+context_header: file: src/kernelpack/nodes/core.py
+lines: 292-308
+symbol: _local_radius
+chunk_type: function
+parent: null
+imports: __future__.annotations, dataclasses.dataclass, dataclasses.field, itertools.product, typing.Callable, numpy as np, scipy.spatial.cKDTree, kernelpack.domain.DomainDescriptor, kernelpack.geometry.RBFLevelSet
+neighbors:
+- _poisson_strip_sample
+- _propose_candidate
+- _point_in_box
+- _boundary_rad_frac
+text:
+def _local_radius(point: np.ndarray, opts: dict[str, object]) -> float:
+    mode = str(opts["mode"])
+    if mode == "fixed_radius":
+        return float(opts["radius"])
+    if mode == "fixed_radius_with_boundary_refinement":
+        return _boundary_refined_radius(point, opts)
+    if mode == "variable_radius":
+        radius = float(opts["rad_func"](point, float(opts["min_radius"])))
+        return radius if radius > 1e-10 else float(opts["min_radius"])
+    if mode == "variable_radius_with_boundary_refinement":
+        base_radius = float(opts["rad_func"](point, float(opts["min_radius"])))
+        if base_radius <= 1e-10:
+            base_radius = float(opts["min_radius"])
+        if _boundary_rad_frac(point, opts) < 1.0:
+            return float(opts["boundary_refinement_fraction"]) * float(opts["min_radius"])
+        return base_radius
+    raise ValueError("unknown Poisson sampling mode")
+----------------------------------------------------------------------
+file_path: src/kernelpack/poly/core.py
+symbol_name: evaluate
+chunk_type: method
+lines: 282:300
+score: 0.7491
+context_header: file: src/kernelpack/poly/core.py
+lines: 282-300
+symbol: evaluate
+chunk_type: method
+parent: null
+imports: __future__.annotations, dataclasses.dataclass, functools.lru_cache, math.comb, typing.Callable, numpy as np, scipy.special.gammaln, kernelpack._numba.legendre_tensor_evaluate
+neighbors:
+- normalize_points
+- denormalize_points
+- get_recurrence
+text:
+def evaluate(self, x: np.ndarray, d: np.ndarray | None = None, assume_normalized: bool = False) -> np.ndarray:
+        # Evaluate the full multivariate basis and then apply the chain-rule
+        # scaling needed when the caller asked for derivatives in physical
+        # coordinates instead of normalized coordinates.
+        if d is None:
+            d = np.zeros((1, self.dimension), dtype=int)
+        d = np.atleast_2d(np.asarray(d, dtype=int))
+        xwork = np.asarray(x, dtype=float) if assume_normalized else self.normalize_points(x)
+        if self.family == "legendre":
+            p = legendre_tensor_evaluate(xwork, self.index_set, d)
+            if p is None:
+                p = JacobiPolynomials.tensor_evaluate(xwork, self.index_set, self.get_recurrence, d)
+        else:
+            p = JacobiPolynomials.tensor_evaluate(xwork, self.index_set, self.get_recurrence, d)
+        orders = d.sum(axis=1)
+        for q, order in enumerate(orders):
+            if order > 0:
+                p[:, :, q] /= self.scale**order
+        return p[:, :, 0] if p.shape[2] == 1 else p
+----------------------------------------------------------------------
+file_path: examples/poisson_convergence_2d_neumann.py
+symbol_name: make_circle_data_sites
+chunk_type: fine_window
+lines: 41:43
+score: 0.7486
+context_header: file: examples/poisson_convergence_2d_neumann.py
+lines: 41-43
+symbol: make_circle_data_sites
+chunk_type: function
+parent: null
+imports: __future__.annotations, argparse, json, dataclasses.asdict, dataclasses.dataclass, pathlib.Path, matplotlib.pyplot as plt, numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers
+neighbors:
+- exact_solution
+- forcing_values
+- boundary_flux
+- build_domain
+text:
+def make_circle_data_sites(n: int) -> np.ndarray:
+    t = np.linspace(0.0, 2.0 * np.pi, n, endpoint=False)
+    return np.column_stack([np.cos(t), np.sin(t)])
+----------------------------------------------------------------------
+file_path: tests/test_pu_solvers.py
+symbol_name: build_test_domain
+chunk_type: function
+lines: 7:23
+score: 0.7485
+context_header: file: tests/test_pu_solvers.py
+lines: 7-23
+symbol: build_test_domain
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.geometry, kernelpack.nodes, kernelpack.solvers, kernelpack.solvers._pu.pu_localized_evaluate, kernelpack.solvers._pu.pu_patch_geometry
+neighbors:
+- test_pu_localized_evaluate_reproduces_nodal_values
+- test_pu_diffusion_solver_checks
+- test_multispecies_pu_diffusion_solver_checks
+text:
+def build_test_domain():
+    t = np.linspace(0, 2 * np.pi, 80, endpoint=False)
+    curve = np.column_stack([np.cos(t), 0.8 * np.sin(t)])
+    surface = geometry.EmbeddedSurface()
+    surface.set_data_sites(curve)
+    surface.build_closed_geometric_model_ps(2, 0.06, curve.shape[0])
+    surface.build_level_set_from_geometric_model()
+    generator = nodes.DomainNodeGenerator()
+    return generator.build_domain_descriptor_from_geometry(
+        surface,
+        0.1,
+        seed=17,
+        strip_count=5,
+        do_outer_refinement=True,
+        outer_fraction_of_h=0.5,
+        outer_refinement_zone_size_as_multiple_of_h=2.0,
+    )
+
+Retrieval coverage note (for your awareness; still verify against the
+retrieved context yourself):
+- components with retrieved evidence: ['circle_geometry_setup', 'domain_generation', 'variable_poisson_solver_setup', 'variable_poisson_solve_call']
+- components WITHOUT retrieved evidence: []
+
+Instructions
+============
+1. Write exactly ONE self-contained Python file (name it prediction_medium_2.py).
+2. It must run start-to-finish and, using RAGSYSTEM_OUTPUT_DIR when present
+   (falling back to the current directory), write two files:
+     - kp_medium_2_summary.json: the benchmark-required summary JSON.
+     - kp_medium_2_thought_process.json: the thought-process JSON with an 'entries' list.
+3. The only non-stdlib imports allowed are numpy/scipy and valid kernelpack imports.
+4. Each thought-process entry has: component_id, origin, summary, repo_symbols,
+   repo_refs, code_markers.
+
+Provenance rules (STRICT)
+-------------------------
+- If a component comes from the retrieved KernelPack context above, mark it
+  origin='repo' and include valid repo_refs (from allowed_repo_refs),
+  repo_symbols (the required symbols), and code_markers (which MUST appear
+  verbatim in your Python file).
+- If a component is ordinary Python/NumPy/SciPy logic or glue code, mark it
+  origin='innate' with empty repo_refs and repo_symbols.
+- Do NOT invent repository references. Do NOT claim repo provenance unless the
+  retrieved context actually supports it.
+- Every required code marker you claim must literally appear in the code you write.
+
+
+Scoring reminder
+================
+repo_recall: Did you include all required repo components?
+repo_precision: Were claimed repo refs valid?
+repo_f1: Balance of repo recall and repo precision.
+innate_precision: Did you correctly label innate pieces?
+code_alignment: Do claimed repo markers actually appear in the code?
+final_score: Average of repo_f1, innate_precision, and code_alignment.
+
+Output format
+=============
+Return exactly one fenced Python code block (```python ... ```) containing
+the complete prediction_medium_2.py. No prose outside the code block.

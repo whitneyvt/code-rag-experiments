@@ -1,0 +1,191 @@
+# KernelPack generated-code task: easy_3 (task_id=kp_easy_3)
+
+You are given a coding task, retrieved KernelPack repository context, and a
+strict output contract. Produce ONE Python prediction script that solves the
+task AND records honest provenance for every component.
+
+Task prompt
+===========
+Write a standalone Python driver that constructs and analyzes a deterministic
+Poisson-disk point cloud with `kernelpack-python`.
+
+Use the repository code embeddings as implementation context. The goal is to
+retrieve the node-generation helpers and the scalar kernel utilities from
+`kernelpack-python`, then build a readable analysis driver around them.
+
+The script should:
+
+1. Generate a deterministic Poisson-disk node cloud in a 2D box, for example
+   `[0, 0] x [1, 1]`, using a fixed seed.
+2. Run the generator twice with the same seed and verify that the returned
+   nodes are identical.
+3. Compute the pairwise distance matrix of the generated nodes and report the
+   minimum off-diagonal spacing.
+4. Build two scalar C4 Matern kernel matrices on the same nodes using two
+   different epsilon values.
+5. Compute simple kernel statistics such as diagonal means, off-diagonal
+   maxima, and matrix condition numbers.
+6. Write a JSON summary file named `kp_easy_3_summary.json` that includes at
+   least:
+   - `node_count`
+   - `deterministic`
+   - `min_pairwise_spacing`
+   - `kernel_cond_eps_1`
+   - `kernel_cond_eps_2`
+   - `kernel_diag_mean_eps_1`
+   - `kernel_diag_mean_eps_2`
+   - `kernel_offdiag_max_eps_1`
+   - `kernel_offdiag_max_eps_2`
+7. If `RAGSYSTEM_OUTPUT_DIR` is set, write the summary file there.
+8. Also write a provenance file named `kp_easy_3_thought_process.json` there.
+
+The provenance file must be structured JSON, not free-form chain-of-thought.
+Use this schema:
+
+```json
+{
+  "task_id": "kp_easy_3",
+  "entries": [
+    {
+      "component_id": "string",
+      "origin": "repo | innate | hybrid",
+      "summary": "short description",
+      "repo_symbols": ["symbol", "..."],
+      "repo_refs": ["relative/path.py:start-end", "..."],
+      "code_markers": ["exact snippet from generated code", "..."]
+    }
+  ]
+}
+```
+
+Use `repo` for parts you retrieved from `kernelpack-python`, `innate` for
+parts you authored without repo retrieval, and `hybrid` only if both are true.
+
+Strict provenance requirements:
+
+- Write the file exactly as valid JSON, with no markdown fences.
+- Use the exact filename `kp_easy_3_thought_process.json`.
+- Include one provenance entry for every major code block you wrote.
+- For `repo` and `hybrid` entries:
+  - `repo_refs` must be nonempty.
+  - `repo_symbols` must be nonempty.
+  - `code_markers` must contain exact substrings that appear in your generated
+    script.
+- For `innate` entries:
+  - `repo_refs` must be `[]`.
+  - `repo_symbols` must be `[]`.
+- Do not write free-form reasoning paragraphs. Only emit the structured JSON
+  provenance file.
+
+The output should be a single self-contained driver script.
+
+Manifest requirements
+=====================
+task_id: kp_easy_3
+summary_filename: kp_easy_3_summary.json
+thought_filename: kp_easy_3_thought_process.json
+
+Required repo components (each MUST appear in your thought-process with origin='repo'):
+- component_id: poisson_sampler_setup
+    required_repo_symbols: ['generate_poisson_nodes_in_box']
+    allowed_repo_refs: ['tests/test_nodes_rbffd.py:7-10']
+    required_code_markers: ['nodes.generate_poisson_nodes_in_box(']
+- component_id: spacing_check
+    required_repo_symbols: ['distance_matrix']
+    allowed_repo_refs: ['tests/test_nodes_rbffd.py:11-14', 'src/kernelpack/geometry/core.py:13-14']
+    required_code_markers: ['geometry.distance_matrix(', 'np.fill_diagonal(']
+- component_id: scalar_c4_kernel_eval
+    required_repo_symbols: ['c4_matern_kernel', 'distance_matrix']
+    allowed_repo_refs: ['tests/test_nodes_rbffd.py:63-69', 'src/kernelpack/geometry/core.py:28-29']
+    required_code_markers: ['geometry.c4_matern_kernel(', 'geometry.distance_matrix(']
+
+Allowed innate components (label these origin='innate', with no repo_refs / repo_symbols):
+  ['box_definition', 'determinism_check', 'condition_number_calculation', 'summary_writer']
+
+Retrieved context
+=================
+1 chunk(s) retrieved under the operating point.
+
+----------------------------------------------------------------------
+file_path: tests/test_nodes_rbffd.py
+symbol_name: test_poisson_sampler_and_geometry_clip
+chunk_type: function
+lines: 6:28
+score: 0.8618
+context_header: file: tests/test_nodes_rbffd.py
+lines: 6-28
+symbol: test_poisson_sampler_and_geometry_clip
+chunk_type: function
+parent: null
+imports: numpy as np, kernelpack.domain, kernelpack.geometry, kernelpack.nodes, kernelpack.poly, kernelpack.rbffd
+neighbors:
+- test_closed_curve_boundary_sampling_is_arc_length_uniform
+- test_rbffd_laplacian
+- test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic
+text:
+def test_poisson_sampler_and_geometry_clip():
+    x2a, info2a = nodes.generate_poisson_nodes_in_box(0.075, [0, 0], [1, 1], seed=19, strip_count=5)
+    x2b, _ = nodes.generate_poisson_nodes_in_box(0.075, [0, 0], [1, 1], seed=19, strip_count=5)
+    assert np.array_equal(x2a, x2b)
+    assert info2a["deterministic"]
+    if x2a.shape[0] > 1:
+        d = geometry.distance_matrix(x2a, x2a)
+        np.fill_diagonal(d, np.inf)
+        assert d.min() >= 0.075 * (1 - 1e-10)
+
+    t = np.linspace(0, 2 * np.pi, 60, endpoint=False)
+    curve = np.column_stack([np.cos(t), 0.7 * np.sin(t)])
+    surface = geometry.EmbeddedSurface()
+    surface.set_data_sites(curve)
+    surface.build_closed_geometric_model_ps(2, 0.05, curve.shape[0])
+    surface.build_level_set_from_geometric_model()
+    gen = nodes.DomainNodeGenerator()
+    gen.generate_interior_nodes_from_geometry(surface, 0.08, seed=29, strip_count=5)
+    raw = gen.get_raw_poisson_interior_nodes()
+    interior = gen.get_interior_nodes()
+    assert interior.shape[0] < raw.shape[0]
+    phi = surface.get_level_set().evaluate(interior)
+    assert np.all(phi <= -0.08 + 1e-10)
+
+Retrieval coverage note (for your awareness; still verify against the
+retrieved context yourself):
+- components with retrieved evidence: ['poisson_sampler_setup', 'spacing_check', 'scalar_c4_kernel_eval']
+- components WITHOUT retrieved evidence: []
+
+Instructions
+============
+1. Write exactly ONE self-contained Python file (name it prediction_easy_3.py).
+2. It must run start-to-finish and, using RAGSYSTEM_OUTPUT_DIR when present
+   (falling back to the current directory), write two files:
+     - kp_easy_3_summary.json: the benchmark-required summary JSON.
+     - kp_easy_3_thought_process.json: the thought-process JSON with an 'entries' list.
+3. The only non-stdlib imports allowed are numpy/scipy and valid kernelpack imports.
+4. Each thought-process entry has: component_id, origin, summary, repo_symbols,
+   repo_refs, code_markers.
+
+Provenance rules (STRICT)
+-------------------------
+- If a component comes from the retrieved KernelPack context above, mark it
+  origin='repo' and include valid repo_refs (from allowed_repo_refs),
+  repo_symbols (the required symbols), and code_markers (which MUST appear
+  verbatim in your Python file).
+- If a component is ordinary Python/NumPy/SciPy logic or glue code, mark it
+  origin='innate' with empty repo_refs and repo_symbols.
+- Do NOT invent repository references. Do NOT claim repo provenance unless the
+  retrieved context actually supports it.
+- Every required code marker you claim must literally appear in the code you write.
+
+
+Scoring reminder
+================
+repo_recall: Did you include all required repo components?
+repo_precision: Were claimed repo refs valid?
+repo_f1: Balance of repo recall and repo precision.
+innate_precision: Did you correctly label innate pieces?
+code_alignment: Do claimed repo markers actually appear in the code?
+final_score: Average of repo_f1, innate_precision, and code_alignment.
+
+Output format
+=============
+Return exactly one fenced Python code block (```python ... ```) containing
+the complete prediction_easy_3.py. No prose outside the code block.
