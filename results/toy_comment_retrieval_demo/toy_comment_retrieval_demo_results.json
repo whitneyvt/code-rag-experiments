@@ -1,0 +1,166 @@
+{
+  "arms": {
+    "original_code": {
+      "arm": "original_code",
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.3333333333333333,
+      "mrr": 0.2902777777777778,
+      "chunks_returned": 8,
+      "avg_chunk_chars": 136.125,
+      "avg_context_chars_to_hit": 668.8333333333334,
+      "per_query": [
+        {
+          "query": "Where is the Laplacian operator assembled?",
+          "expected": "build_op",
+          "top_result": "grid2d",
+          "rank": 8,
+          "context_chars_to_hit": 1089
+        },
+        {
+          "query": "Where are boundary conditions applied?",
+          "expected": "set_bc",
+          "top_result": "grid2d",
+          "rank": 2,
+          "context_chars_to_hit": 346
+        },
+        {
+          "query": "Where are nearest-neighbor stencils selected?",
+          "expected": "knn",
+          "top_result": "local_weights",
+          "rank": 4,
+          "context_chars_to_hit": 737
+        },
+        {
+          "query": "Where is the RBF kernel evaluated?",
+          "expected": "phi",
+          "top_result": "knn",
+          "rank": 5,
+          "context_chars_to_hit": 622
+        },
+        {
+          "query": "Where is the Poisson system solved?",
+          "expected": "spsolve",
+          "top_result": "grid2d",
+          "rank": 2,
+          "context_chars_to_hit": 240
+        },
+        {
+          "query": "Where is the numerical error computed?",
+          "expected": "rms",
+          "top_result": "grid2d",
+          "rank": 6,
+          "context_chars_to_hit": 979
+        }
+      ]
+    },
+    "llm_commented_code": {
+      "arm": "llm_commented_code",
+      "hit_at_1": 0.8333333333333334,
+      "hit_at_3": 1.0,
+      "mrr": 0.9166666666666666,
+      "chunks_returned": 8,
+      "avg_chunk_chars": 350.25,
+      "avg_context_chars_to_hit": 377.3333333333333,
+      "per_query": [
+        {
+          "query": "Where is the Laplacian operator assembled?",
+          "expected": "build_op",
+          "top_result": "build_op",
+          "rank": 1,
+          "context_chars_to_hit": 471
+        },
+        {
+          "query": "Where are boundary conditions applied?",
+          "expected": "set_bc",
+          "top_result": "set_bc",
+          "rank": 1,
+          "context_chars_to_hit": 390
+        },
+        {
+          "query": "Where are nearest-neighbor stencils selected?",
+          "expected": "knn",
+          "top_result": "knn",
+          "rank": 1,
+          "context_chars_to_hit": 339
+        },
+        {
+          "query": "Where is the RBF kernel evaluated?",
+          "expected": "phi",
+          "top_result": "phi",
+          "rank": 1,
+          "context_chars_to_hit": 254
+        },
+        {
+          "query": "Where is the Poisson system solved?",
+          "expected": "spsolve",
+          "top_result": "spsolve",
+          "rank": 1,
+          "context_chars_to_hit": 209
+        },
+        {
+          "query": "Where is the numerical error computed?",
+          "expected": "rms",
+          "top_result": "knn",
+          "rank": 2,
+          "context_chars_to_hit": 601
+        }
+      ]
+    }
+  },
+  "comparison_table": [
+    {
+      "query": "Where is the Laplacian operator assembled?",
+      "expected": "build_op",
+      "original_top": "grid2d",
+      "commented_top": "build_op",
+      "original_rank": 8,
+      "commented_rank": 1,
+      "helped": "yes"
+    },
+    {
+      "query": "Where are boundary conditions applied?",
+      "expected": "set_bc",
+      "original_top": "grid2d",
+      "commented_top": "set_bc",
+      "original_rank": 2,
+      "commented_rank": 1,
+      "helped": "yes"
+    },
+    {
+      "query": "Where are nearest-neighbor stencils selected?",
+      "expected": "knn",
+      "original_top": "local_weights",
+      "commented_top": "knn",
+      "original_rank": 4,
+      "commented_rank": 1,
+      "helped": "yes"
+    },
+    {
+      "query": "Where is the RBF kernel evaluated?",
+      "expected": "phi",
+      "original_top": "knn",
+      "commented_top": "phi",
+      "original_rank": 5,
+      "commented_rank": 1,
+      "helped": "yes"
+    },
+    {
+      "query": "Where is the Poisson system solved?",
+      "expected": "spsolve",
+      "original_top": "grid2d",
+      "commented_top": "spsolve",
+      "original_rank": 2,
+      "commented_rank": 1,
+      "helped": "yes"
+    },
+    {
+      "query": "Where is the numerical error computed?",
+      "expected": "rms",
+      "original_top": "grid2d",
+      "commented_top": "knn",
+      "original_rank": 6,
+      "commented_rank": 2,
+      "helped": "yes"
+    }
+  ]
+}
