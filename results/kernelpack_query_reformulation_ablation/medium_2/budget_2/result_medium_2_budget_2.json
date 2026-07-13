@@ -1,0 +1,123 @@
+{
+  "task": "medium_2",
+  "task_id": "kp_medium_2",
+  "difficulty": "medium",
+  "arm": "fine_to_coarse",
+  "budget": 2,
+  "retrieval_calls_used": 2,
+  "components_total": 4,
+  "components_matched": 0,
+  "components_missed": 4,
+  "matched_components": [],
+  "missed_components": [
+    "circle_geometry_setup",
+    "domain_generation",
+    "variable_poisson_solver_setup",
+    "variable_poisson_solve_call"
+  ],
+  "empty_retrieval_calls": 2,
+  "weak_retrieval_calls": 0,
+  "successful_reformulations": 0,
+  "failed_reformulations": 1,
+  "first_component_found_at_call": null,
+  "all_components_found_at_call": null,
+  "average_calls_per_matched_component": null,
+  "retrieved_files": [],
+  "retrieved_symbols": [],
+  "queries_issued": [
+    {
+      "component_id": "circle_geometry_setup",
+      "variant": "specific",
+      "query": "circle_geometry_setup EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "circle_geometry_setup",
+      "variant": "symbol_only",
+      "query": "EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model",
+      "module_filter": "solvers"
+    }
+  ],
+  "query_variant_counts": {
+    "specific": 1,
+    "symbol_only": 1,
+    "marker_only": 0,
+    "file_hint": 0,
+    "broad_concept": 0
+  },
+  "per_component": [
+    {
+      "component_id": "circle_geometry_setup",
+      "matched": false,
+      "calls_used": 2,
+      "successful_variant": null,
+      "variants_tried": [
+        "specific",
+        "symbol_only"
+      ],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "domain_generation",
+      "matched": false,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "variable_poisson_solver_setup",
+      "matched": false,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "variable_poisson_solve_call",
+      "matched": false,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    }
+  ],
+  "repo_recall": 0.0,
+  "repo_precision": 0.0,
+  "repo_f1": 0.0,
+  "innate_precision": 1.0,
+  "code_alignment": 0.0,
+  "final_score": 0.3333333333333333,
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/medium_2/budget_2/prediction_medium_2_budget_2.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_medium_2",
+    "required_repo_components": 4,
+    "matched_required_repo_components": 0,
+    "missed_required_repo_components": [
+      "circle_geometry_setup",
+      "domain_generation",
+      "variable_poisson_solve_call",
+      "variable_poisson_solver_setup"
+    ],
+    "repo_claim_total": 0,
+    "verified_repo_claims": 0,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 0.0,
+    "repo_precision": 0.0,
+    "repo_f1": 0.0,
+    "innate_precision": 1.0,
+    "code_alignment": 0.0,
+    "final_score": 0.3333333333333333,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/medium_2/budget_2/prediction_medium_2_budget_2.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_y4exnh0p/kp_medium_2_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_y4exnh0p/kp_medium_2_thought_process.json"
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "task": "medium_3",
+  "task_id": "kp_medium_3",
+  "difficulty": "medium",
+  "arm": "fine_to_coarse",
+  "budget": 20,
+  "retrieval_calls_used": 5,
+  "components_total": 5,
+  "components_matched": 5,
+  "components_missed": 0,
+  "matched_components": [
+    "curve_geometry_setup",
+    "domain_generation",
+    "poisson_solver_setup",
+    "mixed_boundary_solve_call",
+    "mean_aligned_error_postprocess"
+  ],
+  "missed_components": [],
+  "empty_retrieval_calls": 3,
+  "weak_retrieval_calls": 0,
+  "successful_reformulations": 1,
+  "failed_reformulations": 0,
+  "first_component_found_at_call": 4,
+  "all_components_found_at_call": 5,
+  "average_calls_per_matched_component": 1.0,
+  "retrieved_files": [
+    "README.md",
+    "src/kernelpack/domain/core.py",
+    "src/kernelpack/geometry/core.py",
+    "src/kernelpack/nodes/core.py",
+    "tests/test_pu_solvers.py",
+    "tests/test_solvers.py"
+  ],
+  "retrieved_symbols": [
+    "build_test_domain",
+    "get_bdry_nodes",
+    "get_int_bdry_nodes",
+    "get_num_bdry_nodes",
+    "get_num_int_bdry_nodes",
+    "test_diffusion_solver_checks",
+    "test_nonlinear_variable_poisson_solver_checks",
+    "test_poisson_solver_checks",
+    "test_variable_poisson_solver_checks",
+    "test_variable_poisson_solver_matches_mixed_bc_case"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "curve_geometry_setup",
+      "variant": "specific",
+      "query": "curve_geometry_setup EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "curve_geometry_setup",
+      "variant": "symbol_only",
+      "query": "EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "curve_geometry_setup",
+      "variant": "marker_only",
+      "query": "geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "curve_geometry_setup",
+      "variant": "file_hint",
+      "query": "tests/test_solvers.py solvers curve geometry setup",
+      "module_filter": null
+    },
+    {
+      "component_id": "mean_aligned_error_postprocess",
+      "variant": "specific",
+      "query": "mean_aligned_error_postprocess get_int_bdry_nodes domain.get_int_bdry_nodes() err = solve_result[\"u\"] - u_true err = err - np.mean(err)",
+      "module_filter": null
+    }
+  ],
+  "query_variant_counts": {
+    "specific": 2,
+    "symbol_only": 1,
+    "marker_only": 1,
+    "file_hint": 1,
+    "broad_concept": 0
+  },
+  "per_component": [
+    {
+      "component_id": "curve_geometry_setup",
+      "matched": true,
+      "calls_used": 4,
+      "successful_variant": "file_hint",
+      "variants_tried": [
+        "specific",
+        "symbol_only",
+        "marker_only",
+        "file_hint"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "tests/test_pu_solvers.py",
+        "tests/test_solvers.py"
+      ],
+      "retrieved_symbols": [
+        "build_test_domain",
+        "test_diffusion_solver_checks",
+        "test_nonlinear_variable_poisson_solver_checks",
+        "test_poisson_solver_checks",
+        "test_variable_poisson_solver_checks",
+        "test_variable_poisson_solver_matches_mixed_bc_case"
+      ]
+    },
+    {
+      "component_id": "domain_generation",
+      "matched": true,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "poisson_solver_setup",
+      "matched": true,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "mixed_boundary_solve_call",
+      "matched": true,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "mean_aligned_error_postprocess",
+      "matched": true,
+      "calls_used": 1,
+      "successful_variant": "specific",
+      "variants_tried": [
+        "specific"
+      ],
+      "retrieved_files": [
+        "README.md",
+        "src/kernelpack/domain/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/nodes/core.py",
+        "tests/test_solvers.py"
+      ],
+      "retrieved_symbols": [
+        "get_bdry_nodes",
+        "get_int_bdry_nodes",
+        "get_num_bdry_nodes",
+        "get_num_int_bdry_nodes",
+        "test_nonlinear_variable_poisson_solver_checks"
+      ]
+    }
+  ],
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/medium_3/budget_20/prediction_medium_3_budget_20.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_medium_3",
+    "required_repo_components": 5,
+    "matched_required_repo_components": 5,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 5,
+    "verified_repo_claims": 5,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/medium_3/budget_20/prediction_medium_3_budget_20.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_82e29d7m/kp_medium_3_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_82e29d7m/kp_medium_3_thought_process.json"
+  }
+}

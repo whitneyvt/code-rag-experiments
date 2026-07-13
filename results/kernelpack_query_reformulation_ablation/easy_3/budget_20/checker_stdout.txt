@@ -1,0 +1,20 @@
+{
+  "task_id": "kp_easy_3",
+  "required_repo_components": 3,
+  "matched_required_repo_components": 3,
+  "missed_required_repo_components": [],
+  "repo_claim_total": 3,
+  "verified_repo_claims": 3,
+  "hallucinated_repo_claims": 0,
+  "innate_claim_total": 4,
+  "correct_innate_claims": 4,
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/easy_3/budget_20/prediction_easy_3_budget_20.py",
+  "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_4k9pwlwg/kp_easy_3_summary.json",
+  "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_4k9pwlwg/kp_easy_3_thought_process.json"
+}

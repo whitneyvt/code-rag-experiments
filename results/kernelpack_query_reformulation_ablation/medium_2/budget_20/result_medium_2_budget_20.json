@@ -1,0 +1,160 @@
+{
+  "task": "medium_2",
+  "task_id": "kp_medium_2",
+  "difficulty": "medium",
+  "arm": "fine_to_coarse",
+  "budget": 20,
+  "retrieval_calls_used": 4,
+  "components_total": 4,
+  "components_matched": 4,
+  "components_missed": 0,
+  "matched_components": [
+    "circle_geometry_setup",
+    "domain_generation",
+    "variable_poisson_solver_setup",
+    "variable_poisson_solve_call"
+  ],
+  "missed_components": [],
+  "empty_retrieval_calls": 3,
+  "weak_retrieval_calls": 0,
+  "successful_reformulations": 1,
+  "failed_reformulations": 0,
+  "first_component_found_at_call": 4,
+  "all_components_found_at_call": 4,
+  "average_calls_per_matched_component": 1.0,
+  "retrieved_files": [
+    "examples/poisson_convergence_2d_neumann.py",
+    "src/kernelpack/nodes/core.py",
+    "src/kernelpack/poly/core.py",
+    "tests/test_pu_solvers.py",
+    "tests/test_solvers.py"
+  ],
+  "retrieved_symbols": [
+    "_local_radius",
+    "build_test_domain",
+    "evaluate",
+    "make_circle_data_sites",
+    "test_nonlinear_variable_poisson_solver_checks",
+    "test_poisson_solver_checks",
+    "test_variable_poisson_solver_matches_mixed_bc_case"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "circle_geometry_setup",
+      "variant": "specific",
+      "query": "circle_geometry_setup EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "circle_geometry_setup",
+      "variant": "symbol_only",
+      "query": "EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "circle_geometry_setup",
+      "variant": "marker_only",
+      "query": "geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "circle_geometry_setup",
+      "variant": "file_hint",
+      "query": "tests/test_solvers.py solvers circle geometry setup",
+      "module_filter": null
+    }
+  ],
+  "query_variant_counts": {
+    "specific": 1,
+    "symbol_only": 1,
+    "marker_only": 1,
+    "file_hint": 1,
+    "broad_concept": 0
+  },
+  "per_component": [
+    {
+      "component_id": "circle_geometry_setup",
+      "matched": true,
+      "calls_used": 4,
+      "successful_variant": "file_hint",
+      "variants_tried": [
+        "specific",
+        "symbol_only",
+        "marker_only",
+        "file_hint"
+      ],
+      "retrieved_files": [
+        "examples/poisson_convergence_2d_neumann.py",
+        "src/kernelpack/nodes/core.py",
+        "src/kernelpack/poly/core.py",
+        "tests/test_pu_solvers.py",
+        "tests/test_solvers.py"
+      ],
+      "retrieved_symbols": [
+        "_local_radius",
+        "build_test_domain",
+        "evaluate",
+        "make_circle_data_sites",
+        "test_nonlinear_variable_poisson_solver_checks",
+        "test_poisson_solver_checks",
+        "test_variable_poisson_solver_matches_mixed_bc_case"
+      ]
+    },
+    {
+      "component_id": "domain_generation",
+      "matched": true,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "variable_poisson_solver_setup",
+      "matched": true,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "variable_poisson_solve_call",
+      "matched": true,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    }
+  ],
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/medium_2/budget_20/prediction_medium_2_budget_20.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_medium_2",
+    "required_repo_components": 4,
+    "matched_required_repo_components": 4,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 4,
+    "verified_repo_claims": 4,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/medium_2/budget_20/prediction_medium_2_budget_20.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_5vcr83v9/kp_medium_2_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_5vcr83v9/kp_medium_2_thought_process.json"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "task": "easy_3",
+  "task_id": "kp_easy_3",
+  "difficulty": "easy",
+  "arm": "fine_to_coarse",
+  "budget": 2,
+  "retrieval_calls_used": 1,
+  "components_total": 3,
+  "components_matched": 3,
+  "components_missed": 0,
+  "matched_components": [
+    "poisson_sampler_setup",
+    "spacing_check",
+    "scalar_c4_kernel_eval"
+  ],
+  "missed_components": [],
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 0,
+  "successful_reformulations": 0,
+  "failed_reformulations": 0,
+  "first_component_found_at_call": 1,
+  "all_components_found_at_call": 1,
+  "average_calls_per_matched_component": 0.3333333333333333,
+  "retrieved_files": [
+    "tests/test_nodes_rbffd.py"
+  ],
+  "retrieved_symbols": [
+    "test_poisson_sampler_and_geometry_clip"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "poisson_sampler_setup",
+      "variant": "specific",
+      "query": "poisson_sampler_setup generate_poisson_nodes_in_box nodes.generate_poisson_nodes_in_box(",
+      "module_filter": "rbffd"
+    }
+  ],
+  "query_variant_counts": {
+    "specific": 1,
+    "symbol_only": 0,
+    "marker_only": 0,
+    "file_hint": 0,
+    "broad_concept": 0
+  },
+  "per_component": [
+    {
+      "component_id": "poisson_sampler_setup",
+      "matched": true,
+      "calls_used": 1,
+      "successful_variant": "specific",
+      "variants_tried": [
+        "specific"
+      ],
+      "retrieved_files": [
+        "tests/test_nodes_rbffd.py"
+      ],
+      "retrieved_symbols": [
+        "test_poisson_sampler_and_geometry_clip"
+      ]
+    },
+    {
+      "component_id": "spacing_check",
+      "matched": true,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    },
+    {
+      "component_id": "scalar_c4_kernel_eval",
+      "matched": true,
+      "calls_used": 0,
+      "successful_variant": null,
+      "variants_tried": [],
+      "retrieved_files": [],
+      "retrieved_symbols": []
+    }
+  ],
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/easy_3/budget_2/prediction_easy_3_budget_2.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_easy_3",
+    "required_repo_components": 3,
+    "matched_required_repo_components": 3,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 3,
+    "verified_repo_claims": 3,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/easy_3/budget_2/prediction_easy_3_budget_2.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_bwmrz60b/kp_easy_3_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_bwmrz60b/kp_easy_3_thought_process.json"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "task_id": "kp_medium_3",
+  "required_repo_components": 5,
+  "matched_required_repo_components": 0,
+  "missed_required_repo_components": [
+    "curve_geometry_setup",
+    "domain_generation",
+    "mean_aligned_error_postprocess",
+    "mixed_boundary_solve_call",
+    "poisson_solver_setup"
+  ],
+  "repo_claim_total": 0,
+  "verified_repo_claims": 0,
+  "hallucinated_repo_claims": 0,
+  "innate_claim_total": 4,
+  "correct_innate_claims": 4,
+  "repo_recall": 0.0,
+  "repo_precision": 0.0,
+  "repo_f1": 0.0,
+  "innate_precision": 1.0,
+  "code_alignment": 0.0,
+  "final_score": 0.3333333333333333,
+  "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_query_reformulation_ablation/medium_3/budget_2/prediction_medium_3_budget_2.py",
+  "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_xvv6nzmr/kp_medium_3_summary.json",
+  "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_xvv6nzmr/kp_medium_3_thought_process.json"
+}
