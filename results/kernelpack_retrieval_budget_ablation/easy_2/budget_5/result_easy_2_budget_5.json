@@ -1,0 +1,121 @@
+{
+  "task": "easy_2",
+  "task_id": "kp_easy_2",
+  "difficulty": "easy",
+  "budget": 5,
+  "mode": "fine_to_coarse_hybrid",
+  "retrieval_calls_used": 4,
+  "queries_issued": [
+    {
+      "component_id": "domain_descriptor_setup",
+      "query": "domain_descriptor_setup DomainDescriptor set_nodes set_sep_rad build_structs domain.DomainDescriptor() .set_nodes( .set_sep_rad( .build_structs()",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "stencil_properties_setup",
+      "query": "stencil_properties_setup StencilProperties OpProperties rbffd.StencilProperties( rbffd.OpProperties(",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "wls_operator_assembly",
+      "query": "wls_operator_assembly FDDiffOp WeightedLeastSquaresStencil assemble_op get_op rbffd.FDDiffOp( rbffd.WeightedLeastSquaresStencil() .assemble_op( .get_op()",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "fdo_operator_assembly",
+      "query": "fdo_operator_assembly FDODiffOp assemble_op get_op rbffd.FDODiffOp( .assemble_op( .get_op()",
+      "module_filter": "rbffd"
+    }
+  ],
+  "retrieved_files": [
+    "src/kernelpack/rbffd/__init__.py",
+    "src/kernelpack/rbffd/core.py",
+    "tests/test_nodes_rbffd.py"
+  ],
+  "retrieved_symbols": [
+    "CrossNodeDiffOp",
+    "FDODiffOp",
+    "_assemble_one",
+    "_compute_weights_boundary",
+    "_compute_weights_interior",
+    "assemble_op",
+    "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic"
+  ],
+  "required_components_retrieved": [
+    "domain_descriptor_setup",
+    "stencil_properties_setup",
+    "wls_operator_assembly",
+    "fdo_operator_assembly"
+  ],
+  "required_components_missing": [],
+  "component_evidence": {
+    "domain_descriptor_setup": {
+      "matched": true,
+      "matched_symbols": [],
+      "matched_files": [
+        "tests/test_nodes_rbffd.py"
+      ]
+    },
+    "stencil_properties_setup": {
+      "matched": true,
+      "matched_symbols": [],
+      "matched_files": [
+        "src/kernelpack/rbffd/core.py",
+        "tests/test_nodes_rbffd.py"
+      ]
+    },
+    "wls_operator_assembly": {
+      "matched": true,
+      "matched_symbols": [
+        "assemble_op"
+      ],
+      "matched_files": [
+        "src/kernelpack/rbffd/core.py",
+        "tests/test_nodes_rbffd.py"
+      ]
+    },
+    "fdo_operator_assembly": {
+      "matched": true,
+      "matched_symbols": [
+        "FDODiffOp",
+        "assemble_op",
+        "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic"
+      ],
+      "matched_files": [
+        "src/kernelpack/rbffd/core.py",
+        "tests/test_nodes_rbffd.py"
+      ]
+    }
+  },
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_retrieval_budget_ablation/easy_2/budget_5/prediction_easy_2_budget_5.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score": {
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0
+  },
+  "checker_score_full": {
+    "task_id": "kp_easy_2",
+    "required_repo_components": 4,
+    "matched_required_repo_components": 4,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 4,
+    "verified_repo_claims": 4,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 5,
+    "correct_innate_claims": 5,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_retrieval_budget_ablation/easy_2/budget_5/prediction_easy_2_budget_5.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_tbjqwn5v/kp_easy_2_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_tbjqwn5v/kp_easy_2_thought_process.json"
+  }
+}

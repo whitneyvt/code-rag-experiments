@@ -1,0 +1,72 @@
+Write a standalone Python driver that constructs and analyzes a deterministic
+Poisson-disk point cloud with `kernelpack-python`.
+
+Use the repository code embeddings as implementation context. The goal is to
+retrieve the node-generation helpers and the scalar kernel utilities from
+`kernelpack-python`, then build a readable analysis driver around them.
+
+The script should:
+
+1. Generate a deterministic Poisson-disk node cloud in a 2D box, for example
+   `[0, 0] x [1, 1]`, using a fixed seed.
+2. Run the generator twice with the same seed and verify that the returned
+   nodes are identical.
+3. Compute the pairwise distance matrix of the generated nodes and report the
+   minimum off-diagonal spacing.
+4. Build two scalar C4 Matern kernel matrices on the same nodes using two
+   different epsilon values.
+5. Compute simple kernel statistics such as diagonal means, off-diagonal
+   maxima, and matrix condition numbers.
+6. Write a JSON summary file named `kp_easy_3_summary.json` that includes at
+   least:
+   - `node_count`
+   - `deterministic`
+   - `min_pairwise_spacing`
+   - `kernel_cond_eps_1`
+   - `kernel_cond_eps_2`
+   - `kernel_diag_mean_eps_1`
+   - `kernel_diag_mean_eps_2`
+   - `kernel_offdiag_max_eps_1`
+   - `kernel_offdiag_max_eps_2`
+7. If `RAGSYSTEM_OUTPUT_DIR` is set, write the summary file there.
+8. Also write a provenance file named `kp_easy_3_thought_process.json` there.
+
+The provenance file must be structured JSON, not free-form chain-of-thought.
+Use this schema:
+
+```json
+{
+  "task_id": "kp_easy_3",
+  "entries": [
+    {
+      "component_id": "string",
+      "origin": "repo | innate | hybrid",
+      "summary": "short description",
+      "repo_symbols": ["symbol", "..."],
+      "repo_refs": ["relative/path.py:start-end", "..."],
+      "code_markers": ["exact snippet from generated code", "..."]
+    }
+  ]
+}
+```
+
+Use `repo` for parts you retrieved from `kernelpack-python`, `innate` for
+parts you authored without repo retrieval, and `hybrid` only if both are true.
+
+Strict provenance requirements:
+
+- Write the file exactly as valid JSON, with no markdown fences.
+- Use the exact filename `kp_easy_3_thought_process.json`.
+- Include one provenance entry for every major code block you wrote.
+- For `repo` and `hybrid` entries:
+  - `repo_refs` must be nonempty.
+  - `repo_symbols` must be nonempty.
+  - `code_markers` must contain exact substrings that appear in your generated
+    script.
+- For `innate` entries:
+  - `repo_refs` must be `[]`.
+  - `repo_symbols` must be `[]`.
+- Do not write free-form reasoning paragraphs. Only emit the structured JSON
+  provenance file.
+
+The output should be a single self-contained driver script.

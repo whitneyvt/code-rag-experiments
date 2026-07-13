@@ -1,0 +1,77 @@
+{
+  "task_id": "kp_medium_2",
+  "summary_filename": "kp_medium_2_summary.json",
+  "thought_filename": "kp_medium_2_thought_process.json",
+  "required_repo_components": [
+    {
+      "component_id": "circle_geometry_setup",
+      "allowed_repo_refs": [
+        "tests/test_solvers.py:6-12"
+      ],
+      "required_repo_symbols": [
+        "EmbeddedSurface",
+        "set_data_sites",
+        "build_closed_geometric_model_ps",
+        "build_level_set_from_geometric_model"
+      ],
+      "required_code_markers": [
+        "geometry.EmbeddedSurface()",
+        ".set_data_sites(",
+        ".build_closed_geometric_model_ps(",
+        ".build_level_set_from_geometric_model()"
+      ]
+    },
+    {
+      "component_id": "domain_generation",
+      "allowed_repo_refs": [
+        "tests/test_solvers.py:13-22",
+        "src/kernelpack/nodes/core.py:600-620"
+      ],
+      "required_repo_symbols": [
+        "DomainNodeGenerator",
+        "build_domain_descriptor_from_geometry"
+      ],
+      "required_code_markers": [
+        "nodes.DomainNodeGenerator()",
+        ".build_domain_descriptor_from_geometry("
+      ]
+    },
+    {
+      "component_id": "variable_poisson_solver_setup",
+      "allowed_repo_refs": [
+        "tests/test_solvers.py:70-82",
+        "src/kernelpack/solvers/variable_poisson.py:47-113"
+      ],
+      "required_repo_symbols": [
+        "VariablePoissonSolver",
+        "init"
+      ],
+      "required_code_markers": [
+        "solvers.VariablePoissonSolver(",
+        ".init(domain,"
+      ]
+    },
+    {
+      "component_id": "variable_poisson_solve_call",
+      "allowed_repo_refs": [
+        "tests/test_solvers.py:72-89",
+        "src/kernelpack/solvers/variable_poisson.py:115-178"
+      ],
+      "required_repo_symbols": [
+        "solve"
+      ],
+      "required_code_markers": [
+        ".solve(",
+        "a_coeff",
+        "neu_coeff",
+        "dir_coeff"
+      ]
+    }
+  ],
+  "allowed_innate_components": [
+    "exact_solution_definition",
+    "coefficient_field_definition",
+    "forcing_definition",
+    "summary_writer"
+  ]
+}

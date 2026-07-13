@@ -1,0 +1,80 @@
+{
+  "task_id": "kp_easy",
+  "summary_filename": "kp_easy_summary.json",
+  "thought_filename": "kp_easy_thought_process.json",
+  "required_repo_components": [
+    {
+      "component_id": "domain_descriptor_setup",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:49-52"
+      ],
+      "required_repo_symbols": [
+        "DomainDescriptor",
+        "set_nodes",
+        "set_sep_rad",
+        "build_structs"
+      ],
+      "required_code_markers": [
+        "domain.DomainDescriptor()",
+        ".set_nodes(",
+        ".set_sep_rad(",
+        ".build_structs()"
+      ]
+    },
+    {
+      "component_id": "stencil_properties_setup",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:53-54",
+        "src/kernelpack/rbffd/core.py:39-84"
+      ],
+      "required_repo_symbols": [
+        "StencilProperties",
+        "OpProperties"
+      ],
+      "required_code_markers": [
+        "rbffd.StencilProperties(",
+        "rbffd.OpProperties("
+      ]
+    },
+    {
+      "component_id": "fd_operator_assembly",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:56-59",
+        "src/kernelpack/rbffd/core.py:500-584"
+      ],
+      "required_repo_symbols": [
+        "FDDiffOp",
+        "WeightedLeastSquaresStencil",
+        "assemble_op",
+        "get_op"
+      ],
+      "required_code_markers": [
+        "rbffd.FDDiffOp(",
+        "rbffd.WeightedLeastSquaresStencil()",
+        ".assemble_op(",
+        ".get_op()"
+      ]
+    },
+    {
+      "component_id": "scalar_c4_kernel_eval",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:63-69",
+        "src/kernelpack/geometry/core.py:13-28"
+      ],
+      "required_repo_symbols": [
+        "distance_matrix",
+        "c4_matern_kernel"
+      ],
+      "required_code_markers": [
+        "geometry.distance_matrix(",
+        "geometry.c4_matern_kernel("
+      ]
+    }
+  ],
+  "allowed_innate_components": [
+    "grid_generation",
+    "interior_row_selection",
+    "quadratic_test_field",
+    "summary_writer"
+  ]
+}

@@ -1,0 +1,72 @@
+Write a standalone Python script that uses `kernelpack-python` to assemble and
+compare two finite-difference Laplacian operators on a 2D Cartesian grid.
+
+Use the repository code embeddings as implementation context. The goal is to
+retrieve and reuse the correct domain, stencil, and operator-assembly pieces
+from `kernelpack-python`, not to invent a new finite-difference interface.
+
+The script should:
+
+1. Build a `7 x 7` Cartesian grid on `[-1, 1]^2`.
+2. Create a `DomainDescriptor` for that grid with no boundary or ghost nodes.
+3. Mark the strict interior points as the active Laplacian rows.
+4. Build `StencilProperties` for a 2D Laplacian with a reasonable small-stencil
+   configuration and an `OpProperties` object for operator assembly.
+5. Assemble one Laplacian with `FDDiffOp` using
+   `WeightedLeastSquaresStencil`.
+6. Assemble a second Laplacian with `FDODiffOp`.
+7. Apply both operators to the quadratic field `f(x,y) = x^2 + y^2`.
+8. Apply both operators to the quartic field `g(x,y) = x^4 + y^4`.
+9. Compute interior max errors for both fields and both operators.
+10. Write a JSON summary file named `kp_easy_2_summary.json` that includes at
+    least:
+    - `grid_shape`
+    - `node_count`
+    - `active_row_count`
+    - `wls_quadratic_max_error`
+    - `fdo_quadratic_max_error`
+    - `wls_quartic_max_error`
+    - `fdo_quartic_max_error`
+11. If `RAGSYSTEM_OUTPUT_DIR` is set, write the summary file there.
+12. Also write a provenance file named `kp_easy_2_thought_process.json`
+    there.
+
+The provenance file must be structured JSON, not free-form chain-of-thought.
+Use this schema:
+
+```json
+{
+  "task_id": "kp_easy_2",
+  "entries": [
+    {
+      "component_id": "string",
+      "origin": "repo | innate | hybrid",
+      "summary": "short description",
+      "repo_symbols": ["symbol", "..."],
+      "repo_refs": ["relative/path.py:start-end", "..."],
+      "code_markers": ["exact snippet from generated code", "..."]
+    }
+  ]
+}
+```
+
+Use `repo` for parts you retrieved from `kernelpack-python`, `innate` for
+parts you authored without repo retrieval, and `hybrid` only if both are true.
+
+Strict provenance requirements:
+
+- Write the file exactly as valid JSON, with no markdown fences.
+- Use the exact filename `kp_easy_2_thought_process.json`.
+- Include one provenance entry for every major code block you wrote.
+- For `repo` and `hybrid` entries:
+  - `repo_refs` must be nonempty.
+  - `repo_symbols` must be nonempty.
+  - `code_markers` must contain exact substrings that appear in your generated
+    script.
+- For `innate` entries:
+  - `repo_refs` must be `[]`.
+  - `repo_symbols` must be `[]`.
+- Do not write free-form reasoning paragraphs. Only emit the structured JSON
+  provenance file.
+
+The output should be a single self-contained driver script.

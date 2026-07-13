@@ -1,0 +1,79 @@
+Write a standalone Python driver that solves a variable-coefficient Poisson
+problem on a smooth circular domain using `kernelpack-python`.
+
+Use the repository code embeddings as implementation context. The goal is to
+retrieve the geometry setup, domain-generation path, and
+`VariablePoissonSolver` workflow from `kernelpack-python`, then implement a
+clear driver around those pieces.
+
+The script should:
+
+1. Define a nontrivial exact solution `u(x,y)`.
+2. Define a spatially varying scalar coefficient field `a(x,y)`.
+3. Define the corresponding forcing term for `-div(a grad u)`.
+4. Build circle data sites with
+   `t = linspace(0, 2*pi, n, endpoint=False)` and points
+   `(cos(t), sin(t))`.
+5. Build a smooth geometry with `EmbeddedSurface`,
+   `set_data_sites`, `build_closed_geometric_model_ps`, and
+   `build_level_set_from_geometric_model`.
+6. Use `DomainNodeGenerator.build_domain_descriptor_from_geometry` to create a
+   2D domain with outer refinement enabled.
+7. Construct a `VariablePoissonSolver` with `lap_assembler="fd"`,
+   `bc_assembler="fd"`, and both `wls` and `rbf` stencil configurations in
+   two separate solves.
+8. Solve the same variable-coefficient problem with the `wls` solver and the
+   `rbf` solver.
+9. Report max and L2 error norms for both solver configurations.
+10. Write a JSON summary file named `kp_medium_2_summary.json` with at least:
+    - `h`
+    - `n_physical`
+    - `wls_linf`
+    - `wls_l2`
+    - `rbf_linf`
+    - `rbf_l2`
+    - `wls_used_nullspace_augmentation`
+    - `rbf_used_nullspace_augmentation`
+11. If `RAGSYSTEM_OUTPUT_DIR` is set, write the summary file there.
+12. Also write a provenance file named
+    `kp_medium_2_thought_process.json` there.
+
+The provenance file must be structured JSON, not free-form chain-of-thought.
+Use this schema:
+
+```json
+{
+  "task_id": "kp_medium_2",
+  "entries": [
+    {
+      "component_id": "string",
+      "origin": "repo | innate | hybrid",
+      "summary": "short description",
+      "repo_symbols": ["symbol", "..."],
+      "repo_refs": ["relative/path.py:start-end", "..."],
+      "code_markers": ["exact snippet from generated code", "..."]
+    }
+  ]
+}
+```
+
+Use `repo` for parts you retrieved from `kernelpack-python`, `innate` for
+parts you authored without repo retrieval, and `hybrid` only if both are true.
+
+Strict provenance requirements:
+
+- Write the file exactly as valid JSON, with no markdown fences.
+- Use the exact filename `kp_medium_2_thought_process.json`.
+- Include one provenance entry for every major code block you wrote.
+- For `repo` and `hybrid` entries:
+  - `repo_refs` must be nonempty.
+  - `repo_symbols` must be nonempty.
+  - `code_markers` must contain exact substrings that appear in your generated
+    script.
+- For `innate` entries:
+  - `repo_refs` must be `[]`.
+  - `repo_symbols` must be `[]`.
+- Do not write free-form reasoning paragraphs. Only emit the structured JSON
+  provenance file.
+
+The output should be a single self-contained driver script.

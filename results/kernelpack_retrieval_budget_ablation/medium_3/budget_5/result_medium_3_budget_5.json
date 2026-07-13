@@ -1,0 +1,167 @@
+{
+  "task": "medium_3",
+  "task_id": "kp_medium_3",
+  "difficulty": "medium",
+  "budget": 5,
+  "mode": "fine_to_coarse_hybrid",
+  "retrieval_calls_used": 5,
+  "queries_issued": [
+    {
+      "component_id": "curve_geometry_setup",
+      "query": "curve_geometry_setup EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "domain_generation",
+      "query": "domain_generation DomainNodeGenerator build_domain_descriptor_from_geometry nodes.DomainNodeGenerator() .build_domain_descriptor_from_geometry(",
+      "module_filter": "nodes"
+    },
+    {
+      "component_id": "poisson_solver_setup",
+      "query": "poisson_solver_setup PoissonSolver init solvers.PoissonSolver( .init(domain,",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "mixed_boundary_solve_call",
+      "query": "mixed_boundary_solve_call solve .solve( neu_coeff dir_coeff boundary_data",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "mean_aligned_error_postprocess",
+      "query": "mean_aligned_error_postprocess get_int_bdry_nodes domain.get_int_bdry_nodes() err = solve_result[\"u\"] - u_true err = err - np.mean(err)",
+      "module_filter": null
+    }
+  ],
+  "retrieved_files": [
+    "README.md",
+    "src/kernelpack/domain/core.py",
+    "src/kernelpack/geometry/core.py",
+    "src/kernelpack/nodes/__init__.py",
+    "src/kernelpack/nodes/core.py",
+    "src/kernelpack/solvers/_common.py",
+    "src/kernelpack/solvers/diffusion.py",
+    "src/kernelpack/solvers/nonlinear_variable_poisson.py",
+    "src/kernelpack/solvers/poisson.py",
+    "src/kernelpack/solvers/pu_diffusion.py",
+    "tests/test_solvers.py"
+  ],
+  "retrieved_symbols": [
+    "DomainNodeGenerator",
+    "PoissonSolver",
+    "_assemble_boundary_data",
+    "_build_boundary_state",
+    "_ensure_boundary_operator",
+    "_get_boundary_coefficients",
+    "build_domain_descriptor_from_geometry",
+    "build_test_domain",
+    "evaluate_boundary_coefficient",
+    "evaluate_transient_boundary_values",
+    "generate_interior_nodes_from_geometry",
+    "generate_poisson_nodes",
+    "get_bdry_nodes",
+    "get_domain_descriptor",
+    "get_int_bdry_nodes",
+    "get_num_bdry_nodes",
+    "get_num_int_bdry_nodes",
+    "init",
+    "is_fixed_boundary_callback",
+    "solve",
+    "test_nonlinear_variable_poisson_solver_checks",
+    "test_poisson_solver_checks",
+    "test_variable_poisson_solver_checks",
+    "test_variable_poisson_solver_matches_mixed_bc_case"
+  ],
+  "required_components_retrieved": [
+    "curve_geometry_setup",
+    "domain_generation",
+    "poisson_solver_setup",
+    "mixed_boundary_solve_call",
+    "mean_aligned_error_postprocess"
+  ],
+  "required_components_missing": [],
+  "component_evidence": {
+    "curve_geometry_setup": {
+      "matched": true,
+      "matched_symbols": [],
+      "matched_files": [
+        "tests/test_solvers.py"
+      ]
+    },
+    "domain_generation": {
+      "matched": true,
+      "matched_symbols": [
+        "DomainNodeGenerator",
+        "build_domain_descriptor_from_geometry"
+      ],
+      "matched_files": [
+        "src/kernelpack/nodes/core.py",
+        "tests/test_solvers.py"
+      ]
+    },
+    "poisson_solver_setup": {
+      "matched": true,
+      "matched_symbols": [
+        "PoissonSolver",
+        "init",
+        "solve"
+      ],
+      "matched_files": [
+        "src/kernelpack/solvers/poisson.py",
+        "tests/test_solvers.py"
+      ]
+    },
+    "mixed_boundary_solve_call": {
+      "matched": true,
+      "matched_symbols": [
+        "PoissonSolver",
+        "solve",
+        "test_nonlinear_variable_poisson_solver_checks",
+        "test_poisson_solver_checks",
+        "test_variable_poisson_solver_checks",
+        "test_variable_poisson_solver_matches_mixed_bc_case"
+      ],
+      "matched_files": [
+        "src/kernelpack/solvers/poisson.py",
+        "tests/test_solvers.py"
+      ]
+    },
+    "mean_aligned_error_postprocess": {
+      "matched": true,
+      "matched_symbols": [
+        "get_int_bdry_nodes"
+      ],
+      "matched_files": []
+    }
+  },
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_retrieval_budget_ablation/medium_3/budget_5/prediction_medium_3_budget_5.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score": {
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0
+  },
+  "checker_score_full": {
+    "task_id": "kp_medium_3",
+    "required_repo_components": 5,
+    "matched_required_repo_components": 5,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 5,
+    "verified_repo_claims": 5,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_retrieval_budget_ablation/medium_3/budget_5/prediction_medium_3_budget_5.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_ubwcjlc1/kp_medium_3_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_ubwcjlc1/kp_medium_3_thought_process.json"
+  }
+}

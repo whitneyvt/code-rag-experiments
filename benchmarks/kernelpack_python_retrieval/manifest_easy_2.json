@@ -1,0 +1,83 @@
+{
+  "task_id": "kp_easy_2",
+  "summary_filename": "kp_easy_2_summary.json",
+  "thought_filename": "kp_easy_2_thought_process.json",
+  "required_repo_components": [
+    {
+      "component_id": "domain_descriptor_setup",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:77-80"
+      ],
+      "required_repo_symbols": [
+        "DomainDescriptor",
+        "set_nodes",
+        "set_sep_rad",
+        "build_structs"
+      ],
+      "required_code_markers": [
+        "domain.DomainDescriptor()",
+        ".set_nodes(",
+        ".set_sep_rad(",
+        ".build_structs()"
+      ]
+    },
+    {
+      "component_id": "stencil_properties_setup",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:81-82",
+        "src/kernelpack/rbffd/core.py:39-84"
+      ],
+      "required_repo_symbols": [
+        "StencilProperties",
+        "OpProperties"
+      ],
+      "required_code_markers": [
+        "rbffd.StencilProperties(",
+        "rbffd.OpProperties("
+      ]
+    },
+    {
+      "component_id": "wls_operator_assembly",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:85-90",
+        "src/kernelpack/rbffd/core.py:500-584"
+      ],
+      "required_repo_symbols": [
+        "FDDiffOp",
+        "WeightedLeastSquaresStencil",
+        "assemble_op",
+        "get_op"
+      ],
+      "required_code_markers": [
+        "rbffd.FDDiffOp(",
+        "rbffd.WeightedLeastSquaresStencil()",
+        ".assemble_op(",
+        ".get_op()"
+      ]
+    },
+    {
+      "component_id": "fdo_operator_assembly",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:87-93",
+        "src/kernelpack/rbffd/core.py:584-640"
+      ],
+      "required_repo_symbols": [
+        "FDODiffOp",
+        "assemble_op",
+        "get_op"
+      ],
+      "required_code_markers": [
+        "rbffd.FDODiffOp(",
+        ".assemble_op(",
+        ".get_op()"
+      ]
+    }
+  ],
+  "allowed_innate_components": [
+    "grid_generation",
+    "interior_row_selection",
+    "quadratic_field_definition",
+    "quartic_field_definition",
+    "summary_writer"
+  ]
+}

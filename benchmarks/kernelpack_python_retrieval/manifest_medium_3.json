@@ -1,0 +1,91 @@
+{
+  "task_id": "kp_medium_3",
+  "summary_filename": "kp_medium_3_summary.json",
+  "thought_filename": "kp_medium_3_thought_process.json",
+  "required_repo_components": [
+    {
+      "component_id": "curve_geometry_setup",
+      "allowed_repo_refs": [
+        "tests/test_solvers.py:6-12"
+      ],
+      "required_repo_symbols": [
+        "EmbeddedSurface",
+        "set_data_sites",
+        "build_closed_geometric_model_ps",
+        "build_level_set_from_geometric_model"
+      ],
+      "required_code_markers": [
+        "geometry.EmbeddedSurface()",
+        ".set_data_sites(",
+        ".build_closed_geometric_model_ps(",
+        ".build_level_set_from_geometric_model()"
+      ]
+    },
+    {
+      "component_id": "domain_generation",
+      "allowed_repo_refs": [
+        "tests/test_solvers.py:13-22",
+        "src/kernelpack/nodes/core.py:600-620"
+      ],
+      "required_repo_symbols": [
+        "DomainNodeGenerator",
+        "build_domain_descriptor_from_geometry"
+      ],
+      "required_code_markers": [
+        "nodes.DomainNodeGenerator()",
+        ".build_domain_descriptor_from_geometry("
+      ]
+    },
+    {
+      "component_id": "poisson_solver_setup",
+      "allowed_repo_refs": [
+        "tests/test_solvers.py:30-31",
+        "src/kernelpack/solvers/poisson.py:24-68"
+      ],
+      "required_repo_symbols": [
+        "PoissonSolver",
+        "init"
+      ],
+      "required_code_markers": [
+        "solvers.PoissonSolver(",
+        ".init(domain,"
+      ]
+    },
+    {
+      "component_id": "mixed_boundary_solve_call",
+      "allowed_repo_refs": [
+        "tests/test_solvers.py:32-37",
+        "src/kernelpack/solvers/poisson.py:70-122"
+      ],
+      "required_repo_symbols": [
+        "solve"
+      ],
+      "required_code_markers": [
+        ".solve(",
+        "neu_coeff",
+        "dir_coeff",
+        "boundary_data"
+      ]
+    },
+    {
+      "component_id": "mean_aligned_error_postprocess",
+      "allowed_repo_refs": [
+        "examples/poisson_convergence_2d_neumann.py:149-160"
+      ],
+      "required_repo_symbols": [
+        "get_int_bdry_nodes"
+      ],
+      "required_code_markers": [
+        "domain.get_int_bdry_nodes()",
+        "err = solve_result[\"u\"] - u_true",
+        "err = err - np.mean(err)"
+      ]
+    }
+  ],
+  "allowed_innate_components": [
+    "exact_solution_definition",
+    "forcing_definition",
+    "boundary_data_definition",
+    "summary_writer"
+  ]
+}

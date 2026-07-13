@@ -1,0 +1,54 @@
+{
+  "task_id": "kp_easy_3",
+  "summary_filename": "kp_easy_3_summary.json",
+  "thought_filename": "kp_easy_3_thought_process.json",
+  "required_repo_components": [
+    {
+      "component_id": "poisson_sampler_setup",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:7-10"
+      ],
+      "required_repo_symbols": [
+        "generate_poisson_nodes_in_box"
+      ],
+      "required_code_markers": [
+        "nodes.generate_poisson_nodes_in_box("
+      ]
+    },
+    {
+      "component_id": "spacing_check",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:11-14",
+        "src/kernelpack/geometry/core.py:13-14"
+      ],
+      "required_repo_symbols": [
+        "distance_matrix"
+      ],
+      "required_code_markers": [
+        "geometry.distance_matrix(",
+        "np.fill_diagonal("
+      ]
+    },
+    {
+      "component_id": "scalar_c4_kernel_eval",
+      "allowed_repo_refs": [
+        "tests/test_nodes_rbffd.py:63-69",
+        "src/kernelpack/geometry/core.py:28-29"
+      ],
+      "required_repo_symbols": [
+        "c4_matern_kernel",
+        "distance_matrix"
+      ],
+      "required_code_markers": [
+        "geometry.c4_matern_kernel(",
+        "geometry.distance_matrix("
+      ]
+    }
+  ],
+  "allowed_innate_components": [
+    "box_definition",
+    "determinism_check",
+    "condition_number_calculation",
+    "summary_writer"
+  ]
+}
