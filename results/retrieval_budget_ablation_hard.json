@@ -1,0 +1,346 @@
+{
+  "manifest": "evals/external_interpolation_tasks.json",
+  "task_id": "external-hard-divergence-free-kernel",
+  "difficulty": "hard",
+  "mode": "fine_to_coarse_hybrid",
+  "budgets": [
+    2,
+    5,
+    20
+  ],
+  "required_symbols": [
+    "DFPHS",
+    "LocalDivFreeInterpolator",
+    "df_poly_basis_from_jacobi",
+    "divfree_gram_matrix"
+  ],
+  "results": [
+    {
+      "max_retrievals": 2,
+      "retrieval_calls_used": 2,
+      "required_symbols_found": [
+        "LocalDivFreeInterpolator"
+      ],
+      "required_symbols_missing": [
+        "DFPHS",
+        "df_poly_basis_from_jacobi",
+        "divfree_gram_matrix"
+      ],
+      "retrieved_files": [
+        "src/kernelpack/divfree/__init__.py",
+        "src/kernelpack/divfree/core.py",
+        "tests/test_divfree.py"
+      ],
+      "retrieved_symbols": [
+        "DivFreePHSInterpolant",
+        "LocalDivFreeInterpolator",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_divfree_global_interpolant_reproduces_nodal_values",
+        "test_divfree_polynomial_basis_shape_and_eval",
+        "test_local_divfree_interpolator_reproduces_nodal_values",
+        "test_local_divfree_interpolator_smoke_3d"
+      ],
+      "runtime_seconds": 3.351794375004829,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "LocalDivFreeInterpolator DFPHS polynomial degree PHS degree",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DivFreePHSInterpolant",
+            "LocalDivFreeInterpolator",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_divfree_global_interpolant_reproduces_nodal_values",
+            "test_divfree_polynomial_basis_shape_and_eval",
+            "test_local_divfree_interpolator_reproduces_nodal_values",
+            "test_local_divfree_interpolator_smoke_3d"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator"
+          ]
+        },
+        {
+          "step_index": 2,
+          "query": "local divergence free interpolation stencil construction weighted least squares",
+          "module_filter": "divfree",
+          "retrieved_files": [],
+          "retrieved_symbols": [],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator"
+          ]
+        }
+      ]
+    },
+    {
+      "max_retrievals": 5,
+      "retrieval_calls_used": 5,
+      "required_symbols_found": [
+        "LocalDivFreeInterpolator",
+        "df_poly_basis_from_jacobi"
+      ],
+      "required_symbols_missing": [
+        "DFPHS",
+        "divfree_gram_matrix"
+      ],
+      "retrieved_files": [
+        "src/kernelpack/divfree/__init__.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "tests/test_divfree.py"
+      ],
+      "retrieved_symbols": [
+        "DivFreePHSInterpolant",
+        "LocalDivFreeInterpolator",
+        "_assemble_one",
+        "_divfree_polynomial_stack",
+        "_eval_open_surface_frame",
+        "_solve_augmented_rbf_system",
+        "assemble_op",
+        "build_closed_geometric_model_ps",
+        "build_planar_parametric_eval_nodes_2d",
+        "df_poly_basis_from_jacobi",
+        "lap_op",
+        "pca_oriented_bounding_box",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_divfree_global_interpolant_reproduces_nodal_values",
+        "test_divfree_polynomial_basis_shape_and_eval",
+        "test_local_divfree_interpolator_reproduces_nodal_values",
+        "test_local_divfree_interpolator_smoke_3d"
+      ],
+      "runtime_seconds": 3.374683415997424,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "LocalDivFreeInterpolator DFPHS polynomial degree PHS degree",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DivFreePHSInterpolant",
+            "LocalDivFreeInterpolator",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_divfree_global_interpolant_reproduces_nodal_values",
+            "test_divfree_polynomial_basis_shape_and_eval",
+            "test_local_divfree_interpolator_reproduces_nodal_values",
+            "test_local_divfree_interpolator_smoke_3d"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator"
+          ]
+        },
+        {
+          "step_index": 2,
+          "query": "local divergence free interpolation stencil construction weighted least squares",
+          "module_filter": "divfree",
+          "retrieved_files": [],
+          "retrieved_symbols": [],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator"
+          ]
+        },
+        {
+          "step_index": 3,
+          "query": "DFPHS poly_order phs_degree sampling domain [-1, 1]",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_divfree_global_interpolant_reproduces_nodal_values",
+            "test_divfree_polynomial_basis_shape_and_eval",
+            "test_local_divfree_interpolator_reproduces_nodal_values",
+            "test_local_divfree_interpolator_smoke_3d"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator"
+          ]
+        },
+        {
+          "step_index": 4,
+          "query": "RBF assembly local stencil polynomial basis divfree",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DivFreePHSInterpolant",
+            "_divfree_polynomial_stack",
+            "df_poly_basis_from_jacobi",
+            "test_divfree_polynomial_basis_shape_and_eval"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator",
+            "df_poly_basis_from_jacobi"
+          ]
+        },
+        {
+          "step_index": 5,
+          "query": "hard output columns poly_order N rel_l2_u rel_l2_v rel_l2_vec",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/geometry/core.py",
+            "src/kernelpack/rbffd/core.py"
+          ],
+          "retrieved_symbols": [
+            "_assemble_one",
+            "_eval_open_surface_frame",
+            "_solve_augmented_rbf_system",
+            "assemble_op",
+            "build_closed_geometric_model_ps",
+            "build_planar_parametric_eval_nodes_2d",
+            "lap_op",
+            "pca_oriented_bounding_box"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator",
+            "df_poly_basis_from_jacobi"
+          ]
+        }
+      ]
+    },
+    {
+      "max_retrievals": 20,
+      "retrieval_calls_used": 5,
+      "required_symbols_found": [
+        "LocalDivFreeInterpolator",
+        "df_poly_basis_from_jacobi"
+      ],
+      "required_symbols_missing": [
+        "DFPHS",
+        "divfree_gram_matrix"
+      ],
+      "retrieved_files": [
+        "src/kernelpack/divfree/__init__.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "tests/test_divfree.py"
+      ],
+      "retrieved_symbols": [
+        "DivFreePHSInterpolant",
+        "LocalDivFreeInterpolator",
+        "_assemble_one",
+        "_divfree_polynomial_stack",
+        "_eval_open_surface_frame",
+        "_solve_augmented_rbf_system",
+        "assemble_op",
+        "build_closed_geometric_model_ps",
+        "build_planar_parametric_eval_nodes_2d",
+        "df_poly_basis_from_jacobi",
+        "lap_op",
+        "pca_oriented_bounding_box",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_divfree_global_interpolant_reproduces_nodal_values",
+        "test_divfree_polynomial_basis_shape_and_eval",
+        "test_local_divfree_interpolator_reproduces_nodal_values",
+        "test_local_divfree_interpolator_smoke_3d"
+      ],
+      "runtime_seconds": 3.7654142910032533,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "LocalDivFreeInterpolator DFPHS polynomial degree PHS degree",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DivFreePHSInterpolant",
+            "LocalDivFreeInterpolator",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_divfree_global_interpolant_reproduces_nodal_values",
+            "test_divfree_polynomial_basis_shape_and_eval",
+            "test_local_divfree_interpolator_reproduces_nodal_values",
+            "test_local_divfree_interpolator_smoke_3d"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator"
+          ]
+        },
+        {
+          "step_index": 2,
+          "query": "local divergence free interpolation stencil construction weighted least squares",
+          "module_filter": "divfree",
+          "retrieved_files": [],
+          "retrieved_symbols": [],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator"
+          ]
+        },
+        {
+          "step_index": 3,
+          "query": "DFPHS poly_order phs_degree sampling domain [-1, 1]",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_divfree_global_interpolant_reproduces_nodal_values",
+            "test_divfree_polynomial_basis_shape_and_eval",
+            "test_local_divfree_interpolator_reproduces_nodal_values",
+            "test_local_divfree_interpolator_smoke_3d"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator"
+          ]
+        },
+        {
+          "step_index": 4,
+          "query": "RBF assembly local stencil polynomial basis divfree",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DivFreePHSInterpolant",
+            "_divfree_polynomial_stack",
+            "df_poly_basis_from_jacobi",
+            "test_divfree_polynomial_basis_shape_and_eval"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator",
+            "df_poly_basis_from_jacobi"
+          ]
+        },
+        {
+          "step_index": 5,
+          "query": "hard output columns poly_order N rel_l2_u rel_l2_v rel_l2_vec",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/geometry/core.py",
+            "src/kernelpack/rbffd/core.py"
+          ],
+          "retrieved_symbols": [
+            "_assemble_one",
+            "_eval_open_surface_frame",
+            "_solve_augmented_rbf_system",
+            "assemble_op",
+            "build_closed_geometric_model_ps",
+            "build_planar_parametric_eval_nodes_2d",
+            "lap_op",
+            "pca_oriented_bounding_box"
+          ],
+          "required_symbols_found": [
+            "LocalDivFreeInterpolator",
+            "df_poly_basis_from_jacobi"
+          ]
+        }
+      ]
+    }
+  ]
+}

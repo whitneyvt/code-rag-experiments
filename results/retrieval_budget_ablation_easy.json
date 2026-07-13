@@ -1,0 +1,410 @@
+{
+  "manifest": "evals/external_interpolation_tasks.json",
+  "task_id": "external-easy-scalar-c4-matern",
+  "difficulty": "easy",
+  "mode": "fine_to_coarse_hybrid",
+  "budgets": [
+    2,
+    5,
+    20
+  ],
+  "required_symbols": [
+    "RBF",
+    "Matern",
+    "interpolation"
+  ],
+  "results": [
+    {
+      "max_retrievals": 2,
+      "retrieval_calls_used": 2,
+      "required_symbols_found": [
+        "Matern"
+      ],
+      "required_symbols_missing": [
+        "RBF",
+        "interpolation"
+      ],
+      "retrieved_files": [
+        "src/kernelpack/_numba.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "tests/test_divfree.py"
+      ],
+      "retrieved_symbols": [
+        "_divfree_polynomial_stack",
+        "bc_op",
+        "dfc4_blocks_3d",
+        "dfc4_blocks_periodic_3d_z",
+        "dfc4_matern_blocks",
+        "dfc4_matern_gram_matrix",
+        "test_dfc4_matern_3d_blocks_and_gram_shape",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_dfc4_matern_gram_matrix_is_symmetric_in_2d"
+      ],
+      "runtime_seconds": 4.284249832999194,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "scalar C4 Matern kernel interpolation epsilon",
+          "module_filter": "rbffd",
+          "retrieved_files": [
+            "src/kernelpack/rbffd/core.py"
+          ],
+          "retrieved_symbols": [
+            "bc_op"
+          ],
+          "required_symbols_found": []
+        },
+        {
+          "step_index": 2,
+          "query": "C4 Matern kernel formula exp(-z) 3 3 z z^2",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/_numba.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "_divfree_polynomial_stack",
+            "dfc4_blocks_3d",
+            "dfc4_blocks_periodic_3d_z",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_gram_matrix_is_symmetric_in_2d"
+          ],
+          "required_symbols_found": [
+            "Matern"
+          ]
+        }
+      ]
+    },
+    {
+      "max_retrievals": 5,
+      "retrieval_calls_used": 5,
+      "required_symbols_found": [
+        "RBF",
+        "Matern"
+      ],
+      "required_symbols_missing": [
+        "interpolation"
+      ],
+      "retrieved_files": [
+        "examples/pusl_incompressible_euler_convergence_2d.py",
+        "src/kernelpack/_numba.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py",
+        "src/kernelpack/solvers/detail/incompressible_euler_bdf_backend.py",
+        "src/kernelpack/solvers/variable_poisson.py",
+        "tests/test_divfree.py",
+        "tests/test_nodes_rbffd.py"
+      ],
+      "retrieved_symbols": [
+        "FDDiffOp",
+        "FDODiffOp",
+        "_apply_operator",
+        "_assemble_operators",
+        "_divfree_polynomial_stack",
+        "_get_cached_system",
+        "_normalize_problem",
+        "assemble_op",
+        "bc_op",
+        "build_ilu_preconditioner",
+        "build_variable_pde_operator",
+        "dfc4_blocks_3d",
+        "dfc4_blocks_periodic_3d_z",
+        "dfc4_matern_blocks",
+        "dfc4_matern_gram_matrix",
+        "from_accuracy",
+        "gmres_with_preconditioner",
+        "init",
+        "initialize_geometry",
+        "lap_op",
+        "normalize_point_set",
+        "normalize_tree_mode",
+        "save_outputs",
+        "set_step_size",
+        "stable_solve",
+        "test_dfc4_matern_3d_blocks_and_gram_shape",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_dfc4_matern_gram_matrix_is_symmetric_in_2d",
+        "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+        "test_rbffd_laplacian"
+      ],
+      "runtime_seconds": 3.5589210000034655,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "scalar C4 Matern kernel interpolation epsilon",
+          "module_filter": "rbffd",
+          "retrieved_files": [
+            "src/kernelpack/rbffd/core.py"
+          ],
+          "retrieved_symbols": [
+            "bc_op"
+          ],
+          "required_symbols_found": []
+        },
+        {
+          "step_index": 2,
+          "query": "C4 Matern kernel formula exp(-z) 3 3 z z^2",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/_numba.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "_divfree_polynomial_stack",
+            "dfc4_blocks_3d",
+            "dfc4_blocks_periodic_3d_z",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_gram_matrix_is_symmetric_in_2d"
+          ],
+          "required_symbols_found": [
+            "Matern"
+          ]
+        },
+        {
+          "step_index": 3,
+          "query": "RBF interpolation scalar target field relative L2",
+          "module_filter": "rbffd",
+          "retrieved_files": [
+            "src/kernelpack/rbffd/core.py",
+            "tests/test_nodes_rbffd.py"
+          ],
+          "retrieved_symbols": [
+            "from_accuracy",
+            "initialize_geometry",
+            "normalize_point_set",
+            "normalize_tree_mode",
+            "stable_solve",
+            "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+            "test_rbffd_laplacian"
+          ],
+          "required_symbols_found": [
+            "RBF",
+            "Matern"
+          ]
+        },
+        {
+          "step_index": 4,
+          "query": "KernelPack interpolation examples Matern epsilon",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/rbffd/core.py",
+            "src/kernelpack/solvers/_common.py",
+            "src/kernelpack/solvers/detail/incompressible_euler_bdf_backend.py"
+          ],
+          "retrieved_symbols": [
+            "_apply_operator",
+            "_assemble_operators",
+            "_get_cached_system",
+            "_normalize_problem",
+            "build_ilu_preconditioner",
+            "gmres_with_preconditioner",
+            "init",
+            "set_step_size"
+          ],
+          "required_symbols_found": [
+            "RBF",
+            "Matern"
+          ]
+        },
+        {
+          "step_index": 5,
+          "query": "checker output columns N epsilon rel_l2",
+          "module_filter": null,
+          "retrieved_files": [
+            "examples/pusl_incompressible_euler_convergence_2d.py",
+            "src/kernelpack/rbffd/core.py",
+            "src/kernelpack/solvers/variable_poisson.py",
+            "tests/test_nodes_rbffd.py"
+          ],
+          "retrieved_symbols": [
+            "FDDiffOp",
+            "FDODiffOp",
+            "assemble_op",
+            "build_variable_pde_operator",
+            "lap_op",
+            "save_outputs",
+            "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+            "test_rbffd_laplacian"
+          ],
+          "required_symbols_found": [
+            "RBF",
+            "Matern"
+          ]
+        }
+      ]
+    },
+    {
+      "max_retrievals": 20,
+      "retrieval_calls_used": 5,
+      "required_symbols_found": [
+        "RBF",
+        "Matern"
+      ],
+      "required_symbols_missing": [
+        "interpolation"
+      ],
+      "retrieved_files": [
+        "examples/pusl_incompressible_euler_convergence_2d.py",
+        "src/kernelpack/_numba.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "src/kernelpack/solvers/_common.py",
+        "src/kernelpack/solvers/detail/incompressible_euler_bdf_backend.py",
+        "src/kernelpack/solvers/variable_poisson.py",
+        "tests/test_divfree.py",
+        "tests/test_nodes_rbffd.py"
+      ],
+      "retrieved_symbols": [
+        "FDDiffOp",
+        "FDODiffOp",
+        "_apply_operator",
+        "_assemble_operators",
+        "_divfree_polynomial_stack",
+        "_get_cached_system",
+        "_normalize_problem",
+        "assemble_op",
+        "bc_op",
+        "build_ilu_preconditioner",
+        "build_variable_pde_operator",
+        "dfc4_blocks_3d",
+        "dfc4_blocks_periodic_3d_z",
+        "dfc4_matern_blocks",
+        "dfc4_matern_gram_matrix",
+        "from_accuracy",
+        "gmres_with_preconditioner",
+        "init",
+        "initialize_geometry",
+        "lap_op",
+        "normalize_point_set",
+        "normalize_tree_mode",
+        "save_outputs",
+        "set_step_size",
+        "stable_solve",
+        "test_dfc4_matern_3d_blocks_and_gram_shape",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_dfc4_matern_gram_matrix_is_symmetric_in_2d",
+        "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+        "test_rbffd_laplacian"
+      ],
+      "runtime_seconds": 3.590149334006128,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "scalar C4 Matern kernel interpolation epsilon",
+          "module_filter": "rbffd",
+          "retrieved_files": [
+            "src/kernelpack/rbffd/core.py"
+          ],
+          "retrieved_symbols": [
+            "bc_op"
+          ],
+          "required_symbols_found": []
+        },
+        {
+          "step_index": 2,
+          "query": "C4 Matern kernel formula exp(-z) 3 3 z z^2",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/_numba.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "_divfree_polynomial_stack",
+            "dfc4_blocks_3d",
+            "dfc4_blocks_periodic_3d_z",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_gram_matrix_is_symmetric_in_2d"
+          ],
+          "required_symbols_found": [
+            "Matern"
+          ]
+        },
+        {
+          "step_index": 3,
+          "query": "RBF interpolation scalar target field relative L2",
+          "module_filter": "rbffd",
+          "retrieved_files": [
+            "src/kernelpack/rbffd/core.py",
+            "tests/test_nodes_rbffd.py"
+          ],
+          "retrieved_symbols": [
+            "from_accuracy",
+            "initialize_geometry",
+            "normalize_point_set",
+            "normalize_tree_mode",
+            "stable_solve",
+            "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+            "test_rbffd_laplacian"
+          ],
+          "required_symbols_found": [
+            "RBF",
+            "Matern"
+          ]
+        },
+        {
+          "step_index": 4,
+          "query": "KernelPack interpolation examples Matern epsilon",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/rbffd/core.py",
+            "src/kernelpack/solvers/_common.py",
+            "src/kernelpack/solvers/detail/incompressible_euler_bdf_backend.py"
+          ],
+          "retrieved_symbols": [
+            "_apply_operator",
+            "_assemble_operators",
+            "_get_cached_system",
+            "_normalize_problem",
+            "build_ilu_preconditioner",
+            "gmres_with_preconditioner",
+            "init",
+            "set_step_size"
+          ],
+          "required_symbols_found": [
+            "RBF",
+            "Matern"
+          ]
+        },
+        {
+          "step_index": 5,
+          "query": "checker output columns N epsilon rel_l2",
+          "module_filter": null,
+          "retrieved_files": [
+            "examples/pusl_incompressible_euler_convergence_2d.py",
+            "src/kernelpack/rbffd/core.py",
+            "src/kernelpack/solvers/variable_poisson.py",
+            "tests/test_nodes_rbffd.py"
+          ],
+          "retrieved_symbols": [
+            "FDDiffOp",
+            "FDODiffOp",
+            "assemble_op",
+            "build_variable_pde_operator",
+            "lap_op",
+            "save_outputs",
+            "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic",
+            "test_rbffd_laplacian"
+          ],
+          "required_symbols_found": [
+            "RBF",
+            "Matern"
+          ]
+        }
+      ]
+    }
+  ]
+}

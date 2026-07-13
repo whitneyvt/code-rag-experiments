@@ -1,0 +1,392 @@
+{
+  "manifest": "evals/external_interpolation_tasks.json",
+  "task_id": "external-medium-divergence-free-kernel",
+  "difficulty": "medium",
+  "mode": "fine_to_coarse_hybrid",
+  "budgets": [
+    2,
+    5,
+    20
+  ],
+  "required_symbols": [
+    "dfc4_matern_blocks",
+    "DivFreeGram",
+    "DivFreePHSInterpolant",
+    "divergence free"
+  ],
+  "results": [
+    {
+      "max_retrievals": 2,
+      "retrieval_calls_used": 2,
+      "required_symbols_found": [
+        "dfc4_matern_blocks"
+      ],
+      "required_symbols_missing": [
+        "DivFreeGram",
+        "DivFreePHSInterpolant",
+        "divergence free"
+      ],
+      "retrieved_files": [
+        "src/kernelpack/divfree/__init__.py",
+        "src/kernelpack/divfree/core.py",
+        "tests/test_divfree.py"
+      ],
+      "retrieved_symbols": [
+        "DFPHS",
+        "_diff_tensor_from_coords",
+        "_stack_field",
+        "dfc4_matern_blocks",
+        "dfc4_matern_gram_matrix",
+        "initialize",
+        "test_dfc4_matern_3d_blocks_and_gram_shape",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric"
+      ],
+      "runtime_seconds": 3.4360824169998523,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "divergence free C4 Matern dfc4_matern_blocks",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "_diff_tensor_from_coords",
+            "_stack_field",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks"
+          ]
+        },
+        {
+          "step_index": 2,
+          "query": "dfc4_matern_gram_matrix DivFreeGram epsilon",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DFPHS",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "initialize",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks"
+          ]
+        }
+      ]
+    },
+    {
+      "max_retrievals": 5,
+      "retrieval_calls_used": 5,
+      "required_symbols_found": [
+        "dfc4_matern_blocks",
+        "DivFreePHSInterpolant"
+      ],
+      "required_symbols_missing": [
+        "DivFreeGram",
+        "divergence free"
+      ],
+      "retrieved_files": [
+        "src/kernelpack/divfree/__init__.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "tests/test_divfree.py"
+      ],
+      "retrieved_symbols": [
+        "DFPHS",
+        "DivFreePHSInterpolant",
+        "LocalDivFreeInterpolator",
+        "_assemble_one",
+        "_diff_tensor_from_coords",
+        "_rotational_field",
+        "_stack_field",
+        "build_closed_geometric_model_ps",
+        "build_level_set_from_cfi",
+        "build_planar_parametric_eval_nodes_2d",
+        "dfc4_matern_blocks",
+        "dfc4_matern_gram_matrix",
+        "get_op",
+        "grad_op",
+        "initialize",
+        "initialize_geometry",
+        "lap_op",
+        "test_dfc4_matern_3d_blocks_and_gram_shape",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric",
+        "test_divfree_global_interpolant_reproduces_nodal_values",
+        "test_divfree_polynomial_basis_shape_and_eval",
+        "test_local_divfree_interpolator_reproduces_nodal_values",
+        "test_local_divfree_interpolator_smoke_3d"
+      ],
+      "runtime_seconds": 3.533263999997871,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "divergence free C4 Matern dfc4_matern_blocks",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "_diff_tensor_from_coords",
+            "_stack_field",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks"
+          ]
+        },
+        {
+          "step_index": 2,
+          "query": "dfc4_matern_gram_matrix DivFreeGram epsilon",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DFPHS",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "initialize",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks"
+          ]
+        },
+        {
+          "step_index": 3,
+          "query": "DivFreePHSInterpolant divergence free vector field",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DivFreePHSInterpolant",
+            "LocalDivFreeInterpolator",
+            "_rotational_field",
+            "test_divfree_global_interpolant_reproduces_nodal_values",
+            "test_divfree_polynomial_basis_shape_and_eval",
+            "test_local_divfree_interpolator_reproduces_nodal_values",
+            "test_local_divfree_interpolator_smoke_3d"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks",
+            "DivFreePHSInterpolant"
+          ]
+        },
+        {
+          "step_index": 4,
+          "query": "conservation of mass incompressible interpolation kernel",
+          "module_filter": "divfree",
+          "retrieved_files": [],
+          "retrieved_symbols": [],
+          "required_symbols_found": [
+            "dfc4_matern_blocks",
+            "DivFreePHSInterpolant"
+          ]
+        },
+        {
+          "step_index": 5,
+          "query": "medium output columns N epsilon rel_l2_u rel_l2_v rel_l2_vec",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/geometry/core.py",
+            "src/kernelpack/rbffd/core.py"
+          ],
+          "retrieved_symbols": [
+            "_assemble_one",
+            "build_closed_geometric_model_ps",
+            "build_level_set_from_cfi",
+            "build_planar_parametric_eval_nodes_2d",
+            "get_op",
+            "grad_op",
+            "initialize_geometry",
+            "lap_op"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks",
+            "DivFreePHSInterpolant"
+          ]
+        }
+      ]
+    },
+    {
+      "max_retrievals": 20,
+      "retrieval_calls_used": 5,
+      "required_symbols_found": [
+        "dfc4_matern_blocks",
+        "DivFreePHSInterpolant"
+      ],
+      "required_symbols_missing": [
+        "DivFreeGram",
+        "divergence free"
+      ],
+      "retrieved_files": [
+        "src/kernelpack/divfree/__init__.py",
+        "src/kernelpack/divfree/core.py",
+        "src/kernelpack/geometry/core.py",
+        "src/kernelpack/rbffd/core.py",
+        "tests/test_divfree.py"
+      ],
+      "retrieved_symbols": [
+        "DFPHS",
+        "DivFreePHSInterpolant",
+        "LocalDivFreeInterpolator",
+        "_assemble_one",
+        "_diff_tensor_from_coords",
+        "_rotational_field",
+        "_stack_field",
+        "build_closed_geometric_model_ps",
+        "build_level_set_from_cfi",
+        "build_planar_parametric_eval_nodes_2d",
+        "dfc4_matern_blocks",
+        "dfc4_matern_gram_matrix",
+        "get_op",
+        "grad_op",
+        "initialize",
+        "initialize_geometry",
+        "lap_op",
+        "test_dfc4_matern_3d_blocks_and_gram_shape",
+        "test_dfc4_matern_blocks_2d_match_manual_formula",
+        "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric",
+        "test_divfree_global_interpolant_reproduces_nodal_values",
+        "test_divfree_polynomial_basis_shape_and_eval",
+        "test_local_divfree_interpolator_reproduces_nodal_values",
+        "test_local_divfree_interpolator_smoke_3d"
+      ],
+      "runtime_seconds": 3.425951958008227,
+      "steps": [
+        {
+          "step_index": 1,
+          "query": "divergence free C4 Matern dfc4_matern_blocks",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "_diff_tensor_from_coords",
+            "_stack_field",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks"
+          ]
+        },
+        {
+          "step_index": 2,
+          "query": "dfc4_matern_gram_matrix DivFreeGram epsilon",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DFPHS",
+            "dfc4_matern_blocks",
+            "dfc4_matern_gram_matrix",
+            "initialize",
+            "test_dfc4_matern_3d_blocks_and_gram_shape",
+            "test_dfc4_matern_blocks_2d_match_manual_formula",
+            "test_dfc4_matern_periodic_2d_gram_matrix_is_symmetric"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks"
+          ]
+        },
+        {
+          "step_index": 3,
+          "query": "DivFreePHSInterpolant divergence free vector field",
+          "module_filter": "divfree",
+          "retrieved_files": [
+            "src/kernelpack/divfree/__init__.py",
+            "src/kernelpack/divfree/core.py",
+            "tests/test_divfree.py"
+          ],
+          "retrieved_symbols": [
+            "DivFreePHSInterpolant",
+            "LocalDivFreeInterpolator",
+            "_rotational_field",
+            "test_divfree_global_interpolant_reproduces_nodal_values",
+            "test_divfree_polynomial_basis_shape_and_eval",
+            "test_local_divfree_interpolator_reproduces_nodal_values",
+            "test_local_divfree_interpolator_smoke_3d"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks",
+            "DivFreePHSInterpolant"
+          ]
+        },
+        {
+          "step_index": 4,
+          "query": "conservation of mass incompressible interpolation kernel",
+          "module_filter": "divfree",
+          "retrieved_files": [],
+          "retrieved_symbols": [],
+          "required_symbols_found": [
+            "dfc4_matern_blocks",
+            "DivFreePHSInterpolant"
+          ]
+        },
+        {
+          "step_index": 5,
+          "query": "medium output columns N epsilon rel_l2_u rel_l2_v rel_l2_vec",
+          "module_filter": null,
+          "retrieved_files": [
+            "src/kernelpack/geometry/core.py",
+            "src/kernelpack/rbffd/core.py"
+          ],
+          "retrieved_symbols": [
+            "_assemble_one",
+            "build_closed_geometric_model_ps",
+            "build_level_set_from_cfi",
+            "build_planar_parametric_eval_nodes_2d",
+            "get_op",
+            "grad_op",
+            "initialize_geometry",
+            "lap_op"
+          ],
+          "required_symbols_found": [
+            "dfc4_matern_blocks",
+            "DivFreePHSInterpolant"
+          ]
+        }
+      ]
+    }
+  ]
+}
