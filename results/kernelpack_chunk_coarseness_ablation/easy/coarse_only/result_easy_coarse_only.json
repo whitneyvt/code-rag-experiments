@@ -1,0 +1,98 @@
+{
+  "task": "easy",
+  "task_id": "kp_easy",
+  "difficulty": "easy",
+  "chunk_arm": "coarse_only",
+  "retrieval_budget": 5,
+  "retrieval_calls_used": 4,
+  "repo_recall": 0.5,
+  "repo_precision": 1.0,
+  "repo_f1": 0.6666666666666666,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 0.8888888888888888,
+  "matched_required_repo_components": 2,
+  "missed_required_repo_components": [
+    "domain_descriptor_setup",
+    "scalar_c4_kernel_eval"
+  ],
+  "retrieved_files": [
+    "src/kernelpack/rbffd/core.py"
+  ],
+  "retrieved_symbols": [
+    "FDDiffOp",
+    "FDODiffOp",
+    "OpProperties",
+    "StencilProperties",
+    "_apply_operator",
+    "_assemble_one",
+    "_compute_weights_boundary",
+    "_compute_weights_interior",
+    "_promote_center_to_front",
+    "assemble_op",
+    "bc_op",
+    "compute_weights",
+    "compute_weights_at_points",
+    "default_diff_order",
+    "eval_weights",
+    "from_accuracy",
+    "initialize_geometry",
+    "stable_solve"
+  ],
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 0,
+  "first_required_component_found_at_call": 1,
+  "all_required_components_found_at_call": null,
+  "required_components_retrieved": [
+    "stencil_properties_setup",
+    "fd_operator_assembly"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "domain_descriptor_setup",
+      "query": "domain_descriptor_setup DomainDescriptor set_nodes set_sep_rad build_structs domain.DomainDescriptor() .set_nodes( .set_sep_rad( .build_structs()",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "stencil_properties_setup",
+      "query": "stencil_properties_setup StencilProperties OpProperties rbffd.StencilProperties( rbffd.OpProperties(",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "fd_operator_assembly",
+      "query": "fd_operator_assembly FDDiffOp WeightedLeastSquaresStencil assemble_op get_op rbffd.FDDiffOp( rbffd.WeightedLeastSquaresStencil() .assemble_op( .get_op()",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "scalar_c4_kernel_eval",
+      "query": "scalar_c4_kernel_eval distance_matrix c4_matern_kernel geometry.distance_matrix( geometry.c4_matern_kernel(",
+      "module_filter": "rbffd"
+    }
+  ],
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/easy/coarse_only/prediction_easy_coarse_only.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_easy",
+    "required_repo_components": 4,
+    "matched_required_repo_components": 2,
+    "missed_required_repo_components": [
+      "domain_descriptor_setup",
+      "scalar_c4_kernel_eval"
+    ],
+    "repo_claim_total": 2,
+    "verified_repo_claims": 2,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 0.5,
+    "repo_precision": 1.0,
+    "repo_f1": 0.6666666666666666,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 0.8888888888888888,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/easy/coarse_only/prediction_easy_coarse_only.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_rqyy6i50/kp_easy_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_rqyy6i50/kp_easy_thought_process.json"
+  }
+}

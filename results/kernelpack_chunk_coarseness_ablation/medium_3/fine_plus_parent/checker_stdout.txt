@@ -1,0 +1,20 @@
+{
+  "task_id": "kp_medium_3",
+  "required_repo_components": 5,
+  "matched_required_repo_components": 5,
+  "missed_required_repo_components": [],
+  "repo_claim_total": 5,
+  "verified_repo_claims": 5,
+  "hallucinated_repo_claims": 0,
+  "innate_claim_total": 4,
+  "correct_innate_claims": 4,
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/medium_3/fine_plus_parent/prediction_medium_3_fine_plus_parent.py",
+  "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_dgdl6nlq/kp_medium_3_summary.json",
+  "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_3_dgdl6nlq/kp_medium_3_thought_process.json"
+}

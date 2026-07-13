@@ -1,0 +1,88 @@
+{
+  "task": "medium_2",
+  "task_id": "kp_medium_2",
+  "difficulty": "medium",
+  "chunk_arm": "fine_only",
+  "retrieval_budget": 5,
+  "retrieval_calls_used": 4,
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "matched_required_repo_components": 4,
+  "missed_required_repo_components": [],
+  "retrieved_files": [
+    "src/kernelpack/nodes/core.py",
+    "src/kernelpack/solvers/poisson.py",
+    "tests/test_solvers.py"
+  ],
+  "retrieved_symbols": [
+    "DomainNodeGenerator",
+    "PoissonSolver",
+    "build_domain_descriptor_from_geometry",
+    "generate_interior_nodes_from_geometry",
+    "generate_poisson_nodes",
+    "get_domain_descriptor",
+    "test_nonlinear_variable_poisson_solver_checks",
+    "test_poisson_solver_checks",
+    "test_variable_poisson_solver_checks",
+    "test_variable_poisson_solver_matches_mixed_bc_case"
+  ],
+  "empty_retrieval_calls": 1,
+  "weak_retrieval_calls": 0,
+  "first_required_component_found_at_call": 2,
+  "all_required_components_found_at_call": 3,
+  "required_components_retrieved": [
+    "circle_geometry_setup",
+    "domain_generation",
+    "variable_poisson_solver_setup",
+    "variable_poisson_solve_call"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "circle_geometry_setup",
+      "query": "circle_geometry_setup EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "domain_generation",
+      "query": "domain_generation DomainNodeGenerator build_domain_descriptor_from_geometry nodes.DomainNodeGenerator() .build_domain_descriptor_from_geometry(",
+      "module_filter": "nodes"
+    },
+    {
+      "component_id": "variable_poisson_solver_setup",
+      "query": "variable_poisson_solver_setup VariablePoissonSolver init solvers.VariablePoissonSolver( .init(domain,",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "variable_poisson_solve_call",
+      "query": "variable_poisson_solve_call solve .solve( a_coeff neu_coeff dir_coeff",
+      "module_filter": "solvers"
+    }
+  ],
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/medium_2/fine_only/prediction_medium_2_fine_only.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_medium_2",
+    "required_repo_components": 4,
+    "matched_required_repo_components": 4,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 4,
+    "verified_repo_claims": 4,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/medium_2/fine_only/prediction_medium_2_fine_only.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_zjbts4au/kp_medium_2_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_zjbts4au/kp_medium_2_thought_process.json"
+  }
+}

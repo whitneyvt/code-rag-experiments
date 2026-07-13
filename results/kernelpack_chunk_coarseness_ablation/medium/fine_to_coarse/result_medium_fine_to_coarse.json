@@ -1,0 +1,109 @@
+{
+  "task": "medium",
+  "task_id": "kp_medium",
+  "difficulty": "medium",
+  "chunk_arm": "fine_to_coarse",
+  "retrieval_budget": 5,
+  "retrieval_calls_used": 5,
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "matched_required_repo_components": 5,
+  "missed_required_repo_components": [],
+  "retrieved_files": [
+    "README.md",
+    "src/kernelpack/domain/core.py",
+    "src/kernelpack/geometry/core.py",
+    "src/kernelpack/nodes/__init__.py",
+    "src/kernelpack/nodes/core.py",
+    "src/kernelpack/solvers/poisson.py",
+    "tests/test_solvers.py"
+  ],
+  "retrieved_symbols": [
+    "DomainNodeGenerator",
+    "PoissonSolver",
+    "_build_boundary_state",
+    "build_closed_geometric_model_ps",
+    "build_domain_descriptor_from_geometry",
+    "build_geometric_model_ps",
+    "build_level_set_from_geometric_model",
+    "build_test_domain",
+    "generate_interior_nodes_from_geometry",
+    "generate_poisson_nodes",
+    "get_bdry_nodes",
+    "get_domain_descriptor",
+    "get_int_bdry_nodes",
+    "get_num_bdry_nodes",
+    "get_num_int_bdry_nodes",
+    "init",
+    "solve",
+    "test_nonlinear_variable_poisson_solver_checks",
+    "test_poisson_solver_checks",
+    "test_variable_poisson_solver_checks",
+    "test_variable_poisson_solver_matches_mixed_bc_case"
+  ],
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 0,
+  "first_required_component_found_at_call": 1,
+  "all_required_components_found_at_call": 5,
+  "required_components_retrieved": [
+    "circle_geometry_setup",
+    "domain_generation",
+    "poisson_solver_setup",
+    "poisson_solve_call",
+    "mean_aligned_error_postprocess"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "circle_geometry_setup",
+      "query": "circle_geometry_setup EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": null
+    },
+    {
+      "component_id": "domain_generation",
+      "query": "domain_generation DomainNodeGenerator build_domain_descriptor_from_geometry nodes.DomainNodeGenerator() .build_domain_descriptor_from_geometry(",
+      "module_filter": "nodes"
+    },
+    {
+      "component_id": "poisson_solver_setup",
+      "query": "poisson_solver_setup PoissonSolver init solvers.PoissonSolver( .init(domain,",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "poisson_solve_call",
+      "query": "poisson_solve_call solve .solve( neu_coeff dir_coeff boundary_flux",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "mean_aligned_error_postprocess",
+      "query": "mean_aligned_error_postprocess get_int_bdry_nodes domain.get_int_bdry_nodes() err = solve_result[\"u\"] - u_true err = err - np.mean(err)",
+      "module_filter": null
+    }
+  ],
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/medium/fine_to_coarse/prediction_medium_fine_to_coarse.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_medium",
+    "required_repo_components": 5,
+    "matched_required_repo_components": 5,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 5,
+    "verified_repo_claims": 5,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/medium/fine_to_coarse/prediction_medium_fine_to_coarse.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_icnf8act/kp_medium_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_icnf8act/kp_medium_thought_process.json"
+  }
+}

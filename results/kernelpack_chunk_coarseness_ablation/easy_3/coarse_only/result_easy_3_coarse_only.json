@@ -1,0 +1,84 @@
+{
+  "task": "easy_3",
+  "task_id": "kp_easy_3",
+  "difficulty": "easy",
+  "chunk_arm": "coarse_only",
+  "retrieval_budget": 5,
+  "retrieval_calls_used": 3,
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "matched_required_repo_components": 3,
+  "missed_required_repo_components": [],
+  "retrieved_files": [
+    "src/kernelpack/rbffd/core.py",
+    "tests/test_nodes_rbffd.py"
+  ],
+  "retrieved_symbols": [
+    "_apply_operator",
+    "_assemble_one",
+    "_compute_weights_interior",
+    "_pick_centers",
+    "_promote_center_to_front",
+    "bc_op",
+    "compute_weights",
+    "compute_weights_at_points",
+    "default_diff_order",
+    "eval_weights",
+    "initialize_geometry",
+    "stable_solve",
+    "test_poisson_sampler_and_geometry_clip"
+  ],
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 2,
+  "first_required_component_found_at_call": 1,
+  "all_required_components_found_at_call": 1,
+  "required_components_retrieved": [
+    "poisson_sampler_setup",
+    "spacing_check",
+    "scalar_c4_kernel_eval"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "poisson_sampler_setup",
+      "query": "poisson_sampler_setup generate_poisson_nodes_in_box nodes.generate_poisson_nodes_in_box(",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "spacing_check",
+      "query": "spacing_check distance_matrix geometry.distance_matrix( np.fill_diagonal(",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "scalar_c4_kernel_eval",
+      "query": "scalar_c4_kernel_eval c4_matern_kernel distance_matrix geometry.c4_matern_kernel( geometry.distance_matrix(",
+      "module_filter": "rbffd"
+    }
+  ],
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/easy_3/coarse_only/prediction_easy_3_coarse_only.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_easy_3",
+    "required_repo_components": 3,
+    "matched_required_repo_components": 3,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 3,
+    "verified_repo_claims": 3,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/easy_3/coarse_only/prediction_easy_3_coarse_only.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_lq8pdanm/kp_easy_3_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_3_lq8pdanm/kp_easy_3_thought_process.json"
+  }
+}

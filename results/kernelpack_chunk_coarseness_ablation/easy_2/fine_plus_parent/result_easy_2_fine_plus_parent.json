@@ -1,0 +1,84 @@
+{
+  "task": "easy_2",
+  "task_id": "kp_easy_2",
+  "difficulty": "easy",
+  "chunk_arm": "fine_plus_parent",
+  "retrieval_budget": 5,
+  "retrieval_calls_used": 4,
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "matched_required_repo_components": 4,
+  "missed_required_repo_components": [],
+  "retrieved_files": [
+    "src/kernelpack/rbffd/__init__.py",
+    "src/kernelpack/rbffd/core.py",
+    "tests/test_nodes_rbffd.py"
+  ],
+  "retrieved_symbols": [
+    "FDODiffOp",
+    "_assemble_one",
+    "_compute_weights_interior",
+    "assemble_op",
+    "initialize_geometry",
+    "test_fdodiffop_center_is_explicit_and_matches_fd_on_quadratic"
+  ],
+  "empty_retrieval_calls": 1,
+  "weak_retrieval_calls": 0,
+  "first_required_component_found_at_call": 2,
+  "all_required_components_found_at_call": 4,
+  "required_components_retrieved": [
+    "domain_descriptor_setup",
+    "stencil_properties_setup",
+    "wls_operator_assembly",
+    "fdo_operator_assembly"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "domain_descriptor_setup",
+      "query": "domain_descriptor_setup DomainDescriptor set_nodes set_sep_rad build_structs domain.DomainDescriptor() .set_nodes( .set_sep_rad( .build_structs()",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "stencil_properties_setup",
+      "query": "stencil_properties_setup StencilProperties OpProperties rbffd.StencilProperties( rbffd.OpProperties(",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "wls_operator_assembly",
+      "query": "wls_operator_assembly FDDiffOp WeightedLeastSquaresStencil assemble_op get_op rbffd.FDDiffOp( rbffd.WeightedLeastSquaresStencil() .assemble_op( .get_op()",
+      "module_filter": "rbffd"
+    },
+    {
+      "component_id": "fdo_operator_assembly",
+      "query": "fdo_operator_assembly FDODiffOp assemble_op get_op rbffd.FDODiffOp( .assemble_op( .get_op()",
+      "module_filter": "rbffd"
+    }
+  ],
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/easy_2/fine_plus_parent/prediction_easy_2_fine_plus_parent.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_easy_2",
+    "required_repo_components": 4,
+    "matched_required_repo_components": 4,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 4,
+    "verified_repo_claims": 4,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 5,
+    "correct_innate_claims": 5,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/easy_2/fine_plus_parent/prediction_easy_2_fine_plus_parent.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_ri528_u_/kp_easy_2_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_easy_2_ri528_u_/kp_easy_2_thought_process.json"
+  }
+}

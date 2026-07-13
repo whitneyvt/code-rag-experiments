@@ -1,0 +1,111 @@
+{
+  "task": "medium_2",
+  "task_id": "kp_medium_2",
+  "difficulty": "medium",
+  "chunk_arm": "coarse_only",
+  "retrieval_budget": 5,
+  "retrieval_calls_used": 4,
+  "repo_recall": 1.0,
+  "repo_precision": 1.0,
+  "repo_f1": 1.0,
+  "innate_precision": 1.0,
+  "code_alignment": 1.0,
+  "final_score": 1.0,
+  "matched_required_repo_components": 4,
+  "missed_required_repo_components": [],
+  "retrieved_files": [
+    "src/kernelpack/nodes/__init__.py",
+    "src/kernelpack/nodes/core.py",
+    "src/kernelpack/nodes/dual.py",
+    "src/kernelpack/solvers/_pu.py",
+    "src/kernelpack/solvers/nonlinear_variable_poisson.py",
+    "src/kernelpack/solvers/poisson.py",
+    "src/kernelpack/solvers/pu_diffusion.py",
+    "src/kernelpack/solvers/pu_sl_advection.py",
+    "src/kernelpack/solvers/variable_poisson.py",
+    "tests/test_pu_solvers.py",
+    "tests/test_solvers.py"
+  ],
+  "retrieved_symbols": [
+    "DomainNodeGenerator",
+    "NonlinearVariablePoissonSolver",
+    "PoissonSolver",
+    "_assemble_boundary_data",
+    "_build_boundary_state",
+    "_get_boundary_coefficients",
+    "_gmres_step",
+    "_state_dependent_data",
+    "_strip_ghosts",
+    "_take_step",
+    "boundary_hit_on_segment",
+    "build_domain_descriptor_from_geometry",
+    "build_patch_node_ids",
+    "build_test_domain",
+    "enforce_global_mass_correction",
+    "generate_interior_nodes_from_geometry",
+    "generate_poisson_nodes",
+    "generate_smooth_domain_nodes_auto_pressure",
+    "init",
+    "pu_patch_geometry",
+    "query_patch_ids",
+    "solve",
+    "test_nonlinear_variable_poisson_solver_checks",
+    "test_poisson_solver_checks",
+    "test_variable_poisson_solver_checks"
+  ],
+  "empty_retrieval_calls": 0,
+  "weak_retrieval_calls": 0,
+  "first_required_component_found_at_call": 1,
+  "all_required_components_found_at_call": 1,
+  "required_components_retrieved": [
+    "circle_geometry_setup",
+    "domain_generation",
+    "variable_poisson_solver_setup",
+    "variable_poisson_solve_call"
+  ],
+  "queries_issued": [
+    {
+      "component_id": "circle_geometry_setup",
+      "query": "circle_geometry_setup EmbeddedSurface set_data_sites build_closed_geometric_model_ps build_level_set_from_geometric_model geometry.EmbeddedSurface() .set_data_sites( .build_closed_geometric_model_ps( .build_level_set_from_geometric_model()",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "domain_generation",
+      "query": "domain_generation DomainNodeGenerator build_domain_descriptor_from_geometry nodes.DomainNodeGenerator() .build_domain_descriptor_from_geometry(",
+      "module_filter": "nodes"
+    },
+    {
+      "component_id": "variable_poisson_solver_setup",
+      "query": "variable_poisson_solver_setup VariablePoissonSolver init solvers.VariablePoissonSolver( .init(domain,",
+      "module_filter": "solvers"
+    },
+    {
+      "component_id": "variable_poisson_solve_call",
+      "query": "variable_poisson_solve_call solve .solve( a_coeff neu_coeff dir_coeff",
+      "module_filter": "solvers"
+    }
+  ],
+  "prediction_script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/medium_2/coarse_only/prediction_medium_2_coarse_only.py",
+  "checker_ok": true,
+  "checker_error": null,
+  "checker_score_full": {
+    "task_id": "kp_medium_2",
+    "required_repo_components": 4,
+    "matched_required_repo_components": 4,
+    "missed_required_repo_components": [],
+    "repo_claim_total": 4,
+    "verified_repo_claims": 4,
+    "hallucinated_repo_claims": 0,
+    "innate_claim_total": 4,
+    "correct_innate_claims": 4,
+    "repo_recall": 1.0,
+    "repo_precision": 1.0,
+    "repo_f1": 1.0,
+    "innate_precision": 1.0,
+    "code_alignment": 1.0,
+    "final_score": 1.0,
+    "script": "/Users/whitney/src/code-rag-experiments/results/kernelpack_chunk_coarseness_ablation/medium_2/coarse_only/prediction_medium_2_coarse_only.py",
+    "summary_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_p0l7eygf/kp_medium_2_summary.json",
+    "thought_file": "/var/folders/5t/1ztyzcpj48qgl7yqnn_7gh500000gn/T/ragprov_medium_2_p0l7eygf/kp_medium_2_thought_process.json"
+  }
+}
