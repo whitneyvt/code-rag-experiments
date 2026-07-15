@@ -1,0 +1,117 @@
+{
+  "comments": {
+    "generate_poisson_nodes_in_box": "Creates a cloud of sample points inside a box using Poisson-disk sampling, which keeps the points spread out so no two are too close together. The inputs are a spacing radius (or a function that gives the spacing) and the lower and upper corners of the box, plus options like the number of attempts and a random seed. It returns the generated points. In the RBF-FD operator example, this is the first step that makes the points the operator will be built on.",
+    "query_knn": "Finds the k nearest neighbors of each query point using a KD-tree over the domain's points. These neighbors form the small local stencil that RBF-FD uses to estimate a derivative at a point. The inputs are which point set to search, the query points, and how many neighbors k to return; it returns the neighbor indices and their distances. In the operator example, this is how each center's stencil is picked before its weights are built.",
+    "phs_kernel": "Evaluates the polyharmonic spline radial basis function, the RBF kernel, for a set of distances and a chosen degree. This kernel sets how strongly points influence each other based on how far apart they are. The input is an array of distances r and the spline degree, and it returns the matching kernel values. In the operator example, this kernel is the building block used when forming the local RBF-FD weights.",
+    "compute_weights": "Builds the local RBF-FD weight row for one stencil so that a weighted sum of the neighbor values approximates the differential operator, such as the Laplacian, at the center point. The inputs are the local point positions and the stencil and operator settings, and it returns the weights for that row, sending interior and boundary points down the right path. In the operator example, this is the per-point weight calculation that fills each row of the global operator.",
+    "assemble_op": "Assembles the full sparse operator matrix by building one row per center point from that point's local stencil weights and scattering them into global form. The inputs are the domain, the operator name such as lap for the Laplacian, and the stencil and operator settings, and it fills in the assembled operator. In the README example, this is the main step that turns local weights into the global RBF-FD operator.",
+    "bc_op": "Builds the boundary rows of the operator by combining a normal-derivative Neumann part and a value Dirichlet part into each boundary row, matching the mixed boundary condition. The inputs are the stencil and operator settings, the Neumann and Dirichlet coefficients, and the local boundary geometry, and it returns the boundary rows. In the operator example, this is the step that handles boundary conditions during assembly."
+  },
+  "quality": {
+    "generate_poisson_nodes_in_box": {
+      "ok": true,
+      "checks": {
+        "not_empty": true,
+        "not_too_long": true,
+        "mentions_purpose": true,
+        "no_unrelated_symbols": true,
+        "no_markdown_fences": true,
+        "no_fake_paths": true
+      },
+      "flags": []
+    },
+    "query_knn": {
+      "ok": true,
+      "checks": {
+        "not_empty": true,
+        "not_too_long": true,
+        "mentions_purpose": true,
+        "no_unrelated_symbols": true,
+        "no_markdown_fences": true,
+        "no_fake_paths": true
+      },
+      "flags": []
+    },
+    "phs_kernel": {
+      "ok": true,
+      "checks": {
+        "not_empty": true,
+        "not_too_long": true,
+        "mentions_purpose": true,
+        "no_unrelated_symbols": true,
+        "no_markdown_fences": true,
+        "no_fake_paths": true
+      },
+      "flags": []
+    },
+    "compute_weights": {
+      "ok": true,
+      "checks": {
+        "not_empty": true,
+        "not_too_long": true,
+        "mentions_purpose": true,
+        "no_unrelated_symbols": true,
+        "no_markdown_fences": true,
+        "no_fake_paths": true
+      },
+      "flags": []
+    },
+    "assemble_op": {
+      "ok": true,
+      "checks": {
+        "not_empty": true,
+        "not_too_long": true,
+        "mentions_purpose": true,
+        "no_unrelated_symbols": true,
+        "no_markdown_fences": true,
+        "no_fake_paths": true
+      },
+      "flags": []
+    },
+    "bc_op": {
+      "ok": true,
+      "checks": {
+        "not_empty": true,
+        "not_too_long": true,
+        "mentions_purpose": true,
+        "no_unrelated_symbols": true,
+        "no_markdown_fences": true,
+        "no_fake_paths": true
+      },
+      "flags": []
+    }
+  },
+  "extraction": {
+    "generate_poisson_nodes_in_box": {
+      "had_fence": false,
+      "raw_length": 459,
+      "comment_length": 458
+    },
+    "query_knn": {
+      "had_fence": false,
+      "raw_length": 439,
+      "comment_length": 438
+    },
+    "phs_kernel": {
+      "had_fence": false,
+      "raw_length": 414,
+      "comment_length": 413
+    },
+    "compute_weights": {
+      "had_fence": false,
+      "raw_length": 470,
+      "comment_length": 469
+    },
+    "assemble_op": {
+      "had_fence": false,
+      "raw_length": 415,
+      "comment_length": 414
+    },
+    "bc_op": {
+      "had_fence": false,
+      "raw_length": 426,
+      "comment_length": 425
+    }
+  },
+  "missing": []
+}

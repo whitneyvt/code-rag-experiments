@@ -1,0 +1,27 @@
+You are writing a short, honest comment for one function from the KernelPack scientific library.
+
+Function name: query_knn
+File: src/kernelpack/domain/core.py
+
+Code:
+def query_knn(self, tree_mode, query_points, k):
+    tree, points = self._get_tree_data(tree_mode)
+    query_points = np.atleast_2d(np.asarray(query_points, dtype=float))
+    k = min(int(k), points.shape[0])
+    distances, indices = tree.searcher.query(query_points, k=k)
+    return indices, distances
+
+Write ONE short comment (2 to 4 sentences) that explains this function in plain English. Say:
+- what the function does
+- what scientific or math idea it implements
+- what the inputs mean
+- what the output means
+- where it fits in the README example that assembles an RBF-FD operator
+
+Rules:
+- Do not change any code.
+- Do not invent facts or claim more than the function does.
+- Do not add long tutorial text.
+- Do not mention unrelated functions or files.
+- Do not include code fences (```), file paths, or quotes around the comment.
+- Return only the plain comment text, nothing else.

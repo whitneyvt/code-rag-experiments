@@ -1,0 +1,28 @@
+You are writing a short, honest comment for one function from the KernelPack scientific library.
+
+Function name: assemble_op
+File: src/kernelpack/rbffd/core.py
+
+Code:
+def assemble_op(self, domain, op_name, st_props, op_props, *, active_rows=None):
+    # Assemble one sparse operator row per requested center. Each
+    # row is built from a local stencil query, then scattered into
+    # global triplet form before converting to CSR.
+    center_points, center_row_ids, center_col_globals, center_normals = _pick_centers(
+        domain, st_props.point_set)
+    knn_indices = _query_center_stencils(domain, st_props.tree_mode, center_points, st_props.n)
+
+Write ONE short comment (2 to 4 sentences) that explains this function in plain English. Say:
+- what the function does
+- what scientific or math idea it implements
+- what the inputs mean
+- what the output means
+- where it fits in the README example that assembles an RBF-FD operator
+
+Rules:
+- Do not change any code.
+- Do not invent facts or claim more than the function does.
+- Do not add long tutorial text.
+- Do not mention unrelated functions or files.
+- Do not include code fences (```), file paths, or quotes around the comment.
+- Return only the plain comment text, nothing else.

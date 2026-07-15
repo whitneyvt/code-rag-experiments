@@ -1,0 +1,161 @@
+{
+  "original": {
+    "arm": "original_code",
+    "hit_at_1": 0.16666666666666666,
+    "hit_at_3": 0.3333333333333333,
+    "mrr": 0.3347222222222222,
+    "chunks_returned": 10,
+    "avg_chunk_chars": 227.3,
+    "avg_context_chars_to_hit": 1354.0,
+    "per_step": [
+      {
+        "question": "Where does KernelPack make or load the points?",
+        "expected": "generate_poisson_nodes_in_box",
+        "top_result": "grad_op",
+        "rank": 5,
+        "context_chars_to_hit": 1557
+      },
+      {
+        "question": "Where does KernelPack choose nearest-neighbor stencils?",
+        "expected": "query_knn",
+        "top_result": "grad_op",
+        "rank": 10,
+        "context_chars_to_hit": 2273
+      },
+      {
+        "question": "Where does KernelPack evaluate the RBF kernel?",
+        "expected": "phs_kernel",
+        "top_result": "bc_op",
+        "rank": 8,
+        "context_chars_to_hit": 1905
+      },
+      {
+        "question": "Where does KernelPack build local RBF-FD weights?",
+        "expected": "compute_weights",
+        "top_result": "bc_op",
+        "rank": 3,
+        "context_chars_to_hit": 765
+      },
+      {
+        "question": "Where does KernelPack assemble the RBF-FD operator?",
+        "expected": "assemble_op",
+        "top_result": "bc_op",
+        "rank": 4,
+        "context_chars_to_hit": 1228
+      },
+      {
+        "question": "Where are boundary conditions handled?",
+        "expected": "bc_op",
+        "top_result": "bc_op",
+        "rank": 1,
+        "context_chars_to_hit": 396
+      }
+    ]
+  },
+  "hand": {
+    "arm": "llm_commented_code",
+    "hit_at_1": 0.6666666666666666,
+    "hit_at_3": 0.8333333333333334,
+    "mrr": 0.7916666666666666,
+    "chunks_returned": 10,
+    "avg_chunk_chars": 433.9,
+    "avg_context_chars_to_hit": 854.6666666666666,
+    "per_step": [
+      {
+        "question": "Where does KernelPack make or load the points?",
+        "expected": "generate_poisson_nodes_in_box",
+        "top_result": "generate_poisson_nodes_in_box",
+        "rank": 1,
+        "context_chars_to_hit": 424
+      },
+      {
+        "question": "Where does KernelPack choose nearest-neighbor stencils?",
+        "expected": "query_knn",
+        "top_result": "from_accuracy",
+        "rank": 4,
+        "context_chars_to_hit": 1732
+      },
+      {
+        "question": "Where does KernelPack evaluate the RBF kernel?",
+        "expected": "phs_kernel",
+        "top_result": "assemble_op",
+        "rank": 2,
+        "context_chars_to_hit": 1067
+      },
+      {
+        "question": "Where does KernelPack build local RBF-FD weights?",
+        "expected": "compute_weights",
+        "top_result": "compute_weights",
+        "rank": 1,
+        "context_chars_to_hit": 533
+      },
+      {
+        "question": "Where does KernelPack assemble the RBF-FD operator?",
+        "expected": "assemble_op",
+        "top_result": "assemble_op",
+        "rank": 1,
+        "context_chars_to_hit": 730
+      },
+      {
+        "question": "Where are boundary conditions handled?",
+        "expected": "bc_op",
+        "top_result": "bc_op",
+        "rank": 1,
+        "context_chars_to_hit": 642
+      }
+    ]
+  },
+  "llm": {
+    "arm": "llm_commented_code",
+    "hit_at_1": 0.5,
+    "hit_at_3": 0.8333333333333334,
+    "mrr": 0.6805555555555557,
+    "chunks_returned": 10,
+    "avg_chunk_chars": 542.2,
+    "avg_context_chars_to_hit": 1229.0,
+    "per_step": [
+      {
+        "question": "Where does KernelPack make or load the points?",
+        "expected": "generate_poisson_nodes_in_box",
+        "top_result": "phs_kernel",
+        "rank": 2,
+        "context_chars_to_hit": 1114
+      },
+      {
+        "question": "Where does KernelPack choose nearest-neighbor stencils?",
+        "expected": "query_knn",
+        "top_result": "from_accuracy",
+        "rank": 4,
+        "context_chars_to_hit": 2112
+      },
+      {
+        "question": "Where does KernelPack evaluate the RBF kernel?",
+        "expected": "phs_kernel",
+        "top_result": "phs_kernel",
+        "rank": 1,
+        "context_chars_to_hit": 481
+      },
+      {
+        "question": "Where does KernelPack build local RBF-FD weights?",
+        "expected": "compute_weights",
+        "top_result": "compute_weights",
+        "rank": 1,
+        "context_chars_to_hit": 732
+      },
+      {
+        "question": "Where does KernelPack assemble the RBF-FD operator?",
+        "expected": "assemble_op",
+        "top_result": "phs_kernel",
+        "rank": 3,
+        "context_chars_to_hit": 2113
+      },
+      {
+        "question": "Where are boundary conditions handled?",
+        "expected": "bc_op",
+        "top_result": "bc_op",
+        "rank": 1,
+        "context_chars_to_hit": 822
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+You are writing a short, honest comment for one function from the KernelPack scientific library.
+
+Function name: bc_op
+File: src/kernelpack/rbffd/core.py
+
+Code:
+def bc_op(self, sp, op, neu_coeff, dir_coeff, r_rhs, x_subset, x, x_at_origin_subset, x_at_origin, nr_subset):
+    total = np.zeros((self.n + self.npoly, x_at_origin_subset.shape[0]))
+    if neu_coeff != 0:
+        for d in range(self.s_dim):
+            diff = x_subset[:, d : d + 1] - x[None, :, d]
+            grad_rbf = (diff * self.phs_dr_over_r(r_rhs, sp.spline_degree)).T
+    return total
+
+Write ONE short comment (2 to 4 sentences) that explains this function in plain English. Say:
+- what the function does
+- what scientific or math idea it implements
+- what the inputs mean
+- what the output means
+- where it fits in the README example that assembles an RBF-FD operator
+
+Rules:
+- Do not change any code.
+- Do not invent facts or claim more than the function does.
+- Do not add long tutorial text.
+- Do not mention unrelated functions or files.
+- Do not include code fences (```), file paths, or quotes around the comment.
+- Return only the plain comment text, nothing else.
